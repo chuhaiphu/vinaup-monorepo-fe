@@ -1,0 +1,65 @@
+.wrapper {
+  background-color: #e5f8df;
+  border-radius: 16px;
+  padding: 30px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0;
+  }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 10px 20px;
+
+  /* vertical divider */
+  &:not(:last-child) {
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 10%;
+      height: 80%;
+      width: 1px;
+      background-color: rgba(13, 92, 63, 0.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    border-bottom: 1px solid rgba(13, 92, 63, 0.1);
+    padding: 30px 10px;
+
+    // 1. Ẩn viền dưới (border-bottom) của 2 phần tử cuối cùng (Hàng dưới)
+    &:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    // 2. Ẩn vạch kẻ dọc bên phải của phần tử thứ 2, 4,... (Các phần tử nằm ngoài cùng bên phải của Grid)
+    &:nth-child(even) {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.value {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--brand-green);
+  line-height: 1.2;
+}
+
+.label {
+  font-size: clamp(0.875rem, 2vw, 1.1rem);
+  color: #7b9986;
+  font-weight: 500;
+  margin-top: 4px;
+}

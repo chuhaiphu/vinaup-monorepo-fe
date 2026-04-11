@@ -1,0 +1,16 @@
+@use '../../../cores/styles/mixins' as *;
+
+.wrapper {
+  margin-bottom: 2rem; // 32px
+}
+
+.title {
+  @include heading-title;
+}
+
+.description {
+  color: var(--brand-black-text);
+  max-width: 50rem; // 800px
+  font-size: clamp(1rem, 1.5vw, 1.125rem); // Từ 16px đến 18px
+  line-height: 1.6;
+}

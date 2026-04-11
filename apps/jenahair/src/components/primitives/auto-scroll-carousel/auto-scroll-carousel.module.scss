@@ -1,0 +1,15 @@
+.landingCarouselRoot {
+  position: relative;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
+}
+
+.slideWrapper {
+  position: relative;
+  width: 20rem;
+  height: 10rem;
+
+  .image {
+    object-fit: contain;
+  }
+}

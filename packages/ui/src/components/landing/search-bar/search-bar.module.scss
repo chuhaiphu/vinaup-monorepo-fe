@@ -1,0 +1,131 @@
+.searchBarWrapper {
+  background: var(--vinaup-soft-gray);
+  height: 4rem; // 64px
+  border-radius: 6.25rem;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 50rem;
+  box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15);
+  pointer-events: auto;
+}
+
+.searchInner {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+// --- 1. PHẦN LOCATION ---
+.locationField {
+  padding: 0 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0; // Không cho cụm này bị bóp méo
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.125rem;
+}
+
+.chevronColumn {
+  display: flex;
+  align-items: center;
+  color: var(--vinaup-medium-gray);
+}
+
+.locationIcon {
+  color: var(--brand-green);
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 2.5rem;
+  background-color: var(--vinaup-light-gray);
+  margin: 0 0.5rem;
+}
+
+// --- 2. PHẦN INPUT ---
+.searchInput {
+  flex: 1;
+  min-width: 0;
+
+  :global(.mantine-TextInput-input) {
+    font-weight: 500;
+    padding-left: 1rem;
+    font-size: 1rem;
+    height: 100%;
+
+    &::placeholder {
+      color: var(--vinaup-medium-gray);
+    }
+  }
+}
+
+// --- 3. PHẦN NÚT SEARCH ---
+.searchBtn {
+  background-color: var(--brand-green);
+  color: white;
+  border: none;
+  height: 100%;
+  padding: 0 2rem;
+  border-radius: 6.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+
+  &:active {
+    transform: scale(0.95); // Thu nhỏ nhẹ khi nhấn vào
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// RESPONSIVE - PHẦN QUAN TRỌNG NHẤT
+@media (max-width: 600px) {
+
+  // Dưới 600px
+  .searchBarWrapper {
+    height: 3.5rem; // 56px
+    padding: 0.375rem;
+  }
+
+  // Ẩn phần location để tiết kiệm diện tích trên mobile
+  .textColumn,
+  .chevronColumn,
+  .divider {
+    display: none !important;
+  }
+
+  .locationField {
+    padding: 0 0.5rem; // Giảm padding cho tiết kiệm diện tích
+  }
+
+  .searchInput {
+    :global(.mantine-TextInput-input) {
+      padding-left: 0.5rem;
+      font-size: 0.875rem; // 14px
+    }
+  }
+
+  .searchBtn {
+    padding: 0;
+    width: 2.75rem; // Biến nút thành hình tròn
+    height: 2.75rem;
+
+    .btnText {
+      display: none; // Ẩn chữ Search
+    }
+  }
+}

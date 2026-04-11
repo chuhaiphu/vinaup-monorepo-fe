@@ -1,0 +1,16 @@
+.exploreButton {
+  .text {
+    display: inline;
+  }
+
+  .arrow {
+    display: inline;
+  }
+
+  // Hide text on small screens
+  @media (max-width: 768px) {
+    .text {
+      display: none;
+    }
+  }
+}

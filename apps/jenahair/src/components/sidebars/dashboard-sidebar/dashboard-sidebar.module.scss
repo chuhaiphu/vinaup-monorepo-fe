@@ -1,0 +1,31 @@
+@use '@/app/mixins' as *;
+
+.dashboardSidebarContainer {
+  background-color: var(--vinaup-black);
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .containerTop {
+    .logoText {
+      padding: 1rem 1rem 0 1rem;
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: white;
+    }
+
+    .burger {
+      padding: 1rem 1rem 0 1rem;
+    }
+  }
+}
+
+// =============================================
+// Container Bottom
+// =============================================
+.containerBottom {
+  @include flex-justify-end;
+  padding-right: 0.8rem;
+}

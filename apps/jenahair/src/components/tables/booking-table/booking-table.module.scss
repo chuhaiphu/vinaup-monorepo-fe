@@ -1,0 +1,54 @@
+@use '@/app/mixins' as *;
+
+.table {
+  background-color: transparent;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  .quantityBox {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .thead {
+    background-color: var(--vinaup-soft-gray);
+
+    .th {
+      font-size: 1rem;
+      font-weight: normal;
+      padding: 1rem;
+      border-bottom: none;
+    }
+  }
+
+  .quantitySelect {
+    width: 60%;
+
+    @media screen and (max-width: 1440px) {
+      width: 70%;
+    }
+
+    @media screen and (max-width: 1200px) {
+      width: 80%;
+    }
+
+    @media screen and (max-width: 992px) {
+      width: 90%;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    .quantitySelectInput {
+      text-align: right;
+      font-size: 1rem;
+      color: var(--vinaup-blue-link);
+    }
+  }
+}
+
+.quantitySelectOption {
+  justify-content: flex-end;
+
+}

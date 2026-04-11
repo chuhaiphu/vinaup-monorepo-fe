@@ -1,0 +1,34 @@
+.yourInformationGroup {
+  background-color: var(--vinaup-soft-gray);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+}
+
+.formInput {
+  border-color: var(--vinaup-medium-gray);
+}
+
+.formLabel {
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.checkboxLabel {
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.quantitySelect {
+  width: 80px;
+}
+
+.quantitySelectInput {
+  text-align: right;
+  font-size: 1rem;
+  color: var(--vinaup-blue-link);
+  border-color: var(--vinaup-medium-gray);
+}
+
+.quantitySelectOption {
+  justify-content: flex-end;
+}

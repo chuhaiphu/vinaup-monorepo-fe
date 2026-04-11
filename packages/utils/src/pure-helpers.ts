@@ -1,0 +1,112 @@
+import { ParsedCookie } from './api-error';
+
+export const stripHtmlAndTruncate = (html: string, maxLength: number) => {
+  const text = html.replace(/<[^>]*>/g, '');
+  return text.length > maxLength ? text.substring(0, maxLength) : text;
+};
+
+export const formatPrice = (price: number): string => {
+  return price.toLocaleString('vi-VN');
+};
+
+export function getEmbeddedVideoUrl(url: string | null | undefined): string | null {
+  try {
+    if (!url) {
+      return null;
+    }
+    const parsed = new URL(url);
+    const hostname = parsed.hostname.replace('www.', '');
+
+    if (hostname === 'youtube.com' || hostname === 'youtu.be') {
+      if (hostname === 'youtu.be') {
+        return `https://www.youtube-nocookie.com/embed/${parsed.pathname.slice(1)}`;
+      }
+
+      const videoId = parsed.searchParams.get('v');
+      if (videoId) {
+        return `https://www.youtube-nocookie.com/embed/${videoId}`;
+      }
+
+      if (parsed.pathname.startsWith('/embed/')) {
+        if (hostname === 'youtube.com' || hostname === 'www.youtube.com') {
+          const videoId = parsed.pathname.split('/embed/')[1]?.split('?')[0];
+          if (videoId) {
+            return `https://www.youtube-nocookie.com/embed/${videoId}${parsed.search}`;
+          }
+        }
+        return url;
+      }
+    }
+
+    if (hostname === 'vimeo.com') {
+      const videoId = parsed.pathname.split('/')[1];
+      if (videoId) {
+        return `https://player.vimeo.com/video/${videoId}`;
+      }
+    }
+
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export function isPathActive(pathname: string, itemPath: string, isRoot = false) {
+  if (!itemPath) return false;
+  if (isRoot) {
+    return pathname === itemPath;
+  }
+  if (pathname === itemPath) return true;
+  return pathname.startsWith(itemPath + '/');
+}
+
+export const renderDurationDays = (durationDays: number) => {
+  if (durationDays === 0.5) {
+    return 'Half day';
+  }
+  if (durationDays === 1) {
+    return '1 day';
+  }
+  return `${durationDays} days`;
+};
+
+export function parseSetCookie(setCookie: string | null): ParsedCookie {
+  if (!setCookie) {
+    return {
+      name: '',
+      value: '',
+      options: {},
+    };
+  }
+  const parts = setCookie.split(';').map((p) => p.trim());
+  const [nameValue, ...attrs] = parts;
+  const [name, value] = nameValue.split('=');
+  const options: ParsedCookie['options'] = {};
+
+  for (const attr of attrs) {
+    const [key, val] = attr.split('=');
+
+    switch (key.toLowerCase()) {
+      case 'max-age':
+        options.maxAge = Number(val);
+        break;
+      case 'path':
+        options.path = val;
+        break;
+      case 'expires':
+        options.expires = new Date(val);
+        break;
+      case 'httponly':
+        options.httpOnly = true;
+        break;
+      case 'samesite':
+        options.sameSite = val.toLowerCase() as 'lax' | 'strict' | 'none';
+        break;
+      case 'secure':
+        options.secure = true;
+        break;
+    }
+  }
+
+  return { name, value, options };
+}

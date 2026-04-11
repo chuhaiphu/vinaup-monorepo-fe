@@ -1,0 +1,112 @@
+// =============================================
+// Mixins
+// =============================================
+@mixin flex-align-center($direction: null) {
+  display: flex;
+  align-items: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-between($direction: null) {
+  display: flex;
+  justify-content: space-between;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-center($direction: null) {
+  display: flex;
+  justify-content: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-start($direction: null) {
+  display: flex;
+  justify-content: flex-start;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-start-align-center($direction: null) {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-end($direction: null) {
+  display: flex;
+  justify-content: flex-end;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-end-align-center($direction: null) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-center($direction: null) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-between-align-center($direction: null) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-around($direction: null) {
+  display: flex;
+  justify-content: space-around;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-between-align-start($direction: null) {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin flex-justify-between-align-end($direction: null) {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  @if $direction != null {
+    flex-direction: $direction;
+  }
+}
+
+@mixin hover-scale($scale: 1.2) {
+  transition: transform 0.15s ease;
+  cursor: pointer;
+  &:hover {
+    transform: scale($scale);
+  }
+}

@@ -1,0 +1,63 @@
+.sectionTitle {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2rem;
+  color: #00E1FF;
+}
+
+.sectionSubTitle {
+  color: white;
+  font-weight: normal;
+}
+
+.htmlDescription {
+  >* {
+    color: white;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+  }
+
+  a {
+    color: #00E1FF;
+  }
+
+  mark {
+    font-size: inherit;
+  }
+
+  hr {
+    border: 0.5px solid rgb(255, 255, 255);
+  }
+
+  // Make sure empty paragraphs have height to present the nextline effect in sync with Editor
+  p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  p:empty {
+    padding: 1.1rem;
+  }
+
+  // Make sure ul is displayed vertically aligned with the text
+  ul {
+    list-style-position: inside;
+  }
+
+  li>p {
+    display: inline;
+  }
+}

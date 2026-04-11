@@ -1,0 +1,30 @@
+.sectionUIDetailRoot {
+  .paperBlock {
+    border: 1px solid #c7c7c7;
+  }
+
+  .savingText {
+    color: var(--mantine-color-blue-6);
+  }
+
+  .savedText {
+    color: var(--mantine-color-gray-5);
+  }
+
+  .listItem {
+    transition: background-color 0.15s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--mantine-color-gray-1);
+    }
+  }
+
+  .positionSelect {
+    width: 100px;
+  }
+
+  .templateInput {
+    flex: 1;
+  }
+}

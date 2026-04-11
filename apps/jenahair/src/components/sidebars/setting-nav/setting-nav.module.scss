@@ -1,0 +1,8 @@
+.navItem {
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &.active {
+    background-color: #FCBE11;
+  }
+}

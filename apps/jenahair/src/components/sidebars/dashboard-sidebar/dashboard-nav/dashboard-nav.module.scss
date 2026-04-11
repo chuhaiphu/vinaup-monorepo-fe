@@ -1,0 +1,100 @@
+@use '@/app/mixins' as *;
+
+// =============================================
+// Variables
+// =============================================
+$nav-spacing: 0.5rem;
+$nav-padding: 0.5rem 0.375rem;
+$nav-font-size: 1.1rem;
+$group-gap: 0.5rem;
+
+// =============================================
+// Root
+// =============================================
+.root {
+  padding: 1rem 0 0 0;
+}
+
+// =============================================
+// Shared Styles
+// =============================================
+.iconWrapper {
+  @include flex-center;
+  width: 2rem;
+  color: white;
+}
+
+.label {
+  color: white;
+  font-size: $nav-font-size;
+}
+
+.body {
+  text-align: right;
+}
+
+.section {
+  margin-left: 0;
+}
+
+// =============================================
+// Nav Item (Parent Level)
+// =============================================
+.item {
+  margin-top: $group-gap;
+  margin-bottom: $nav-spacing;
+  padding: $nav-padding;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &.active {
+    .iconWrapper {
+      color: var(--vinaup-yellow);
+    }
+  }
+
+  // Has children - toggle icon rotation
+  &.opened .section:first-of-type {
+    transform: rotateX(180deg);
+  }
+
+  // No children - highlight label when active
+  &.single.active .label {
+    color: var(--vinaup-yellow);
+  }
+}
+
+// =============================================
+// Children Group
+// =============================================
+.childGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $nav-spacing;
+  padding-bottom: $nav-spacing;
+}
+
+// =============================================
+// Child Item
+// =============================================
+.childItem {
+  padding: $nav-padding;
+  background-color: transparent;
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &.active {
+    .label {
+      color: var(--vinaup-yellow);
+    }
+
+    .iconWrapper {
+      color: var(--vinaup-yellow);
+    }
+  }
+}

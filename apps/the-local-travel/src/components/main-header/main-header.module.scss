@@ -1,0 +1,114 @@
+.headerWrapper {
+    width: 100%;
+}
+
+.topRow {
+    height: 5rem; // 80px
+}
+
+.logoLink {
+    text-decoration: none;
+}
+
+.logoText {
+    color: var(--brand-green);
+    font-size: clamp(1.5rem, 4vw, 2.625rem); // 24px - 42px
+    font-weight: 800;
+    text-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.socialIcon {
+    color: var(--brand-green);
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: var(--brand-green) !important;
+        color: var(--vinaup-soft-gray) !important;
+        transform: translateY(-0.125rem);
+    }
+}
+
+.rightSection {
+    display: flex;
+    gap: 1.25rem; // 20px
+
+    .searchIcon {
+        border-color: var(--brand-green);
+        color: var(--brand-green);
+
+        &:hover {
+            background-color: rgba(11, 93, 58, 0.05);
+        }
+    }
+
+    .menuIcon {
+        color: var(--brand-green);
+    }
+}
+
+.bottomRow {
+    height: 2.5rem; // 40px
+    background-color: var(--brand-green);
+}
+
+.navLink {
+    color: var(--vinaup-soft-gray);
+    text-decoration: none;
+    font-size: 1rem; // 16px
+    font-weight: 500;
+    letter-spacing: 0.03125rem; // 0.5px
+    white-space: nowrap;
+    transition: color 0.2s;
+
+    &:hover,
+    &.active {
+        color: var(--brand-light-green);
+    }
+}
+
+.navContainer {
+    padding: 0;
+}
+
+// --- RESPONSIVE ---
+@media (max-width: 768px) {
+    .btnContainer {
+        display: none !important;
+    }
+
+    .topRow {
+        height: 3.75rem; // 60px
+    }
+
+    .rightSection {
+        gap: 0.5rem !important; // 8px
+    }
+
+    .navGroup {
+        gap: 1rem; // 16px
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .searchIcon {
+        display: none !important;
+    }
+
+    .navLink {
+        font-size: 0.875rem; // 14px
+    }
+}
+
+@media (max-width: 380px) {
+    .navLink {
+        font-size: 0.75rem; // 12px
+    }
+}
+
+@media (max-width: 350px) {
+    .navLink {
+        font-size: 0.625rem; // 10px
+    }
+}

@@ -1,0 +1,18 @@
+.backButton {
+  background-color: transparent;
+  color: white;
+  padding: 0;
+  text-decoration: none;
+}
+
+.pageTitle {
+  flex: 1;
+}
+
+.backIcon {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}

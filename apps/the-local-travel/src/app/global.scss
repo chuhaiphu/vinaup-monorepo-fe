@@ -1,0 +1,40 @@
+:root {
+  --font-main: var(--font-poppins), sans-serif;
+  --font-heading: var(--font-montserrat), sans-serif;
+
+  --vinaup-black: #121212;
+  --vinaup-black-laminated: #2a2a2a;
+  --vinaup-dark-gray: #515151;
+  --vinaup-medium-dark-gray: #686868;
+  --vinaup-medium-gray: #a2a2a2;
+  --vinaup-light-gray: #d8d8d8;
+  --vinaup-soft-gray: #f5f5f5;
+  --vinaup-light-white: #f9f9f9;
+  --vinaup-white: #ffffff;
+
+  --vinaup-orange: #ff7629;
+  --vinaup-red: #da401e;
+  --vinaup-yellow: #fdbe11;
+  --vinaup-soft-yellow: rgb(252, 190, 17, 0.5);
+  --vinaup-light-green: rgba(206, 244, 218, 0.5);
+  --vinaup-soft-green: rgba(206, 244, 218, 0.75);
+  --vinaup-teal: #005c62;
+  --vinaup-green: #005230;
+  --vinaup-green-light: #a4da8c;
+  --vinaup-purple: #be266a;
+  --vinaup-text-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+
+  --vinaup-blue-link: #0e54c9;
+  --vinaup-blue-dark: #013437;
+  --vinaup-navy-dark: #01233a;
+
+  --brand-green: #0b5d3a;
+  --brand-light-green: #94f990;
+  --brand-black-text: #3F4945;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}

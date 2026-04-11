@@ -1,0 +1,64 @@
+@use '@/app/mixins' as *;
+
+.tableWrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1.5px solid #01426e;
+}
+
+.table {
+  .thead {
+    background-color: white;
+  }
+
+  .th {
+    font-weight: normal;
+
+    .columnHeaderContent {
+      @include flex-align-center;
+    }
+
+    .actionColumnHeaderContent {
+      @include flex-justify-end;
+    }
+
+    .transferTypeColumnHeaderContent {
+      @include flex-justify-center;
+    }
+
+    .thuChiFilterColumnHeaderContent {
+      .headerText {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        color: #01426e;
+
+        .selected {
+          font-weight: 900;
+        }
+      }
+    }
+  }
+
+  .tr {
+    border-bottom: 1.5px solid var(--vinaup-light-gray);
+
+    .transferTypeCellContent {
+      @include flex-justify-center;
+    }
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+
+// =============================================
+// Icons
+// =============================================
+.calendarIcon {
+  justify-content: start;
+
+  &:hover {
+    scale: 1.2;
+  }
+}

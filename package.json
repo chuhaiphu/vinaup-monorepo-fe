@@ -1,0 +1,12 @@
+{
+  "name": "vinaup-monorepo",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev:jenahair": "npm run dev --workspace=apps/jenahair",
+    "dev:tlt": "npm run dev --workspace=apps/the-local-travel",
+    "build": "npm run build --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "engines": { "node": ">=20" }
+}

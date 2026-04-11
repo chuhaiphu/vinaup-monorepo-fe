@@ -1,0 +1,27 @@
+.blogItem {
+  color: white;
+  cursor: pointer;
+  transition: scale 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
+
+  .imageWrapper {
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 0.75rem;
+    overflow: hidden;
+    position: relative;
+    height: 250px;
+  }
+
+  &:hover {
+    scale: 1.02;
+    box-shadow: none;
+  }
+
+  // .categories {
+  //   color: #5ec4e8;
+  //   display: flex;
+  //   gap: 0.5rem;
+  //   filter: drop-shadow(0px 2px 8px #F9F9F9);
+  // }
+}

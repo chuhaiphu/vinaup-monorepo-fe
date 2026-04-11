@@ -1,0 +1,34 @@
+@use '@/app/mixins' as *;
+
+.tableWrapper {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1.5px solid #01426e;
+}
+
+.table {
+  .thead {
+    background-color: white;
+  }
+
+  .th {
+    font-weight: normal;
+
+    .columnHeaderContent {
+      @include flex-align-center;
+    }
+
+    .actionColumnHeaderContent {
+      @include flex-justify-end;
+    }
+  }
+
+  .tr {
+    border-bottom: 1.5px solid var(--vinaup-light-gray);
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+

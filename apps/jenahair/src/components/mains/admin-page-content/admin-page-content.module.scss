@@ -1,0 +1,35 @@
+@use '@/app/mixins' as *;
+
+.adminPageRoot {
+  padding: 1rem;
+
+  .pageHeader {
+    margin-bottom: 0.75rem;
+  }
+
+  .tabsWrapper {
+    .tableWrapper {
+      border-radius: 0.75rem;
+      overflow: hidden;
+      border: 1.5px solid #01426e;
+    }
+
+    .table {
+      .thead {
+        background-color: white;
+      }
+
+      .th {
+        font-weight: normal;
+      }
+
+      .tr {
+        border-bottom: 1.5px solid var(--vinaup-light-gray);
+
+        &:last-of-type {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}

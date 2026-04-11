@@ -1,0 +1,52 @@
+.menuDetailRoot {
+  .paperBlock {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .selectRoot {
+    .selectSection {
+      justify-content: flex-end;
+    }
+
+    .selectInput {
+      font-size: 1rem;
+      text-align: right;
+    }
+  }
+
+  .selectOption {
+    span {
+      font-size: 0.95rem;
+    }
+
+    justify-content: flex-end;
+  }
+
+  .menuConfiguration {
+    background: linear-gradient(180deg, rgba(252, 190, 17, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.2) 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .savingText {
+    color: var(--mantine-color-dark-3);
+  }
+
+  .savedText {
+    color: var(--mantine-color-dark-3);
+  }
+}
+
+.selectRoot {
+  .selectInput {
+    font-size: 1.1rem;
+    text-align: right;
+  }
+}
+
+.selectOption {
+  justify-content: flex-end;
+
+  span {
+    font-size: 0.95rem;
+  }
+}

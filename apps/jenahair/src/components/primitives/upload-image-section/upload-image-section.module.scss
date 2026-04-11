@@ -1,0 +1,15 @@
+@use '@/app/mixins' as *;
+
+.uploadImageWrapper {
+  position: relative;
+  display: inline-block;
+
+  .deleteButton {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+  }
+}

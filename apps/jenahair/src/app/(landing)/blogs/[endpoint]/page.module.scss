@@ -1,0 +1,116 @@
+.blogDetailPage {
+  .blogTitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  .htmlDescription,
+  .htmlContent {
+    >* {
+      color: white;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      line-height: 2.2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      line-height: 2.2rem;
+    }
+
+    a {
+      color: #00E1FF;
+      text-decoration: none;
+    }
+
+    mark {
+      font-size: inherit;
+    }
+
+    hr {
+      border: 0.5px solid rgb(255, 255, 255);
+    }
+
+    // Make sure empty paragraphs have height to present the nextline effect in sync with Editor
+    p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    p:empty {
+      padding: 1.1rem;
+    }
+
+    blockquote {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 0.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    // Make sure ul is displayed vertically aligned with the text
+    ul {
+      list-style-position: inside;
+    }
+
+    li>p {
+      display: inline;
+    }
+  }
+
+  .topInfo {
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(1px);
+    border-radius: 0.4rem;
+    padding: 0.75rem 1rem 1rem 1rem;
+  }
+
+  .mainContent {
+    .rightCol {
+      .mainImageWrapper {
+        position: relative;
+        height: 480px;
+        border-radius: 0.75rem;
+        overflow: hidden;
+      }
+
+      .mainImage {
+        object-fit: cover;
+      }
+    }
+
+    .whyBox {
+      margin-top: 1.5rem;
+      border: 2px solid #FCBE11;
+      border-radius: 0.5rem;
+
+      .title,
+      .subTitle {
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+}
+
+.categories {
+  font-size: 1.2rem;
+}
+
+.date {
+  font-size: 1.2rem;
+}

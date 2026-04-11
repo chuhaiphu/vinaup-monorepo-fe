@@ -1,0 +1,120 @@
+// --- CAROUSEL WRAPPER ---
+.carouselWrapper {
+  position: relative;
+
+  // Kỹ thuật này giúp Carousel có khoảng padding bên trong mà không ảnh hưởng 
+  // đến layout tổng thể, đồng thời tránh bị cắt khi slide có bóng đổ (shadow)
+  :global(.mantine-Carousel-viewport) {
+    padding: 1.5rem 0.5rem;
+    margin: -1.5rem -0.5rem;
+    transform: translateZ(0); // Kích hoạt GPU compositing để tăng hiệu suất trên mobile
+  }
+}
+
+// --- NÚT BẤM (CONTROLS) ---
+.carouselControls {
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  pointer-events: none;
+
+  // Desktop (Màn hình rộng): Đẩy 2 nút ra 2 bên lề
+  width: calc(100% + 6rem);
+  margin-left: -3rem;
+
+  &>* {
+    pointer-events: auto;
+  }
+
+  // FIX LỖI IPAD & MOBILE: Thu mũi tên vào bên trong ảnh
+  @media (max-width: 1300px) {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 1rem;
+  }
+}
+
+.carouselControl {
+  background-color: var(--vinaup-white);
+  border: 1px solid var(--vinaup-light-gray);
+  color: var(--vinaup-dark-gray);
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+
+  // Hover/Focus vào BẤT KỲ nút nào đều sáng màu xanh
+  &:hover,
+  &:focus {
+    background-color: var(--brand-green);
+    border-color: var(--brand-green);
+    color: var(--vinaup-white);
+    box-shadow: 0 0.25rem 0.5rem rgba(11, 77, 50, 0.3); // Glow xanh nhẹ
+  }
+
+  // Bỏ viền mặc định của trình duyệt khi focus
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+// --- CARD VÒNG TRÒN ---
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 15.625rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  // Kỹ thuật này giúp tăng hiệu suất khi hover trên mobile bằng cách kích hoạt GPU compositing
+  transform: translateZ(0);
+  will-change: transform, box-shadow;
+  backface-visibility: hidden;
+
+  &:hover {
+    transform: scale(1.03) translateZ(0);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.2);
+
+    .image {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardTitle {
+  color: var(--vinaup-white);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.5vw, 1.375rem);
+  text-shadow: var(--vinaup-text-shadow);
+  text-align: center;
+  padding: 0 1rem;
+}

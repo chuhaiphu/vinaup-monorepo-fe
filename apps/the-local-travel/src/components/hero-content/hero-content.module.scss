@@ -1,0 +1,51 @@
+.inner {
+  height: 100%;
+  text-align: center;
+  padding: 0 1.25rem;
+}
+
+.content {
+  height: 100%;
+  max-width: 56.25rem; // 900px
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 2.5rem; // Khoảng cách an toàn từ thanh search tới viền dưới cùng
+}
+
+.titleWrapper {
+  flex: 1; // Chiếm TRỌN phần không gian trống để đẩy Search Bar xuống
+  display: flex;
+  align-items: center; // Căn giữa cái Title theo chiều dọc
+  padding-bottom: 2rem; // Đẩy Title nhích lên một tí cho thuận mắt, không bị sát Search Bar quá
+}
+
+.searchWrapper {
+  width: 100%; // Giữ cho Search Bar giãn đều theo max-width 400px trên mobile
+  display: flex;
+  justify-content: center; // Căn giữa Search Bar theo chiều ngang
+}
+
+.title {
+  color: white;
+  font-family: var(--font-heading);
+  // Đã chuyển sang rem: 42px -> 2.625rem | 72px -> 4.5rem
+  font-size: clamp(2.625rem, 6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  // text-shadow: 2px 4px 20px -> Đổi sang rem
+  text-shadow: 0.125rem 0.25rem 1.25rem rgba(0, 0, 0, 0.4);
+
+  .highlight {
+    color: var(--brand-light-green);
+  }
+}
+
+.description {
+  color: #f1f1f1;
+  font-size: clamp(0.875rem, 1.5vw, 1.125rem); // 14px - 18px
+  max-width: 50rem; // 800px
+  line-height: 1.6;
+  text-shadow: 0.0625rem 0.0625rem 0.625rem rgba(0, 0, 0, 0.5); // 1px 1px 10px
+}

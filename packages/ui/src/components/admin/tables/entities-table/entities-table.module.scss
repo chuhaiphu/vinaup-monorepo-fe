@@ -1,0 +1,46 @@
+@use '../../../../cores/styles/mixins' as *;
+
+.tableWrapper {
+  width: 100%;
+
+  .table {
+    background-color: transparent;
+    border-top: 1.5px solid var(--vinaup-medium-gray);
+
+    .thead {
+      background-color: transparent;
+      border-bottom: 1.5px solid var(--vinaup-medium-gray);
+    }
+
+    .tbody {
+      background-color: transparent;
+    }
+
+    .tr {
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .th {
+      font-weight: normal;
+    }
+  }
+}
+
+.tableContainer {
+  position: relative;
+
+  .tableSkeleton {
+    height: 20rem;
+  }
+}
+
+// =============================================
+// Icons
+// =============================================
+.calendarIcon {
+  justify-content: flex-start;
+
+  &:hover {
+    scale: 1.2;
+  }
+}

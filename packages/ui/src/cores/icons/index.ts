@@ -1,0 +1,9 @@
+export { default as MenuIcon } from './menu-icon';
+export { default as SmileSquareIcon } from './smile-square-icon';
+export { default as VinaupEarthIcon } from './vinaup-earth-icon';
+export { default as VinaupHomeIcon } from './vinaup-home-icon';
+export { default as VinaupLocationIcon } from './vinaup-location-icon';
+export { default as VinaupLogoAlternative } from './vinaup-logo-alternative';
+export { default as VinaupLogoCustom } from './vinaup-logo-custom';
+export { default as VinaupNetworkHubIcon } from './vinaup-network-hub-icon';
+export { default as VinaupUnlockIcon } from './vinaup-unlock-icon';

@@ -1,0 +1,157 @@
+.adminBlogDetailPageRoot {
+  padding: 1rem;
+
+  .pageHeader {
+    margin-bottom: 0.75rem;
+  }
+
+  .countryInput[data-disabled] {
+    color: black;
+  }
+
+  .paperBlock {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .seoBlockTitle {
+    b {
+      font-size: 1.1rem;
+    }
+
+    font-size: 1.1rem;
+  }
+
+  .seoTextInput {
+    color: black;
+  }
+
+  .linkText {
+    color: var(--vinaup-blue-link);
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .htmlDescription,
+  .htmlContent {
+
+    h1 {
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      line-height: 2.2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      line-height: 2.2rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    blockquote {
+      margin: 1.5rem 0;
+      padding-left: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 0.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    mark {
+      font-size: inherit;
+    }
+
+    // Make sure empty paragraphs have height to present the nextline effect in sync with Editor
+    p {
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    p:empty {
+      padding: 1.1rem;
+    }
+
+    // Make sure ul is displayed vertically aligned with the text
+    ul {
+      list-style-position: inside;
+    }
+
+    li>p {
+      display: inline;
+    }
+  }
+
+  .blogConfiguration {
+    background: linear-gradient(180deg, rgba(252, 190, 17, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.2) 100%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    .selectRoot {
+      width: 7rem;
+
+      .selectSection {
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .videoSection {
+    .videoUrlInput {
+      color: var(--vinaup-blue-link);
+      font-size: 0.95rem;
+      line-height: 2rem;
+      height: 2rem;
+      min-height: 2rem;
+      padding: 0;
+    }
+  }
+
+  .savingText {
+    color: var(--mantine-color-dark-3);
+  }
+
+  .savedText {
+    color: var(--mantine-color-dark-3);
+  }
+
+  .seoDivider {
+    height: 1.5px;
+    background-color: #dee2e6;
+    margin: 8px 0;
+  }
+}
+
+
+.selectRoot {
+  .selectInput {
+    font-size: 1.1rem;
+    text-align: right;
+  }
+}
+
+.selectOption {
+  justify-content: flex-end;
+
+  span {
+    font-size: 0.95rem;
+  }
+}
+
+.selectOptionWithDivider {
+  justify-content: flex-end;
+  border-bottom: 1px solid #e0e0e0;
+
+  span {
+    font-size: 0.95rem;
+  }
+}

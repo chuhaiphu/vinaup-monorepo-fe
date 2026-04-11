@@ -1,0 +1,130 @@
+.wrapper {
+  background-color: rgba(69, 81, 57, 0.11);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+
+  backdrop-filter: blur(10px);
+
+  padding: 0 16px 20px;
+
+  @media (max-width: 768px) {
+    padding: 0 15px 20px;
+  }
+}
+
+.card {
+  background: #ffffff5f;
+  border-radius: 12px;
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 1145px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    padding: 15px 8px;
+  }
+}
+
+.highlightText {
+  font-size: 45px;
+  font-weight: 800;
+  color: #2c3524;
+  line-height: 1.2;
+  margin: 4px 0;
+  text-shadow:
+    -1px -2px 2px rgba(0, 0, 0, 0.2),
+    1px 2px 2px rgba(255, 255, 255, 0.3);
+}
+
+.label {
+  font-size: 22px;
+  color: #121212;
+  font-weight: 500;
+}
+
+.linkGroup {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.link {
+  color: #003584;
+  font-size: 22px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.subText {
+  font-size: 22px;
+  color: #121212;
+  margin-top: 4px;
+}
+
+.copyright {
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+
+  .brand {
+    color: var(--vinaup-amber);
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 150px;
+
+  @media (max-width: 1024px) {
+    gap: 40px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0px;
+    flex-wrap: nowrap;
+
+    .highlightText {
+      font-size: 25px;
+      white-space: nowrap;
+    }
+
+    .label,
+    .subText,
+    .link {
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .linkGroup {
+      gap: 4px;
+    }
+    .bookingPrefix {
+      display: none;
+    }
+  }
+}
+
+.leftCol,
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.rightCol {
+  align-items: flex-end;
+}

@@ -1,0 +1,21 @@
+@use '@/app/mixins' as *;
+
+.versionSectionRoot {
+  color: white;
+  @include flex-align-center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+
+  > * {
+    font-size: 0.8rem;
+  }
+
+  .versionText {
+    color: white;
+    text-decoration: none;
+  }
+
+  .brandText {
+    color: var(--vinaup-yellow);
+  }
+}
