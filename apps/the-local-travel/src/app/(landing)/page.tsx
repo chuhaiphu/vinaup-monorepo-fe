@@ -38,7 +38,8 @@ export default function Home() {
           <RecentlyPublished data={MOCK_RECENTLY_PUBLISHED} />
           <TravelServices
             data={TRAVEL_SERVICES_DATA}
-            youtubeEmbedUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            youtubeEmbedUrl="https://www.youtube.com/embed/f8QDvuGLVZw"
+            youtubeVideoTitle="Da Nang Vietnam | 3 Days Itinerary | Things to do in Da Nang | Da Nang Travel Guide |Trip to Hoi An"
           />
           <OurPartners data={MOCK_PARTNERS} />
         </Stack>

@@ -143,15 +143,18 @@
 }
 
 .badgeItem {
-  color: goldenrod;
+  color: orange;
   font-family: var(--font-heading);
   text-transform: uppercase;
   font-weight: 700;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
 }
 
 .heartIconItem {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 32px;
   width: 32px;
+  background-color: rgba(255, 255, 255, 0.6);
 }

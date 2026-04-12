@@ -1,16 +1,15 @@
 // --- CAROUSEL WRAPPER ---
 .carouselWrapper {
   position: relative;
+}
 
+.carouselViewport {
+  // Đảm bảo các slide không bị cắt khi có padding
   // Kỹ thuật này giúp Carousel có khoảng padding bên trong mà không ảnh hưởng
   // đến layout tổng thể, đồng thời tránh bị cắt khi slide có bóng đổ (shadow)
-  :global(.mantine-Carousel-viewport) {
-    padding: 1.5rem 0.5rem;
-    margin: -1.5rem -0.5rem;
-    transform: translateZ(
-      0
-    ); // Kích hoạt GPU compositing để tăng hiệu suất trên mobile
-  }
+  margin: -1.5rem -0.5rem;
+  padding: 1.5rem 0.5rem;
+  transform: translateZ(0); // Kích hoạt GPU compositing để tăng hiệu suất trên mobile
 }
 
 // --- NÚT BẤM (CONTROLS) ---
@@ -24,7 +23,7 @@
   width: calc(100% + 6rem);
   margin-left: -3rem;
 
-  & > * {
+  &>* {
     pointer-events: auto;
   }
 

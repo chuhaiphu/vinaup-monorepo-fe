@@ -14,11 +14,13 @@ export interface TravelServicesItem {
 export interface TravelServicesProps {
   data: TravelServicesItem[];
   youtubeEmbedUrl: string;
+  youtubeVideoTitle: string;
 }
 
 export function TravelServices({
   data,
   youtubeEmbedUrl,
+  youtubeVideoTitle,
 }: Readonly<TravelServicesProps>) {
   return (
     <section>
@@ -39,14 +41,16 @@ export function TravelServices({
               allowFullScreen
             ></iframe> */}
 
-            <iframe
-              width="100%"
-              height="100%"
-              src={youtubeEmbedUrl}
-              title="Vietnam Travel Insights"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            ></iframe>
+            {youtubeEmbedUrl ? (
+              <iframe
+                width="100%"
+                height="100%"
+                src={youtubeEmbedUrl}
+                title={youtubeVideoTitle}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            ) : null}
           </div>
         </GridCol>
         <GridCol span={{ base: 12, md: 8 }}>

@@ -34,6 +34,7 @@ export function GridCarousel({
         classNames={{
           control: classes.carouselControl,
           controls: classes.carouselControls,
+          viewport: classes.carouselViewport,
         }}
         {...carouselProps}
       >
