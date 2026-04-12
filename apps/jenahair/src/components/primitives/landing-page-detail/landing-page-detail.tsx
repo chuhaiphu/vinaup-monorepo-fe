@@ -6,7 +6,7 @@ import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import classes from './landing-page-detail.module.scss';
 import {
   CarouselSlide,
-  LandingCarousel,
+  Carousel,
 } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import { RiCheckDoubleFill } from 'react-icons/ri';
@@ -21,12 +21,12 @@ interface LandingPageDetailProps {
 export default function LandingPageDetail({ page }: LandingPageDetailProps) {
   const additionalImageSlides: CarouselSlide[] = page.additionalImageUrls.map(
     (url) => ({
-      imageUrl: url,
+      src: url,
     })
   );
 
   const staticServiceSlides: CarouselSlide[] = SERVICE_ITEMS.map((item) => ({
-    imageUrl: item.imageUrl,
+    src: item.imageUrl,
     titleMain: item.name,
     href: item.endpoint,
   }));
@@ -45,7 +45,7 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
     if (additionalImageSlides.length === 0) {
       return <></>;
     }
-    return <LandingCarousel slides={additionalImageSlides} height={480} />;
+    return <Carousel slides={additionalImageSlides} height={480} />;
   };
 
   const renderVideoSection = (
@@ -234,7 +234,7 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
             </Paper>
           </Stack>
 
-          <LandingCarousel
+          <Carousel
             slides={staticServiceSlides}
             height={400}
             orientation="vertical"

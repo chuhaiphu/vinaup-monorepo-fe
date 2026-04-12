@@ -7,7 +7,7 @@ import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import classes from './page.module.scss';
 import {
   CarouselSlide,
-  LandingCarousel,
+  Carousel,
 } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import SocialTab from '@/components/primitives/social-tab/social-tab';
@@ -84,12 +84,12 @@ export default async function BlogDetailPage({
   const blogData = blogResponse.data;
   const additionalImageSlides: CarouselSlide[] = blogData.additionalImageUrls.map(
     (url) => ({
-      imageUrl: url,
+      src: url,
     })
   );
 
   const staticServiceSlides: CarouselSlide[] = SERVICE_ITEMS.map((item) => ({
-    imageUrl: item.imageUrl,
+    src: item.imageUrl,
     titleMain: item.name,
     href: item.endpoint,
   }));
@@ -98,7 +98,7 @@ export default async function BlogDetailPage({
     if (additionalImageSlides.length === 0) {
       return <></>;
     } else {
-      return <LandingCarousel slides={additionalImageSlides} height={480} />;
+      return <Carousel slides={additionalImageSlides} height={480} />;
     }
   };
 
@@ -305,7 +305,7 @@ export default async function BlogDetailPage({
               </Group>
             </Stack>
           </Paper>
-          <LandingCarousel
+          <Carousel
             slides={staticServiceSlides}
             height={400}
             orientation="vertical"

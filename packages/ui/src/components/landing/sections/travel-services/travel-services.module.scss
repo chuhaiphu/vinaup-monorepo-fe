@@ -1,0 +1,169 @@
+@use '../../../../cores/styles/mixins' as *;
+
+.videoWrapper {
+  max-height: 80vh;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+
+  // Cho video ngang
+  // @media (max-width: 62em) {
+  //   height: auto;
+  //   aspect-ratio: 16 / 9;
+  // }
+
+  // Cho video short dọc
+  @media (max-width: 62em) {
+    height: auto;
+    aspect-ratio: 9 / 16;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}
+
+.card {
+  position: relative;
+  height: 180px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+
+    /* Box shadow đậm hơn khi hover */
+    .gradientOverlay {
+      opacity: 1;
+    }
+
+    .textWrapper {
+      transform: translateY(0);
+    }
+
+    .subtitleWrapper {
+      opacity: 1;
+      max-height: 100px;
+    }
+  }
+}
+
+.imageWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+
+  .bgImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+    transition: filter 0.3s ease;
+  }
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  &.gradientLeft {
+    background: linear-gradient(90deg, var(--brand-green) 0%, var(--brand-green) 40%, transparent 100%);
+  }
+
+  &.gradientRight {
+    background: linear-gradient(270deg, var(--brand-green) 0%, var(--brand-green) 40%, transparent 100%);
+  }
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 3rem;
+  color: var(--vinaup-white);
+
+  &.contentLeft {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  &.contentRight {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .textWrapper {
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  .title {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: var(--brand-light-green);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3);
+    /* Tạo bóng để chữ trên nền ảnh nổi và dễ đọc hơn */
+  }
+
+  .subtitleWrapper {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+  }
+
+  .subtitle {
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 400;
+    max-width: 450px;
+    line-height: 1.4;
+    color: var(--vinaup-white);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    height: 160px;
+  }
+
+  .content {
+    padding: 0 1.5rem;
+
+    .title {
+      font-size: 1.4rem;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+    }
+  }
+}

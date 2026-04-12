@@ -1,0 +1,157 @@
+@use '../../../../cores/styles/mixins' as *;
+
+.headerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  @media (max-width: 48em) {
+    gap: 0.5rem;
+  }
+}
+
+.titleRow {
+  align-items: center;
+}
+
+.titleIcon {
+  object-fit: contain;
+
+  @media (max-width: 48em) {
+    display: none;
+  }
+}
+
+.title {
+  @include heading-title;
+}
+
+.controlRow {
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+
+  @media (max-width: 48em) {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+}
+
+.filterGroup {
+  align-items: center;
+
+  @media (max-width: 48em) {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+}
+
+.filterButton {
+  border-color: #dee2e6;
+  color: var(--vinaup-black);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  border-radius: 20px;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: var(--vinaup-soft-gray);
+  }
+}
+
+.categories {
+  font-family: var(--font-main);
+  font-weight: 600;
+  color: var(--vinaup-dark-gray);
+  font-size: 1rem;
+  white-space: nowrap;
+  display: flex;
+
+  @media (max-width: 48em) {
+    display: none; // ẩn hoàn toàn trên mobile
+  }
+}
+
+.category {
+  color: var(--vinaup-dark-gray);
+  position: relative;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  text-decoration: none;
+
+  &:hover {
+    color: var(--vinaup-black);
+  }
+}
+
+.categoryActive {
+  color: var(--vinaup-black);
+  position: relative;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.rightControls {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 0.5rem;
+
+  @media (max-width: 48em) {
+    gap: 0.25rem;
+  }
+}
+
+.viewAllText {
+  color: var(--brand-green);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+
+  @media (max-width: 48em) {
+    font-size: 0.875rem;
+    margin-right: 0.25rem;
+  }
+
+  &:hover {
+    color: #09472b;
+  }
+}
+
+.arrowBtn {
+  border-color: #dee2e6;
+  color: var(--vinaup-dark-gray);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: var(--vinaup-soft-gray);
+  }
+}
+
+.arrowBtnActive {
+  background-color: var(--brand-green);
+  color: white;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #09472b;
+  }
+}
+
+.badgeItem {
+  color: goldenrod;
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.heartIconItem {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 32px;
+  width: 32px;
+}

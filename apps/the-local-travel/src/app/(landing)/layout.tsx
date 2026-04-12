@@ -1,8 +1,8 @@
 
 import React from 'react';
 import classes from './layout.module.scss';
-import { LandingHeader } from '@vinaup/ui/landing';
-import { LandingFooter } from '@vinaup/ui/landing';
+import { Header } from '@vinaup/ui/landing';
+import { Footer } from '@vinaup/ui/landing';
 import { ScrollToTop } from '@vinaup/ui/landing';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa6';
 
@@ -61,9 +61,9 @@ const FOOTER_LINKS = [
 export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className={classes.landingLayout}>
-      <LandingHeader navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} />
+      <Header navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} />
       {children}
-      <LandingFooter columns={FOOTER_LINKS} />
+      <Footer columns={FOOTER_LINKS} />
       <ScrollToTop />
     </div>
   );

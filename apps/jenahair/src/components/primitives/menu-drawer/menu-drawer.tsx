@@ -8,7 +8,7 @@ import InstagramIcon from "@/components/icons/instagram-icon.svg";
 import FaceBookIcon from "@/components/icons/facebook-icon.svg";
 import GoogleMapIcon from "@/components/icons/google-map.svg";
 import { Group, Text } from "@mantine/core";
-import { LandingDrawer, LandingDrawerMenuItem } from "@vinaup/ui/landing";
+import { Drawer, DrawerMenuItem } from "@vinaup/ui/landing";
 
 interface MenuDrawerProps {
   opened: boolean;
@@ -31,19 +31,19 @@ export function MenuDrawer({ opened, onClose, menusData }: MenuDrawerProps) {
     return "/";
   };
 
-  const toLandingDrawerMenuItem = (menu: IMenuResponse): LandingDrawerMenuItem => {
+  const toDrawerMenuItem = (menu: IMenuResponse): DrawerMenuItem => {
     return {
       id: menu.id,
       title: menu.title,
       url: getMenuUrl(menu),
       isExternal: menu.targetType === "custom-url" && menu.customUrl !== "",
-      children: menu.children?.map(toLandingDrawerMenuItem),
+      children: menu.children?.map(toDrawerMenuItem),
     };
   };
 
   const menus = useMemo(() => {
     const root = menuTreeManager?.getRoot();
-    return (root?.children || []).map((m: any) => toLandingDrawerMenuItem(m));
+    return (root?.children || []).map((m: any) => toDrawerMenuItem(m));
   }, [menuTreeManager]);
 
   const socialsNode = (
@@ -69,7 +69,7 @@ export function MenuDrawer({ opened, onClose, menusData }: MenuDrawerProps) {
   );
 
   return (
-    <LandingDrawer
+    <Drawer
       opened={opened}
       onClose={onClose}
       menus={menus}

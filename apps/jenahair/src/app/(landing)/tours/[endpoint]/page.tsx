@@ -16,7 +16,7 @@ import classes from './page.module.scss';
 import { SmileSquareIcon } from '@vinaup/ui/cores';
 import {
   CarouselSlide,
-  LandingCarousel,
+  Carousel,
 } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import { formatPrice, renderDurationDays } from '@/utils/function-helpers';
@@ -97,11 +97,11 @@ export default async function TourDetailPage({
 
   const additionalImageSlides: CarouselSlide[] =
     tourData.data.additionalImageUrls.map((url) => ({
-      imageUrl: url,
+      src: url,
     }));
 
   const staticServiceSlides: CarouselSlide[] = SERVICE_ITEMS.map((item) => ({
-    imageUrl: item.imageUrl,
+    src: item.imageUrl,
     titleMain: item.name,
     href: item.endpoint,
   }));
@@ -110,7 +110,7 @@ export default async function TourDetailPage({
     if (additionalImageSlides.length === 0) {
       return <></>;
     } else {
-      return <LandingCarousel slides={additionalImageSlides} height={480} />;
+      return <Carousel slides={additionalImageSlides} height={480} />;
     }
   };
 
@@ -412,7 +412,7 @@ export default async function TourDetailPage({
               </Group>
             </Stack>
           </Paper>
-          <LandingCarousel
+          <Carousel
             slides={staticServiceSlides}
             height={400}
             orientation="vertical"
