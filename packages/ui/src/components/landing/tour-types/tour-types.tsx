@@ -1,7 +1,6 @@
-'use client';
 
 import { Box, Text } from '@mantine/core';
-import { Carousel } from '@mantine/carousel';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 import Image from 'next/image';
 import classes from './tour-types.module.scss';
@@ -38,7 +37,7 @@ export function TourTypes({ data }: TourTypesProps) {
           nextControlIcon={<FaArrowRight size={16} />}
         >
           {data.map((tour, index) => (
-            <Carousel.Slide key={index}>
+            <CarouselSlide key={index}>
               <div className={classes.card}>
                 <div className={classes.imageWrapper}>
                   <Image
@@ -53,7 +52,7 @@ export function TourTypes({ data }: TourTypesProps) {
                   </div>
                 </div>
               </div>
-            </Carousel.Slide>
+            </CarouselSlide>
           ))}
         </Carousel>
       </div>

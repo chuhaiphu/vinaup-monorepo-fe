@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel } from '@mantine/carousel';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
 import { useRef, useState } from 'react';
 import classes from './landing-carousel.module.scss';
 import { Container, Group } from '@mantine/core';
@@ -71,7 +71,7 @@ export function LandingCarousel({
       >
         {validSlides.map((slide, index) => {
           return (
-            <Carousel.Slide pb={0} key={index}>
+            <CarouselSlide pb={0} key={index}>
               <div className={classes.slideInner}>
                 <ImageCard
                   title={slide.titleMain || ''}
@@ -83,7 +83,7 @@ export function LandingCarousel({
                   priority={index === 0}
                 />
               </div>
-            </Carousel.Slide>
+            </CarouselSlide>
           );
         })}
       </Carousel>

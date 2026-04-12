@@ -1,6 +1,13 @@
-'use client';
-
-import { Card, Text, Group, Button, Box, Badge, ActionIcon } from '@mantine/core';
+import {
+  Card,
+  Text,
+  Group,
+  Button,
+  Box,
+  Badge,
+  ActionIcon,
+  CardSection,
+} from '@mantine/core';
 import Image from 'next/image';
 import { FaRegClock, FaHeart } from 'react-icons/fa6';
 import classes from './tour-card.module.scss';
@@ -42,7 +49,7 @@ export function TourCard({
         <FaHeart size={16} color={isFavorite ? 'var(--vinaup-red)' : '#ced4da'} />
       </ActionIcon>
 
-      <Card.Section className={classes.imageSection}>
+      <CardSection className={classes.imageSection}>
         <div className={classes.imageWrapper}>
           <Image
             src={image}
@@ -52,7 +59,7 @@ export function TourCard({
             className={classes.image}
           />
         </div>
-      </Card.Section>
+      </CardSection>
 
       <Box className={classes.content}>
         <Text className={classes.title} lineClamp={2} title={title}>
@@ -69,7 +76,13 @@ export function TourCard({
           </Text>
         </Group>
 
-        <Button fullWidth radius="md" className={classes.bookButton} component={Link} href="#">
+        <Button
+          fullWidth
+          radius="md"
+          className={classes.bookButton}
+          component={Link}
+          href="#"
+        >
           Booking Now
         </Button>
       </Box>

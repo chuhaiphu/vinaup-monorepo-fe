@@ -1,9 +1,8 @@
-'use client';
 
 import { Group, ActionIcon, Text, Box, Container } from '@mantine/core';
 import { IoSearch } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import classes from './main-header.module.scss';
+import classes from './landing-header.module.scss';
 import Link from 'next/link';
 import type { Route } from 'next';
 
@@ -19,12 +18,12 @@ export interface SocialLinkItem {
   label: string;
 }
 
-export interface MainHeaderProps {
+export interface LandingHeaderProps {
   navLinks: NavLinkItem[];
   socialLinks: SocialLinkItem[];
 }
 
-export default function MainHeader({ navLinks, socialLinks }: Readonly<MainHeaderProps>) {
+export function LandingHeader({ navLinks, socialLinks }: Readonly<LandingHeaderProps>) {
   return (
     <header className={classes.headerWrapper}>
       {/* HÀNG 1: Logo & Socials */}

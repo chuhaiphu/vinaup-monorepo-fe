@@ -9,7 +9,10 @@
     "./cores": "./src/cores/index.ts",
     "./cores/*": "./src/cores/*",
     "./core": "./src/cores/index.ts",
-    "./core/*": "./src/cores/*"
+    "./core/*": "./src/cores/*",
+    "./libs": "./src/libs/index.ts",
+    "./libs/*": "./src/libs/*.ts",
+    "./libs/mantine": "./src/libs/mantine/index.ts"
   },
   "peerDependencies": {
     "react": ">=19",

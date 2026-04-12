@@ -1,10 +1,10 @@
-'use client';
+
 
 import { Container, Title } from '@mantine/core';
 import classes from './hero-content.module.scss';
-import { SearchBar } from '@vinaup/ui/landing';
+import { SearchBar } from '../search-bar/search-bar';
 
-export default function HeroContent() {
+export function HeroContent() {
   return (
     <Container size={1232} className={classes.inner}>
       <div className={classes.content}>

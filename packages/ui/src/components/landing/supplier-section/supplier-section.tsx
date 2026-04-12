@@ -1,4 +1,3 @@
-'use client';
 
 import { Box, SimpleGrid } from '@mantine/core';
 import { SectionHeader } from '../section-header/section-header';

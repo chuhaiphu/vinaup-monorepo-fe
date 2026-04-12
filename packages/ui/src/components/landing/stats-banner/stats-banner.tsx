@@ -1,4 +1,4 @@
-'use client'; // Bắt buộc phải có 'use client' vì có animation và scroll event
+'use client';
 
 import { Box, Text, SimpleGrid } from '@mantine/core';
 import CountUp from 'react-countup';

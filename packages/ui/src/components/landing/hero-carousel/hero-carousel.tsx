@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel } from '@mantine/carousel';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
 import { Box } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
@@ -24,12 +24,14 @@ export function HeroCarousel({
   data,
   height = '80vh',
 }: HeroCarouselProps) {
-  const autoplay = useRef(Autoplay({
-    delay: 4000,
-    stopOnMouseEnter: false,
-    stopOnInteraction: false,
-    playOnInit: true,
-  }));
+  const autoplay = useRef(
+    Autoplay({
+      delay: 4000,
+      stopOnMouseEnter: false,
+      stopOnInteraction: false,
+      playOnInit: true,
+    })
+  );
 
   return (
     <Box
@@ -55,7 +57,7 @@ export function HeroCarousel({
         }}
       >
         {data.map((slide, index) => (
-          <Carousel.Slide key={slide.id} className={classes.slide}>
+          <CarouselSlide key={slide.id} className={classes.slide}>
             <Image
               src={slide.image}
               alt={slide.alt}
@@ -65,14 +67,12 @@ export function HeroCarousel({
               style={{ objectFit: 'cover' }}
               className={classes.slideImage}
             />
-          </Carousel.Slide>
+          </CarouselSlide>
         ))}
       </Carousel>
 
       {/* Lớp nội dung đè lên Carousel */}
-      <div className={classes.contentOverlay}>
-        {children}
-      </div>
+      <div className={classes.contentOverlay}>{children}</div>
     </Box>
   );
 }

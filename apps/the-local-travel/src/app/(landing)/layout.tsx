@@ -1,7 +1,8 @@
-import React from "react";
-import classes from "./layout.module.scss";
-import MainHeader from "@/components/main-header/main-header";
-import MainFooter from "@/components/main-footer/main-footer";
+
+import React from 'react';
+import classes from './layout.module.scss';
+import { LandingHeader } from '@vinaup/ui/landing';
+import { LandingFooter } from '@vinaup/ui/landing';
 import { ScrollToTop } from '@vinaup/ui/landing';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa6';
 
@@ -47,17 +48,23 @@ const FOOTER_LINKS = [
   },
   {
     title: 'Beaches & Experiences',
-    links: ['Phu Quoc', 'Con Dao', 'Ha Long Cruises', 'Luxury Resorts', 'Eco Tours'],
+    links: [
+      'Phu Quoc',
+      'Con Dao',
+      'Ha Long Cruises',
+      'Luxury Resorts',
+      'Eco Tours',
+    ],
   },
 ];
 
 export default function LandingLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <div className={classes.landingLayout}>
-            <MainHeader navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} />
-            {children}
-            <MainFooter columns={FOOTER_LINKS} />
-            <ScrollToTop />
-        </div>
-    )
+  return (
+    <div className={classes.landingLayout}>
+      <LandingHeader navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} />
+      {children}
+      <LandingFooter columns={FOOTER_LINKS} />
+      <ScrollToTop />
+    </div>
+  );
 }

@@ -16,3 +16,6 @@ export * from './split-section-header/split-section-header';
 export * from './landing-carousel/landing-carousel';
 export * from './landing-drawer/landing-drawer';
 export * from './recaptcha-enterprise';
+export * from './landing-header/landing-header';
+export * from './landing-footer/landing-footer';
+export * from './hero-content/hero-content';

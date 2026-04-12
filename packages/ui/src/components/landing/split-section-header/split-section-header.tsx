@@ -1,4 +1,3 @@
-'use client';
 
 import { Title, Text, Flex, TitleOrder } from '@mantine/core';
 import classes from './split-section-header.module.scss';

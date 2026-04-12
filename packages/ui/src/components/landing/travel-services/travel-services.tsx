@@ -1,9 +1,7 @@
-'use client';
-
-import Image from "next/image";
-import { SectionHeader } from "../section-header/section-header";
-import classes from "./travel-services.module.scss";
-import { Flex, Grid } from "@mantine/core";
+import Image from 'next/image';
+import { SectionHeader } from '../section-header/section-header';
+import classes from './travel-services.module.scss';
+import { Flex, Grid, GridCol } from '@mantine/core';
 
 export interface TravelServicesItem {
   id: number | string;
@@ -18,7 +16,10 @@ export interface TravelServicesProps {
   youtubeEmbedUrl: string;
 }
 
-export function TravelServices({ data, youtubeEmbedUrl }: Readonly<TravelServicesProps>) {
+export function TravelServices({
+  data,
+  youtubeEmbedUrl,
+}: Readonly<TravelServicesProps>) {
   return (
     <section>
       <SectionHeader
@@ -27,7 +28,7 @@ export function TravelServices({ data, youtubeEmbedUrl }: Readonly<TravelService
         align="left"
       />
       <Grid gap={{ base: 'sm', sm: 'lg' }} align="stretch">
-        <Grid.Col span={{ base: 12, md: 4 }}>
+        <GridCol span={{ base: 12, md: 4 }}>
           <div className={classes.videoWrapper}>
             {/* <iframe
               width="100%"
@@ -47,8 +48,8 @@ export function TravelServices({ data, youtubeEmbedUrl }: Readonly<TravelService
               allowFullScreen
             ></iframe>
           </div>
-        </Grid.Col>
-        <Grid.Col span={{ base: 12, md: 8 }}>
+        </GridCol>
+        <GridCol span={{ base: 12, md: 8 }}>
           <Flex direction="column" gap={{ base: 'sm', md: 'lg' }}>
             {data.map((item) => (
               <div key={item.id} className={classes.card}>
@@ -57,18 +58,25 @@ export function TravelServices({ data, youtubeEmbedUrl }: Readonly<TravelService
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className={classes.bgImage}
                   />
                 </div>
 
                 <div
-                  className={`${classes.gradientOverlay} ${item.align === "left" ? classes.gradientLeft : classes.gradientRight
-                    }`}
+                  className={`${classes.gradientOverlay} ${
+                    item.align === 'left'
+                      ? classes.gradientLeft
+                      : classes.gradientRight
+                  }`}
                 />
 
                 <div
-                  className={`${classes.content} ${item.align === "left" ? classes.contentLeft : classes.contentRight
-                    }`}
+                  className={`${classes.content} ${
+                    item.align === 'left'
+                      ? classes.contentLeft
+                      : classes.contentRight
+                  }`}
                 >
                   <div className={classes.textWrapper}>
                     <h3 className={classes.title}>{item.title}</h3>
@@ -80,7 +88,7 @@ export function TravelServices({ data, youtubeEmbedUrl }: Readonly<TravelService
               </div>
             ))}
           </Flex>
-        </Grid.Col>
+        </GridCol>
       </Grid>
     </section>
   );

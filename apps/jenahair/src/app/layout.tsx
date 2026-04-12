@@ -11,7 +11,7 @@ import './globals.scss';
 
 // app/layout.tsx
 import type { Metadata } from 'next';
-import { MantineConfigProvider } from '@/libs/mantine/mantine-config-provider';
+import { MantineConfigProvider } from '@vinaup/ui/libs/mantine';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jenahair.com'),

@@ -1,4 +1,3 @@
-'use client';
 
 import { Title, Text, Box } from '@mantine/core';
 import Image from 'next/image';

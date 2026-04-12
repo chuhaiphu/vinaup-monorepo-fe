@@ -1,4 +1,3 @@
-'use client';
 
 import { Group, Text, UnstyledButton, TextInput } from '@mantine/core';
 import { IoLocationOutline, IoSearch } from "react-icons/io5";

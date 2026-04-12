@@ -1,4 +1,3 @@
-'use client';
 
 import { Box, SimpleGrid } from '@mantine/core';
 import Image from 'next/image';

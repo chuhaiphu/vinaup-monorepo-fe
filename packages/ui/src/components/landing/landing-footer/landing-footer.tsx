@@ -1,6 +1,5 @@
-'use client';
-import classes from "./main-footer.module.scss";
-import { Container, Grid, Text, Group, ActionIcon } from "@mantine/core";
+import classes from "./landing-footer.module.scss";
+import { Container, Grid, Text, Group, ActionIcon, GridCol } from "@mantine/core";
 import { FaFacebookF, FaInstagram, FaTwitter, FaEnvelope, FaArrowRight } from "react-icons/fa6";
 
 export interface FooterColumn {
@@ -8,11 +7,11 @@ export interface FooterColumn {
     links: string[];
 }
 
-export interface MainFooterProps {
+export interface LandingFooterProps {
     columns: FooterColumn[];
 }
 
-export default function MainFooter({ columns }: Readonly<MainFooterProps>) {
+export function LandingFooter({ columns }: Readonly<LandingFooterProps>) {
     return (
         <footer className={classes.footer}>
             <Container size={1232} className={classes.inner}>
@@ -31,7 +30,7 @@ export default function MainFooter({ columns }: Readonly<MainFooterProps>) {
                 {/* Links Section */}
                 <Grid gap={{ base: 'sm', md: 'lg' }} className={classes.linksGrid}>
                     {columns.map((col, index) => (
-                        <Grid.Col span={{ base: 6, sm: 3 }} key={index}>
+                        <GridCol span={{ base: 6, sm: 3 }} key={index}>
                             <Text className={classes.columnTitle}>{col.title}</Text>
                             <div className={classes.linkList}>
                                 {col.links.map((link, idx) => (
@@ -40,7 +39,7 @@ export default function MainFooter({ columns }: Readonly<MainFooterProps>) {
                                     </a>
                                 ))}
                             </div>
-                        </Grid.Col>
+                        </GridCol>
                     ))}
                 </Grid>
             </Container>
