@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getAllToursActionPublic } from '../actions/tour-action';
-import { getAllBlogsActionPublic } from '../actions/blog-action';
-import { getAllPagesVisibleActionPrivate } from '../actions/page-action';
-import { getAllTourCategoriesActionPublic } from '../actions/tour-category-action';
-import { getAllBlogCategoriesActionPrivate } from '../actions/blog-category-action';
+import { getAllToursActionPublic } from '@/actions/tour-action';
+import { getAllBlogsActionPublic } from '@/actions/blog-action';
+import { getAllPagesVisibleActionPrivate } from '@/actions/page-action';
+import { getAllTourCategoriesActionPublic } from '@/actions/tour-category-action';
+import { getAllBlogCategoriesActionPrivate } from '@/actions/blog-category-action';
 import { SERVICE_ITEMS } from '@/constants';
 
 const BASE_URL = 'https://jenahair.com';

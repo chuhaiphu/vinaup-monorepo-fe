@@ -1,7 +1,7 @@
 import slugify from 'slugify';
-import { getTourByEndpointActionPublic } from '../actions/tour-action';
-import { getTourCategoryByEndpointActionPublic } from '../actions/tour-category-action';
-import { getPageByEndpointActionPublic } from '../actions/page-action';
+import { getTourByEndpointActionPublic } from '@/actions/tour-action';
+import { getTourCategoryByEndpointActionPublic } from '@/actions/tour-category-action';
+import { getPageByEndpointActionPublic } from '@/actions/page-action';
 import { getBlogCategoryByEndpointActionPublic } from '@/actions/blog-category-action';
 import { getBlogByEndpointActionPublic } from '@/actions/blog-action';
 

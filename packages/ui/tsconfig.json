@@ -15,6 +15,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "paths": {
+      "@ui/*": ["./src/*"]
+    }
   },
   "include": ["**/*.ts", "**/*.tsx", "global.d.ts"],
   "exclude": ["node_modules", "dist"]

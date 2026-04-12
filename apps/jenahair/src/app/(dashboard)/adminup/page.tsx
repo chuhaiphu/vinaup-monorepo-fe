@@ -1,7 +1,7 @@
 import { getAllBookingsActionPrivate } from '@/actions/booking-action';
 import { getAllCustomTourRequestsActionPrivate } from '@/actions/custom-tour-request-action';
 import { getAllCustomerContactsActionPrivate } from '@/actions/customer-contact-action';
-import AdminPageContent from '../../../components/mains/admin-page-content/admin-page-content';
+import AdminPageContent from '@/components/mains/admin-page-content/admin-page-content';
 import { Suspense } from 'react';
 
 export default async function AdminPage() {
