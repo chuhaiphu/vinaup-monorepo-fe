@@ -1,10 +1,11 @@
-
 import { Group, ActionIcon, Text, Box, Container } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { IoSearch } from 'react-icons/io5';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import classes from './header.module.scss';
 import Link from 'next/link';
 import type { Route } from 'next';
+import Hamburger from '../../primitives/hamburger/hamburger';
 
 export interface NavLinkItem {
   label: string;
@@ -72,13 +73,7 @@ export function Header({ navLinks, socialLinks }: Readonly<HeaderProps>) {
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
 
-              <ActionIcon
-                variant="transparent"
-                size="xl"
-                className={classes.menuIcon}
-              >
-                <RxHamburgerMenu size={32} />
-              </ActionIcon>
+              <Hamburger navLinks={navLinks} />
             </Group>
           </Group>
         </Container>

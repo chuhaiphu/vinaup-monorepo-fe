@@ -1,10 +1,9 @@
-
 import { Box, Text } from '@mantine/core';
 import { Carousel, CarouselSlide } from '@mantine/carousel';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6';
 import Image from 'next/image';
 import classes from './tour-types.module.scss';
-import { SplitSectionHeader } from '../../primitives/section-header/split-section-header/split-section-header';
+import { SplitSectionHeader } from '../../primitives/split-section-header/split-section-header';
 
 export interface TourTypeItem {
   title: string;

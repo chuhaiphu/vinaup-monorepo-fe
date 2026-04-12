@@ -23,5 +23,5 @@ export * from './primitives/cards/overlay-card/overlay-card';
 export * from './primitives/cards/product-card/product-card';
 export * from './primitives/search-bar/search-bar';
 export * from './primitives/section-header/section-header';
-export * from './primitives/section-header/split-section-header/split-section-header';
+export * from './primitives/split-section-header/split-section-header';
 export * from './primitives/recaptcha-enterprise/recaptcha-enterprise';

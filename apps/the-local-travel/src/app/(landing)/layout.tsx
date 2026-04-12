@@ -1,8 +1,7 @@
 
 import React from 'react';
 import classes from './layout.module.scss';
-import { Header } from '@vinaup/ui/landing';
-import { Footer } from '@vinaup/ui/landing';
+import { Footer, Header } from '@vinaup/ui/landing';
 import { ScrollToTop } from '@vinaup/ui/landing';
 import { FaFacebookF, FaInstagram, FaWhatsapp, FaYoutube } from 'react-icons/fa6';
 
