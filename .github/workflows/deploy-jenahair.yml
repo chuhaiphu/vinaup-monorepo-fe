@@ -70,5 +70,5 @@ jobs:
               -e API_URL=${{ env.API_URL }} \
               ${{ env.DOCKER_IMAGE }}:${{ steps.version.outputs.VERSION }}
 
-            # Clean up old images (keep latest 3 versions)
-            docker images ${{ env.DOCKER_IMAGE }} --format "table {{.Tag}}\t{{.ID}}" | tail -n +4 | awk '{print $2}' | xargs -r docker rmi || true
+            # Clean up old images
+            docker image prune -a -f --filter "until=24h"
