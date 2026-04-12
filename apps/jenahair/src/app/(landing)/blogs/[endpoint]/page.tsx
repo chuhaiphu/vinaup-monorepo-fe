@@ -6,8 +6,8 @@ import { Grid, GridCol, Group, Paper, Stack, Text } from '@mantine/core';
 import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import classes from './page.module.scss';
 import {
-  CarouselSlide,
-  Carousel,
+  SectionCarouselSlide,
+  SectionCarousel,
 } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import SocialTab from '@/components/primitives/social-tab/social-tab';
@@ -82,13 +82,13 @@ export default async function BlogDetailPage({
     notFound();
   }
   const blogData = blogResponse.data;
-  const additionalImageSlides: CarouselSlide[] = blogData.additionalImageUrls.map(
+  const additionalImageSlides: SectionCarouselSlide[] = blogData.additionalImageUrls.map(
     (url) => ({
       src: url,
     })
   );
 
-  const staticServiceSlides: CarouselSlide[] = SERVICE_ITEMS.map((item) => ({
+  const staticServiceSlides: SectionCarouselSlide[] = SERVICE_ITEMS.map((item) => ({
     src: item.imageUrl,
     titleMain: item.name,
     href: item.endpoint,
@@ -98,7 +98,7 @@ export default async function BlogDetailPage({
     if (additionalImageSlides.length === 0) {
       return <></>;
     } else {
-      return <Carousel slides={additionalImageSlides} height={480} />;
+      return <SectionCarousel slides={additionalImageSlides} height={480} />;
     }
   };
 
@@ -305,7 +305,7 @@ export default async function BlogDetailPage({
               </Group>
             </Stack>
           </Paper>
-          <Carousel
+          <SectionCarousel
             slides={staticServiceSlides}
             height={400}
             orientation="vertical"

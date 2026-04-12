@@ -1,4 +1,4 @@
-import { Carousel } from '@vinaup/ui/landing';
+import { SectionCarousel } from '@vinaup/ui/landing';
 import { SECTION_KEYS } from './section-key';
 import { SECTION_METADATA } from './section-metadata';
 import LandingFooter from '@/components/footers/landing-footer/landing-footer';
@@ -7,7 +7,7 @@ import { VideoSection } from '@vinaup/ui/landing';
 // Full registry with components for runtime - key is componentKey (immutable)
 const REGISTRY_MAP = {
   [SECTION_KEYS.LANDING_CAROUSEL_V1]: {
-    component: Carousel,
+    component: SectionCarousel,
     properties: SECTION_METADATA[SECTION_KEYS.LANDING_CAROUSEL_V1].properties,
   },
   [SECTION_KEYS.LANDING_FOOTER_V1]: {

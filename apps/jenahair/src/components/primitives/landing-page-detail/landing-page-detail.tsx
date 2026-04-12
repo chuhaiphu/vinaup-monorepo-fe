@@ -5,8 +5,8 @@ import { Grid, GridCol, Group, Image, Paper, Stack, Text } from '@mantine/core';
 import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import classes from './landing-page-detail.module.scss';
 import {
-  CarouselSlide,
-  Carousel,
+  SectionCarouselSlide,
+  SectionCarousel,
 } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import { RiCheckDoubleFill } from 'react-icons/ri';
@@ -19,13 +19,13 @@ interface LandingPageDetailProps {
 }
 
 export default function LandingPageDetail({ page }: LandingPageDetailProps) {
-  const additionalImageSlides: CarouselSlide[] = page.additionalImageUrls.map(
+  const additionalImageSlides: SectionCarouselSlide[] = page.additionalImageUrls.map(
     (url) => ({
       src: url,
     })
   );
 
-  const staticServiceSlides: CarouselSlide[] = SERVICE_ITEMS.map((item) => ({
+  const staticServiceSlides: SectionCarouselSlide[] = SERVICE_ITEMS.map((item) => ({
     src: item.imageUrl,
     titleMain: item.name,
     href: item.endpoint,
@@ -45,7 +45,7 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
     if (additionalImageSlides.length === 0) {
       return <></>;
     }
-    return <Carousel slides={additionalImageSlides} height={480} />;
+    return <SectionCarousel slides={additionalImageSlides} height={480} />;
   };
 
   const renderVideoSection = (
@@ -234,7 +234,7 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
             </Paper>
           </Stack>
 
-          <Carousel
+          <SectionCarousel
             slides={staticServiceSlides}
             height={400}
             orientation="vertical"

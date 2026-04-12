@@ -2,12 +2,14 @@
 .carouselWrapper {
   position: relative;
 
-  // Kỹ thuật này giúp Carousel có khoảng padding bên trong mà không ảnh hưởng 
+  // Kỹ thuật này giúp Carousel có khoảng padding bên trong mà không ảnh hưởng
   // đến layout tổng thể, đồng thời tránh bị cắt khi slide có bóng đổ (shadow)
   :global(.mantine-Carousel-viewport) {
     padding: 1.5rem 0.5rem;
     margin: -1.5rem -0.5rem;
-    transform: translateZ(0); // Kích hoạt GPU compositing để tăng hiệu suất trên mobile
+    transform: translateZ(
+      0
+    ); // Kích hoạt GPU compositing để tăng hiệu suất trên mobile
   }
 }
 
@@ -22,7 +24,7 @@
   width: calc(100% + 6rem);
   margin-left: -3rem;
 
-  &>* {
+  & > * {
     pointer-events: auto;
   }
 
@@ -77,7 +79,9 @@
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 
   // Kỹ thuật này giúp tăng hiệu suất khi hover trên mobile bằng cách kích hoạt GPU compositing
   transform: translateZ(0);

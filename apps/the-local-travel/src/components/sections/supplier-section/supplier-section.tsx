@@ -1,7 +1,6 @@
-
 import { Box, SimpleGrid } from '@mantine/core';
-import { SectionHeader } from '../../primitives/section-header/section-header';
-import { OverlayCard, OverlayCardProps } from '../../primitives/cards/overlay-card/overlay-card';
+import { SectionHeader } from '@vinaup/ui/landing';
+import { OverlayCard, OverlayCardProps } from '@vinaup/ui/landing';
 
 interface SupplierSectionProps {
   data: OverlayCardProps[];
@@ -25,4 +24,6 @@ export function SupplierSection({ data }: SupplierSectionProps) {
       </SimpleGrid>
     </Box>
   );
-}export type { OverlayCardProps } from '../../primitives/cards/overlay-card/overlay-card';
+}
+
+export type { OverlayCardProps } from '@vinaup/ui/landing';

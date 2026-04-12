@@ -2,12 +2,12 @@
 
 import { Carousel as MantineCarousel, CarouselSlide } from '@mantine/carousel';
 import { useRef, useState } from 'react';
-import classes from './carousel.module.scss';
+import classes from './section-carousel.module.scss';
 import { Container, Group } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
-import { MediaCard } from '../../primitives/cards/media-card/media-card';
+import { MediaCard } from '../../cards/media-card/media-card';
 
-export interface CarouselSlide {
+export interface SectionCarouselSlide {
   titleMain?: string;
   titleHighlight?: string;
   subTitle?: string;
@@ -16,21 +16,21 @@ export interface CarouselSlide {
   href?: string;
 }
 
-interface CarouselProps {
-  slides: CarouselSlide[];
+interface SectionCarouselProps {
+  slides: SectionCarouselSlide[];
   showText?: boolean;
   height?: number | string;
   loop?: boolean;
   orientation?: 'horizontal' | 'vertical';
 }
 
-export function Carousel({
+export function SectionCarousel({
   slides = [],
   showText = true,
   height = '80vh',
   loop = true,
   orientation = 'horizontal',
-}: CarouselProps) {
+}: SectionCarouselProps) {
   const [active, setActive] = useState(0);
   const autoplay = useRef(Autoplay({ delay: 3000 }));
 

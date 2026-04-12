@@ -2,20 +2,23 @@
 
 import { ActionIcon } from '@mantine/core';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import classes from './hamburger.module.scss';
+import classes from './navigation-control.module.scss';
 import { NavLinkItem } from '../../layout/header/header';
-import { MainSidebar } from '../../main-sidebar/main-sidebar';
+
 import { useDisclosure } from '@mantine/hooks';
+import { Sidebar } from '../../layout/sidebar/sidebar';
 
 export interface LandingHeaderProps {
   navLinks: NavLinkItem[];
 }
 
-export default function Hamburger({ navLinks }: Readonly<LandingHeaderProps>) {
+export default function NavigationControl({
+  navLinks,
+}: Readonly<LandingHeaderProps>) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <div>
-      <MainSidebar
+    <>
+      <Sidebar
         opened={opened}
         close={close}
         drawerPosition="right"
@@ -30,6 +33,6 @@ export default function Hamburger({ navLinks }: Readonly<LandingHeaderProps>) {
       >
         <RxHamburgerMenu size={32} />
       </ActionIcon>
-    </div>
+    </>
   );
 }

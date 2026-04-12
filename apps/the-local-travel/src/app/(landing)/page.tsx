@@ -3,11 +3,11 @@ import { HeroContent } from '@vinaup/ui/landing';
 import { Container, Stack } from '@mantine/core';
 
 import { StatsBanner } from '@vinaup/ui/landing';
-import { SupplierSection } from '@vinaup/ui/landing';
-import { TourTypes } from '@vinaup/ui/landing';
+import { SupplierSection } from '@/components/sections/supplier-section/supplier-section';
+import { TourTypes } from '@/components/sections/tour-types/tour-types';
 import { RecentlyPublished } from '@vinaup/ui/landing';
-import { OurPartners } from '@vinaup/ui/landing';
-import { TravelServices } from '@vinaup/ui/landing';
+import { OurPartners } from '@/components/sections/our-partners/our-partners';
+import { TravelServices } from '@/components/sections/travel-services/travel-services';
 
 import { MOCK_SLIDES } from '@/mocks/hero-carousel-data';
 import { SUPPLIER_DATA } from '@/mocks/suppiler-data';
@@ -36,7 +36,10 @@ export default function Home() {
           <TourTypes data={MOCK_TOUR_TYPES} />
           <StatsBanner stats={STATS_DATA} />
           <RecentlyPublished data={MOCK_RECENTLY_PUBLISHED} />
-          <TravelServices data={TRAVEL_SERVICES_DATA} youtubeEmbedUrl="..." />
+          <TravelServices
+            data={TRAVEL_SERVICES_DATA}
+            youtubeEmbedUrl="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          />
           <OurPartners data={MOCK_PARTNERS} />
         </Stack>
       </Container>
