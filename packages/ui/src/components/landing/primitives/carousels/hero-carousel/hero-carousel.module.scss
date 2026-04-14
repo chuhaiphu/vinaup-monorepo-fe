@@ -4,12 +4,11 @@
   overflow: hidden;
   height: 60vh; // 60% chiều cao viewport trên mobile
   min-height: 320px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 
   @media (min-width: 768px) {
-    height: var(
-      --carousel-height,
-      80vh
-    ); // Sử dụng biến CSS để linh hoạt điều chỉnh chiều cao trên desktop, mặc định là 80vh)
+    height: var(--carousel-height,
+        80vh); // Sử dụng biến CSS để linh hoạt điều chỉnh chiều cao trên desktop, mặc định là 80vh)
   }
 }
 
@@ -30,7 +29,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, var(--carousel-overlay-opacity, 0.6)); // Sử dụng biến CSS để điều chỉnh độ mờ của lớp phủ, mặc định là 0.6
     z-index: 1;
   }
 }
@@ -44,7 +43,7 @@
   pointer-events: none; // Lớp màng vô hình để không cản Carousel
 
   // Bật lên nếu muốn cho phép tương tác với nội dung bên trong
-  & > * {
+  &>* {
     pointer-events: none;
   }
 }
@@ -76,5 +75,47 @@
 
   &[data-active] {
     background-color: #fff !important;
+  }
+}
+
+.slideTextOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 3rem;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    padding-bottom: 1.5rem;
+  }
+}
+
+.textContainer {
+  color: #fff;
+  text-align: left;
+}
+
+.slideTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+}
+
+.slideDescription {
+  font-size: 1.25rem;
+  max-width: 600px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
   }
 }

@@ -1,49 +1,75 @@
-.header {
+.headerWrapper {
   height: 80px;
-  background-color: #414d44;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #4d5b41;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 100;
 }
 
 .inner {
-  max-width: 1400px;
-  margin: 0 auto;
+  height: 100%;
 }
 
 .logoSection {
-  .logoText {
-    color: #1a202c;
-    letter-spacing: -0.5px;
-    font-family: 'Inter', sans-serif;
-  }
-}
-
-.navLink {
-  color: #ffffff !important;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity 0.2s ease;
 
   &:hover {
     opacity: 0.8;
-    color: #f4a261 !important;
   }
 }
 
-.ctaButton {
-  background-color: #f4a261 !important;
-  color: #ffffff;
-  padding: 0 30px;
-  font-weight: 700;
-  font-size: 14px;
-  border: none;
-  box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
+.searchInput {
+  color: white;
+  font-family: var(--font-merriweather);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: var(--font-merriweather);
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+
+.searchInput {
+  color: white;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* THIẾT KẾ LẠI BỘ SOCIAL ICONS */
+.socialIcon {
+  color: #cdead1;
+  /* Cùng tông màu với menu button */
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Nền mờ nhẹ */
+  border-radius: 50%;
+  /* Bo tròn hoàn toàn */
+  transition: all 0.2s ease;
 
   &:hover {
-    background-color: #e78c49 !important;
-    transform: translateY(-1px);
+    background-color: rgba(255, 255, 255, 0.15);
+    /* Sáng nền lên khi hover */
+    color: #ffffff;
+    /* Sáng icon lên khi hover */
+    transform: translateY(-2px);
+    /* Nhấc nhẹ lên */
+  }
+}
+
+.menuBtn {
+  color: #cdead1;
+  transition: transform 0.2s ease;
+  margin-left: 8px;
+  /* Tách nhẹ menu ra khỏi dải icon */
+
+  &:hover {
+    transform: scale(1.05);
+    color: #ffffff;
   }
 }

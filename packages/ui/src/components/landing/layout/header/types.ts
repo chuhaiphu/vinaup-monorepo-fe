@@ -1,4 +1,3 @@
-"use client";
 export interface NavLinkItem {
   label: string;
   href: string;
@@ -14,10 +13,4 @@ export interface SocialLinkItem {
 export interface HeaderProps {
   navLinks: NavLinkItem[];
   socialLinks: SocialLinkItem[];
-}
-
-export function Header({ navLinks, socialLinks }: Readonly<HeaderProps>) {
-  return (
-    <></>
-  );
 }

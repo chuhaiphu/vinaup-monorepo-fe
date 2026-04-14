@@ -24,7 +24,7 @@
         top: 1rem;
         left: -3.5rem; // Đẩy xa ra một chút
     }
-    
+
     &[data-position="left"] {
         top: 1rem;
         right: -3.5rem;
@@ -49,7 +49,6 @@
 .navLinksContainer {
     display: flex;
     flex-direction: column;
-    gap: 15px;
     margin-top: 10px;
 }
 
@@ -59,11 +58,11 @@
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.2s, transform 0.2s;
-    padding: 0.25rem 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
 
-    &:hover,
-    &.active {
-        color: var(--brand-green, #0b5d3a); /* Fallback color nếu chưa có biến var */
+    &:hover {
+        background-color: rgba(211, 211, 211, 0.3); // Nền sáng nhẹ khi hover
         transform: translateX(5px); // Tạo hiệu ứng nhẹ khi hover
     }
 }

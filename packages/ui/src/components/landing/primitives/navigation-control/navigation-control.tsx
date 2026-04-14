@@ -1,20 +1,20 @@
 'use client';
 
 import { ActionIcon } from '@mantine/core';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import classes from './navigation-control.module.scss';
-import { NavLinkItem } from '../../layout/header/header';
-
+import { NavLinkItem } from '../../layout/header/types';
 import { useDisclosure } from '@mantine/hooks';
 import { Sidebar } from '../../layout/sidebar/sidebar';
 
-export interface LandingHeaderProps {
+export interface NavigationControlProps {
+  iconSvg: React.ReactNode;
   navLinks: NavLinkItem[];
 }
 
 export default function NavigationControl({
+  iconSvg,
   navLinks,
-}: Readonly<LandingHeaderProps>) {
+}: Readonly<NavigationControlProps>) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
@@ -31,7 +31,7 @@ export default function NavigationControl({
         className={classes.menuIcon}
         onClick={open}
       >
-        <RxHamburgerMenu size={32} />
+        {iconSvg}
       </ActionIcon>
     </>
   );

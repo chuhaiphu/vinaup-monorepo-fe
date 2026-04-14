@@ -1,0 +1,63 @@
+.headerWrapper {
+  height: 80px;
+  background-color: var(--brand-green, #4d5b41);
+  /* Use var for theme support, fallback to JenaHair green */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.inner {
+  height: 100%;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+}
+
+.searchIconSvg {
+  color: var(--vinaup-mint);
+}
+
+.searchInput {
+  color: white;
+  font-family: var(--font-merriweather, sans-serif);
+
+  &::placeholder {
+    color: var(--vinaup-mint);
+    font-family: var(--font-merriweather, sans-serif);
+    opacity: 0.6;
+    font-weight: 400;
+    font-style: italic;
+  }
+}
+
+.socialIcon {
+  transition: all 0.2s ease;
+
+  @media (max-width: 375px) {
+    /* 1. Thu nhỏ bản thân cái nút ActionIcon */
+    width: 30px !important;
+    height: 30px !important;
+    min-height: 30px !important;
+
+    /* 2. Ép hình SVG bên trong nhỏ lại, đè lên width/height ở file Layout */
+    svg {
+      width: 22px !important;
+      height: auto !important;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

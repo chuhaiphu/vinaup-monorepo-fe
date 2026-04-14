@@ -1,0 +1,161 @@
+/* Bạn có thể thêm background-color vào đây nếu muốn nền xanh rêu */
+.sectionWrapper {
+    padding: 2rem 0;
+}
+
+.header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainTitle {
+    font-family: var(--font-merriweather, serif);
+    color: var(--vinaup-amber, #F16406);
+    font-size: clamp(2rem, 4vw, 2.875rem);
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.mainDescription {
+    font-family: var(--font-merriweather, serif);
+    color: #FFFFFF;
+    font-size: clamp(1rem, 1.5vw, 1.375rem);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0;
+    opacity: 0.95;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+        line-height: 1.5;
+    }
+}
+
+
+.subTitle {
+    font-family: var(--font-merriweather, serif);
+    color: var(--vinaup-amber, #F16406);
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.seeAllLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: var(--font-merriweather, serif);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #FFFFFF;
+    }
+}
+
+/* --- VIDEO WRAPPER --- */
+.videoWrapper {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+    /* Mặc định trên Mobile: Giữ tỷ lệ 16:9 để không bị xẹp */
+    aspect-ratio: 16 / 9; 
+
+    /* Từ màn hình Desktop trở lên (Mantine 'md' breakpoint ~992px) */
+    @media (min-width: 992px) {
+        aspect-ratio: auto; 
+        flex-grow: 1;       /* Tự động kéo giãn lấp đầy chiều cao bằng với cột Blog */
+    }
+
+    &:hover .videoThumbnail {
+        transform: scale(1.05);
+    }
+
+    &:hover .playButton {
+        transform: translate(-50%, -50%) scale(1.1); 
+    }
+}
+
+.videoThumbnail {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.playButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease;
+    z-index: 2;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* --- MINI BLOG CARD --- */
+.miniBlogCard {
+    display: flex;
+    gap: 1.5rem; // Tạo khoảng cách giữa ảnh và chữ
+    align-items: center; // Căn giữa nội dung 2 bên theo chiều dọc
+    cursor: pointer;
+    border-radius: 12px;
+
+    &:hover {
+        .miniBlogImage {
+            transform: scale(1.05); // Chỉ ảnh phóng to khi hover
+        }
+    }
+}
+
+.miniBlogImageWrapper {
+    flex: 1; // PHÉP THUẬT: Ép khối ảnh chiếm đúng 50%
+    position: relative;
+    aspect-ratio: 16 / 9; // Ép ảnh thành hình chữ nhật ngang y hệt Video
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.miniBlogImage {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.miniBlogContent {
+    flex: 1; // PHÉP THUẬT: Ép khối chữ chiếm 50% còn lại
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.miniBlogTitle {
+    font-family: var(--font-merriweather, serif);
+    color: #FFFFFF;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    font-weight: 700; // In đậm giống thiết kế
+    margin: 0;
+    line-height: 1.4;
+
+    // Cắt chữ nếu dài quá 3 dòng
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.miniBlogMeta {
+    color: rgba(255, 255, 255, 0.6); // Màu chữ nhạt đi cho icon và số
+    font-size: 0.85rem;
+    font-family: var(--font-open-sans, sans-serif);
+}

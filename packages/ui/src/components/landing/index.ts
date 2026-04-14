@@ -1,6 +1,8 @@
 // layout
 export * from './layout/footer/footer';
-export * from './layout/header/header';
+export * from './layout/header/types';
+export * from './layout/header/header-centered-logo/header-centered-logo';
+export * from './layout/header/header-split-search-with-social-media/header-split-search-with-social-media';
 export * from './layout/drawer/drawer';
 export * from './layout/scroll-to-top/scroll-to-top';
 

@@ -4,7 +4,7 @@ import '@mantine/notifications/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/tiptap/styles.css';
 
-import { Inter } from 'next/font/google';
+import { Inter, Merriweather, Open_Sans } from 'next/font/google';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 
 import './globals.scss';
@@ -37,11 +37,25 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+const merriweather = Merriweather({
+  variable: '--font-merriweather',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const openSans = Open_Sans({
+  variable: '--font-open-sans',
+  subsets: ['latin', 'vietnamese'],
+  weight: ['400', '500', '600', '700'],
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang="en" {...mantineHtmlProps}
+
+      className={`${inter.variable} ${merriweather.variable} ${openSans.variable}`}>
       <head>
         <ColorSchemeScript />
       </head>

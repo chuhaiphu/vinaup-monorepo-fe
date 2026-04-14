@@ -7,3 +7,6 @@ export { default as VinaupLogoAlternative } from './vinaup-logo-alternative';
 export { default as VinaupLogoCustom } from './vinaup-logo-custom';
 export { default as VinaupNetworkHubIcon } from './vinaup-network-hub-icon';
 export { default as VinaupUnlockIcon } from './vinaup-unlock-icon';
+export { default as JenhairIcon } from './vinaup-jenahair-logo-icon';
+export { default as MenuSquareIcon } from './menu-square-icon';
+export { default as VinaupGridListIcon } from './vinaup-grid-list-icon';

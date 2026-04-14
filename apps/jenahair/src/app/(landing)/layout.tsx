@@ -1,9 +1,14 @@
 import { MaintenanceGuard } from '@/components/guards/maintenance-guard';
 import classes from './layout.module.scss';
-import { LandingHeader } from '@/components/headers/landing-header/landing-header';
 import { getAppConfigActionPublic } from '@/actions/app-config-action';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
+import { JenhairIcon } from '@vinaup/ui/cores';
+import FacebookIcon from '@vinaup/ui/cores/icons/facebook-icon.svg';
+import InstagramIcon from '@vinaup/ui/cores/icons/instagram-icon.svg';
+import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
+import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
+import { HeaderSplitSearchWithSocialMedia } from '@vinaup/ui/landing';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -69,6 +74,37 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
+const NAV_LINKS = [
+  { label: 'Home', href: '/', active: true },
+  { label: 'Danh mục', href: '/' },
+  { label: 'Dịch vụ', href: '/' },
+  { label: 'Blog', href: '/' },
+  { label: 'Nhật ký', href: '/' },
+];
+
+const SOCIAL_LINKS = [
+  {
+    icon: <GoogleMapIcon width={36} height={38} />,
+    href: 'https://google.com/maps',
+    label: 'Google Map',
+  },
+  {
+    icon: <TiktokIcon width={36} height={38} />,
+    href: 'https://tiktok.com',
+    label: 'Tiktok',
+  },
+  {
+    icon: <FacebookIcon width={36} height={38} />,
+    href: 'https://facebook.com',
+    label: 'Facebook',
+  },
+  {
+    icon: <InstagramIcon width={36} height={38} />,
+    href: 'https://instagram.com',
+    label: 'Instagram',
+  },
+];
+
 export default async function LandingLayout({
   children,
 }: {
@@ -77,9 +113,9 @@ export default async function LandingLayout({
   return (
     <div className={classes.landingLayout}>
       <Suspense fallback={null}>
-        <MaintenanceGuard />
+        {/* <MaintenanceGuard /> */}
       </Suspense>
-      <LandingHeader />
+      <HeaderSplitSearchWithSocialMedia navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />} />
       {children}
     </div>
   );
