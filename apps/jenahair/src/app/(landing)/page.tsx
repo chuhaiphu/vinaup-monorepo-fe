@@ -34,8 +34,6 @@ export default function Home() {
         <CommitmentAndMedia />
 
       </Stack>
-
-      <div style={{ height: '1000px' }}></div>
     </main>
   );
 }

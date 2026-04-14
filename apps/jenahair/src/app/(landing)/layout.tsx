@@ -9,6 +9,7 @@ import InstagramIcon from '@vinaup/ui/cores/icons/instagram-icon.svg';
 import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
 import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
 import { HeaderSplitSearchWithSocialMedia } from '@vinaup/ui/landing';
+import { Footer } from '@/components/footer/footer';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -117,6 +118,7 @@ export default async function LandingLayout({
       </Suspense>
       <HeaderSplitSearchWithSocialMedia navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />} />
       {children}
+      <Footer />
     </div>
   );
 }
