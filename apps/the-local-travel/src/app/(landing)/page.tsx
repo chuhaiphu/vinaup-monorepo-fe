@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <main>
-      <HeroCarousel data={MOCK_SLIDES} height="70vh">
+      <HeroCarousel data={MOCK_SLIDES} height="70vh" overlayOpacity={0.3}>
         <HeroContent />
       </HeroCarousel>
 

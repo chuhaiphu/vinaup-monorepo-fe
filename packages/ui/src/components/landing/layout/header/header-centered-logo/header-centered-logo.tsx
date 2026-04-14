@@ -3,26 +3,11 @@ import { IoSearch } from 'react-icons/io5';
 import classes from './header.module.scss';
 import Link from 'next/link';
 import type { Route } from 'next';
-import NavigationControl from '../../primitives/navigation-control/navigation-control';
+import NavigationControl from '../../../primitives/navigation-control/navigation-control';
+import { NavLinkItem, SocialLinkItem, HeaderProps } from '../types';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
-export interface NavLinkItem {
-  label: string;
-  href: string;
-  active?: boolean;
-}
-
-export interface SocialLinkItem {
-  icon: React.ReactNode;
-  href: string;
-  label: string;
-}
-
-export interface HeaderProps {
-  navLinks: NavLinkItem[];
-  socialLinks: SocialLinkItem[];
-}
-
-export function Header({ navLinks, socialLinks }: Readonly<HeaderProps>) {
+export function HeaderCenteredLogo({ navLinks, socialLinks }: Readonly<HeaderProps>) {
   return (
     <header className={classes.headerWrapper}>
       {/* HÀNG 1: Logo & Socials */}
@@ -71,7 +56,7 @@ export function Header({ navLinks, socialLinks }: Readonly<HeaderProps>) {
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
 
-              <NavigationControl navLinks={navLinks} />
+              <NavigationControl navLinks={navLinks} iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />} />
             </Group>
           </Group>
         </Container>
