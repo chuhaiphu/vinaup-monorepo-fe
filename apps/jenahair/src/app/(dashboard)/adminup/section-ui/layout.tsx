@@ -1,12 +1,17 @@
-import AdminSectionUILayoutContent from "@/components/mains/admin-section-ui-layout-content/admin-section-ui-layout-content";
-import { Suspense } from "react";
+import { Group, Text } from '@mantine/core';
+import classes from './layout.module.scss';
 
-export default async function AdminSectionUILayout({ children }: { children: React.ReactNode }) {
+export default function AdminSectionUILayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <Suspense>
-      <AdminSectionUILayoutContent>
-        {children}
-      </AdminSectionUILayoutContent>
-    </Suspense>
+    <div className={classes.adminSectionUILayoutRoot}>
+      <Group className={classes.pageHeader} justify="space-between">
+        <Text size="xl">Section UI</Text>
+      </Group>
+      {children}
+    </div>
   );
 }

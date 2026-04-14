@@ -1,8 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import dayjs from 'dayjs';
-import { ActionIcon, Button, Group, Modal, Popover, Stack, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Button,
+  Group,
+  Modal,
+  Popover,
+  Stack,
+  Text,
+} from '@mantine/core';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
 import { MdLockReset } from 'react-icons/md';
@@ -13,10 +21,10 @@ import { DatePicker } from '@mantine/dates';
 
 import { resetPasswordForUserActionPrivate } from '@/actions/auth-action';
 import { notifications } from '@mantine/notifications';
+import { useAuth } from '@/providers/auth-provider';
 
 interface UsersTableProps {
-  usersData: IUserResponse[];
-  currentUserId: string;
+  usersDataPromise: Promise<IUserResponse[]>;
 }
 
 const RoleDisplayMap: Record<string, string> = {
@@ -25,10 +33,11 @@ const RoleDisplayMap: Record<string, string> = {
   ['user']: 'User',
 };
 
-export default function UsersTable({
-  usersData,
-  currentUserId,
-}: UsersTableProps) {
+export default function UsersTable({ usersDataPromise }: UsersTableProps) {
+  const { getUser } = useAuth();
+  const currentUserId = getUser()?.id;
+  const usersData = use(usersDataPromise);
+
   const [datePickerOpened, setDatePickerOpened] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | string | null>(null);
   const [resetPasswordModalOpened, setResetPasswordModalOpened] = useState(false);
@@ -66,7 +75,11 @@ export default function UsersTable({
       width: '10%',
       headerAlign: 'left',
       header: (
-        <Popover opened={datePickerOpened} onChange={setDatePickerOpened} position='bottom-start'>
+        <Popover
+          opened={datePickerOpened}
+          onChange={setDatePickerOpened}
+          position="bottom-start"
+        >
           <Popover.Target>
             <ActionIcon
               variant="transparent"
@@ -83,17 +96,15 @@ export default function UsersTable({
           </Popover.Dropdown>
         </Popover>
       ),
-      render: ({ entity }) => <>{entity.createdAt ? dayjs(entity.createdAt).format('DD/MM/YYYY') : '-'}</>,
+      render: ({ entity }) => (
+        <>{entity.createdAt ? dayjs(entity.createdAt).format('DD/MM/YYYY') : '-'}</>
+      ),
     },
     {
       key: 'email',
       width: '30%',
       header: 'Email',
-      render: ({ entity }) => (
-        <>
-          {entity.email}
-        </>
-      ),
+      render: ({ entity }) => <>{entity.email}</>,
     },
     {
       key: 'name',
@@ -116,7 +127,9 @@ export default function UsersTable({
       width: '15%',
       headerAlign: 'right',
       header: (
-        <div className={`${classes.columnHeaderContent} ${classes.actionColumnHeaderContent}`}>
+        <div
+          className={`${classes.columnHeaderContent} ${classes.actionColumnHeaderContent}`}
+        >
           <ActionIcon variant="transparent">
             <SlOptionsVertical size={24} color="#01426e" />
           </ActionIcon>
@@ -125,7 +138,6 @@ export default function UsersTable({
       cellAlign: 'right',
       render: ({ entity }) => (
         <Group gap="xs" justify="flex-end">
-
           <ActionIcon
             variant="transparent"
             onClick={() => {
@@ -134,15 +146,15 @@ export default function UsersTable({
             }}
             title="Reset Password"
             size={'lg'}
-          >{entity.id !== currentUserId && entity.role !== 'supadmin' && (
-            <MdLockReset size={32} color="#01426e" />
-          )}
+          >
+            {entity.id !== currentUserId && entity.role !== 'supadmin' && (
+              <MdLockReset size={32} color="#01426e" />
+            )}
           </ActionIcon>
         </Group>
       ),
     },
   ];
-
 
   return (
     <>
@@ -170,7 +182,8 @@ export default function UsersTable({
       >
         <Stack>
           <Text>
-            Are you sure you want to reset password for user <strong>{selectedUser?.email}</strong>?
+            Are you sure you want to reset password for user{' '}
+            <strong>{selectedUser?.email}</strong>?
           </Text>
           <Group justify="flex-end" mt="sm">
             <Button

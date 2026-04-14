@@ -1,29 +1,33 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { use, useMemo } from 'react';
 import { Paper, Stack, Group, Text } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { Route } from 'next';
 import classes from './tour-category-nav.module.scss';
 import { ITourCategoryResponse } from '@/interfaces/tour-category-interface';
 import { TreeManager } from '@vinaup/utils/tree-manager';
+import { ActionResponse } from '@/interfaces/_base-interface';
 
 interface TourCategoryNavProps {
-  tourCategoriesData: ITourCategoryResponse[];
+  tourCategoriesDataPromise: Promise<ActionResponse<ITourCategoryResponse[]>>;
 }
 
 export default function TourCategoryNav({
-  tourCategoriesData,
+  tourCategoriesDataPromise,
 }: TourCategoryNavProps) {
   const router = useRouter();
   const { id } = useParams();
 
+  const tourCategoriesData = use(tourCategoriesDataPromise);
+  const data = tourCategoriesData.data ?? [];
+
   const treeManager = useMemo(() => {
-    if (tourCategoriesData.length === 0) {
+    if (data.length === 0) {
       return null;
     }
-    return new TreeManager(tourCategoriesData);
-  }, [tourCategoriesData]);
+    return new TreeManager(data);
+  }, [data]);
 
   const isActiveTourCategory = (categoryId: string) => {
     return id === categoryId;

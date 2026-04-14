@@ -10,7 +10,7 @@ interface IUser {
 
 interface AuthContextType {
   getUser: () => IUser | null;
-  logout: () => void;
+  logout: () => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -28,10 +28,10 @@ export function AuthProvider({
 }: AuthProviderProps) {
   const [user, setUser] = useState<IUser | null>(initialUser);
 
-  const logout = () => {
+  const logout = async () => {
     setUser(null);
     try {
-      onLogout();
+      await onLogout();
       // Set a key in localStorage to notify other tabs about the logout event
       window.localStorage.setItem('ONLOGOUT_EVENT', Date.now().toString());
     } catch (error) {

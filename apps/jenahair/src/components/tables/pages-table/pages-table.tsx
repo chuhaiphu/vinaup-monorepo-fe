@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import dayjs from 'dayjs';
 import { ActionIcon, Button, Group, Modal, Popover, Stack } from '@mantine/core';
 import { TbEdit } from 'react-icons/tb';
@@ -18,12 +18,13 @@ import { deletePageActionPrivate } from '@/actions/page-action';
 import { notifications } from '@mantine/notifications';
 
 interface PagesTableProps {
-  pagesData: IPageResponse[];
+  pagesDataPromise: Promise<IPageResponse[]>;
 }
 
 export default function PagesTable({
-  pagesData,
+  pagesDataPromise,
 }: PagesTableProps) {
+  const pagesData = use(pagesDataPromise);
   const router = useRouter();
   const [datePickerOpened, setDatePickerOpened] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | string | null>(null);

@@ -1,5 +1,5 @@
-import AdminBlogDetailPageContent from "@/components/mains/admin-blog-detail-page-content/admin-blog-detail-page-content";
-import { Suspense } from "react";
+import AdminBlogDetailPageContent from '@/components/mains/admin-blog/admin-blog-detail-page-content/admin-blog-detail-page-content';
+import { Suspense } from 'react';
 
 export default async function AdminBlogDetailPage({
   params,
@@ -12,4 +12,3 @@ export default async function AdminBlogDetailPage({
     </Suspense>
   );
 }
-

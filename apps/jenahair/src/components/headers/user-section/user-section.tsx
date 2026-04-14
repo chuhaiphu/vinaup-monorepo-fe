@@ -1,17 +1,26 @@
 'use client';
 
-import { Avatar, Menu, UnstyledButton, Group, Text, MenuItem, MenuTarget, MenuDropdown } from '@mantine/core';
+import {
+  Avatar,
+  Menu,
+  UnstyledButton,
+  Group,
+  Text,
+  MenuItem,
+  MenuTarget,
+  MenuDropdown,
+} from '@mantine/core';
 import { FiUser, FiLogOut } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import classes from './user-section.module.scss';
 import { IUserResponse } from '@/interfaces/user-interface';
-import { logoutActionPrivate } from '@/actions/auth-action';
+import { useAuth } from '@/providers/auth-provider';
 
 export function UserSection({ userData }: { userData: IUserResponse }) {
   const router = useRouter();
-
+  const { logout } = useAuth();
   const handleLogout = async () => {
-    await logoutActionPrivate();
+    await logout();
     router.push('/login');
   };
 
@@ -23,12 +32,7 @@ export function UserSection({ userData }: { userData: IUserResponse }) {
   const avatarLetter = userData.email?.charAt(0).toUpperCase() || 'U';
 
   return (
-    <Menu
-      position="bottom"
-      trigger="hover"
-      openDelay={100}
-      closeDelay={400}
-    >
+    <Menu position="bottom" trigger="hover" openDelay={100} closeDelay={400}>
       <MenuTarget>
         <UnstyledButton className={classes.userButton}>
           <Group gap={8}>

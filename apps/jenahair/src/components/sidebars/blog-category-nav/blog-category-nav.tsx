@@ -1,28 +1,34 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { use, useMemo } from 'react';
 import { Paper, Stack, Group, Text } from '@mantine/core';
 import { useParams, useRouter } from 'next/navigation';
 import { Route } from 'next';
 import classes from './blog-category-nav.module.scss';
 import { IBlogCategoryResponse } from '@/interfaces/blog-category-interface';
 import { TreeManager } from '@vinaup/utils/tree-manager';
+import { ActionResponse } from '@/interfaces/_base-interface';
 
 interface BlogCategoryNavProps {
-  blogCategoriesData: IBlogCategoryResponse[];
+  blogCategoriesDataPromise: Promise<ActionResponse<IBlogCategoryResponse[]>>;
 }
 
 export default function BlogCategoryNav({
-  blogCategoriesData,
+  blogCategoriesDataPromise,
 }: BlogCategoryNavProps) {
   const router = useRouter();
   const { id } = useParams();
 
+  const blogCategoriesData = use(blogCategoriesDataPromise);
+
   const treeManager = useMemo(() => {
-    if (blogCategoriesData.length === 0) {
+    if (
+      blogCategoriesData.data === undefined ||
+      blogCategoriesData.data?.length === 0
+    ) {
       return null;
     }
-    return new TreeManager(blogCategoriesData);
+    return new TreeManager(blogCategoriesData.data);
   }, [blogCategoriesData]);
 
   const isActiveBlogCategory = (categoryId: string) => {

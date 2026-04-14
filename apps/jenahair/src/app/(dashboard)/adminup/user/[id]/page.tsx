@@ -1,5 +1,5 @@
-import AdminUserDetailPageContent from "@/components/mains/admin-user-detail-page-content/admin-user-detail-page-content";
-import { Suspense } from "react";
+import AdminUserDetailPageContent from '@/components/mains/admin-user/admin-user-detail-page-content/admin-user-detail-page-content';
+import { Suspense } from 'react';
 
 export default async function AdminUserDetailPage({
   params,
@@ -12,4 +12,3 @@ export default async function AdminUserDetailPage({
     </Suspense>
   );
 }
-

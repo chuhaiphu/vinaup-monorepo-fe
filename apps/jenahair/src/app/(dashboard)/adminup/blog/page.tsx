@@ -1,11 +1,30 @@
-import AdminBlogPageContent from "@/components/mains/admin-blog-page-content/admin-blog-page-content";
-import { Loader } from "@mantine/core";
-import { Suspense } from "react";
+import { Group, Text } from '@mantine/core';
+import BlogsTable from '@/components/tables/blogs-table/blogs-table';
+import { getAllBlogsActionPrivate } from '@/actions/blog-action';
+import classes from './page.module.scss';
+import CreateBlogAction from '@/components/mains/admin-blog/create-blog-action/create-blog-action';
+import { Suspense } from 'react';
+import BlogsTableSkeleton from '@/components/tables/blogs-table/blogs-table-skeleton';
 
 export default async function AdminBlogPage() {
+  const blogsDataPromise = getAllBlogsActionPrivate().then((res) => {
+    if (!res.success || !res.data) {
+      return [];
+    }
+    return res.data;
+  });
+
   return (
-    <Suspense fallback={<Loader size={48} />}>
-      <AdminBlogPageContent />
-    </Suspense>
+    <div className={classes.adminBlogPageRoot}>
+      <Group className={classes.pageHeader} justify="space-between">
+        <Text size="xl">Blog</Text>
+        <Group gap="xs">
+          <CreateBlogAction />
+        </Group>
+      </Group>
+      <Suspense fallback={<BlogsTableSkeleton />}>
+        <BlogsTable blogsDataPromise={blogsDataPromise} />
+      </Suspense>
+    </div>
   );
 }

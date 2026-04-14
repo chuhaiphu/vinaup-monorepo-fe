@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { ActionIcon, Button, Group, Modal, Pagination, Popover, Stack } from '@mantine/core';
 import { TbEdit } from 'react-icons/tb';
@@ -18,13 +18,13 @@ import { deleteBlogActionPrivate } from '@/actions/blog-action';
 import { notifications } from '@mantine/notifications';
 
 interface BlogsTableProps {
-  blogsData: IBlogResponse[];
+  blogsDataPromise: Promise<IBlogResponse[]>;
 }
 
 const ITEMS_PER_PAGE = 20;
 
 export default function BlogsTable({
-  blogsData,
+  blogsDataPromise,
 }: BlogsTableProps) {
   const router = useRouter();
   const [page, setPage] = useState(1);
@@ -34,6 +34,7 @@ export default function BlogsTable({
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedBlogId, setSelectedBlogId] = useState<string | null>(null);
 
+  const blogsData = use(blogsDataPromise);
   const totalPages = Math.ceil(blogsData.length / ITEMS_PER_PAGE) || 1;
   useEffect(() => {
     setPage((p) => (p > totalPages ? totalPages : p));

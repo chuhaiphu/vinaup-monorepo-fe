@@ -40,6 +40,7 @@ function LoginForm() {
       router.push(callbackUrl as Route);
     } else {
       setError(result.error || 'Invalid email or password');
+      console.log(result);
       notifications.show({
         title: 'Login Failed',
         message: result.error || 'Invalid email or password',
@@ -72,7 +73,9 @@ function LoginForm() {
               label="Password"
               placeholder="Your password"
               value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
               required
             />
 

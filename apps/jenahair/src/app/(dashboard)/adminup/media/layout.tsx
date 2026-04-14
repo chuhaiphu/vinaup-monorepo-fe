@@ -1,9 +1,18 @@
-import AdminMediaLayoutContent from "@/components/mains/admin-media-layout-content/admin-media-layout-content";
+import { Group, Text } from '@mantine/core';
+import MediaTabs from './media-tabs';
+import classes from './layout.module.scss';
 
-export default function AdminMediaLayout({ children }: { children: React.ReactNode }) {
+export default function AdminMediaLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <AdminMediaLayoutContent>
-      {children}
-    </AdminMediaLayoutContent>
+    <div className={classes.adminMediaPageRoot}>
+      <Group className={classes.pageHeader} justify="space-between">
+        <Text size="xl">Media</Text>
+      </Group>
+      <MediaTabs>{children}</MediaTabs>
+    </div>
   );
 }
