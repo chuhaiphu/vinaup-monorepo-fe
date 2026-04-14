@@ -14,7 +14,7 @@ import {
 import { FaFilter, FaArrowLeft, FaArrowRight, FaHeart } from 'react-icons/fa6';
 import Image from 'next/image';
 import classes from './recently-published.module.scss';
-import { ProductCard } from '../../primitives/cards/product-card/product-card';
+import { ProductCard } from '@vinaup/ui/landing';
 import Link from 'next/link';
 
 interface TourItem {

@@ -1,20 +1,30 @@
-import { getAllToursActionPrivate } from "@/actions/tour-action";
-import { getMeActionPrivate } from "@/actions/auth-action";
-import { redirect } from "next/navigation";
-import AdminTourPageContentContainer from "./admin-tour-page-content-container/admin-tour-page-content-container";
+import { Group, Text } from '@mantine/core';
+import ToursTable from '@/components/tables/tours-table/tours-table';
+import { getAllToursActionPrivate } from '@/actions/tour-action';
+import classes from './admin-tour-page-content.module.scss';
+import CreateTourAction from './create-tour-action/create-tour-action';
+import { Suspense } from 'react';
+import ToursTableSkeleton from '@/components/tables/tours-table/tours-table-skeleton';
 
 export default async function AdminTourPageContent() {
-  const toursData = await getAllToursActionPrivate();
-  const meResult = await getMeActionPrivate();
-
-  if (!meResult.success || !meResult.data) {
-    redirect('/login');
-  }
+  const toursDataPromise = getAllToursActionPrivate().then((res) => {
+    if (!res.success || !res.data) {
+      return [];
+    }
+    return res.data;
+  });
 
   return (
-    <AdminTourPageContentContainer
-      toursData={toursData?.data ?? []}
-      userData={meResult.data}
-    />
+    <div className={classes.adminTourPageRoot}>
+      <Group className={classes.pageHeader} justify="space-between">
+        <Text size="xl">Tour</Text>
+        <Group gap="sm">
+          <CreateTourAction />
+        </Group>
+      </Group>
+      <Suspense fallback={<ToursTableSkeleton />}>
+        <ToursTable toursDataPromise={toursDataPromise} />
+      </Suspense>
+    </div>
   );
 }

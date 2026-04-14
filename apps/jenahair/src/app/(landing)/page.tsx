@@ -10,6 +10,9 @@ import { MOCK_SALON_SERVICES } from '@/mocks/salon-services';
 import { MOCK_SLIDES } from '@/mocks/mock-slides';
 import { MOCK_DIARY_POSTS } from '@/mocks/salon-diary';
 import { CommitmentAndMedia } from '@/components/commitment-and-media/commitment-and-media';
+import classes from './page.module.scss';
+
+const PARTNER_BRANDS = ['Milbon', 'ATS', 'L\u2019Or\u00e9al', 'Olaplex', 'K\u00e9rastase'];
 
 export default function Home() {
   return (
@@ -21,7 +24,13 @@ export default function Home() {
       </Container>
 
       <Stack gap="3rem" pt="3rem" >
-        <AutoScrollCarousel />
+        <AutoScrollCarousel>
+          {PARTNER_BRANDS.map((brand, index) => (
+            <div key={index} className={classes.brandItem}>
+              {brand}
+            </div>
+          ))}
+        </AutoScrollCarousel>
 
         <SalonServicesBanner
           imageSrc="/images/IntroImage.png"

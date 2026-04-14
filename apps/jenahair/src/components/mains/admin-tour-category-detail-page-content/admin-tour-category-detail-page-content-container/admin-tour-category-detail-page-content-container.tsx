@@ -25,8 +25,7 @@ import {
 import { ITourCategoryResponse } from '@/interfaces/tour-category-interface';
 import { useDebouncedCallback } from 'use-debounce';
 import {
-  generateUniqueEndpoint,
-  validateImageFile,
+  generateUniqueEndpoint
 } from '@/utils/function-helpers';
 import { FaCaretDown } from 'react-icons/fa6';
 import { GrTrash } from 'react-icons/gr';
@@ -201,7 +200,6 @@ export default function AdminTourCategoryDetailPageContentContainer({
 
   const handleRemoveVideoThumbnail = async () => {
     setVideoThumbnailLoading(true);
-    const oldUrl = videoThumbnailUrl;
     setVideoThumbnailUrl('');
     await updateTourCategoryActionPrivate(currentTourCategory.id, {
       videoThumbnailUrl: '',
@@ -229,7 +227,6 @@ export default function AdminTourCategoryDetailPageContentContainer({
 
   const handleRemoveMainImage = async () => {
     setMainImageLoading(true);
-    const oldUrl = mainImageUrl;
     setMainImageUrl('');
     await updateTourCategoryActionPrivate(currentTourCategory.id, { mainImageUrl: '' });
     setMainImageLoading(false);

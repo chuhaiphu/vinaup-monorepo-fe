@@ -7,8 +7,6 @@ export * from './layout/drawer/drawer';
 export * from './layout/scroll-to-top/scroll-to-top';
 
 // sections
-export * from './sections/hero-content/hero-content';
-export * from './sections/recently-published/recently-published';
 export * from './sections/stats-banner/stats-banner';
 export * from './sections/video-section/video-section';
 export * from './sections/toggle-section/toggle-section';
@@ -24,3 +22,4 @@ export * from './primitives/search-bar/search-bar';
 export * from './primitives/section-header/section-header';
 export * from './primitives/split-section-header/split-section-header';
 export * from './primitives/recaptcha-enterprise/recaptcha-enterprise';
+export * from './primitives/skeleton/skeleton';

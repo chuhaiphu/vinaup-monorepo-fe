@@ -1,8 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { ActionIcon, Button, Group, Modal, Pagination, Popover, Stack } from '@mantine/core';
+import {
+  ActionIcon,
+  Button,
+  Group,
+  Modal,
+  Pagination,
+  Popover,
+  Stack,
+} from '@mantine/core';
 import { TbEdit } from 'react-icons/tb';
 import { SlOptionsVertical } from 'react-icons/sl';
 import { MdOutlineCalendarMonth } from 'react-icons/md';
@@ -18,14 +26,12 @@ import { deleteTourActionPrivate } from '@/actions/tour-action';
 import { notifications } from '@mantine/notifications';
 
 interface ToursTableProps {
-  toursData: ITourResponse[];
+  toursDataPromise: Promise<ITourResponse[]>;
 }
 
 const ITEMS_PER_PAGE = 20;
 
-export default function ToursTable({
-  toursData,
-}: ToursTableProps) {
+export default function ToursTable({ toursDataPromise }: ToursTableProps) {
   const router = useRouter();
   const [page, setPage] = useState(1);
   const [datePickerOpened, setDatePickerOpened] = useState(false);
@@ -34,6 +40,7 @@ export default function ToursTable({
   const [isDeleting, setIsDeleting] = useState(false);
   const [selectedTourId, setSelectedTourId] = useState<string | null>(null);
 
+  const toursData = use(toursDataPromise);
   const totalPages = Math.ceil(toursData.length / ITEMS_PER_PAGE) || 1;
   useEffect(() => {
     setPage((p) => (p > totalPages ? totalPages : p));
@@ -78,7 +85,11 @@ export default function ToursTable({
       width: '5%',
       headerAlign: 'left',
       header: (
-        <Popover opened={datePickerOpened} onChange={setDatePickerOpened} position='bottom-start'>
+        <Popover
+          opened={datePickerOpened}
+          onChange={setDatePickerOpened}
+          position="bottom-start"
+        >
           <Popover.Target>
             <ActionIcon
               variant="transparent"
@@ -101,11 +112,7 @@ export default function ToursTable({
       key: 'title',
       width: '35%',
       header: 'Title',
-      render: ({ entity }) => (
-        <>
-          {entity.title}
-        </>
-      ),
+      render: ({ entity }) => <>{entity.title}</>,
     },
     {
       key: 'category',
@@ -117,7 +124,13 @@ export default function ToursTable({
         if (entity.tourCategoryTours.length === 0) {
           return <>(No category selected)</>;
         }
-        return <>{entity.tourCategoryTours.map((tourCategoryTour) => tourCategoryTour.tourCategory?.title).join(', ')}</>;
+        return (
+          <>
+            {entity.tourCategoryTours
+              .map((tourCategoryTour) => tourCategoryTour.tourCategory?.title)
+              .join(', ')}
+          </>
+        );
       },
     },
     {
@@ -134,14 +147,16 @@ export default function ToursTable({
       key: 'status',
       width: '10%',
       header: 'Status',
-      render: ({ entity }) => (StatusDisplayMap[entity.visibility]),
+      render: ({ entity }) => StatusDisplayMap[entity.visibility],
     },
     {
       key: 'actions',
       width: '10%',
       headerAlign: 'right',
       header: (
-        <div className={`${classes.columnHeaderContent} ${classes.actionColumnHeaderContent}`}>
+        <div
+          className={`${classes.columnHeaderContent} ${classes.actionColumnHeaderContent}`}
+        >
           <ActionIcon variant="transparent">
             <SlOptionsVertical size={24} color="#01426e" />
           </ActionIcon>
@@ -170,8 +185,10 @@ export default function ToursTable({
     },
   ];
 
-
-  const paginatedData = toursData.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+  const paginatedData = toursData.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE
+  );
 
   return (
     <>
@@ -216,11 +233,7 @@ export default function ToursTable({
             >
               Cancel
             </Button>
-            <Button
-              color="red"
-              onClick={handleDeleteTour}
-              loading={isDeleting}
-            >
+            <Button color="red" onClick={handleDeleteTour} loading={isDeleting}>
               Delete
             </Button>
           </Group>

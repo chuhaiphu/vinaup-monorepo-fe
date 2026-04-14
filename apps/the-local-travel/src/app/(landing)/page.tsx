@@ -1,11 +1,11 @@
 import { HeroCarousel } from '@vinaup/ui/landing';
-import { HeroContent } from '@vinaup/ui/landing';
+import { HeroContent } from '@/components/sections/hero-content/hero-content';
 import { Container, Stack } from '@mantine/core';
 
 import { StatsBanner } from '@vinaup/ui/landing';
 import { SupplierSection } from '@/components/sections/supplier-section/supplier-section';
 import { TourTypes } from '@/components/sections/tour-types/tour-types';
-import { RecentlyPublished } from '@vinaup/ui/landing';
+import { RecentlyPublished } from '@/components/sections/recently-published/recently-published';
 import { OurPartners } from '@/components/sections/our-partners/our-partners';
 import { TravelServices } from '@/components/sections/travel-services/travel-services';
 

@@ -1,10 +1,17 @@
-import AdminLayoutContent from "@/components/mains/admin-layout-content/admin-layout-content";
-import { Suspense } from "react";
+import { getMeActionPrivate } from '@/actions/auth-action';
+import AdminLayoutContent from '@/components/mains/admin-layout-content/admin-layout-content';
+import { Suspense } from 'react';
 
-export default async function AdminLayoutRoot({ children }: { children: React.ReactNode }) {
+export default async function AdminLayoutRoot({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const userDataPromise = getMeActionPrivate();
+
   return (
     <Suspense>
-      <AdminLayoutContent>
+      <AdminLayoutContent userDataPromise={userDataPromise}>
         {children}
       </AdminLayoutContent>
     </Suspense>

@@ -1,0 +1,28 @@
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.container {
+  position: relative;
+  background-color: #ebebeb;
+  overflow: hidden;
+}
+
+.shimmer {
+  position: absolute;
+  inset: 0;
+  animation: shimmer 1s linear infinite;
+  background: linear-gradient(
+    90deg,
+    #ebebeb 0%,
+    #f0f0f0 25%,
+    #fafafa 50%,
+    #f0f0f0 75%,
+    #ebebeb 100%
+  );
+}
