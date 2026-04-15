@@ -1,41 +1,481 @@
+'use client';
+
 import {
-  getAllMenusActionPrivate,
-  getAvailableSortOrdersActionPrivate,
-  getMenuByIdActionPrivate,
-} from '@/actions/menu-action';
-import { getAllTourCategoriesActionPublic } from '@/actions/tour-category-action';
-import { notFound } from 'next/navigation';
-import AdminMenuDetailPageContentContainer from './admin-menu-detail-page-content-container/admin-menu-detail-page-content-container';
+  ActionIcon,
+  Button,
+  Grid,
+  GridCol,
+  Group,
+  Modal,
+  Paper,
+  Select,
+  SelectProps,
+  Stack,
+  Text,
+  TextInput,
+} from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import classes from './admin-menu-detail-page-content.module.scss';
+import { use, useEffect, useMemo, useState } from 'react';
+import { deleteMenuActionPrivate, updateMenuActionPrivate } from '@/actions/menu-action';
+import { IMenuResponse } from '@/interfaces/menu-interface';
+import { ITourCategoryResponse } from '@/interfaces/tour-category-interface';
+import { useDebouncedCallback } from 'use-debounce';
+import { FaCaretDown } from 'react-icons/fa6';
+import { GrTrash } from 'react-icons/gr';
+import { TreeManager } from '@vinaup/utils/tree-manager';
+import { useRouter } from 'next/navigation';
+import { ActionResponse } from '@/interfaces/_base-interface';
 
 interface AdminMenuDetailPageContentProps {
-  params: Promise<{ id: string }>;
+  currentMenuPromise: Promise<ActionResponse<IMenuResponse>>;
+  menusPromise: Promise<ActionResponse<IMenuResponse[]>>;
+  tourCategoriesPromise: Promise<ActionResponse<ITourCategoryResponse[]>>;
+  availableSortOrdersPromise: Promise<ActionResponse<number[]>>;
 }
 
-export default async function AdminMenuDetailPageContent({
-  params,
+export default function AdminMenuDetailPageContent({
+  currentMenuPromise,
+  menusPromise,
+  tourCategoriesPromise,
+  availableSortOrdersPromise,
 }: AdminMenuDetailPageContentProps) {
-  const { id } = await params;
+  const currentMenuResult = use(currentMenuPromise);
+  const menusResult = use(menusPromise);
+  const tourCategoriesResult = use(tourCategoriesPromise);
+  const availableSortOrdersResult = use(availableSortOrdersPromise);
 
-  const [currentMenuResponse, menusResponse, tourCategoriesResponse] =
-    await Promise.all([
-      getMenuByIdActionPrivate(id),
-      getAllMenusActionPrivate(),
-      getAllTourCategoriesActionPublic(),
-    ]);
-  const availableSortOrdersResponse = await getAvailableSortOrdersActionPrivate(
-    currentMenuResponse.data?.parent?.id || ''
-  );
-
-  if (!currentMenuResponse.success || !currentMenuResponse.data) {
-    notFound();
+  if (!currentMenuResult.success || !currentMenuResult.data) {
+    return <div>Menu not found</div>;
   }
 
+  const currentMenu = currentMenuResult.data;
+  const menusData = menusResult.data ?? [];
+  const tourCategoriesData = tourCategoriesResult.data ?? [];
+  const availableSortOrdersData = availableSortOrdersResult.data ?? [];
+
   return (
-    <AdminMenuDetailPageContentContainer
-      currentMenu={currentMenuResponse.data}
-      menusData={menusResponse.data ?? []}
-      availableSortOrdersData={availableSortOrdersResponse.data ?? []}
-      tourCategoriesData={tourCategoriesResponse.data ?? []}
+    <AdminMenuDetailPageContentInner
+      currentMenu={currentMenu}
+      menusData={menusData}
+      tourCategoriesData={tourCategoriesData}
+      availableSortOrdersData={availableSortOrdersData}
     />
+  );
+}
+
+interface AdminMenuDetailPageContentInnerProps {
+  currentMenu: IMenuResponse;
+  menusData: IMenuResponse[];
+  availableSortOrdersData: number[];
+  tourCategoriesData: ITourCategoryResponse[];
+}
+
+function AdminMenuDetailPageContentInner({
+  currentMenu,
+  menusData,
+  availableSortOrdersData,
+  tourCategoriesData,
+}: AdminMenuDetailPageContentInnerProps) {
+  const [title, setTitle] = useState<string>(currentMenu.title);
+  const [parentId, setParentId] = useState<string | null>(
+    currentMenu.parent?.id || null
+  );
+  const [sortOrder, setSortOrder] = useState<number>(currentMenu.sortOrder || 0);
+  const [targetType, setTargetType] = useState<string | null>(
+    currentMenu.targetType || null
+  );
+  const [targetId, setTargetId] = useState<string | null>(
+    currentMenu.targetId || null
+  );
+  const [customUrl, setCustomUrl] = useState<string>(currentMenu.customUrl || '');
+
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  useEffect(() => {
+    setSortOrder(currentMenu.sortOrder);
+  }, [currentMenu.sortOrder]);
+
+  const router = useRouter();
+
+  const menuTreeManager = useMemo(() => {
+    if (menusData.length === 0) {
+      return null;
+    }
+    return new TreeManager(menusData);
+  }, [menusData]);
+
+  const tourCategoryTreeManager = useMemo(() => {
+    if (tourCategoriesData.length === 0) {
+      return null;
+    }
+    return new TreeManager(tourCategoriesData);
+  }, [tourCategoriesData]);
+
+  // Filter out current menu and its children from parent options
+  const excludedIds = menuTreeManager?.toIds(
+    menuTreeManager?.toFlatList(currentMenu.id) ?? []
+  );
+  excludedIds?.add(currentMenu.id);
+
+  const parentOptions = menusData
+    .filter((menu) => !excludedIds?.has(menu.id))
+    .map((menu) => ({ value: menu.id, label: menu.title }));
+
+  // Tour category options record for renderTourCategoryOption
+  const tourCategoryOptionsData: Record<string, ITourCategoryResponse> =
+    tourCategoriesData.reduce(
+      (acc, tourCategory) => {
+        acc[tourCategory.id] = tourCategory;
+        return acc;
+      },
+      {} as Record<string, ITourCategoryResponse>
+    );
+
+  // Helper function to get parent chain recursively
+  const getOptionChain = (tourCategoryId: string): ITourCategoryResponse[] => {
+    const tourCategoryChain = tourCategoryOptionsData[tourCategoryId];
+    if (!tourCategoryChain) return [];
+    if (tourCategoryChain.parent) {
+      return [...getOptionChain(tourCategoryChain.parent.id), tourCategoryChain];
+    }
+    return [tourCategoryChain];
+  };
+
+  const getOptionChainWithoutRoot = (
+    tourCategoryId: string
+  ): ITourCategoryResponse[] => {
+    const parentChain = getOptionChain(tourCategoryId);
+    return parentChain.slice(1);
+  };
+
+  const renderTourCategoryOption: SelectProps['renderOption'] = ({ option }) => {
+    const parentChain = getOptionChainWithoutRoot(option.value);
+
+    // If has parent(s), show the full chain
+    if (parentChain.length > 1) {
+      return (
+        <Group gap="xs" wrap="nowrap">
+          {parentChain.map((category, index) => (
+            <Group key={category.id} gap="xs" wrap="nowrap">
+              <Text
+                size="sm"
+                fw={index === parentChain.length - 1 ? 500 : 400}
+                c={index === parentChain.length - 1 ? undefined : 'dark.3'}
+              >
+                {category.title}
+              </Text>
+              {index < parentChain.length - 1 && (
+                <Text size="sm" c="dark.3" fw={300}>
+                  ›
+                </Text>
+              )}
+            </Group>
+          ))}
+        </Group>
+      );
+    }
+
+    // Root category (no parent)
+    return (
+      <Text size="sm" fw={500}>
+        {tourCategoryOptionsData[option.value]?.title || option.label}
+      </Text>
+    );
+  };
+
+  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
+    await updateMenuActionPrivate(currentMenu.id, { title: newTitle });
+    notifications.show({
+      message: 'Saved successfully',
+      color: 'green',
+      position: 'top-right',
+      autoClose: 900,
+    });
+    setIsSaving(false);
+  }, 1500);
+
+  const handleUpdateParent = async (newParentId: string | null) => {
+    if (!newParentId) {
+      return;
+    }
+    setParentId(newParentId);
+    await updateMenuActionPrivate(currentMenu.id, { parentId: newParentId });
+  };
+
+  const handleUpdateSortOrder = async (newSortOrder: string | null) => {
+    if (!newSortOrder) return;
+    const newValue = parseInt(newSortOrder);
+    setSortOrder(newValue);
+    await updateMenuActionPrivate(currentMenu.id, { sortOrder: newValue });
+    notifications.show({
+      message: 'Sort order updated successfully',
+      color: 'green',
+      position: 'top-right',
+      autoClose: 900,
+    });
+  };
+
+  const handleUpdateTargetType = async (newTargetType: string | null) => {
+    setTargetType(newTargetType);
+    // Reset target values when type changes
+    setTargetId(null);
+    setCustomUrl('');
+    await updateMenuActionPrivate(currentMenu.id, {
+      targetType: newTargetType || undefined,
+      targetId: undefined,
+      customUrl: undefined,
+    });
+    notifications.show({
+      message: 'Target type updated successfully',
+      color: 'green',
+      position: 'top-right',
+      autoClose: 900,
+    });
+  };
+
+  const handleUpdateCustomUrl = useDebouncedCallback(
+    async (newCustomUrl: string) => {
+      await updateMenuActionPrivate(currentMenu.id, { customUrl: newCustomUrl });
+      notifications.show({
+        message: 'Custom URL saved successfully',
+        color: 'green',
+        position: 'top-right',
+        autoClose: 900,
+      });
+      setIsSaving(false);
+    },
+    1500
+  );
+
+  const handleUpdateTourCategory = async (tourCategoryId: string | null) => {
+    setTargetId(tourCategoryId);
+    await updateMenuActionPrivate(currentMenu.id, {
+      targetId: tourCategoryId || undefined,
+    });
+    notifications.show({
+      message: 'Tour category updated successfully',
+      color: 'green',
+      position: 'top-right',
+      autoClose: 900,
+    });
+  };
+
+  const handleDeleteMenu = async () => {
+    setIsDeleting(true);
+    try {
+      const result = await deleteMenuActionPrivate(currentMenu.id);
+      if (result.success) {
+        router.replace('/adminup/menu');
+        notifications.show({
+          message: 'Menu has been successfully deleted',
+          color: 'green',
+          position: 'top-center',
+        });
+      } else {
+        notifications.show({
+          title: 'Delete failed',
+          message: result.error || 'Failed to delete menu',
+          color: 'red',
+        });
+      }
+    } catch (error) {
+      notifications.show({
+        title: 'Delete failed',
+        message: error instanceof Error ? error.message : 'Failed to delete menu',
+        color: 'red',
+      });
+    } finally {
+      setIsDeleting(false);
+      setDeleteModalOpened(false);
+    }
+  };
+
+  return (
+    <div className={classes.menuDetailRoot}>
+      <Grid>
+        <GridCol span={{ base: 12, sm: 12, md: 7, lg: 7, xl: 8 }}>
+          <Stack>
+            <Paper p={'sm'} radius={'md'} classNames={{ root: classes.paperBlock }}>
+              <Stack gap={'xs'}>
+                <Text>Title</Text>
+                <TextInput
+                  size="md"
+                  value={title}
+                  placeholder="A title under 100 characters"
+                  maxLength={100}
+                  onChange={(e) => {
+                    setTitle(e.target.value);
+                    setIsSaving(true);
+                    handleUpdateTitle(e.target.value);
+                  }}
+                />
+              </Stack>
+
+              <Stack gap={'xs'} mt={'md'}>
+                <Text>Parent Menu</Text>
+                <Select
+                  size="md"
+                  placeholder="---"
+                  data={parentOptions}
+                  value={parentId}
+                  searchable
+                  nothingFoundMessage="No menu found"
+                  onChange={(value) => handleUpdateParent(value)}
+                />
+              </Stack>
+
+              <Stack gap={'xs'} mt={'md'}>
+                <Text>Target Type</Text>
+                <Select
+                  size="md"
+                  placeholder="Select target type"
+                  data={[
+                    { value: 'tour-category', label: 'Tour Category' },
+                    { value: 'custom-url', label: 'Custom URL' },
+                  ]}
+                  allowDeselect={false}
+                  value={targetType}
+                  onChange={(value) => {
+                    if (value === targetType) return;
+                    handleUpdateTargetType(value);
+                  }}
+                />
+              </Stack>
+
+              {targetType === 'tour-category' && (
+                <Stack gap={'xs'} mt={'md'}>
+                  <Text>Tour Category</Text>
+                  <Select
+                    size="md"
+                    placeholder="Select tour category"
+                    data={
+                      tourCategoryTreeManager
+                        ?.toFlatListWithoutRoot()
+                        .map((tourCategory) => ({
+                          value: tourCategory.id,
+                          label: tourCategory.title,
+                        })) ?? []
+                    }
+                    value={targetId}
+                    searchable
+                    nothingFoundMessage="No tour category found"
+                    renderOption={renderTourCategoryOption}
+                    onChange={(value) => handleUpdateTourCategory(value)}
+                    clearable
+                  />
+                </Stack>
+              )}
+
+              {targetType === 'custom-url' && (
+                <Stack gap={'xs'} mt={'md'}>
+                  <Text>Custom URL</Text>
+                  <TextInput
+                    size="md"
+                    placeholder="Enter custom URL"
+                    value={customUrl}
+                    onChange={(e) => {
+                      setCustomUrl(e.target.value);
+                      setIsSaving(true);
+                      handleUpdateCustomUrl(e.target.value);
+                    }}
+                  />
+                </Stack>
+              )}
+            </Paper>
+          </Stack>
+        </GridCol>
+
+        <GridCol span={{ base: 12, sm: 12, md: 5, lg: 5, xl: 4 }}>
+          <Paper
+            pt={0}
+            p={'xs'}
+            radius={'md'}
+            classNames={{ root: classes.menuConfiguration }}
+          >
+            <Stack gap={'0'}>
+              <Group justify="space-between" wrap="nowrap">
+                <Text size="lg">Index</Text>
+                <Select
+                  w={'5rem'}
+                  classNames={{
+                    root: classes.selectRoot,
+                    section: classes.selectSection,
+                    input: classes.selectInput,
+                    option: classes.selectOption,
+                  }}
+                  size="md"
+                  data={availableSortOrdersData.map((order) => ({
+                    value: order.toString(),
+                    label: order.toString(),
+                  }))}
+                  value={sortOrder?.toString()}
+                  variant="unstyled"
+                  rightSection={
+                    <FaCaretDown color="var(--vinaup-blue-link)" size={24} />
+                  }
+                  onChange={handleUpdateSortOrder}
+                />
+              </Group>
+              <Group justify="space-between" wrap="nowrap" mt={'sm'}>
+                <ActionIcon
+                  size="lg"
+                  variant="subtle"
+                  color="var(--vinaup-blue-link)"
+                  onClick={() => setDeleteModalOpened(true)}
+                >
+                  <GrTrash size={24} color="var(--vinaup-blue-link)" />
+                </ActionIcon>
+                <Group gap={'xs'}>
+                  <Text
+                    size="lg"
+                    c="dark.3"
+                    className={isSaving ? classes.savingText : classes.savedText}
+                  >
+                    {isSaving ? 'Saving...' : 'Saved'}
+                  </Text>
+                  <Button
+                    onClick={() => {
+                      router.push('/adminup/menu');
+                    }}
+                    variant="filled"
+                    color="blue"
+                    size="xs"
+                    bg={'#01426e'}
+                  >
+                    Exit
+                  </Button>
+                </Group>
+              </Group>
+            </Stack>
+          </Paper>
+        </GridCol>
+      </Grid>
+
+      <Modal
+        opened={deleteModalOpened}
+        onClose={() => setDeleteModalOpened(false)}
+        title="Confirm Delete"
+        centered
+      >
+        <Stack>
+          <Text>Are you sure you want to delete this menu?</Text>
+          <Group justify="flex-end" mt="sm">
+            <Button
+              variant="default"
+              onClick={() => setDeleteModalOpened(false)}
+              disabled={isDeleting}
+            >
+              Cancel
+            </Button>
+            <Button color="red" onClick={handleDeleteMenu} loading={isDeleting}>
+              Delete
+            </Button>
+          </Group>
+        </Stack>
+      </Modal>
+    </div>
   );
 }

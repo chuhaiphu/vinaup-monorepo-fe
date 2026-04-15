@@ -1,4 +1,4 @@
-.adminTourDetailPageRoot {
+.adminBlogDetailPageRoot {
   padding: 1rem;
 
   .pageHeader {
@@ -92,22 +92,9 @@
     }
   }
 
-  .tourConfiguration {
+  .blogConfiguration {
     background: linear-gradient(180deg, rgba(252, 190, 17, 0.2) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.13) 0%, rgba(0, 0, 0, 0.2) 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-    .datePickerInput {
-      font-size: 1rem;
-      color: var(--vinaup-blue-link)
-    }
-
-    .timePickerInputField {
-      &:focus {
-        background-color: aliceblue;
-      }
-
-      color: var(--vinaup-blue-link)
-    }
 
     .selectRoot {
       width: 7rem;
@@ -116,16 +103,6 @@
         justify-content: flex-end;
       }
     }
-  }
-
-  .priceInput {
-    padding-left: 6rem;
-    text-align: right;
-  }
-
-  .priceInputSection {
-    inset-inline-start: 0.5rem;
-    justify-content: flex-start;
   }
 
   .videoSection {

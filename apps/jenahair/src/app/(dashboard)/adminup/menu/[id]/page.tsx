@@ -1,12 +1,32 @@
-import AdminMenuDetailPageContent from "@/components/mains/admin-menu/admin-menu-detail-page-content/admin-menu-detail-page-content";
-import { Suspense } from "react";
+import AdminMenuDetailPageContent from '@/components/mains/admin-menu/admin-menu-detail-page-content/admin-menu-detail-page-content';
+import {
+  getAllMenusActionPrivate,
+  getAvailableSortOrdersActionPrivate,
+  getMenuByIdActionPrivate,
+} from '@/actions/menu-action';
+import { getAllTourCategoriesActionPublic } from '@/actions/tour-category-action';
+import { Suspense } from 'react';
 
-export default async function AdminMenuDetailPage({
-  params
-}: { params: Promise<{ id: string }> }) {
+export default function AdminMenuDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const currentMenuPromise = params.then((params) => getMenuByIdActionPrivate(params.id));
+  const menusPromise = getAllMenusActionPrivate();
+  const tourCategoriesPromise = getAllTourCategoriesActionPublic();
+  const availableSortOrdersPromise = currentMenuPromise.then((res) =>
+    getAvailableSortOrdersActionPrivate(res.data?.parent?.id || '')
+  );
+
   return (
     <Suspense>
-      <AdminMenuDetailPageContent params={params} />
+      <AdminMenuDetailPageContent
+        currentMenuPromise={currentMenuPromise}
+        menusPromise={menusPromise}
+        tourCategoriesPromise={tourCategoriesPromise}
+        availableSortOrdersPromise={availableSortOrdersPromise}
+      />
     </Suspense>
   );
 }
