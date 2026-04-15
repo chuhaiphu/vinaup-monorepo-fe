@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function HeartIcon({
+export default function VinaupHeartIcon({
     fill = "#FCBE11",
     size = 17,
     className,

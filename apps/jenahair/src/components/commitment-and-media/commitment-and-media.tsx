@@ -2,9 +2,7 @@ import { Container, Grid, GridCol, Stack, Group } from '@mantine/core';
 import Image from 'next/image';
 import Link from 'next/link';
 import classes from './commitment-and-media.module.scss';
-import { VinaupGridListIcon } from '@vinaup/ui/cores';
-import HeartIcon from '../../../../../packages/ui/src/cores/icons/vinaup-heart-icon';
-import EyeIcon from '../../../../../packages/ui/src/cores/icons/eye-icon';
+import { VinaupGridListIcon, VinaupHeartIcon, VinaupEyeIcon } from '@vinaup/ui/cores';
 
 export interface MiniBlogItem {
     id: number | string;
@@ -92,11 +90,11 @@ export function CommitmentAndMedia({
                                                 </h4>
                                                 <Group gap="1rem" className={classes.miniBlogMeta}>
                                                     <Group gap="0.5rem" align="center">
-                                                        <HeartIcon fill="#99AB89" />
+                                                        <VinaupHeartIcon fill="#99AB89" />
                                                         <span>{blog.likes}</span>
                                                     </Group>
                                                     <Group gap="0.5rem" align="center">
-                                                        <EyeIcon stroke="#99AB89" />
+                                                        <VinaupEyeIcon stroke='#99AB89' />
                                                         <span>{blog.views}</span>
                                                     </Group>
                                                 </Group>

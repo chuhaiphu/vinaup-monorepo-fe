@@ -11,4 +11,4 @@ export { default as JenhairIcon } from './vinaup-jenahair-logo-icon';
 export { default as MenuSquareIcon } from './menu-square-icon';
 export { default as VinaupGridListIcon } from './vinaup-grid-list-icon';
 export { default as VinaupHeartIcon } from './vinaup-heart-icon';
-export { default as EyeIcon } from './eye-icon';
+export { default as VinaupEyeIcon } from './vinaup-eye-icon';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function EyeIcon({
+export default function VinaupEyeIcon({
     stroke = "#FCBE11",
     size = 17,
     className,
