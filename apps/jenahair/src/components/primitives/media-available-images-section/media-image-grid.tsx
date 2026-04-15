@@ -1,7 +1,6 @@
 'use client';
 
-import '@vinaup/media-ui/dist/index.css';
-import { MediaGrid, type IMedia } from '@vinaup/media-ui';
+import { MediaGrid, type IMedia } from '@vinaup/ui/admin';
 import { useRouter, usePathname } from "next/navigation";
 import { Route } from "next";
 import { IMediaResponse } from "@/interfaces/media-interface";

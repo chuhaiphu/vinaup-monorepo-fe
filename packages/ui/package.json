@@ -14,12 +14,18 @@
     "./libs/*": "./src/libs/*.ts",
     "./libs/mantine": "./src/libs/mantine/index.ts"
   },
+  "dependencies": {
+    "@vinaup/utils": "*"
+  },
   "peerDependencies": {
     "react": ">=19",
     "react-dom": ">=19",
     "next": ">=16",
     "@mantine/core": ">=9",
-    "@mantine/hooks": ">=9"
+    "@mantine/hooks": ">=9",
+    "@mantine/dropzone": ">=9",
+    "@mantine/notifications": ">=9",
+    "react-icons": ">=5"
   },
   "devDependencies": {
     "@types/react": "^19",

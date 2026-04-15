@@ -1,5 +1,5 @@
 'use client';
-import { ICreateMedia, IMedia, MediaUpload, type UploadResult } from '@vinaup/media-ui';
+import { ICreateMedia, IMedia, MediaUpload, type UploadResult } from '@vinaup/ui/admin';
 import { uploadImageActionPrivate } from '@/actions/upload-action';
 import { createManyMediaActionPrivate } from '@/actions/media-action';
 import { notifications } from '@mantine/notifications';

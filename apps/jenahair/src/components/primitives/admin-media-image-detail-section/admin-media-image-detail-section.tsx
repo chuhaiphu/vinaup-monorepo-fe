@@ -1,7 +1,6 @@
 'use client';
 
-import '@vinaup/media-ui/dist/index.css';
-import { MediaDetail, type IMedia, type IUpdateMedia } from '@vinaup/media-ui';
+import { MediaDetail, type IMedia, type IUpdateMedia } from '@vinaup/ui/admin';
 import { IMediaResponse } from '@/interfaces/media-interface';
 import { Button, Group, Modal, Stack, Text } from '@mantine/core';
 import { notifications } from '@mantine/notifications';

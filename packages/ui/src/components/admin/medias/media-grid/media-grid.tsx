@@ -1,0 +1,176 @@
+'use client';
+import { Grid, GridCol, Group, Image, Paper, Stack, Text, TextInput, Select, Pagination } from "@mantine/core";
+import { useEffect, useState } from "react";
+import { IoSearch } from "react-icons/io5";
+import { cx } from '@vinaup/utils';
+import defaultClasses from './media-grid.module.scss';
+import type { IMedia } from '../_types';
+
+interface MediaGridClassNames {
+  rootStack?: { root?: string };
+  filterGroup?: { root?: string };
+  sortSelect?: { root?: string; wrapper?: string; input?: string; section?: string; dropdown?: string };
+  searchInput?: { root?: string; wrapper?: string; input?: string; section?: string };
+  grid?: { root?: string; inner?: string; col?: string };
+  itemPaper?: { root?: string };
+  itemStack?: { root?: string };
+  itemImage?: { root?: string };
+  itemText?: { root?: string };
+  imageContainer?: string;
+  selectedPaper?: string;
+}
+
+export interface MediaGridProps {
+  images: IMedia[];
+  selectedImageId?: string | null;
+  onImageClick: (imageId: string) => void;
+  sortOptions?: { value: string; label: string }[];
+  itemsPerPage?: number;
+  classNames?: MediaGridClassNames;
+}
+
+export function MediaGrid({
+  images,
+  selectedImageId = null,
+  itemsPerPage = 24,
+  onImageClick,
+  sortOptions = [
+    { value: 'createdAt', label: 'By created date' },
+    { value: 'updatedAt', label: 'By updated date' },
+    { value: 'title', label: 'By title' },
+  ],
+  classNames,
+}: MediaGridProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<string | null>('createdAt');
+  const [activePage, setActivePage] = useState(1);
+
+  const filteredAndSortedImages = () => {
+    let result = [...images];
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase();
+      result = result.filter((image) =>
+        image.title?.toLowerCase().includes(query)
+      );
+    }
+    if (sortBy) {
+      result.sort((a, b) => {
+        switch (sortBy) {
+          case 'createdAt':
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          case 'updatedAt':
+            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+          case 'title':
+            return (a.title ?? '').localeCompare(b.title ?? '');
+          default:
+            return 0;
+        }
+      });
+    }
+    return result;
+  };
+
+  const processedImages = filteredAndSortedImages();
+  const totalPages = Math.ceil(processedImages.length / itemsPerPage);
+  const paginatedImages = processedImages.slice(itemsPerPage * (activePage - 1), itemsPerPage * activePage);
+
+  useEffect(() => {
+    setActivePage(1);
+  }, [sortBy, searchQuery]);
+
+  return (
+    <Stack
+      gap="md"
+      classNames={{
+        root: classNames?.rootStack?.root
+      }}
+    >
+      <Group
+        justify="space-between"
+        align="center"
+        classNames={{
+          root: classNames?.filterGroup?.root
+        }}
+      >
+        <Select
+          placeholder="Sort by"
+          value={sortBy}
+          onChange={setSortBy}
+          data={sortOptions}
+          w={200}
+          clearable={false}
+          classNames={classNames?.sortSelect}
+        />
+        <TextInput
+          placeholder="Search by title..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.currentTarget.value)}
+          leftSection={<IoSearch size={16} />}
+          w={250}
+          classNames={classNames?.searchInput}
+        />
+      </Group>
+
+      <Grid
+        gutter="md"
+        classNames={classNames?.grid}
+      >
+        {paginatedImages.map((image) => {
+          const isSelected = selectedImageId === image.id;
+          return (
+            <GridCol key={image.id} span={{ base: 6, sm: 4, md: 3, lg: 2 }}>
+              <Paper
+                p="xs"
+                withBorder
+                radius="md"
+                onClick={() => onImageClick(image.id)}
+                classNames={{
+                  root: cx(
+                    defaultClasses.itemPaperRoot,
+                    classNames?.itemPaper?.root,
+                    isSelected ? defaultClasses.selectedPaper : undefined,
+                    isSelected ? classNames?.selectedPaper : undefined
+                  )
+                }}
+              >
+                <Stack
+                  gap={6}
+                  classNames={{
+                    root: cx(defaultClasses.imageStackRoot, classNames?.itemStack?.root)
+                  }}
+                >
+                  <div className={cx(defaultClasses.imageContainer, classNames?.imageContainer)}>
+                    <Image
+                      src={image.url}
+                      alt={image.title || image.name}
+                      fit="cover"
+                      classNames={{
+                        root: cx(defaultClasses.itemImageRoot, classNames?.itemImage?.root)
+                      }}
+                    />
+                  </div>
+                  <Text
+                    size="xs"
+                    c="dimmed"
+                    lineClamp={1}
+                    title={image.title ?? image.name}
+                    classNames={{
+                      root: cx(defaultClasses.itemTextRoot, classNames?.itemText?.root)
+                    }}
+                  >
+                    {image.title ?? image.name}
+                  </Text>
+                </Stack>
+              </Paper>
+            </GridCol>
+          );
+        })}
+      </Grid>
+      <Pagination
+        value={activePage}
+        onChange={setActivePage}
+        total={totalPages}
+      />
+    </Stack>
+  );
+}

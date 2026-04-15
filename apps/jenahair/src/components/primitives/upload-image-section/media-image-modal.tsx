@@ -1,11 +1,10 @@
 'use client';
-import '@vinaup/media-ui/dist/index.css';
 import {
   MediaModal,
   type IMedia,
   type UploadResult,
   type ICreateMedia,
-} from '@vinaup/media-ui';
+} from '@vinaup/ui/admin';
 import { uploadImageActionPrivate } from '@/actions/upload-action';
 import { createManyMediaActionPrivate, getAllMediaActionPrivate } from '@/actions/media-action';
 import { useState, useEffect, useEffectEvent } from 'react';
