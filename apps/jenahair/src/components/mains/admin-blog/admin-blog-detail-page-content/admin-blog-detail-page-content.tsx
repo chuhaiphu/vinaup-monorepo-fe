@@ -27,7 +27,6 @@ import {
   updateBlogActionPrivate,
 } from '@/actions/blog-action';
 import { IBlogResponse } from '@/interfaces/blog-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import {
   generateUniqueEndpoint,
   stripHtmlAndTruncate,
@@ -41,7 +40,6 @@ import PenIcon from '@/components/icons/vinaup-pen-icon.svg';
 import AddNewIcon from '@/components/icons/vinaup-add-new-icon.svg';
 import { useRouter } from 'next/navigation';
 import { IBlogCategoryResponse } from '@/interfaces/blog-category-interface';
-import { IBlogCategoryBlogResponse } from '@/interfaces/blog-category-blog-interface';
 import {
   createBlogCategoryBlogActionPrivate,
   deleteBlogCategoryBlogActionPrivate,
@@ -120,17 +118,20 @@ function AdminBlogDetailPageContentInner({
   );
   const [status, setStatus] = useState<string>(currentBlogData.visibility);
   const [sortOrder, setSortOrder] = useState<number>(currentBlogData.sortOrder);
-  const [blogCategoryBlogs, setBlogCategoryBlogs] = useState<
-    IBlogCategoryBlogResponse[]
-  >(currentBlogData.blogCategoryBlogs);
-  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>(
+    currentBlogData.blogCategoryBlogs.map((bcb) => bcb.blogCategoryId)
+  );
+
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
-  const router = useRouter();
+  const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
 
+  const router = useRouter();
   useEffect(() => {
-    setBlogCategoryBlogs(currentBlogData.blogCategoryBlogs);
+    setSelectedCategoryIds(
+      currentBlogData.blogCategoryBlogs.map((bcb) => bcb.blogCategoryId)
+    );
   }, [currentBlogData.blogCategoryBlogs]);
 
   const treeManager = useMemo(() => {
@@ -271,107 +272,38 @@ function AdminBlogDetailPageContentInner({
     setMainImageLoading(false);
   };
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    const endpoint = await generateUniqueEndpoint(
-      newTitle,
-      'blog',
-      currentBlogData.id
-    );
-
-    await updateBlogActionPrivate(currentBlogData.id, {
-      title: newTitle,
-      endpoint: endpoint,
-    });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
-
-  // const handleUpdateDescription = useDebouncedCallback(async (newDescription: string) => {
-  //   await updateBlogActionPrivate(
-  //     currentBlogData.id,
-  //     { description: newDescription }
-  //   );
-  //   setIsSaving(false);
-  // }, 1500)
-
-  const handleUpdateContent = useDebouncedCallback(async (newContent: string) => {
-    await updateBlogActionPrivate(currentBlogData.id, { content: newContent });
-    setIsSaving(false);
-  }, 1500);
+  const handleUpdateTitle = (newTitle: string) => {
+    setTitle(newTitle);
+  };
 
   const handleUpdateAdditionalImagesPosition = (newPosition: string) => {
     setAdditionalImagesPosition(newPosition);
-    updateBlogActionPrivate(currentBlogData.id, {
-      additionalImagesPosition: newPosition,
-    });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateDestinations = (newDestinations: string[]) => {
     setDestinations(newDestinations);
-    updateBlogActionPrivate(currentBlogData.id, { destinations: newDestinations });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateStatus = (newStatus: string) => {
     setStatus(newStatus);
-    updateBlogActionPrivate(currentBlogData.id, { visibility: newStatus });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
+  };
+
+  const handleUpdateContent = (newContent: string) => {
+    setContent(newContent);
   };
 
   const handleUpdateSortOrder = (newSortOrder: string) => {
     const sortOrderNumber = Number(newSortOrder);
     setSortOrder(sortOrderNumber);
-    updateBlogActionPrivate(currentBlogData.id, { sortOrder: sortOrderNumber });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateVideoPosition = (newPosition: string) => {
     setVideoPosition(newPosition);
-    updateBlogActionPrivate(currentBlogData.id, { videoPosition: newPosition });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
-  const handleUpdateVideoUrl = useDebouncedCallback(async (newUrl: string) => {
-    await updateBlogActionPrivate(currentBlogData.id, { videoUrl: newUrl });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateVideoUrl = (newVideoUrl: string) => {
+    setVideoUrl(newVideoUrl);
+  };
 
   // Generate SEO title and description
   const seoTitle = title ? stripHtmlAndTruncate(title, 100) : '';
@@ -424,6 +356,79 @@ function AdminBlogDetailPageContentInner({
     }
   };
 
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      let newEndpoint = currentBlogData.endpoint;
+      if (title !== currentBlogData.title) {
+        newEndpoint = await generateUniqueEndpoint(
+          title,
+          'blog',
+          currentBlogData.id
+        );
+      }
+
+      const updatePayload = {
+        title: title,
+        endpoint: newEndpoint,
+        content: content,
+        additionalImageUrls: additionalImageUrls,
+        additionalImagesPosition: additionalImagesPosition,
+        videoUrl: videoUrl,
+        videoThumbnailUrl: videoThumbnailUrl,
+        mainImageUrl: mainImageUrl,
+        videoPosition: videoPosition,
+        destinations: destinations,
+        visibility: status,
+        sortOrder: sortOrder,
+      };
+
+      await updateBlogActionPrivate(currentBlogData.id, updatePayload);
+
+      const currentBlogCategoryIds = currentBlogData.blogCategoryBlogs.map(
+        (bcb) => bcb.blogCategoryId
+      );
+
+      const toAdd = selectedCategoryIds.filter(
+        (id) => !currentBlogCategoryIds.includes(id)
+      );
+      const toRemove = currentBlogCategoryIds.filter(
+        (id) => !selectedCategoryIds.includes(id)
+      );
+
+      for (const blogCategoryId of toAdd) {
+        await createBlogCategoryBlogActionPrivate({
+          blogId: currentBlogData.id,
+          blogCategoryId: blogCategoryId,
+          sortOrder: 0,
+        });
+      }
+
+      for (const blogCategoryId of toRemove) {
+        const blogCategoryBlog = currentBlogData.blogCategoryBlogs.find(
+          (bcb) => bcb.blogCategoryId === blogCategoryId
+        );
+        if (blogCategoryBlog) {
+          await deleteBlogCategoryBlogActionPrivate(blogCategoryBlog.id);
+        }
+      }
+
+      notifications.show({
+        title: 'Success',
+        message: 'All changes have been saved successfully',
+        color: 'green',
+        position: 'top-right',
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Save failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+      });
+    } finally {
+      setIsSavingAll(false);
+    }
+  };
   // blog category options record for renderBlogCategoryOption to reference the id from option value
   const blogCategoryOptionsData: Record<string, IBlogCategoryResponse> =
     blogCategoriesData.reduce(
@@ -495,42 +500,8 @@ function AdminBlogDetailPageContentInner({
     );
   };
 
-  const handleUpdateBlogCategories = async (newBlogCategoryIds: string[]) => {
-    // Find blog categories to add (have in selected but not in current)
-    const currentBlogCategoryIds = blogCategoryBlogs.map(
-      (bcb) => bcb.blogCategoryId
-    );
-    const toAdd = newBlogCategoryIds.filter(
-      (id) => !currentBlogCategoryIds.includes(id)
-    );
-    const toRemove = currentBlogCategoryIds.filter(
-      (id) => !newBlogCategoryIds.includes(id)
-    );
-
-    // Add new blog categories
-    for (const blogCategoryId of toAdd) {
-      await createBlogCategoryBlogActionPrivate({
-        blogId: currentBlogData.id,
-        blogCategoryId: blogCategoryId,
-        sortOrder: 0,
-      });
-    }
-
-    // Remove blog categories that are not selected
-    for (const blogCategoryId of toRemove) {
-      const blogCategoryBlog = blogCategoryBlogs.find(
-        (bcb) => bcb.blogCategoryId === blogCategoryId
-      );
-      if (blogCategoryBlog) {
-        await deleteBlogCategoryBlogActionPrivate(blogCategoryBlog.id);
-      }
-    }
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
+  const handleUpdateBlogCategories = (newBlogCategoryIds: string[]) => {
+    setSelectedCategoryIds(newBlogCategoryIds);
   };
 
   return (
@@ -562,8 +533,6 @@ function AdminBlogDetailPageContentInner({
                   placeholder="A title under 100 characters"
                   maxLength={100}
                   onChange={(e) => {
-                    setTitle(e.target.value);
-                    setIsSaving(true);
                     handleUpdateTitle(e.target.value);
                   }}
                 />
@@ -596,8 +565,6 @@ function AdminBlogDetailPageContentInner({
                 <TextEditor
                   content={content}
                   onChange={(newContent) => {
-                    setContent(newContent);
-                    setIsSaving(true);
                     handleUpdateContent(newContent);
                   }}
                 />
@@ -866,20 +833,22 @@ function AdminBlogDetailPageContentInner({
                   <GrTrash size={24} color="var(--vinaup-blue-link)" />
                 </ActionIcon>
                 <Group gap={'xs'}>
-                  <Text
-                    size="lg"
-                    c="dark.3"
-                    className={isSaving ? classes.savingText : classes.savedText}
+                  <Button
+                    onClick={handleSaveAll}
+                    loading={isSavingAll}
+                    variant="filled"
+                    color="teal"
+                    size="sm"
                   >
-                    {isSaving ? 'Saving...' : 'Saved'}
-                  </Text>
+                    Save Changes
+                  </Button>
                   <Button
                     onClick={() => {
                       router.push('/adminup/blog');
                     }}
                     variant="filled"
                     color="blue"
-                    size="xs"
+                    size="sm"
                     bg={'#01426e'}
                   >
                     Exit
@@ -897,17 +866,16 @@ function AdminBlogDetailPageContentInner({
             <Group justify="space-between" wrap="nowrap">
               <MultiSelect
                 placeholder={
-                  blogCategoryBlogs.length < 3
+                  selectedCategoryIds.length < 3
                     ? 'Select up to 3 blog categories'
                     : ''
                 }
+                size="md"
                 maxValues={3}
                 w={'100%'}
                 searchable
                 nothingFoundMessage="Not found"
-                value={blogCategoryBlogs.map(
-                  (blogCategoryBlog) => blogCategoryBlog.blogCategoryId
-                )}
+                value={selectedCategoryIds}
                 renderOption={renderBlogCategoryOption}
                 data={treeManager?.toFlatListWithoutRoot().map((blogCategory) => ({
                   value: blogCategory.id,
@@ -983,8 +951,6 @@ function AdminBlogDetailPageContentInner({
                       placeholder="https://www.youtube.com/watch?v=..."
                       value={videoUrl}
                       onChange={(e) => {
-                        setVideoUrl(e.target.value);
-                        setIsSaving(true);
                         handleUpdateVideoUrl(e.target.value);
                       }}
                     />

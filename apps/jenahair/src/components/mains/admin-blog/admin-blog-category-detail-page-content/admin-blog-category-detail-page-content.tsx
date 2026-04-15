@@ -23,7 +23,6 @@ import {
   updateBlogCategoryActionPrivate,
 } from '@/actions/blog-category-action';
 import { IBlogCategoryResponse } from '@/interfaces/blog-category-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import { generateUniqueEndpoint } from '@/utils/function-helpers';
 import { FaCaretDown } from 'react-icons/fa6';
 import { GrTrash } from 'react-icons/gr';
@@ -103,9 +102,9 @@ function AdminBlogCategoryDetailPageContentInner({
   const [videoThumbnailLoading, setVideoThumbnailLoading] =
     useState<boolean>(false);
   const [mainImageLoading, setMainImageLoading] = useState<boolean>(false);
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
+  const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
 
   useEffect(() => {
     setSortOrder(currentBlogCategory.sortOrder);
@@ -140,76 +139,31 @@ function AdminBlogCategoryDetailPageContentInner({
     }
   };
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    const endpoint = await generateUniqueEndpoint(
-      newTitle,
-      'landing',
-      currentBlogCategory.id
-    );
-
-    await updateBlogCategoryActionPrivate(currentBlogCategory.id, {
-      title: newTitle,
-      endpoint: endpoint,
-    });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-    setIsSaving(false);
-  }, 1500);
-
-  const handleUpdateDescription = useDebouncedCallback(
-    async (newDescription: string) => {
-      await updateBlogCategoryActionPrivate(currentBlogCategory.id, {
-        description: newDescription,
-      });
-      setIsSaving(false);
-    },
-    1500
-  );
-
-  const handleUpdateParent = async (newParentId: string | null) => {
-    if (!newParentId) {
-      return;
-    }
-    setParentId(newParentId);
-    await updateBlogCategoryActionPrivate(currentBlogCategory.id, {
-      parentId: newParentId,
-    });
+  const handleUpdateTitle = (newTitle: string) => {
+    setTitle(newTitle);
   };
 
-  const handleUpdateSortOrder = async (newSortOrder: string | null) => {
+  const handleUpdateDescription = (newDescription: string) => {
+    setDescription(newDescription);
+  };
+
+  const handleUpdateParent = (newParentId: string | null) => {
+    if (!newParentId) return;
+    setParentId(newParentId);
+  };
+
+  const handleUpdateSortOrder = (newSortOrder: string | null) => {
     if (!newSortOrder) return;
-    const newValue = parseInt(newSortOrder);
-    setSortOrder(newValue);
-    await updateBlogCategoryActionPrivate(currentBlogCategory.id, { sortOrder: newValue });
-    notifications.show({
-      message: 'Sort order updated successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
+    setSortOrder(parseInt(newSortOrder));
   };
 
   const handleUpdateVideoPosition = (newPosition: string) => {
     setVideoPosition(newPosition);
-    updateBlogCategoryActionPrivate(currentBlogCategory.id, {
-      videoPosition: newPosition,
-    });
   };
 
-  const handleUpdateVideoUrl = useDebouncedCallback(async (newUrl: string) => {
-    await updateBlogCategoryActionPrivate(currentBlogCategory.id, { videoUrl: newUrl });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateVideoUrl = (newUrl: string) => {
+    setVideoUrl(newUrl);
+  };
 
   const handleSelectVideoThumbnail = async (imageUrl: string) => {
     setVideoThumbnailLoading(true);
@@ -259,7 +213,9 @@ function AdminBlogCategoryDetailPageContentInner({
   const handleRemoveMainImage = async () => {
     setMainImageLoading(true);
     setMainImageUrl('');
-    await updateBlogCategoryActionPrivate(currentBlogCategory.id, { mainImageUrl: '' });
+    await updateBlogCategoryActionPrivate(currentBlogCategory.id, {
+      mainImageUrl: '',
+    });
     setMainImageLoading(false);
   };
 
@@ -276,6 +232,45 @@ function AdminBlogCategoryDetailPageContentInner({
   const handleViewLink = () => {
     const link = `https://jenahair.com/${currentBlogCategory.endpoint}`;
     window.open(link, '_blank');
+  };
+
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      let newEndpoint = currentBlogCategory.endpoint;
+      if (title !== currentBlogCategory.title) {
+        newEndpoint = await generateUniqueEndpoint(
+          title,
+          'landing',
+          currentBlogCategory.id
+        );
+      }
+
+      await updateBlogCategoryActionPrivate(currentBlogCategory.id, {
+        title,
+        description,
+        parentId: parentId || undefined,
+        sortOrder,
+        videoUrl,
+        videoPosition,
+        endpoint: newEndpoint,
+      });
+
+      notifications.show({
+        message: 'Saved successfully',
+        color: 'green',
+        position: 'top-right',
+        autoClose: 900,
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Save failed',
+        message: error instanceof Error ? error.message : 'Failed to save',
+        color: 'red',
+      });
+    } finally {
+      setIsSavingAll(false);
+    }
   };
 
   const handleDeleteBlogCategory = async () => {
@@ -324,8 +319,6 @@ function AdminBlogCategoryDetailPageContentInner({
                   placeholder="A title under 100 characters"
                   maxLength={100}
                   onChange={(e) => {
-                    setTitle(e.target.value);
-                    setIsSaving(true);
                     handleUpdateTitle(e.target.value);
                   }}
                 />
@@ -370,8 +363,6 @@ function AdminBlogCategoryDetailPageContentInner({
                 <TextEditor
                   content={description}
                   onChange={(newDescription) => {
-                    setDescription(newDescription);
-                    setIsSaving(true);
                     handleUpdateDescription(newDescription);
                   }}
                 />
@@ -421,13 +412,15 @@ function AdminBlogCategoryDetailPageContentInner({
                   <GrTrash size={24} color="var(--vinaup-blue-link)" />
                 </ActionIcon>
                 <Group gap={'xs'}>
-                  <Text
-                    size="lg"
-                    c="dark.3"
-                    className={isSaving ? classes.savingText : classes.savedText}
+                  <Button
+                    onClick={handleSaveAll}
+                    loading={isSavingAll}
+                    variant="filled"
+                    color="teal"
+                    size="sm"
                   >
-                    {isSaving ? 'Saving...' : 'Saved'}
-                  </Text>
+                    Save Changes
+                  </Button>
                   <Button
                     onClick={() => {
                       router.push('/adminup/blog-category');
@@ -506,8 +499,6 @@ function AdminBlogCategoryDetailPageContentInner({
                       placeholder="https://www.youtube.com/watch?v=..."
                       value={videoUrl}
                       onChange={(e) => {
-                        setVideoUrl(e.target.value);
-                        setIsSaving(true);
                         handleUpdateVideoUrl(e.target.value);
                       }}
                     />

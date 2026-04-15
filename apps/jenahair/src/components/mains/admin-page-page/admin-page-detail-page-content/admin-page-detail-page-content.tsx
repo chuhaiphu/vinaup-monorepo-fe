@@ -25,7 +25,6 @@ import {
   updatePageActionPrivate,
 } from '@/actions/page-action';
 import { IPageResponse } from '@/interfaces/page-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import {
   generateUniqueEndpoint,
   stripHtmlAndTruncate,
@@ -102,10 +101,10 @@ function AdminPageDetailPageContentInner({
   const [status, setStatus] = useState<string>(currentPageData.visibility);
   const [pageType, setPageType] = useState<string>(currentPageData.type);
   const [endpoint, setEndpoint] = useState<string>(currentPageData.endpoint);
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
+  const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -239,106 +238,37 @@ function AdminPageDetailPageContentInner({
     setMainImageLoading(false);
   };
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    const newEndpoint = await generateUniqueEndpoint(
-      newTitle,
-      'landing',
-      currentPageData.id
-    );
+  const handleUpdateTitle = (newTitle: string) => {
+    setTitle(newTitle);
+  };
 
-    await updatePageActionPrivate(currentPageData.id, {
-      title: newTitle,
-      endpoint: newEndpoint,
-    });
+  const handleUpdateEndpoint = (newEndpoint: string) => {
     setEndpoint(newEndpoint);
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  };
 
-  const handleUpdateEndpoint = useDebouncedCallback(async (newEndpoint: string) => {
-    const uniqueEndpoint = await generateUniqueEndpoint(
-      newEndpoint,
-      'landing',
-      currentPageData.id
-    );
-
-    await updatePageActionPrivate(currentPageData.id, { endpoint: uniqueEndpoint });
-    setEndpoint(uniqueEndpoint);
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
-
-  const handleUpdateContent = useDebouncedCallback(async (newContent: string) => {
-    await updatePageActionPrivate(currentPageData.id, { content: newContent });
-    setIsSaving(false);
-  }, 1500);
+  const handleUpdateContent = (newContent: string) => {
+    setContent(newContent);
+  };
 
   const handleUpdateAdditionalImagesPosition = (newPosition: string) => {
     setAdditionalImagesPosition(newPosition);
-    updatePageActionPrivate(currentPageData.id, {
-      additionalImagesPosition: newPosition,
-    });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateStatus = (newStatus: string) => {
     setStatus(newStatus);
-    updatePageActionPrivate(currentPageData.id, { visibility: newStatus });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdatePageType = (newPageType: string) => {
     setPageType(newPageType);
-    updatePageActionPrivate(currentPageData.id, { type: newPageType });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateVideoPosition = (newPosition: string) => {
     setVideoPosition(newPosition);
-    updatePageActionPrivate(currentPageData.id, { videoPosition: newPosition });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
-  const handleUpdateVideoUrl = useDebouncedCallback(async (newUrl: string) => {
-    await updatePageActionPrivate(currentPageData.id, { videoUrl: newUrl });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateVideoUrl = (newUrl: string) => {
+    setVideoUrl(newUrl);
+  };
 
   // Generate SEO title and description
   const seoTitle = title ? stripHtmlAndTruncate(title, 100) : '';
@@ -359,6 +289,60 @@ function AdminPageDetailPageContentInner({
   const handleViewLink = () => {
     const link = `https://jenahair.com/${endpoint}`;
     window.open(link, '_blank');
+  };
+
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      let finalEndpoint = endpoint;
+      if (
+        title !== currentPageData.title &&
+        endpoint === currentPageData.endpoint
+      ) {
+        finalEndpoint = await generateUniqueEndpoint(
+          title,
+          'landing',
+          currentPageData.id
+        );
+      } else if (endpoint !== currentPageData.endpoint) {
+        finalEndpoint = await generateUniqueEndpoint(
+          endpoint,
+          'landing',
+          currentPageData.id
+        );
+      }
+
+      await updatePageActionPrivate(currentPageData.id, {
+        title,
+        endpoint: finalEndpoint,
+        content,
+        additionalImageUrls,
+        additionalImagesPosition,
+        visibility: status,
+        type: pageType,
+        videoPosition,
+        videoUrl,
+        videoThumbnailUrl,
+        mainImageUrl,
+      });
+
+      setEndpoint(finalEndpoint);
+
+      notifications.show({
+        title: 'Success',
+        message: 'All changes have been saved successfully',
+        color: 'green',
+        position: 'top-right',
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Save failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+      });
+    } finally {
+      setIsSavingAll(false);
+    }
   };
 
   const handleDeletePage = async () => {
@@ -420,8 +404,6 @@ function AdminPageDetailPageContentInner({
                   placeholder="A title under 100 characters"
                   maxLength={100}
                   onChange={(e) => {
-                    setTitle(e.target.value);
-                    setIsSaving(true);
                     handleUpdateTitle(e.target.value);
                   }}
                 />
@@ -441,8 +423,6 @@ function AdminPageDetailPageContentInner({
                         value={endpoint}
                         onChange={(e) => {
                           const sanitized = sanitizeEndpoint(e.target.value);
-                          setEndpoint(sanitized);
-                          setIsSaving(true);
                           handleUpdateEndpoint(sanitized);
                         }}
                       />
@@ -480,8 +460,6 @@ function AdminPageDetailPageContentInner({
                 <TextEditor
                   content={content}
                   onChange={(newContent) => {
-                    setContent(newContent);
-                    setIsSaving(true);
                     handleUpdateContent(newContent);
                   }}
                 />
@@ -610,13 +588,15 @@ function AdminPageDetailPageContentInner({
                   <GrTrash size={24} color="var(--vinaup-blue-link)" />
                 </ActionIcon>
                 <Group gap={'xs'}>
-                  <Text
-                    size="lg"
-                    c="dark.3"
-                    className={isSaving ? classes.savingText : classes.savedText}
+                  <Button
+                    onClick={handleSaveAll}
+                    loading={isSavingAll}
+                    variant="filled"
+                    color="teal"
+                    size="sm"
                   >
-                    {isSaving ? 'Saving...' : 'Saved'}
-                  </Text>
+                    Save Changes
+                  </Button>
                   <Button
                     onClick={() => {
                       router.push('/adminup/page' as Route);
@@ -695,8 +675,6 @@ function AdminPageDetailPageContentInner({
                       placeholder="https://www.youtube.com/watch?v=..."
                       value={videoUrl}
                       onChange={(e) => {
-                        setVideoUrl(e.target.value);
-                        setIsSaving(true);
                         handleUpdateVideoUrl(e.target.value);
                       }}
                     />

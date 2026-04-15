@@ -2,12 +2,19 @@
 
 import { use } from 'react';
 import { IAppConfigResponse } from '@/interfaces/app-config-interface';
-import { Group, Paper, Stack, Text, Textarea, TextInput } from '@mantine/core';
+import {
+  Button,
+  Group,
+  Paper,
+  Stack,
+  Text,
+  Textarea,
+  TextInput,
+} from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import classes from './admin-setting-seo-page-content.module.scss';
 import { useState } from 'react';
 import { updateAppConfigActionPrivate } from '@/actions/app-config-action';
-import { useDebouncedCallback } from 'use-debounce';
 import Link from 'next/link';
 import { HiOutlineEye } from 'react-icons/hi';
 import { Route } from 'next';
@@ -17,37 +24,62 @@ interface AdminSettingSeoPageContentProps {
   appConfigPromise: Promise<ActionResponse<IAppConfigResponse>>;
 }
 
-export default function AdminSettingSeoPageContent({ appConfigPromise }: AdminSettingSeoPageContentProps) {
+export default function AdminSettingSeoPageContent({
+  appConfigPromise,
+}: AdminSettingSeoPageContentProps) {
   const appConfigResponse = use(appConfigPromise);
   const appConfig = appConfigResponse.data;
 
   const [title, setTitle] = useState(appConfig?.websiteTitle || '');
-  const [description, setDescription] = useState(appConfig?.websiteDescription || '');
+  const [description, setDescription] = useState(
+    appConfig?.websiteDescription || ''
+  );
+  const [isSavingAll, setIsSavingAll] = useState(false);
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    await updateAppConfigActionPrivate({ websiteTitle: newTitle });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
-
-  const handleUpdateDescription = useDebouncedCallback(async (newDescription: string) => {
-    await updateAppConfigActionPrivate({ websiteDescription: newDescription });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      await updateAppConfigActionPrivate({
+        websiteTitle: title,
+        websiteDescription: description,
+      });
+      notifications.show({
+        message: 'Saved successfully',
+        color: 'green',
+        position: 'top-right',
+        autoClose: 1500,
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+        position: 'top-right',
+        autoClose: 1500,
+      });
+    } finally {
+      setIsSavingAll(false);
+    }
+  };
 
   return (
     <Stack gap={'md'}>
       <Paper radius={'md'} shadow="xs" classNames={{ root: classes.paperBlock }}>
         <Stack p={'sm'} gap={'md'}>
+          <Group justify="space-between" wrap="nowrap">
+            <Text size="lg" fw={500}>
+              SEO Basic Information
+            </Text>
+            <Button
+              loading={isSavingAll}
+              onClick={handleSaveAll}
+              variant="filled"
+              color="teal"
+              size="sm"
+            >
+              Save Changes
+            </Button>
+          </Group>
           <Stack gap={2}>
             <Group justify="space-between" wrap="nowrap">
               <Text size="lg">Site title</Text>
@@ -59,7 +91,6 @@ export default function AdminSettingSeoPageContent({ appConfigPromise }: AdminSe
               maxLength={100}
               onChange={(e) => {
                 setTitle(e.target.value);
-                handleUpdateTitle(e.target.value);
               }}
             />
           </Stack>
@@ -74,7 +105,6 @@ export default function AdminSettingSeoPageContent({ appConfigPromise }: AdminSe
               maxLength={300}
               onChange={(e) => {
                 setDescription(e.target.value);
-                handleUpdateDescription(e.target.value);
               }}
             />
           </Stack>

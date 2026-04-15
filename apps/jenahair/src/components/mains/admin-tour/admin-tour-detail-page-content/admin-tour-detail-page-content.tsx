@@ -27,7 +27,6 @@ import {
   updateTourActionPrivate,
 } from '@/actions/tour-action';
 import { ITourResponse } from '@/interfaces/tour-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import {
   generateUniqueEndpoint,
   stripHtmlAndTruncate,
@@ -133,14 +132,21 @@ function AdminTourDetailPageContentInner({
   const [tourCategoryTours, setTourCategoryTours] = useState<
     ITourCategoryTourResponse[]
   >(currentTourData.tourCategoryTours);
-  const [isSaving, setIsSaving] = useState<boolean>(false);
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
   const [isCreating, setIsCreating] = useState<boolean>(false);
+  const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>(
+    currentTourData.tourCategoryTours.map((bcb) => bcb.tourCategoryId)
+  );
+
   const router = useRouter();
 
   useEffect(() => {
     setTourCategoryTours(currentTourData.tourCategoryTours);
+    setSelectedCategoryIds(
+      currentTourData.tourCategoryTours.map((bcb) => bcb.tourCategoryId)
+    );
   }, [currentTourData.tourCategoryTours]);
 
   const treeManager = useMemo(() => {
@@ -282,171 +288,62 @@ function AdminTourDetailPageContentInner({
     setMainImageLoading(false);
   };
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    const endpoint = await generateUniqueEndpoint(
-      newTitle,
-      'tour',
-      currentTourData.id
-    );
+  const handleUpdateTitle = (newTitle: string) => {
+    setTitle(newTitle);
+  };
 
-    await updateTourActionPrivate(currentTourData.id, {
-      title: newTitle,
-      endpoint: endpoint,
-    });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateDescription = (newDescription: string) => {
+    setDescription(newDescription);
+  };
 
-  const handleUpdateDescription = useDebouncedCallback(
-    async (newDescription: string) => {
-      await updateTourActionPrivate(currentTourData.id, {
-        description: newDescription,
-      });
-      setIsSaving(false);
-    },
-    1500
-  );
-
-  const handleUpdateContent = useDebouncedCallback(async (newContent: string) => {
-    await updateTourActionPrivate(currentTourData.id, { content: newContent });
-    setIsSaving(false);
-  }, 1500);
+  const handleUpdateContent = (newContent: string) => {
+    setContent(newContent);
+  };
 
   const handleUpdateAdditionalImagesPosition = (newPosition: string) => {
     setAdditionalImagesPosition(newPosition);
-    updateTourActionPrivate(currentTourData.id, {
-      additionalImagesPosition: newPosition,
-    });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateDestinations = (newDestinations: string[]) => {
     setDestinations(newDestinations);
-    updateTourActionPrivate(currentTourData.id, { destinations: newDestinations });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateStatus = (newStatus: string) => {
     setStatus(newStatus);
-    updateTourActionPrivate(currentTourData.id, { visibility: newStatus });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateSortOrder = (newSortOrder: string) => {
     const sortOrderNumber = Number(newSortOrder);
     setSortOrder(sortOrderNumber);
-    updateTourActionPrivate(currentTourData.id, { sortOrder: sortOrderNumber });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   const handleUpdateType = (newType: string) => {
     setType(newType);
-    updateTourActionPrivate(currentTourData.id, { type: newType });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
-  const handleUpdateNormalPrice = useDebouncedCallback(async (newPrice: number) => {
-    await updateTourActionPrivate(currentTourData.id, { price: newPrice });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateNormalPrice = (newPrice: number | string) => {
+    setNormalPrice(Number(newPrice));
+  };
 
-  const handleUpdateDiscountPrice = useDebouncedCallback(
-    async (newPrice: number) => {
-      await updateTourActionPrivate(currentTourData.id, {
-        discountPrice: newPrice,
-      });
-      setIsSaving(false);
-      notifications.show({
-        message: 'Saved successfully',
-        color: 'green',
-        position: 'top-right',
-        autoClose: 900,
-      });
-    },
-    1500
-  );
+  const handleUpdateDiscountPrice = (newPrice: number | string) => {
+    setDiscountPrice(Number(newPrice));
+  };
 
-  const handleUpdateChildPrice = useDebouncedCallback(async (newPrice: number) => {
-    await updateTourActionPrivate(currentTourData.id, { childPrice: newPrice });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateChildPrice = (newPrice: number | string) => {
+    setChildPrice(Number(newPrice));
+  };
 
   const handleUpdateVideoPosition = (newPosition: string) => {
     setVideoPosition(newPosition);
-    updateTourActionPrivate(currentTourData.id, { videoPosition: newPosition });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
-  const handleUpdateVideoUrl = useDebouncedCallback(async (newUrl: string) => {
-    await updateTourActionPrivate(currentTourData.id, { videoUrl: newUrl });
-    setIsSaving(false);
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdateVideoUrl = (newUrl: string) => {
+    setVideoUrl(newUrl);
+  };
 
   const handleUpdateDuration = (newDuration: string) => {
     const newDurationNumber = Number(newDuration);
     setDuration(newDurationNumber);
-    updateTourActionPrivate(currentTourData.id, {
-      durationDays: newDurationNumber,
-    });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
   };
 
   // Generate SEO title and description
@@ -497,6 +394,86 @@ function AdminTourDetailPageContentInner({
     } finally {
       setIsDeleting(false);
       setDeleteModalOpened(false);
+    }
+  };
+
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      let newEndpoint = currentTourData.endpoint;
+      if (title !== currentTourData.title) {
+        newEndpoint = await generateUniqueEndpoint(
+          title,
+          'tour',
+          currentTourData.id
+        );
+      }
+
+      const updatePayload = {
+        title,
+        endpoint: newEndpoint,
+        description,
+        content,
+        additionalImageUrls,
+        additionalImagesPosition,
+        videoUrl,
+        videoThumbnailUrl,
+        mainImageUrl,
+        videoPosition,
+        destinations,
+        visibility: status,
+        sortOrder,
+        price: normalPrice,
+        discountPrice,
+        childPrice,
+        type,
+        durationDays: duration,
+      };
+
+      await updateTourActionPrivate(currentTourData.id, updatePayload);
+
+      const currentTourCategoryIds = currentTourData.tourCategoryTours.map(
+        (bcb) => bcb.tourCategoryId
+      );
+
+      const toAdd = selectedCategoryIds.filter(
+        (id) => !currentTourCategoryIds.includes(id)
+      );
+      const toRemove = currentTourCategoryIds.filter(
+        (id) => !selectedCategoryIds.includes(id)
+      );
+
+      for (const tourCategoryId of toAdd) {
+        await createTourCategoryTourActionPrivate({
+          tourId: currentTourData.id,
+          tourCategoryId: tourCategoryId,
+          sortOrder: 0,
+        });
+      }
+
+      for (const tourCategoryId of toRemove) {
+        const tourCategoryTour = currentTourData.tourCategoryTours.find(
+          (bcb) => bcb.tourCategoryId === tourCategoryId
+        );
+        if (tourCategoryTour) {
+          await deleteTourCategoryTourActionPrivate(tourCategoryTour.id);
+        }
+      }
+
+      notifications.show({
+        title: 'Success',
+        message: 'All changes have been saved successfully',
+        color: 'green',
+        position: 'top-right',
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Save failed',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+      });
+    } finally {
+      setIsSavingAll(false);
     }
   };
 
@@ -571,42 +548,8 @@ function AdminTourDetailPageContentInner({
     );
   };
 
-  const handleUpdateTourCategories = async (newTourCategoryIds: string[]) => {
-    // Find tour categories to add (have in selected but not in current)
-    const currentTourCategoryIds = tourCategoryTours.map(
-      (tct) => tct.tourCategoryId
-    );
-    const toAdd = newTourCategoryIds.filter(
-      (id) => !currentTourCategoryIds.includes(id)
-    );
-    const toRemove = currentTourCategoryIds.filter(
-      (id) => !newTourCategoryIds.includes(id)
-    );
-
-    // Add new tour categories
-    for (const tourCategoryId of toAdd) {
-      await createTourCategoryTourActionPrivate({
-        tourId: currentTourData.id,
-        tourCategoryId: tourCategoryId,
-        sortOrder: 0,
-      });
-    }
-
-    // Remove tour categories that are not selected
-    for (const tourCategoryId of toRemove) {
-      const tourCategoryTour = tourCategoryTours.find(
-        (tct) => tct.tourCategoryId === tourCategoryId
-      );
-      if (tourCategoryTour) {
-        await deleteTourCategoryTourActionPrivate(tourCategoryTour.id);
-      }
-    }
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
+  const handleUpdateTourCategories = (newTourCategoryIds: string[]) => {
+    setSelectedCategoryIds(newTourCategoryIds);
   };
 
   return (
@@ -638,8 +581,6 @@ function AdminTourDetailPageContentInner({
                   placeholder="A title under 100 characters"
                   maxLength={100}
                   onChange={(e) => {
-                    setTitle(e.target.value);
-                    setIsSaving(true);
                     handleUpdateTitle(e.target.value);
                   }}
                 />
@@ -670,8 +611,6 @@ function AdminTourDetailPageContentInner({
                 <TextEditor
                   content={description}
                   onChange={(newDescription) => {
-                    setDescription(newDescription);
-                    setIsSaving(true);
                     handleUpdateDescription(newDescription);
                   }}
                 />
@@ -683,8 +622,6 @@ function AdminTourDetailPageContentInner({
                 <TextEditor
                   content={content}
                   onChange={(newContent) => {
-                    setContent(newContent);
-                    setIsSaving(true);
                     handleUpdateContent(newContent);
                   }}
                 />
@@ -978,13 +915,15 @@ function AdminTourDetailPageContentInner({
                   <GrTrash size={24} color="var(--vinaup-blue-link)" />
                 </ActionIcon>
                 <Group gap={'xs'}>
-                  <Text
-                    size="lg"
-                    c="dark.3"
-                    className={isSaving ? classes.savingText : classes.savedText}
+                  <Button
+                    onClick={handleSaveAll}
+                    loading={isSavingAll}
+                    variant="filled"
+                    color="teal"
+                    size="sm"
                   >
-                    {isSaving ? 'Saving...' : 'Saved'}
-                  </Text>
+                    Save Changes
+                  </Button>
                   <Button
                     onClick={() => {
                       router.push('/adminup/tour');
@@ -1141,8 +1080,6 @@ function AdminTourDetailPageContentInner({
                   const rawValue = e.target.value.replace(/\./g, '');
                   if (rawValue === '' || /^\d+$/.test(rawValue)) {
                     const newValue = rawValue === '' ? 0 : Number(rawValue);
-                    setNormalPrice(newValue);
-                    setIsSaving(true);
                     handleUpdateNormalPrice(newValue);
                   }
                 }}
@@ -1163,8 +1100,6 @@ function AdminTourDetailPageContentInner({
                   const rawValue = e.target.value.replace(/\./g, '');
                   if (rawValue === '' || /^\d+$/.test(rawValue)) {
                     const newValue = rawValue === '' ? 0 : Number(rawValue);
-                    setDiscountPrice(newValue);
-                    setIsSaving(true);
                     handleUpdateDiscountPrice(newValue);
                   }
                 }}
@@ -1182,8 +1117,6 @@ function AdminTourDetailPageContentInner({
                   const rawValue = e.target.value.replace(/\./g, '');
                   if (rawValue === '' || /^\d+$/.test(rawValue)) {
                     const newValue = rawValue === '' ? 0 : Number(rawValue);
-                    setChildPrice(newValue);
-                    setIsSaving(true);
                     handleUpdateChildPrice(newValue);
                   }
                 }}
@@ -1253,8 +1186,6 @@ function AdminTourDetailPageContentInner({
                       placeholder="https://www.youtube.com/watch?v=..."
                       value={videoUrl}
                       onChange={(e) => {
-                        setVideoUrl(e.target.value);
-                        setIsSaving(true);
                         handleUpdateVideoUrl(e.target.value);
                       }}
                     />

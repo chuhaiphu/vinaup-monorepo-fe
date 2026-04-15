@@ -3,29 +3,33 @@
 import { use } from 'react';
 import { updateAppConfigActionPrivate } from '@/actions/app-config-action';
 import { ToggleSection } from '@vinaup/ui/landing';
-import { Group, Paper, Stack, Text, TextInput } from '@mantine/core';
+import { Group, Paper, Stack, Text, TextInput, Button } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import { useState } from 'react';
 import classes from './admin-setting-overview-page-content.module.scss';
 import UploadImageSection from '@/components/primitives/upload-image-section/upload-image-section';
 import { IAppConfigResponse } from '@/interfaces/app-config-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import { ActionResponse } from '@/interfaces/_base-interface';
 
 interface AdminSettingOverviewPageContentProps {
   appConfigPromise: Promise<ActionResponse<IAppConfigResponse>>;
 }
 
-export default function AdminSettingOverviewPageContent({ appConfigPromise }: AdminSettingOverviewPageContentProps) {
+export default function AdminSettingOverviewPageContent({
+  appConfigPromise,
+}: AdminSettingOverviewPageContentProps) {
   const appConfigResponse = use(appConfigPromise);
   const appConfig = appConfigResponse.data;
 
-  const [isMaintenanceMode, setIsMaintenanceMode] = useState(appConfig?.maintenanceMode);
+  const [isMaintenanceMode, setIsMaintenanceMode] = useState(
+    appConfig?.maintenanceMode
+  );
   const [faviconUrl, setFaviconUrl] = useState(appConfig?.faviconUrl);
   const [logoUrl, setLogoUrl] = useState(appConfig?.logoUrl);
   const [isUpdatingLogoUrl, setIsUpdatingLogoUrl] = useState(false);
   const [isUpdatingFaviconUrl, setIsUpdatingFaviconUrl] = useState(false);
   const [phoneContact, setPhoneContact] = useState(appConfig?.phoneContact ?? '');
+  const [isSavingHotline, setIsSavingHotline] = useState(false);
 
   const handleSelectFaviconUrl = async (imageUrl: string) => {
     setIsUpdatingFaviconUrl(true);
@@ -91,50 +95,91 @@ export default function AdminSettingOverviewPageContent({ appConfigPromise }: Ad
     }
   };
 
-  const handleUpdatePhoneContact = useDebouncedCallback(async (newPhoneContact: string) => {
-    await updateAppConfigActionPrivate({ phoneContact: newPhoneContact });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  }, 1500);
+  const handleUpdatePhoneContact = async () => {
+    setIsSavingHotline(true);
+    try {
+      await updateAppConfigActionPrivate({ phoneContact });
+      notifications.show({
+        message: 'Saved successfully',
+        color: 'green',
+        position: 'top-right',
+        autoClose: 1500,
+      });
+    } catch (error) {
+      notifications.show({
+        title: 'Error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+        position: 'top-right',
+      });
+    } finally {
+      setIsSavingHotline(false);
+    }
+  };
 
   return (
     <div className={classes.overviewPageRoot}>
       <Stack gap="md">
         <Paper radius={'md'} shadow="xs" classNames={{ root: classes.paperBlock }}>
           <Stack p={'sm'}>
-            <Text size="lg" fw={600}>Favicon</Text>
+            <Text size="lg" fw={600}>
+              Favicon
+            </Text>
             <Group align="center">
-              <UploadImageSection size="lg" isLoading={isUpdatingFaviconUrl} imageUrl={faviconUrl ?? undefined}
-                onImageSelect={handleSelectFaviconUrl} onRemoveFile={handleRemoveFaviconUrl}
+              <UploadImageSection
+                size="lg"
+                isLoading={isUpdatingFaviconUrl}
+                imageUrl={faviconUrl ?? undefined}
+                onImageSelect={handleSelectFaviconUrl}
+                onRemoveFile={handleRemoveFaviconUrl}
               />
               <Stack gap={2}>
                 <Text size="lg">{faviconUrl ? 'Edit' : 'Upload'}</Text>
-                <Text size="sm" c="dimmed">png, jpg; jpeg; Size ≤ 2M</Text>
+                <Text size="sm" c="dimmed">
+                  png, jpg; jpeg; Size ≤ 2M
+                </Text>
               </Stack>
             </Group>
           </Stack>
         </Paper>
         <Paper radius={'md'} shadow="xs" classNames={{ root: classes.paperBlock }}>
           <Stack p={'sm'}>
-            <Text size="lg" fw={600}>Logo website</Text>
+            <Text size="lg" fw={600}>
+              Logo website
+            </Text>
             <Group align="center">
-              <UploadImageSection size="lg" isLoading={isUpdatingLogoUrl} imageUrl={logoUrl ?? undefined}
-                onImageSelect={handleSelectLogoUrl} onRemoveFile={handleRemoveLogoUrl}
+              <UploadImageSection
+                size="lg"
+                isLoading={isUpdatingLogoUrl}
+                imageUrl={logoUrl ?? undefined}
+                onImageSelect={handleSelectLogoUrl}
+                onRemoveFile={handleRemoveLogoUrl}
               />
               <Stack gap={2}>
                 <Text size="lg">{logoUrl ? 'Edit' : 'Upload'}</Text>
-                <Text size="sm" c="dimmed">png, jpg; jpeg; Size ≤ 2M</Text>
+                <Text size="sm" c="dimmed">
+                  png, jpg; jpeg; Size ≤ 2M
+                </Text>
               </Stack>
             </Group>
           </Stack>
         </Paper>
         <Paper radius={'md'} classNames={{ root: classes.paperBlock }}>
           <Stack p={'sm'} gap={'xs'}>
-            <Text size="lg" fw={600}>Hotline</Text>
+            <Group justify="space-between">
+              <Text size="lg" fw={600}>
+                Hotline
+              </Text>
+              <Button
+                loading={isSavingHotline}
+                onClick={handleUpdatePhoneContact}
+                variant="filled"
+                color="teal"
+                size="sm"
+              >
+                Save Changes
+              </Button>
+            </Group>
             <Stack gap={2}>
               <Text size="lg">Whatsapp</Text>
               <TextInput
@@ -145,7 +190,6 @@ export default function AdminSettingOverviewPageContent({ appConfigPromise }: Ad
                 placeholder="Enter your phone number"
                 onChange={(e) => {
                   setPhoneContact(e.target.value);
-                  handleUpdatePhoneContact(e.target.value);
                 }}
               />
             </Stack>

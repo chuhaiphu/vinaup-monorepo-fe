@@ -17,10 +17,12 @@ import {
 import { notifications } from '@mantine/notifications';
 import classes from './admin-menu-detail-page-content.module.scss';
 import { use, useEffect, useMemo, useState } from 'react';
-import { deleteMenuActionPrivate, updateMenuActionPrivate } from '@/actions/menu-action';
+import {
+  updateMenuActionPrivate,
+  deleteMenuActionPrivate,
+} from '@/actions/menu-action';
 import { IMenuResponse } from '@/interfaces/menu-interface';
 import { ITourCategoryResponse } from '@/interfaces/tour-category-interface';
-import { useDebouncedCallback } from 'use-debounce';
 import { FaCaretDown } from 'react-icons/fa6';
 import { GrTrash } from 'react-icons/gr';
 import { TreeManager } from '@vinaup/utils/tree-manager';
@@ -90,7 +92,7 @@ function AdminMenuDetailPageContentInner({
   );
   const [customUrl, setCustomUrl] = useState<string>(currentMenu.customUrl || '');
 
-  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
   const [deleteModalOpened, setDeleteModalOpened] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
@@ -186,81 +188,33 @@ function AdminMenuDetailPageContentInner({
     );
   };
 
-  const handleUpdateTitle = useDebouncedCallback(async (newTitle: string) => {
-    await updateMenuActionPrivate(currentMenu.id, { title: newTitle });
-    notifications.show({
-      message: 'Saved successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-    setIsSaving(false);
-  }, 1500);
-
-  const handleUpdateParent = async (newParentId: string | null) => {
-    if (!newParentId) {
-      return;
-    }
-    setParentId(newParentId);
-    await updateMenuActionPrivate(currentMenu.id, { parentId: newParentId });
-  };
-
-  const handleUpdateSortOrder = async (newSortOrder: string | null) => {
-    if (!newSortOrder) return;
-    const newValue = parseInt(newSortOrder);
-    setSortOrder(newValue);
-    await updateMenuActionPrivate(currentMenu.id, { sortOrder: newValue });
-    notifications.show({
-      message: 'Sort order updated successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  };
-
-  const handleUpdateTargetType = async (newTargetType: string | null) => {
-    setTargetType(newTargetType);
-    // Reset target values when type changes
-    setTargetId(null);
-    setCustomUrl('');
-    await updateMenuActionPrivate(currentMenu.id, {
-      targetType: newTargetType || undefined,
-      targetId: undefined,
-      customUrl: undefined,
-    });
-    notifications.show({
-      message: 'Target type updated successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
-  };
-
-  const handleUpdateCustomUrl = useDebouncedCallback(
-    async (newCustomUrl: string) => {
-      await updateMenuActionPrivate(currentMenu.id, { customUrl: newCustomUrl });
+  const handleSaveAll = async () => {
+    setIsSavingAll(true);
+    try {
+      await updateMenuActionPrivate(currentMenu.id, {
+        title,
+        parentId: parentId || undefined,
+        sortOrder,
+        targetType: targetType || undefined,
+        targetId: targetId || undefined,
+        customUrl: customUrl || undefined,
+      });
       notifications.show({
-        message: 'Custom URL saved successfully',
+        message: 'Saved successfully',
         color: 'green',
         position: 'top-right',
-        autoClose: 900,
+        autoClose: 1500,
       });
-      setIsSaving(false);
-    },
-    1500
-  );
-
-  const handleUpdateTourCategory = async (tourCategoryId: string | null) => {
-    setTargetId(tourCategoryId);
-    await updateMenuActionPrivate(currentMenu.id, {
-      targetId: tourCategoryId || undefined,
-    });
-    notifications.show({
-      message: 'Tour category updated successfully',
-      color: 'green',
-      position: 'top-right',
-      autoClose: 900,
-    });
+    } catch (error) {
+      notifications.show({
+        title: 'Error',
+        message: error instanceof Error ? error.message : 'Unknown error',
+        color: 'red',
+        position: 'top-right',
+      });
+    } finally {
+      setIsSavingAll(false);
+    }
   };
 
   const handleDeleteMenu = async () => {
@@ -308,8 +262,6 @@ function AdminMenuDetailPageContentInner({
                   maxLength={100}
                   onChange={(e) => {
                     setTitle(e.target.value);
-                    setIsSaving(true);
-                    handleUpdateTitle(e.target.value);
                   }}
                 />
               </Stack>
@@ -323,7 +275,7 @@ function AdminMenuDetailPageContentInner({
                   value={parentId}
                   searchable
                   nothingFoundMessage="No menu found"
-                  onChange={(value) => handleUpdateParent(value)}
+                  onChange={(value) => setParentId(value)}
                 />
               </Stack>
 
@@ -340,7 +292,9 @@ function AdminMenuDetailPageContentInner({
                   value={targetType}
                   onChange={(value) => {
                     if (value === targetType) return;
-                    handleUpdateTargetType(value);
+                    setTargetType(value);
+                    setTargetId(null);
+                    setCustomUrl('');
                   }}
                 />
               </Stack>
@@ -363,7 +317,7 @@ function AdminMenuDetailPageContentInner({
                     searchable
                     nothingFoundMessage="No tour category found"
                     renderOption={renderTourCategoryOption}
-                    onChange={(value) => handleUpdateTourCategory(value)}
+                    onChange={(value) => setTargetId(value)}
                     clearable
                   />
                 </Stack>
@@ -378,8 +332,6 @@ function AdminMenuDetailPageContentInner({
                     value={customUrl}
                     onChange={(e) => {
                       setCustomUrl(e.target.value);
-                      setIsSaving(true);
-                      handleUpdateCustomUrl(e.target.value);
                     }}
                   />
                 </Stack>
@@ -416,7 +368,7 @@ function AdminMenuDetailPageContentInner({
                   rightSection={
                     <FaCaretDown color="var(--vinaup-blue-link)" size={24} />
                   }
-                  onChange={handleUpdateSortOrder}
+                  onChange={(value) => setSortOrder(value ? parseInt(value) : 0)}
                 />
               </Group>
               <Group justify="space-between" wrap="nowrap" mt={'sm'}>
@@ -429,13 +381,15 @@ function AdminMenuDetailPageContentInner({
                   <GrTrash size={24} color="var(--vinaup-blue-link)" />
                 </ActionIcon>
                 <Group gap={'xs'}>
-                  <Text
-                    size="lg"
-                    c="dark.3"
-                    className={isSaving ? classes.savingText : classes.savedText}
+                  <Button
+                    loading={isSavingAll}
+                    onClick={handleSaveAll}
+                    variant="filled"
+                    color="teal"
+                    size="xs"
                   >
-                    {isSaving ? 'Saving...' : 'Saved'}
-                  </Text>
+                    Save Changes
+                  </Button>
                   <Button
                     onClick={() => {
                       router.push('/adminup/menu');
