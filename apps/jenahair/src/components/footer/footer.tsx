@@ -1,7 +1,6 @@
 // footer.tsx
-import { Container, Grid, GridCol, Group, Text, Box } from '@mantine/core';
+import { Container, Grid, GridCol, Group, Text, Box, Anchor } from '@mantine/core';
 import Image from 'next/image';
-import Link from 'next/link';
 import classes from './footer.module.scss';
 
 export function Footer() {
@@ -22,8 +21,9 @@ export function Footer() {
                                     <Image
                                         src="/favicon.ico"
                                         alt="Jenahair.com Logo"
-                                        width={100}
-                                        height={100}
+                                        // Chỉnh kích thước logo trong style css để điều chỉnh reponsive
+                                        width={120}
+                                        height={120}
                                         className={classes.logoImage}
                                         unoptimized
                                     />
@@ -35,8 +35,8 @@ export function Footer() {
                                     <Text className={classes.phoneNumber}>0981824770</Text>
 
                                     <Group gap="sm" className={classes.socialLinks}>
-                                        <Link href="#" className={classes.socialLink}>Zalo</Link>
-                                        <Link href="#" className={classes.socialLink}>Messenger</Link>
+                                        <Anchor href="https://zalo.me/0981824770" target="_blank" className={classes.socialLink}>Zalo</Anchor>
+                                        <Anchor href="#" target="_blank" className={classes.socialLink}>Messenger</Anchor>
                                     </Group>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@ export function Footer() {
 
                 {/* DÒNG BẢN QUYỀN (COPYRIGHT) */}
                 <div className={classes.copyright}>
-                    <Text size="md" style={{ color: 'inherit' }}>
+                    <Text size="md" style={{ color: 'inherit' }} className={classes.copyrightText}>
                         <span className={classes.brandName}>Jenahair</span> © 2026 by VinaUp
                     </Text>
                 </div>

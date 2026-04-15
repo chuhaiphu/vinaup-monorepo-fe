@@ -1,7 +1,7 @@
 import { Container, Stack } from '@mantine/core';
-import { DiaryGrid } from '@/components/diary-grid/diary-grid';
 import { DiaryPost } from '@/mocks/salon-diary';
 import classes from './salon-diary.module.scss';
+import { OverlayCardGrid } from '../../../../../packages/ui/src/components/landing/primitives/overlay-card-grid/overlay-card-grid';
 
 export interface SalonDiaryProps {
     posts: DiaryPost[];
@@ -23,7 +23,10 @@ export function SalonDiary({ posts }: Readonly<SalonDiaryProps>) {
                     </div>
 
                     {/* Phần Grid/Carousel hiển thị bài viết */}
-                    <DiaryGrid posts={posts} />
+                    <OverlayCardGrid
+                        items={posts}
+                        maxItems={8}
+                    />
 
                     <a href="#" className={classes.seeMore}>
                         Xem thêm

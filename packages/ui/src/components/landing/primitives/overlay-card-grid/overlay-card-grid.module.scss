@@ -9,13 +9,13 @@
 .carouselViewport {
     margin: -1.5rem -0.5rem;
     padding: 1.5rem 0.5rem;
-    transform: translateZ(0); 
+    transform: translateZ(0);
 }
 
 .overlayCardTitle {
     font-family: var(--font-merriweather, serif);
     color: #FFFFFF;
-    font-size: clamp(1rem, 3vw, 1.1rem); 
+    font-size: clamp(1rem, 3vw, 1.1rem);
     font-weight: 700;
     line-height: 1.2;
     margin: 0 0 0.5rem 0;
