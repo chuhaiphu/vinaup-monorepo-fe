@@ -11,6 +11,7 @@ import { MOCK_SLIDES } from '@/mocks/mock-slides';
 import { MOCK_DIARY_POSTS } from '@/mocks/salon-diary';
 import { CommitmentAndMedia } from '@/components/commitment-and-media/commitment-and-media';
 import classes from './page.module.scss';
+import { MOCK_MEDIA_DATA } from '@/mocks/commitment-media';
 
 const PARTNER_BRANDS = ['Milbon', 'ATS', 'L\u2019Or\u00e9al', 'Olaplex', 'K\u00e9rastase'];
 
@@ -40,7 +41,7 @@ export default function Home() {
 
         <SalonDiary posts={MOCK_DIARY_POSTS} />
 
-        <CommitmentAndMedia />
+        <CommitmentAndMedia {...MOCK_MEDIA_DATA} />
 
       </Stack>
     </main>

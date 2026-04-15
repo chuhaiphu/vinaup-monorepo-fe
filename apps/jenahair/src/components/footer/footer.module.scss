@@ -1,45 +1,40 @@
-// footer.module.scss
 .footerWrapper {
     background-color: transparent;
-    padding-top: 2rem;
-    padding-bottom: 1.5rem;
+    margin-top: 2rem;
 }
 
 .footerContainer {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
 }
 
-/* --- THANH CHÍNH FOOTER MÀU XÁM --- */
 .mainFooter {
-    background-color: #929B84;
+    background-color: rgba(255, 255, 255, 0.4);
     border-radius: 16px;
-    padding: 2rem 3rem;
+    padding: 1.5rem 1rem;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-
-    @media (max-width: 768px) {
-        padding: 2rem 1.5rem;
-    }
 }
 
-/* --- CỘT TRÁI: LIÊN HỆ --- */
 .contactBlock {
     display: flex;
     align-items: center;
-    gap: 2rem;
-
-    @media (max-width: 768px) {
-        gap: 1rem;
-    }
+    gap: 1rem;
 }
 
 .logoWrapper {
-    flex-shrink: 0; /* Ngăn không cho logo bị bóp nhỏ */
+    flex-shrink: 0;
 }
 
 .logoImage {
     object-fit: contain;
+    width: 120px;
+    height: 120px;
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+        width: 80px;
+        height: 80px;
+    }
 }
 
 .contactInfo {
@@ -50,22 +45,18 @@
 
 .contactLabel {
     font-family: var(--font-inter, 'Inter', sans-serif);
-    color: #2F3323;
-    font-size: 1.1rem;
+    color: var(--vinaup-black, #121212);
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
 }
 
 .phoneNumber {
     font-family: var(--font-inter, 'Inter', sans-serif);
-    color: #4C593C;
-    font-size: 2.25rem;
+    color: var(--vinaup-dark-green);
+    font-size: clamp(1.5rem, 6vw, 3.5rem);
     font-weight: 800;
     line-height: 1.2;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+    text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.5);
     letter-spacing: 1px;
-}
-
-.socialLinks {
-    margin-top: 0.25rem;
 }
 
 .socialLink {
@@ -78,20 +69,18 @@
     transition: color 0.2s ease;
 
     &:hover {
-        color: var(--vinaup-amber, #F16406);
+        color: #0A4FA8;
+        text-decoration: underline;
     }
 }
 
-
-/* --- CỘT PHẢI: GIỜ LÀM VIỆC --- */
 .hoursBlock {
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* PC căn phải */
+    align-items: flex-end;
     gap: 0.25rem;
 
     @media (max-width: 768px) {
-        align-items: flex-end; /* Mobile căn phải / giữa */
         text-align: right;
         margin-top: 0;
         padding-top: 0;
@@ -100,36 +89,43 @@
 
 .hoursLabel {
     font-family: var(--font-inter, 'Inter', sans-serif);
-    color: #2F3323;
-    font-size: 1.1rem;
+    color: var(--vinaup-black, #121212);
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
 }
 
 .hoursTime {
     font-family: var(--font-inter, 'Inter', sans-serif);
-    color: #4C593C;
-    font-size: 2.25rem;
+    color: var(--vinaup-dark-green);
+    font-size: clamp(1.5rem, 6vw, 3.5rem);
     font-weight: 800;
     line-height: 1.1;
-    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.4);
+    text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.5);
     letter-spacing: 1px;
 }
 
 .hoursDays {
     font-family: var(--font-inter, 'Inter', sans-serif);
-    color: #2F3323;
-    font-size: 1.1rem;
+    color: var(--vinaup-black, #121212);
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
 }
 
-
-/* --- COPYRIGHT --- */
 .copyright {
     text-align: center;
-    margin-top: 0.5rem;
+    padding: 2rem 0;
+    color: #ffffff;
+
+    @media (max-width: 768px) {
+        padding: 1.5rem 0;
+    }
+}
+
+.copyrightText {
+    font-family: var(--font-inter, 'Inter', sans-serif);
+    font-size: clamp(1rem, 2vw, 1.25rem);
     color: #ffffff;
 }
 
 .brandName {
     color: var(--vinaup-amber, #F16406);
-    font-family: var(--font-inter, 'Inter', sans-serif);
     font-weight: 700;
 }
