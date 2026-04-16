@@ -23,3 +23,4 @@ export * from './primitives/section-header/section-header';
 export * from './primitives/split-section-header/split-section-header';
 export * from './primitives/recaptcha-enterprise/recaptcha-enterprise';
 export * from './primitives/skeleton/skeleton';
+export * from './primitives/actions/copy-to-clipboard';

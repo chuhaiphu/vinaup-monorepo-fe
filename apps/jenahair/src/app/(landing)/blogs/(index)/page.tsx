@@ -21,8 +21,7 @@ async function BlogPageContent({
 }) {
   const queryParams = await searchParams;
   const blogsResponse = await getAllBlogsActionPublic();
-  // const blogsData = blogsResponse.data || [];
-  const blogsData: IBlogResponse[] = [];
+  const blogsData = blogsResponse.data || [];
 
   return <BlogGrid queryParams={queryParams} blogsData={blogsData} />;
 }

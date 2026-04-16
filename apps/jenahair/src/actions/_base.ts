@@ -1,24 +1,25 @@
-import { ActionResponse, HttpResponse } from "@/interfaces/_base-interface";
-import { unstable_rethrow } from "next/navigation";
+import { ActionResponse, HttpResponse } from '@/interfaces/_base-interface';
+import { unstable_rethrow } from 'next/navigation';
 
 const isSuccessStatusCode = (statusCode: number | undefined) => {
   if (!statusCode) return false;
   return statusCode >= 200 && statusCode < 300;
-}
+};
 
 /**
-* API Executor that handles delay and returns ActionResponse
-* @param fn - Async function that returns the data or void
-*/
+ * API Executor that handles delay and returns ActionResponse
+ * @param fn - Async function that returns the data or void
+ */
 export async function executeApi<T>(
   fn: () => Promise<HttpResponse<T>>,
   options?: {
-    delay?: boolean,
-    delayMs?: number,
+    delay?: boolean;
+    delayMs?: number;
   }
 ): Promise<ActionResponse<T>> {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   if (options?.delay) {
-    await new Promise(resolve => setTimeout(resolve, options.delayMs || 0));
+    await new Promise((resolve) => setTimeout(resolve, options.delayMs || 0));
   }
 
   try {
@@ -27,12 +28,12 @@ export async function executeApi<T>(
       return {
         success: false,
         error: httpResponse.error + ' - ' + httpResponse.message,
-      }
+      };
     }
     return {
       success: true,
       data: httpResponse.data,
-    }
+    };
   } catch (error: unknown) {
     unstable_rethrow(error);
     return {

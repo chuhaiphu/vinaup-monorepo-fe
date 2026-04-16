@@ -112,7 +112,7 @@ export function MediaGrid({
       </Group>
 
       <Grid
-        gutter="md"
+        gap={'md'}
         classNames={classNames?.grid}
       >
         {paginatedImages.map((image) => {

@@ -5,9 +5,7 @@ import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
 import Highlight from '@tiptap/extension-highlight';
-import Underline from '@tiptap/extension-underline';
 import TextAlign from '@tiptap/extension-text-align';
-import Link from '@tiptap/extension-link';
 import classes from './text-editor.module.scss';
 
 interface RichTextEditorProps {
@@ -16,7 +14,11 @@ interface RichTextEditorProps {
   placeholder?: string;
 }
 
-export function TextEditor({ content = '', onChange, placeholder }: RichTextEditorProps) {
+export function TextEditor({
+  content = '',
+  onChange,
+  placeholder,
+}: RichTextEditorProps) {
   const editor = useEditor({
     immediatelyRender: false,
     shouldRerenderOnTransaction: true,
@@ -24,8 +26,6 @@ export function TextEditor({ content = '', onChange, placeholder }: RichTextEdit
       StarterKit,
       Placeholder.configure({ placeholder: placeholder || 'This is placeholder' }),
       Highlight,
-      Underline,
-      Link,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
     ],
     content,
@@ -35,9 +35,13 @@ export function TextEditor({ content = '', onChange, placeholder }: RichTextEdit
   });
 
   return (
-    <RichTextEditor editor={editor} variant="subtle" classNames={{
-      content: classes.editorContent,
-    }}>
+    <RichTextEditor
+      editor={editor}
+      variant="subtle"
+      classNames={{
+        content: classes.editorContent,
+      }}
+    >
       <RichTextEditor.Toolbar sticky stickyOffset="56px">
         <RichTextEditor.ControlsGroup>
           <RichTextEditor.H1 />
