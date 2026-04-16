@@ -2,13 +2,13 @@ import {
   getAllBlogsActionPublic,
   getBlogByEndpointActionPublic,
 } from '@/actions/blog-action';
-import { Grid, GridCol, Group, Paper, Stack, Text } from '@mantine/core';
-import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
-import classes from './page.module.scss';
+import { Container, Grid, GridCol, Group, Paper, Stack, Text } from '@mantine/core';
 import {
-  SectionCarouselSlide,
-  SectionCarousel,
-} from '@vinaup/ui/landing';
+  VinaupLocationIcon as LocationIcon,
+  VinaupHomeIcon,
+} from '@vinaup/ui/cores';
+import classes from './page.module.scss';
+import { SectionCarouselSlide, SectionCarousel } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import SocialTab from '@/components/primitives/social-tab/social-tab';
 import IncrementView from '@/components/primitives/social-tab/increment-view';
@@ -82,17 +82,10 @@ export default async function BlogDetailPage({
     notFound();
   }
   const blogData = blogResponse.data;
-  const additionalImageSlides: SectionCarouselSlide[] = blogData.additionalImageUrls.map(
-    (url) => ({
+  const additionalImageSlides: SectionCarouselSlide[] =
+    blogData.additionalImageUrls.map((url) => ({
       src: url,
-    })
-  );
-
-  const staticServiceSlides: SectionCarouselSlide[] = SERVICE_ITEMS.map((item) => ({
-    src: item.imageUrl,
-    titleMain: item.name,
-    href: item.endpoint,
-  }));
+    }));
 
   const renderAdditionalImagesCarousel = () => {
     if (additionalImageSlides.length === 0) {
@@ -119,19 +112,7 @@ export default async function BlogDetailPage({
       />
     );
   };
-
-  // const renderHTMLDescription = (htmlDescription: string | undefined | null) => {
-  //   if (!htmlDescription || htmlDescription.trim() === '' || htmlDescription.trim() === '<p></p>') {
-  //     return <></>
-  //   }
-  //   return (
-  //     <Stack gap={2}>
-  //       <Text size="xl" fw={'bold'} c={'var(--vinaup-yellow)'}>Overview:</Text>
-  //       <div dangerouslySetInnerHTML={{ __html: htmlDescription }} className={classes.htmlDescription}></div>
-  //     </Stack>
-  //   );
-  // }
-
+  console.log('blogData', blogData);
   const renderHTMLContent = (htmlContent: string | undefined | null) => {
     if (
       !htmlContent ||
@@ -190,129 +171,22 @@ export default async function BlogDetailPage({
   const currentUrl = `https://jenahair.com/blogs/${endpoint}`;
 
   return (
-    <div className={classes.blogDetailPage}>
+    <main className={classes.blogDetailPage}>
       <IncrementView blogId={blogData.id} />
-      <Grid
-        mb={'lg'}
-        classNames={{
-          root: classes.topInfo,
-        }}
-      >
-        <GridCol span={12}>
-          <Stack gap={'sm'}>
+      <section className={classes.blogDetailHeader}>
+        <Container size={'lg'} className={classes.blogDetailHeaderContainer}>
+          <Group gap={12}>
+            <VinaupHomeIcon />
             <Text
-              c={'#00E1FF'}
-              component="h2"
               classNames={{
                 root: classes.blogTitle,
               }}
             >
               {blogData.title}
             </Text>
-            <SocialTab
-              blogId={blogData.id}
-              likes={blogData.likes}
-              views={blogData.views}
-              url={currentUrl}
-            />
-          </Stack>
-        </GridCol>
-      </Grid>
-      <Grid
-        gap={'xl'}
-        classNames={{
-          root: classes.mainContent,
-        }}
-      >
-        <GridCol
-          span={{ base: 12, sm: 12, md: 8, lg: 8, xl: 8 }}
-          classNames={{
-            col: classes.leftCol,
-          }}
-        >
-          {blogData.additionalImagesPosition === 'top' &&
-            renderAdditionalImagesCarousel()}
-          {blogData.videoPosition === 'top' &&
-            renderVideoSection(
-              blogData.videoUrl || undefined,
-              blogData.videoThumbnailUrl || undefined,
-              blogData.title
-            )}
-          {/* {renderHTMLDescription(blogData.description)} */}
-          {renderHTMLContent(blogData.content)}
-          {blogData.additionalImagesPosition === 'bottom' &&
-            renderAdditionalImagesCarousel()}
-          {blogData.videoPosition === 'bottom' &&
-            renderVideoSection(
-              blogData.videoUrl || undefined,
-              blogData.videoThumbnailUrl || undefined,
-              blogData.title
-            )}
-          {renderDestinationAndCategory()}
-        </GridCol>
-        <GridCol
-          span={{ base: 12, sm: 12, md: 4, lg: 4, xl: 4 }}
-          classNames={{
-            col: classes.rightCol,
-          }}
-        >
-          <div className={classes.mainImageWrapper}>
-            <Image
-              className={classes.mainImage}
-              src={blogData.mainImageUrl || '/images/image-placeholder.png'}
-              alt={blogData.title || ''}
-              fill
-            />
-          </div>
-          <Paper
-            shadow="0"
-            bg={'transparent'}
-            mb={'sm'}
-            pt={'sm'}
-            pb={'sm'}
-            pl={'md'}
-            pr={'md'}
-            classNames={{
-              root: classes.whyBox,
-            }}
-          >
-            <Stack gap={'sm'}>
-              <Text
-                classNames={{ root: classes.title }}
-                c={'#FCBE11'}
-                fz={24}
-                fw={'bold'}
-              >
-                Why you should choose us?
-              </Text>
-              <Group wrap="nowrap">
-                <RiCheckDoubleFill size={32} color="#FCBE11" />
-                <Text classNames={{ root: classes.subTitle }} c={'#FCBE11'} fz={18}>
-                  We have Vietnam tourism license
-                </Text>
-              </Group>
-              <Group wrap="nowrap">
-                <RiCheckDoubleFill size={32} color="#FCBE11" />
-                <Text classNames={{ root: classes.subTitle }} c={'#FCBE11'} fz={18}>
-                  We have good agencies
-                </Text>
-              </Group>
-              <Group wrap="nowrap">
-                <RiCheckDoubleFill size={32} color="#FCBE11" />
-                <Text classNames={{ root: classes.subTitle }} c={'#FCBE11'} fz={18}>
-                  We try make you happy
-                </Text>
-              </Group>
-            </Stack>
-          </Paper>
-          <SectionCarousel
-            slides={staticServiceSlides}
-            height={400}
-            orientation="vertical"
-            loop={true}
-          />
-        </GridCol>
-      </Grid>
-    </div>
+          </Group>
+        </Container>
+      </section>
+    </main>
   );
 }

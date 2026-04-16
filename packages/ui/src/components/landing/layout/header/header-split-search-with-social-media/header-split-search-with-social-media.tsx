@@ -22,7 +22,7 @@ export function HeaderSplitSearchWithSocialMedia({
 }: Readonly<HeaderSplitSearchWithSocialMediaProps>) {
   return (
     <header className={classes.headerWrapper}>
-      <Container size={1232} h="100%">
+      <Container size={'xl'} h="100%">
         <Group
           h="100%"
           w="100%" // Đảm bảo bung rộng 100% để space-between hoạt động
@@ -65,7 +65,10 @@ export function HeaderSplitSearchWithSocialMedia({
               ))}
             </Group>
 
-            <NavigationControl navLinks={navLinks} iconSvg={<MenuSquareIcon size={32} fill="var(--vinaup-amber)" />} />
+            <NavigationControl
+              navLinks={navLinks}
+              iconSvg={<MenuSquareIcon size={32} fill="var(--vinaup-amber)" />}
+            />
           </Group>
         </Group>
       </Container>

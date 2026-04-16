@@ -3,8 +3,6 @@ import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/carousel/styles.css';
 import '@mantine/tiptap/styles.css';
-
-import { Inter, Merriweather, Open_Sans } from 'next/font/google';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 
 import './globals.scss';
@@ -32,34 +30,15 @@ export const metadata: Metadata = {
   },
 };
 
-const inter = Inter({
-  subsets: ['latin-ext'],
-  variable: '--font-inter',
-});
-
-const merriweather = Merriweather({
-  variable: '--font-merriweather',
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-});
-
-const openSans = Open_Sans({
-  variable: '--font-open-sans',
-  subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500', '600', '700'],
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" {...mantineHtmlProps}
-
-      className={`${inter.variable} ${merriweather.variable} ${openSans.variable}`}>
+    <html lang="en" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body>
         <MantineConfigProvider>{children}</MantineConfigProvider>
       </body>
     </html>

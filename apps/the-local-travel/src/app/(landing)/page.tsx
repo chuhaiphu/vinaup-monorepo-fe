@@ -30,7 +30,7 @@ export default function Home() {
         <HeroContent />
       </HeroCarousel>
 
-      <Container size={1232} pt="3rem">
+      <Container size={'xl'} pt="3rem">
         <Stack gap="3rem">
           <SupplierSection data={SUPPLIER_DATA} />
           <TourTypes data={MOCK_TOUR_TYPES} />

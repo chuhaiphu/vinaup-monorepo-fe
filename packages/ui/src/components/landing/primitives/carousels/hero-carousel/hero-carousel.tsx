@@ -40,10 +40,12 @@ export function HeroCarousel({
   return (
     <Box
       className={classes.carouselWrapper}
-      style={{
-        '--carousel-height': height,
-        '--carousel-overlay-opacity': overlayOpacity
-      } as React.CSSProperties}
+      style={
+        {
+          '--carousel-height': height,
+          '--carousel-overlay-opacity': overlayOpacity,
+        } as React.CSSProperties
+      }
     >
       <Carousel
         height="100%"
@@ -77,10 +79,16 @@ export function HeroCarousel({
             {/* Vùng chứa Title và Description của mỗi slide */}
             {(slide.title || slide.description) && (
               <div className={classes.slideTextOverlay}>
-                <Container size={1232} w="100%">
+                <Container size={'xl'} w="100%">
                   <div className={classes.textContainer}>
-                    {slide.title && <h2 className={classes.slideTitle}>{slide.title}</h2>}
-                    {slide.description && <p className={classes.slideDescription}>{slide.description}</p>}
+                    {slide.title && (
+                      <h2 className={classes.slideTitle}>{slide.title}</h2>
+                    )}
+                    {slide.description && (
+                      <p className={classes.slideDescription}>
+                        {slide.description}
+                      </p>
+                    )}
                   </div>
                 </Container>
               </div>

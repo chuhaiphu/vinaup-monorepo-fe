@@ -7,12 +7,15 @@ import NavigationControl from '../../../primitives/navigation-control/navigation
 import { NavLinkItem, SocialLinkItem, HeaderProps } from '../types';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-export function HeaderCenteredLogo({ navLinks, socialLinks }: Readonly<HeaderProps>) {
+export function HeaderCenteredLogo({
+  navLinks,
+  socialLinks,
+}: Readonly<HeaderProps>) {
   return (
     <header className={classes.headerWrapper}>
       {/* HÀNG 1: Logo & Socials */}
       <div className={classes.topRow}>
-        <Container size={1232} h="100%">
+        <Container size={'xl'} h="100%">
           <Group justify="space-between" align="center" h="100%" wrap="nowrap">
             {/* BÊN TRÁI: Social Icons */}
             <Box className={classes.btnContainer} style={{ flex: 1 }}>
@@ -56,7 +59,10 @@ export function HeaderCenteredLogo({ navLinks, socialLinks }: Readonly<HeaderPro
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
 
-              <NavigationControl navLinks={navLinks} iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />} />
+              <NavigationControl
+                navLinks={navLinks}
+                iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />}
+              />
             </Group>
           </Group>
         </Container>
@@ -64,7 +70,7 @@ export function HeaderCenteredLogo({ navLinks, socialLinks }: Readonly<HeaderPro
 
       {/* HÀNG 2: Navigation */}
       <nav className={classes.bottomRow}>
-        <Container size={1232} h="100%" classNames={{ root: classes.navContainer }}>
+        <Container size={'xl'} h="100%" classNames={{ root: classes.navContainer }}>
           <Group
             gap={40}
             justify="center"

@@ -13,18 +13,24 @@ import { CommitmentAndMedia } from '@/components/commitment-and-media/commitment
 import classes from './page.module.scss';
 import { MOCK_MEDIA_DATA } from '@/mocks/commitment-media';
 
-const PARTNER_BRANDS = ['Milbon', 'ATS', 'L\u2019Or\u00e9al', 'Olaplex', 'K\u00e9rastase'];
+const PARTNER_BRANDS = [
+  'Milbon',
+  'ATS',
+  'L\u2019Or\u00e9al',
+  'Olaplex',
+  'K\u00e9rastase',
+];
 
 export default function Home() {
   return (
     <main>
       <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" />
 
-      <Container size={1232} pt="3rem">
+      <Container size={'xl'} pt="3rem">
         <BrandIntroduction />
       </Container>
 
-      <Stack gap="3rem" pt="3rem" >
+      <Stack gap="3rem" pt="3rem">
         <AutoScrollCarousel>
           {PARTNER_BRANDS.map((brand, index) => (
             <div key={index} className={classes.brandItem}>
@@ -42,7 +48,6 @@ export default function Home() {
         <SalonDiary posts={MOCK_DIARY_POSTS} />
 
         <CommitmentAndMedia {...MOCK_MEDIA_DATA} />
-
       </Stack>
     </main>
   );
