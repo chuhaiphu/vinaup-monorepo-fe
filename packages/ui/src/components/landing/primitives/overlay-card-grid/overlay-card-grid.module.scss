@@ -1,29 +1,28 @@
 .carouselContainer {
-    cursor: grab;
+  cursor: grab;
 
-    &:active {
-        cursor: grabbing;
-    }
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .carouselViewport {
-    margin: -1.5rem -0.5rem;
-    padding: 1.5rem 0.5rem;
-    transform: translateZ(0);
+  margin: -1.5rem -0.5rem;
+  padding: 1.5rem 0.5rem;
+  transform: translateZ(0);
 }
 
 .overlayCardTitle {
-    font-family: var(--font-merriweather, serif);
-    color: #FFFFFF;
-    font-size: clamp(1rem, 3vw, 1.1rem);
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 0.5rem 0;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .overlayCardDescription {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
-    line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  line-height: 1.5;
 }

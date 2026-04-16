@@ -23,7 +23,7 @@ const PARTNER_BRANDS = [
 
 export default function Home() {
   return (
-    <main>
+    <div>
       <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" />
 
       <Container size={'xl'} pt="3rem">
@@ -49,6 +49,6 @@ export default function Home() {
 
         <CommitmentAndMedia {...MOCK_MEDIA_DATA} />
       </Stack>
-    </main>
+    </div>
   );
 }

@@ -112,7 +112,7 @@ export default async function BlogDetailPage({
       />
     );
   };
-  console.log('blogData', blogData);
+
   const renderHTMLContent = (htmlContent: string | undefined | null) => {
     if (
       !htmlContent ||
@@ -171,7 +171,7 @@ export default async function BlogDetailPage({
   const currentUrl = `https://jenahair.com/blogs/${endpoint}`;
 
   return (
-    <main className={classes.blogDetailPage}>
+    <div className={classes.blogDetailPage}>
       <IncrementView blogId={blogData.id} />
       <section className={classes.blogDetailHeader}>
         <Container size={'lg'} className={classes.blogDetailHeaderContainer}>
@@ -187,6 +187,6 @@ export default async function BlogDetailPage({
           </Group>
         </Container>
       </section>
-    </main>
+    </div>
   );
 }

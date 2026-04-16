@@ -10,6 +10,7 @@ import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
 import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
 import { HeaderSplitSearchWithSocialMedia } from '@vinaup/ui/landing';
 import { Footer } from '@/components/footer/footer';
+import { merriweather } from '../font';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -112,13 +113,15 @@ export default async function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={classes.landingLayout}>
-      <Suspense fallback={null}>
-        {/* <MaintenanceGuard /> */}
-      </Suspense>
-      <HeaderSplitSearchWithSocialMedia navLinks={NAV_LINKS} socialLinks={SOCIAL_LINKS} logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />} />
+    <main className={`${classes.landingLayout} ${merriweather.className}`}>
+      <Suspense fallback={null}>{/* <MaintenanceGuard /> */}</Suspense>
+      <HeaderSplitSearchWithSocialMedia
+        navLinks={NAV_LINKS}
+        socialLinks={SOCIAL_LINKS}
+        logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
+      />
       {children}
       <Footer />
-    </div>
+    </main>
   );
 }
