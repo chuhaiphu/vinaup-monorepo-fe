@@ -1,78 +1,74 @@
 .wrapper {
-    text-align: center;
+  text-align: center;
 }
 
 .inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .heading {
-    font-family: var(--font-merriweather, serif);
-    font-size: clamp(3.5rem, 15vw, 16.25rem);
-    line-height: 0.9;
-    margin-bottom: 1.5rem;
-    white-space: nowrap;
-    letter-spacing: -0.02em;
+  font-size: clamp(3.5rem, 15vw, 16.25rem);
+  line-height: 0.9;
+  margin-bottom: 1.5rem;
+  white-space: nowrap;
+  letter-spacing: -0.02em;
 
-    // GỌI ANIMATION TẠI ĐÂY
-    // 4s: Thời gian hoàn thành 1 chu kỳ (rất chậm và mượt)
-    // ease-in-out: Sáng lên từ từ rồi mờ đi từ từ
-    // infinite: Lặp lại vô hạn
-    animation: breathingGlow 4s ease-in-out infinite;
+  // GỌI ANIMATION TẠI ĐÂY
+  // 4s: Thời gian hoàn thành 1 chu kỳ (rất chậm và mượt)
+  // ease-in-out: Sáng lên từ từ rồi mờ đi từ từ
+  // infinite: Lặp lại vô hạn
+  animation: breathingGlow 4s ease-in-out infinite;
 
-    @media (max-width: 768px) {
-        margin-bottom: 1rem;
-    }
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 }
 
 .jena {
-    color: var(--vinaup-mint);
-    padding-right: 1.5rem; // Chuyển từ TSX sang đây
+  color: var(--vinaup-mint);
+  padding-right: 1.5rem; // Chuyển từ TSX sang đây
 
-    @media (max-width: 768px) {
-        padding-right: 0.5rem; // Trên điện thoại nên thu hẹp khoảng cách lại một chút
-    }
+  @media (max-width: 768px) {
+    padding-right: 0.5rem; // Trên điện thoại nên thu hẹp khoảng cách lại một chút
+  }
 }
 
 .hair {
-    color: var(--vinaup-amber);
+  color: var(--vinaup-amber);
 }
 
 .description {
-    font-family: var(--font-merriweather, serif);
-    color: #FFFFFF;
-    font-size: clamp(1rem, 2vw, 1.375rem);
-    max-width: 900px;
-    margin: 0 auto;
-    line-height: 1.7;
-    opacity: 0.9;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: clamp(1rem, 2vw, 1.375rem);
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.7;
+  opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
-    @media (max-width: 768px) {
-        padding: 0 1rem;
-        line-height: 1.5;
-    }
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+    line-height: 1.5;
+  }
 }
 
 // --- KHAI BÁO ANIMATION NHẤP NHÁY CHẬM ---
 @keyframes breathingGlow {
+  0%,
+  100% {
+    text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  }
 
-    0%,
-    100% {
-        text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    50% {
-        text-shadow:
-            0px 4px 12px rgba(0, 0, 0, 0.5),
-            /* Bóng đen nền */
-            0px 0px 10px rgba(255, 255, 255, 0.8),
-            /* Lõi chói: thu lại chỉ còn 10px nhưng đậm (0.8) */
-            0px 0px 20px rgba(255, 255, 255, 0.4);
-        /* Viền sáng: ôm sát chữ ở mức 20px */
-        /* Đã cắt bỏ hoàn toàn các lớp 30px và 50px để không bị lan xa */
-    }
+  50% {
+    text-shadow:
+      0px 4px 12px rgba(0, 0, 0, 0.5),
+      /* Bóng đen nền */ 0px 0px 10px rgba(255, 255, 255, 0.8),
+      /* Lõi chói: thu lại chỉ còn 10px nhưng đậm (0.8) */ 0px 0px 20px
+        rgba(255, 255, 255, 0.4);
+    /* Viền sáng: ôm sát chữ ở mức 20px */
+    /* Đã cắt bỏ hoàn toàn các lớp 30px và 50px để không bị lan xa */
+  }
 }
