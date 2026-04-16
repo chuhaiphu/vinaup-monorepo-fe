@@ -3,6 +3,9 @@ import BlogGrid from '@/components/grids/blog-grid/blog-grid';
 import { Group, Stack, Loader, Box, Container, Text } from '@mantine/core';
 import classes from './page.module.scss';
 import { Suspense } from 'react';
+import { IBlogResponse } from '@/interfaces/blog-interface';
+import { MOCK_BLOGS_DATA } from '@/mocks/mock-blogs';
+import { VideoSection } from '@vinaup/ui/landing';
 
 const MOCK_TAGS = ['Tẩy tóc', 'Uốn tóc Xù Hippi', 'Tẩy tóc', 'Uốn tóc Xù Hippi', 'Tẩy tóc', 'Uốn tóc Xù Hippi'];
 
@@ -13,7 +16,8 @@ async function BlogPageContent({
 }) {
   const queryParams = await searchParams;
   const blogsResponse = await getAllBlogsActionPublic();
-  const blogsData = blogsResponse.data || [];
+  // const blogsData = blogsResponse.data || [];
+  const blogsData: IBlogResponse[] = MOCK_BLOGS_DATA;
 
   return <BlogGrid queryParams={queryParams} blogsData={blogsData} />;
 }
@@ -54,10 +58,19 @@ export default async function BlogPage({
 
         {/* --- 3. BLOG GRID --- */}
         <Suspense fallback={<Loader size={64} />}>
-          <BlogPageContent searchParams={searchParams} />
+          <Container size="xl">
+            <BlogPageContent searchParams={searchParams} />
+          </Container>
         </Suspense>
 
         {/* --- 4. YOUTUBE --- */}
+        <Container size="xl">
+          <VideoSection
+            url="https://www.youtube.com/watch?v=0VdBHRVy4Cw"
+            title="Video Title"
+            height={480}
+          />
+        </Container>
       </main>
     </>
   );
