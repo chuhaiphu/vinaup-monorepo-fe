@@ -302,7 +302,7 @@ function AdminDiaryDetailPageContentInner({
   const seoContent = content ? stripHtmlAndTruncate(content, 300) : '';
 
   const handleCopyLink = () => {
-    const link = `https://jenahair.com/diaries/${currentDiaryData.endpoint}`;
+    const link = `https://jenahair.com/nhat-ky/${currentDiaryData.endpoint}`;
     navigator.clipboard.writeText(link);
     notifications.show({
       title: 'Link copied',
@@ -314,7 +314,7 @@ function AdminDiaryDetailPageContentInner({
   };
 
   const handleViewLink = () => {
-    const link = `https://jenahair.com/diaries/${currentDiaryData.endpoint}`;
+    const link = `https://jenahair.com/nhat-ky/${currentDiaryData.endpoint}`;
     window.open(link, '_blank');
   };
 
@@ -527,7 +527,7 @@ function AdminDiaryDetailPageContentInner({
                 />
                 <Group gap={'xs'} justify="space-between">
                   <Text size="md">
-                    URL: jenahair.com/diaries/{currentDiaryData.endpoint}
+                    URL: jenahair.com/nhat-ky/{currentDiaryData.endpoint}
                   </Text>
                   <Group>
                     <Text
@@ -666,7 +666,7 @@ function AdminDiaryDetailPageContentInner({
                 <Stack gap={4}>
                   <Text
                     component="a"
-                    href={`https://jenahair.com/diaries/${currentDiaryData.endpoint}`}
+                    href={`https://jenahair.com/nhat-ky/${currentDiaryData.endpoint}`}
                     target="_blank"
                     size="lg"
                     fw={500}
@@ -676,12 +676,12 @@ function AdminDiaryDetailPageContentInner({
                   </Text>
                   <Text
                     component="a"
-                    href={`https://jenahair.com/diaries/${currentDiaryData.endpoint}`}
+                    href={`https://jenahair.com/nhat-ky/${currentDiaryData.endpoint}`}
                     target="_blank"
                     size="md"
                     c={'var(--vinaup-blue-link)'}
                   >
-                    https://jenahair.com/diaries/{currentDiaryData.endpoint}
+                    https://jenahair.com/nhat-ky/{currentDiaryData.endpoint}
                   </Text>
                   <Text size="sm">
                     {dayjs(currentDiaryData.updatedAt).format('MMM DD, YYYY')}

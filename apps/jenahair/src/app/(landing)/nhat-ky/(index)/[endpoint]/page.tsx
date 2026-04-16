@@ -64,7 +64,7 @@ export async function generateMetadata({
         images: diary.mainImageUrl ? [diary.mainImageUrl] : [],
       },
       alternates: {
-        canonical: `https://jenahair.com/diary/${endpoint}`,
+        canonical: `https://jenahair.com/nhat-ky/${endpoint}`,
       },
     };
   }
@@ -85,7 +85,7 @@ export async function generateMetadata({
         images: category.mainImageUrl ? [category.mainImageUrl] : [],
       },
       alternates: {
-        canonical: `https://jenahair.com/diary/${endpoint}`,
+        canonical: `https://jenahair.com/nhat-ky/${endpoint}`,
       },
     };
   }

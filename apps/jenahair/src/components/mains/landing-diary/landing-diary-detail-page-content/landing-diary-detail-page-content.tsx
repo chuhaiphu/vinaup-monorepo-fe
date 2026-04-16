@@ -34,7 +34,7 @@ export default async function LandingDiaryDetailPageContent({
   }
 
   const diaryData = diaryResponse.data;
-  const currentUrl = `https://jenahair.com/diary/${endpoint}`;
+  const currentUrl = `https://jenahair.com/nhat-ky/${endpoint}`;
 
   const renderVideoSection = (
     videoUrl?: string,
@@ -170,20 +170,33 @@ export default async function LandingDiaryDetailPageContent({
           </Group>
         </Container>
       </section>
+      {diaryData.videoPosition === 'top' && diaryData.videoUrl && (
+        <section className={classes.diaryVideoSection}>
+          <Container size={'lg'} className={classes.diaryVideoSectionContainer}>
+            {renderVideoSection(
+              diaryData.videoUrl || undefined,
+              diaryData.videoThumbnailUrl || undefined,
+              diaryData.title || undefined
+            )}
+          </Container>
+        </section>
+      )}
       <section>
         <Container size={'lg'} className={classes.diaryDetailContentContainer}>
           {renderHTMLContent(diaryData.content)}
         </Container>
       </section>
-      <section className={classes.diaryVideoSection}>
-        <Container size={'lg'} className={classes.diaryVideoSectionContainer}>
-          {renderVideoSection(
-            diaryData.videoUrl || undefined,
-            diaryData.videoThumbnailUrl || undefined,
-            diaryData.title || undefined
-          )}
-        </Container>
-      </section>
+      {diaryData.videoPosition !== 'top' && diaryData.videoUrl && (
+        <section className={classes.diaryVideoSection}>
+          <Container size={'lg'} className={classes.diaryVideoSectionContainer}>
+            {renderVideoSection(
+              diaryData.videoUrl || undefined,
+              diaryData.videoThumbnailUrl || undefined,
+              diaryData.title || undefined
+            )}
+          </Container>
+        </section>
+      )}
       <section className={classes.diaryLocationSection}>
         <Container size={'lg'} className={classes.diaryLocationSectionContainer}>
           {renderDestinationAndCategory()}

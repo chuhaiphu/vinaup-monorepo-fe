@@ -40,7 +40,6 @@ function LoginForm() {
       router.push(callbackUrl as Route);
     } else {
       setError(result.error || 'Invalid email or password');
-      console.log(result);
       notifications.show({
         title: 'Login Failed',
         message: result.error || 'Invalid email or password',

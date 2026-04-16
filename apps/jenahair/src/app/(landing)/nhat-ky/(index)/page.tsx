@@ -42,13 +42,13 @@ export default async function DiaryIndexPage({
     <div className={classes.pageWrapper}>
       {/* --- 1. ORANGE HEADER --- */}
       <Box className={classes.orangeHeader}>
-        <Container size={1232}>
+        <Container size={'xl'}>
           <h1 className={classes.h1Title}>Title Page / Danh mục là H1</h1>
         </Container>
       </Box>
 
       {/* --- 2. INTRO SECTION --- */}
-      <Container size={1232} className={classes.introSection}>
+      <Container size={'xl'} className={classes.introSection}>
         <Stack gap="sm">
           <DiaryCategoryTags diaryCategories={diaryCategories} />
         </Stack>

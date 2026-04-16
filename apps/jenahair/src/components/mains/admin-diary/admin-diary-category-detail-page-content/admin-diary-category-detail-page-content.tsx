@@ -219,7 +219,7 @@ function AdminDiaryCategoryDetailPageContentInner({
   };
 
   const handleCopyLink = () => {
-    const link = `https://jenahair.com/diaries/${currentDiaryCategory.endpoint}`;
+    const link = `https://jenahair.com/nhat-ky/${currentDiaryCategory.endpoint}`;
     navigator.clipboard.writeText(link);
     notifications.show({
       title: 'Link copied',
@@ -229,7 +229,7 @@ function AdminDiaryCategoryDetailPageContentInner({
   };
 
   const handleViewLink = () => {
-    const link = `https://jenahair.com/diaries/${currentDiaryCategory.endpoint}`;
+    const link = `https://jenahair.com/nhat-ky/${currentDiaryCategory.endpoint}`;
     window.open(link, '_blank');
   };
 
@@ -327,7 +327,7 @@ function AdminDiaryCategoryDetailPageContentInner({
                 />
                 <Group gap={'xs'} justify="space-between">
                   <Text size="md">
-                    URL: jenahair.com/diaries/{currentDiaryCategory.endpoint}
+                    URL: jenahair.com/nhat-ky/{currentDiaryCategory.endpoint}
                   </Text>
                   <Group>
                     <Text

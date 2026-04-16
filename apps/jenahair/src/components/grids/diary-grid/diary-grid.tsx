@@ -90,7 +90,7 @@ export default function DiaryGrid({
       <Grid mt={'lg'} mb={'md'} gap="lg">
         {paginated.map((item) => (
           <GridCol span={{ base: 12, sm: 6, md: 3 }} key={item.id}>
-            <Link href={`/diary/${item.endpoint}` as Route} className={classes.cardLink}>
+            <Link href={`/nhat-ky/${item.endpoint}` as Route} className={classes.cardLink}>
               <DiaryItem item={item} />
             </Link>
           </GridCol>

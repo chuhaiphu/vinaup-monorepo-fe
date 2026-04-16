@@ -11,7 +11,7 @@ export default function LandingDiaryCategoryPageContentSkeleton() {
     <div className={classes.diaryCategoryPage}>
       {/* --- 1. ORANGE HEADER --- */}
       <Box className={classes.diaryCategoryHeader}>
-        <Container size={1232}>
+        <Container size={'xl'}>
           <Box style={{ width: '50%', margin: '0 auto' }} p={4} bg={'white'} bdrs={'md'}>
             <Skeleton
               height={36}
@@ -22,7 +22,7 @@ export default function LandingDiaryCategoryPageContentSkeleton() {
       </Box>
 
       {/* --- 2. INTRO SECTION --- */}
-      <Container size={1232} className={classes.diaryCategoryIntro}>
+      <Container size={'xl'} className={classes.diaryCategoryIntro}>
         <DiaryCategoryTagsSkeleton />
         <Stack gap="sm" mt={'sm'}>
           {DESCRIPTION_LINES.map((width, index) => (

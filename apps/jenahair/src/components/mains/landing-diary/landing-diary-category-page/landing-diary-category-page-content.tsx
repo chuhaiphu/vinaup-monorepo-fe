@@ -68,14 +68,22 @@ export default async function LandingDiaryCategoryPageContent({
     <div className={classes.diaryCategoryPage}>
       {/* --- 1. ORANGE HEADER --- */}
       <Box className={classes.diaryCategoryHeader}>
-        <Container size={1232}>
+        <Container size={'xl'}>
           <h1 className={classes.diaryCategoryTitle}>{category.title}</h1>
         </Container>
       </Box>
 
       {/* --- 2. INTRO SECTION --- */}
-      <Container size={1232} className={classes.diaryCategoryIntro}>
-        <DiaryCategoryTags diaryCategories={diaryCategories} />
+      <Container size={'xl'} className={classes.diaryCategoryIntro}>
+        <DiaryCategoryTags
+          diaryCategories={diaryCategories}
+          activeEndpoint={category.endpoint}
+        />
+        <Box mt={'sm'}>
+          {category.videoPosition === 'top' &&
+            renderVideoSection()
+          }
+        </Box>
         <Stack gap="sm" mt={'sm'}>
           {!isHtmlDescriptionEmpty(category.description) && (
             <div
@@ -85,10 +93,6 @@ export default async function LandingDiaryCategoryPageContent({
           )}
         </Stack>
       </Container>
-
-      {category.videoPosition === 'top' && (
-        <Container size="xl">{renderVideoSection()}</Container>
-      )}
 
       <Container size="xl">
         <DiaryGrid queryParams={queryParams} diaries={sortedDiaries} />
