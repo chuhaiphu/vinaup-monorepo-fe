@@ -18,7 +18,7 @@ export default function CreatePageAction() {
   const handleAddNewPage = async () => {
     setIsCreating(true);
     const newTitle = 'Untitled';
-    const endpoint = await generateUniqueEndpoint(newTitle, 'landing');
+    const endpoint = await generateUniqueEndpoint(newTitle, 'page');
 
     const response = await createPageActionPrivate({
       title: newTitle,

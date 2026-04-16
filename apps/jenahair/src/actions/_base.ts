@@ -17,7 +17,6 @@ export async function executeApi<T>(
     delayMs?: number;
   }
 ): Promise<ActionResponse<T>> {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   if (options?.delay) {
     await new Promise((resolve) => setTimeout(resolve, options.delayMs || 0));
   }

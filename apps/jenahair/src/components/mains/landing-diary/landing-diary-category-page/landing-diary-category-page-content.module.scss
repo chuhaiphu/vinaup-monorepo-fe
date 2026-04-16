@@ -1,0 +1,87 @@
+.diaryCategoryPage {
+  min-height: 100vh;
+
+  .diaryCategoryHeader {
+    background-color: var(--vinaup-amber, #f16406);
+    padding: 1.5rem 0;
+    text-align: center;
+
+    .diaryCategoryTitle {
+      color: #ffffff;
+      font-size: clamp(1.25rem, 4vw, 2rem);
+      margin: 0;
+      font-weight: 700;
+      text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  .diaryCategoryIntro {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .diaryCategoryDescription {
+    > * {
+      color: #ffffff;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      line-height: 2.2rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      line-height: 2.2rem;
+      font-weight: 700;
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      line-height: 2.2rem;
+    }
+
+    a {
+      color: var(--vinaup-amber);
+      text-decoration: none;
+    }
+
+    mark {
+      font-size: inherit;
+    }
+
+    hr {
+      border: 0.5px solid rgba(255, 255, 255, 0.5);
+    }
+
+    p {
+      line-height: 1.5rem;
+      margin-bottom: 0.75rem;
+      text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    p:empty {
+      padding: 0.25rem;
+    }
+
+    blockquote {
+      margin: 1.5rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    ul {
+      list-style-position: inside;
+    }
+
+    li > p {
+      display: inline;
+    }
+  }
+}

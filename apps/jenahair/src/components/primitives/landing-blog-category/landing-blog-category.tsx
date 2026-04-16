@@ -86,7 +86,7 @@ export default async function LandingBlogCategory({
           q: queryParams.q,
           destinations: queryParams.destinations,
         }}
-        blogsData={sortedBlogs}
+        blogs={sortedBlogs}
       />
       {category.videoPosition === 'bottom' &&
         renderVideoSection(

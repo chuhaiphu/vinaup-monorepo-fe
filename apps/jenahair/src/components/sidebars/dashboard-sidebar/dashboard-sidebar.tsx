@@ -65,6 +65,24 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
         ]
       },
       {
+        key: 'diary',
+        label: 'Diary',
+        path: '/adminup/diary',
+        defaultOpened: true,
+        childrens: [
+          {
+            key: 'all-diaries',
+            label: 'All Diaries',
+            path: '/adminup/diary',
+          },
+          {
+            key: 'diary-categories',
+            label: 'Diary Categories',
+            path: '/adminup/diary-category'
+          },
+        ]
+      },
+      {
         key: 'page',
         label: 'Pages',
         rightSection: <GoDot size={24} />,

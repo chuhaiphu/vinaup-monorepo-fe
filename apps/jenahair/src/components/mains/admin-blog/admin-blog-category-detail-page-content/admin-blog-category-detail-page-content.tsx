@@ -241,7 +241,7 @@ function AdminBlogCategoryDetailPageContentInner({
       if (title !== currentBlogCategory.title) {
         newEndpoint = await generateUniqueEndpoint(
           title,
-          'landing',
+          'blog-category',
           currentBlogCategory.id
         );
       }

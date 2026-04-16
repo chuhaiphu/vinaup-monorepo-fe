@@ -5,24 +5,25 @@ import BlogItem from './blog-item/blog-item';
 import Link from 'next/link';
 import classes from './blog-grid-content.module.scss';
 import { useState } from 'react';
+import { Route } from 'next';
 
 type BlogGridContentProps = {
-  blogsData: IBlogResponse[];
+  blogs: IBlogResponse[];
   pageSize?: number;
 };
 
 export default function BlogGridContent({
-  blogsData,
+  blogs,
   pageSize = 16,
 }: BlogGridContentProps) {
   const [page, setPage] = useState(1);
-  const total = blogsData.length;
+  const total = blogs.length;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
   const getPaginatedData = () => {
     const start = (page - 1) * pageSize;
     const end = start + pageSize;
-    return blogsData.slice(start, end);
+    return blogs.slice(start, end);
   };
 
   return (
@@ -30,7 +31,7 @@ export default function BlogGridContent({
       <Grid mt={'lg'} mb={'md'} gap="lg">
         {getPaginatedData().map((item) => (
           <GridCol span={{ base: 12, sm: 6, md: 3 }} key={item.id}>
-            <Link href={`/blogs/${item.endpoint}`} className={classes.cardLink}>
+            <Link href={`/blogs/${item.endpoint}` as Route} className={classes.cardLink}>
               <BlogItem item={item} />
             </Link>
           </GridCol>

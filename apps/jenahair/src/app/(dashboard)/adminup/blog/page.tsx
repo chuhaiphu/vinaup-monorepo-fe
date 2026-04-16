@@ -6,7 +6,7 @@ import CreateBlogAction from '@/components/mains/admin-blog/create-blog-action/c
 import { Suspense } from 'react';
 import BlogsTableSkeleton from '@/components/tables/blogs-table/blogs-table-skeleton';
 
-export default async function AdminBlogPage() {
+export default async function AdminBlogCategoryPage() {
   const blogsDataPromise = getAllBlogsActionPrivate().then((res) => {
     if (!res.success || !res.data) {
       return [];
@@ -15,7 +15,7 @@ export default async function AdminBlogPage() {
   });
 
   return (
-    <div className={classes.adminBlogPageRoot}>
+    <div className={classes.adminBlogCategoryPageRoot}>
       <Group className={classes.pageHeader} justify="space-between">
         <Text size="xl">Blog</Text>
         <Group gap="xs">

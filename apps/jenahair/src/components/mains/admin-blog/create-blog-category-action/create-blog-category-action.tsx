@@ -16,7 +16,7 @@ export default function CreateBlogCategoryAction() {
   const handleAddNewBlogCategory = async () => {
     setIsCreating(true);
     const newTitle = 'New Blog Category';
-    const endpoint = await generateUniqueEndpoint(newTitle, 'landing');
+    const endpoint = await generateUniqueEndpoint(newTitle, 'blog-category');
 
     const response = await createBlogCategoryActionPrivate({
       title: newTitle,

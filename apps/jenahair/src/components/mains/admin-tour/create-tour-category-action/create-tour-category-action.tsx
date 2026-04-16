@@ -16,7 +16,7 @@ export default function CreateTourCategoryAction() {
   const handleAddNewTourCategory = async () => {
     setIsCreating(true);
     const newTitle = 'New Tour Category';
-    const endpoint = await generateUniqueEndpoint(newTitle, 'landing');
+    const endpoint = await generateUniqueEndpoint(newTitle, 'tour-category');
 
     const response = await createTourCategoryActionPrivate({
       title: newTitle,

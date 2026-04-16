@@ -125,7 +125,7 @@ function AdminPageDetailPageContentInner({
   const handleAddNewPage = async () => {
     setIsCreating(true);
     const newTitle = 'Untitled';
-    const endpoint = await generateUniqueEndpoint(newTitle, 'landing');
+    const endpoint = await generateUniqueEndpoint(newTitle, 'page');
 
     const response = await createPageActionPrivate({
       title: newTitle,
@@ -301,13 +301,13 @@ function AdminPageDetailPageContentInner({
       ) {
         finalEndpoint = await generateUniqueEndpoint(
           title,
-          'landing',
+          'page',
           currentPageData.id
         );
       } else if (endpoint !== currentPageData.endpoint) {
         finalEndpoint = await generateUniqueEndpoint(
           endpoint,
-          'landing',
+          'page',
           currentPageData.id
         );
       }

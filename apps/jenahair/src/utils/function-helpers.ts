@@ -4,6 +4,9 @@ import { getTourCategoryByEndpointActionPublic } from '@/actions/tour-category-a
 import { getPageByEndpointActionPublic } from '@/actions/page-action';
 import { getBlogCategoryByEndpointActionPublic } from '@/actions/blog-category-action';
 import { getBlogByEndpointActionPublic } from '@/actions/blog-action';
+import { getDiaryByEndpointActionPublic } from '@/actions/diary-action';
+import { getDiaryCategoryByEndpointActionPublic } from '@/actions/diary-category-action';
+import { ActionResponse } from '@/interfaces/_base-interface';
 
 export * from '@vinaup/utils';
 
@@ -23,9 +26,44 @@ export const sanitizeEndpoint = (input: string): string => {
     .replace(/^-|-$/g, '');
 };
 
+export type EndpointModel =
+  | 'tour'
+  | 'tour-category'
+  | 'blog'
+  | 'blog-category'
+  | 'diary'
+  | 'diary-category'
+  | 'page';
+
+type EndpointChecker = (
+  endpoint: string
+) => Promise<ActionResponse<{ id: string } | null>>;
+
+const checkersByModel: Record<EndpointModel, EndpointChecker[]> = {
+  tour: [getTourByEndpointActionPublic, getTourCategoryByEndpointActionPublic],
+  'tour-category': [
+    getTourByEndpointActionPublic,
+    getTourCategoryByEndpointActionPublic,
+  ],
+  blog: [getBlogByEndpointActionPublic, getBlogCategoryByEndpointActionPublic],
+  'blog-category': [
+    getBlogByEndpointActionPublic,
+    getBlogCategoryByEndpointActionPublic,
+  ],
+  diary: [
+    getDiaryByEndpointActionPublic,
+    getDiaryCategoryByEndpointActionPublic,
+  ],
+  'diary-category': [
+    getDiaryByEndpointActionPublic,
+    getDiaryCategoryByEndpointActionPublic,
+  ],
+  page: [getPageByEndpointActionPublic],
+};
+
 export const generateUniqueEndpoint = async (
   title: string,
-  model: 'tour' | 'blog' | 'landing',
+  model: EndpointModel,
   currentModelId?: string
 ): Promise<string> => {
   let slugifiedTitle = '';
@@ -43,65 +81,21 @@ export const generateUniqueEndpoint = async (
     trim: true,
   });
 
+  const checkers = checkersByModel[model];
   let endpoint = baseEndpoint;
   let isUnique = false;
 
   while (!isUnique) {
-    if (model === 'tour') {
-      const existingTour = await getTourByEndpointActionPublic(endpoint);
-      const tourConflict =
-        existingTour.success &&
-        existingTour.data &&
-        existingTour.data.id !== currentModelId;
+    const results = await Promise.all(checkers.map((fn) => fn(endpoint)));
+    const hasConflict = results.some(
+      (res) => res.success && res.data && res.data.id !== currentModelId
+    );
 
-      if (tourConflict) {
-        const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-        endpoint = `${baseEndpoint}-${randomSuffix}`;
-      } else {
-        isUnique = true;
-      }
-    } else if (model === 'blog') {
-      const existingBlog = await getBlogByEndpointActionPublic(endpoint);
-      const blogConflict =
-        existingBlog.success &&
-        existingBlog.data &&
-        existingBlog.data.id !== currentModelId;
-
-      if (blogConflict) {
-        const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-        endpoint = `${baseEndpoint}-${randomSuffix}`;
-      } else {
-        isUnique = true;
-      }
+    if (hasConflict) {
+      const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+      endpoint = `${baseEndpoint}-${randomSuffix}`;
     } else {
-      const [existingTourCategory, existingPage, existingBlogCategory] =
-        await Promise.all([
-          getTourCategoryByEndpointActionPublic(endpoint),
-          getPageByEndpointActionPublic(endpoint),
-          getBlogCategoryByEndpointActionPublic(endpoint),
-        ]);
-
-      const categoryConflict =
-        existingTourCategory.success &&
-        existingTourCategory.data &&
-        existingTourCategory.data.id !== currentModelId;
-
-      const pageConflict =
-        existingPage.success &&
-        existingPage.data &&
-        existingPage.data.id !== currentModelId;
-
-      const blogCategoryConflict =
-        existingBlogCategory.success &&
-        existingBlogCategory.data &&
-        existingBlogCategory.data.id !== currentModelId;
-
-      if (categoryConflict || pageConflict || blogCategoryConflict) {
-        const randomSuffix = Math.floor(1000 + Math.random() * 9000);
-        endpoint = `${baseEndpoint}-${randomSuffix}`;
-      } else {
-        isUnique = true;
-      }
+      isUnique = true;
     }
   }
 

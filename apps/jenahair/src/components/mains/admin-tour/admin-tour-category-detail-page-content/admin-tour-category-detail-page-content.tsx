@@ -241,7 +241,7 @@ function AdminTourCategoryDetailPageContentInner({
       if (title !== currentTourCategory.title) {
         newEndpoint = await generateUniqueEndpoint(
           title,
-          'landing',
+          'tour-category',
           currentTourCategory.id
         );
       }
