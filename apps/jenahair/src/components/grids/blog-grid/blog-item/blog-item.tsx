@@ -4,19 +4,20 @@ import { IBlogResponse } from "@/interfaces/blog-interface";
 import dayjs from "dayjs";
 import { MdOutlineCalendarMonth } from "react-icons/md";
 import Image from "next/image";
-import { OverlayCard } from "@vinaup/ui/landing";
+import { VinaupHeartIcon, VinaupEyeIcon } from '@vinaup/ui/cores';
 
 interface BlogItemProps {
-  item: {
-    id: string;
-    title: string;
-    mainImageUrl: string | null;
-    description: string | null;
-    endpoint: string;
-    blogCategoryBlogs: IBlogResponse['blogCategoryBlogs'];
-    createdAt: Date;
-    createdBy: IBlogResponse['createdBy'];
-  };
+  // item: {
+  //   id: string;
+  //   title: string;
+  //   mainImageUrl: string | null;
+  //   description: string | null;
+  //   endpoint: string;
+  //   blogCategoryBlogs: IBlogResponse['blogCategoryBlogs'];
+  //   createdAt: Date;
+  //   createdBy: IBlogResponse['createdBy'];
+  // };
+  item: IBlogResponse;
 }
 
 export default function BlogItem({ item }: BlogItemProps) {
@@ -104,7 +105,36 @@ export default function BlogItem({ item }: BlogItemProps) {
   //   </Card>
 
   return (
-    <OverlayCard title={item.title} src={item.mainImageUrl || "/images/image-placeholder.png"} />
+    <div className={classes.blogCardWrapper}>
+      {/* KHỐI ẢNH BÊN TRÁI */}
+      <div className={classes.imageWrapper}>
+        <Image
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          src={item.mainImageUrl || "/images/image-placeholder.png"}
+          alt={item.title}
+          className={classes.image}
+        />
+      </div>
+
+      {/* KHỐI NỘI DUNG BÊN PHẢI */}
+      <div className={classes.content}>
+        <h3 className={classes.title} title={item.title}>
+          {item.title}
+        </h3>
+
+        <Group gap="1rem" className={classes.meta}>
+          <Group gap="0.5rem" align="center">
+            <VinaupHeartIcon fill="#99AB89" />
+            <span>{item.likes < 10 ? `0${item.likes}` : item.likes}</span>
+          </Group>
+          <Group gap="0.5rem" align="center">
+            <VinaupEyeIcon stroke="#99AB89" />
+            <span>{item.views < 10 ? `0${item.views}` : item.views}</span>
+          </Group>
+        </Group>
+      </div>
+    </div>
   )
 }
 

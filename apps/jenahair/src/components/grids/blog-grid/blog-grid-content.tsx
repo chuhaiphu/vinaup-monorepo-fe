@@ -30,7 +30,7 @@ export default function BlogGridContent({
     <>
       <Grid mt={'lg'} mb={'md'} gap="lg">
         {getPaginatedData().map((item) => (
-          <GridCol span={{ base: 12, sm: 6, md: 3 }} key={item.id}>
+          <GridCol span={{ base: 12, md: 6 }} key={item.id}>
             <Link href={`/blogs/${item.endpoint}` as Route} className={classes.cardLink}>
               <BlogItem item={item} />
             </Link>
