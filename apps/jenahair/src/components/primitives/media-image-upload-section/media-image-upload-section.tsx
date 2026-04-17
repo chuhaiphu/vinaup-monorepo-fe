@@ -53,7 +53,7 @@ export default function MediaImageUploadSection() {
     <MediaUpload
       folder="media"
       multiple={true}
-      maxSize={2 * 1024 * 1024} // 2MB
+      maxSize={5 * 1024 * 1024} // 5MB
       acceptedTypes={['image/png', 'image/jpeg', 'image/jpg', 'image/webp']}
       onUpload={handleUpload}
       onSave={handleSave}

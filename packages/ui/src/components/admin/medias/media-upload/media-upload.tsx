@@ -57,7 +57,7 @@ export function MediaUpload({
   onSave,
   onUploadSuccess,
   onUploadError,
-  maxSize = 2 * 1024 ** 2,
+  maxSize = 5 * 1024 ** 2,
   acceptedTypes = ['image/png', 'image/jpeg', 'image/jpg'],
   multiple = true,
   folder = 'media',
@@ -133,7 +133,7 @@ export function MediaUpload({
   const handleReject = (files: FileRejection[]) => {
     notifications.show({
       title: 'Files rejected',
-      message: `${files.length} file(s) were rejected. Please check file type and size (≤ 2MB).`,
+      message: `${files.length} file(s) were rejected. Please check file type and size (≤ 5MB).`,
       color: 'red',
     });
   };
