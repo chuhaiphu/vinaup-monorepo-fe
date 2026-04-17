@@ -37,7 +37,7 @@ export default async function DiaryIndexPage({
       {/* --- 1. ORANGE HEADER --- */}
       <Box className={classes.orangeHeader}>
         <Container size={'xl'}>
-          <h1 className={classes.h1Title}>Title Page / Danh mục là H1</h1>
+          <h1 className={classes.h1Title}>Tất cả Nhật ký</h1>
         </Container>
       </Box>
 

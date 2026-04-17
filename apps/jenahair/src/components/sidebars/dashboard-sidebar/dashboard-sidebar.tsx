@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import { AppShellNavbar, Text, Group } from '@mantine/core';
 import { NavItemProps } from './dashboard-nav/_props';
-import { VersionSection } from '@/components/primitives/version-section/version-section';
+import { VersionSection } from '@/components/sections/version-section/version-section';
 import { DashboardNav } from './dashboard-nav/dashboard-nav';
 import classes from './dashboard-sidebar.module.scss';
 import { GoDot, GoDotFill } from 'react-icons/go';

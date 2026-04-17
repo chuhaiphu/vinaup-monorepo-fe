@@ -15,12 +15,14 @@ type DiaryGridProps = {
   };
   diaries: IDiaryResponse[];
   pageSize?: number;
+  showPagination?: boolean;
 };
 
 export default function DiaryGrid({
   queryParams,
   diaries,
   pageSize = 16,
+  showPagination = true,
 }: DiaryGridProps) {
   const [page, setPage] = useState(1);
 
@@ -83,7 +85,7 @@ export default function DiaryGrid({
           </GridCol>
         ))}
       </Grid>
-      {totalPages > 1 && (
+      {showPagination && totalPages > 1 && (
         <div className={classes.paginationWrapper}>
           <Pagination total={totalPages} value={page} onChange={setPage} />
         </div>

@@ -76,7 +76,6 @@ export function HeroCarousel({
               style={{ objectFit: 'cover' }}
               className={classes.slideImage}
             />
-            {/* Vùng chứa Title và Description của mỗi slide */}
             {(slide.title || slide.description) && (
               <div className={classes.slideTextOverlay}>
                 <Container size={'xl'} w="100%">
@@ -96,8 +95,6 @@ export function HeroCarousel({
           </CarouselSlide>
         ))}
       </Carousel>
-
-      {/* Lớp nội dung đè lên Carousel */}
       <div className={classes.contentOverlay}>{children}</div>
     </Box>
   );

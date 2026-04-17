@@ -14,16 +14,13 @@ import {
 import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import classes from './page.module.scss';
 import { SmileSquareIcon } from '@vinaup/ui/cores';
-import {
-  SectionCarouselSlide,
-  SectionCarousel,
-} from '@vinaup/ui/landing';
+import { SectionCarouselSlide, SectionCarousel } from '@vinaup/ui/landing';
 import { VideoSection } from '@vinaup/ui/landing';
 import { formatPrice, renderDurationDays } from '@/utils/function-helpers';
 import { RiCheckDoubleFill } from 'react-icons/ri';
 import { SERVICE_ITEMS } from '@/constants';
-import SocialTab from '@/components/primitives/social-tab/social-tab';
-import IncrementView from '@/components/primitives/social-tab/increment-view';
+// import SocialTab from '@/components/primitives/increment-view/social-tab';
+import IncrementView from '@/components/primitives/increment-view/increment-view';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
@@ -241,12 +238,12 @@ export default async function TourDetailPage({
             >
               {tourData.data.title}
             </Text>
-            <SocialTab
+            {/* <SocialTab
               tourId={tourData.data.id}
               likes={tourData.data.likes}
               views={tourData.data.views}
               url={currentUrl}
-            />
+            /> */}
             <Group justify="space-between" pb={'sm'}>
               <Group gap={4}>
                 <LocationIcon size={20} />

@@ -1,17 +1,13 @@
 import { HeroCarousel } from '@vinaup/ui/landing';
 import { Container, Stack } from '@mantine/core';
-import { BrandIntroduction } from '@/components/brand-introduction/brand-introduction';
+import { BrandIntroduction } from '@/components/sections/brand-introduction/brand-introduction';
 import { AutoScrollCarousel } from '../../../../../packages/ui/src/components/landing/primitives/carousels/auto-scroll-carousel/auto-scroll-carousel';
-import { SalonServicesBanner } from '@/components/salon-services-banner/salon-services-banner';
-import { SalonDiary } from '@/components/salon-diary/salon-diary';
-
-// Import toàn bộ Mock Data ở đây
+import { SalonServicesBanner } from '@/components/sections/salon-services-banner/salon-services-banner';
+import { SalonDiarySection } from '@/components/sections/salon-diary-section/salon-diary-section';
 import { MOCK_SALON_SERVICES } from '@/mocks/salon-services';
 import { MOCK_SLIDES } from '@/mocks/mock-slides';
-import { MOCK_DIARY_POSTS } from '@/mocks/salon-diary';
-import { CommitmentAndMedia } from '@/components/commitment-and-media/commitment-and-media';
+import { SalonVideoAndBlogsShowcase } from '@/components/sections/salon-video-and-blogs-showcase/salon-video-and-blogs-showcase';
 import classes from './page.module.scss';
-import { MOCK_MEDIA_DATA } from '@/mocks/commitment-media';
 
 const PARTNER_BRANDS = [
   'Milbon',
@@ -45,9 +41,12 @@ export default function Home() {
           services={MOCK_SALON_SERVICES}
         />
 
-        <SalonDiary posts={MOCK_DIARY_POSTS} />
+        <SalonDiarySection />
 
-        <CommitmentAndMedia {...MOCK_MEDIA_DATA} />
+        <SalonVideoAndBlogsShowcase
+          videoUrl="https://www.youtube.com/watch?v=0VdBHRVy4Cw"
+          videoTitle="Vietnam Barber Princess Takes It ALL OFF! (Hair Makeover)"
+        />
       </Stack>
     </div>
   );

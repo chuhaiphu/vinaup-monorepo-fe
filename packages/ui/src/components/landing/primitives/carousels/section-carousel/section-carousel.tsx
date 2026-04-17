@@ -1,11 +1,11 @@
 'use client';
 
-import { Carousel as MantineCarousel, CarouselSlide } from '@mantine/carousel';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
 import { useRef, useState } from 'react';
 import classes from './section-carousel.module.scss';
 import { Container, Group } from '@mantine/core';
 import Autoplay from 'embla-carousel-autoplay';
-import { MediaCard } from '../../cards/media-card/media-card';
+import Image from 'next/image';
 
 export interface SectionCarouselSlide {
   titleMain?: string;
@@ -50,7 +50,7 @@ export function SectionCarousel({
 
   return (
     <div className={classes.landingCarouselWrapper}>
-      <MantineCarousel
+      <Carousel
         height={height}
         withIndicators={true}
         slideSize="100%"
@@ -73,20 +73,18 @@ export function SectionCarousel({
           return (
             <CarouselSlide pb={0} key={index}>
               <div className={classes.slideInner}>
-                <MediaCard
-                  title={slide.titleMain}
+                <Image
                   src={slide.src}
-                  href={slide.href}
-                  height={height}
-                  borderRadius="0"
-                  variant={'floating'}
+                  alt={slide.alt ?? slide.titleMain ?? ''}
+                  fill
+                  className={classes.slideImage}
                   priority={index === 0}
                 />
               </div>
             </CarouselSlide>
           );
         })}
-      </MantineCarousel>
+      </Carousel>
 
       {showTextBox && (
         <div className={classes.textBoxWrapper}>

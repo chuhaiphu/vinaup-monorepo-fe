@@ -1,11 +1,18 @@
 import { getDiaryByEndpointActionPublic } from '@/actions/diary-action';
-import IncrementView from '@/components/primitives/social-tab/increment-view';
+import IncrementView from '@/components/primitives/increment-view/increment-view';
 import { Container, Group, Stack, Text } from '@mantine/core';
 import {
   VinaupLocationIcon as LocationIcon,
-  VinaupHomeIcon,
+  VinaupGridListIcon,
 } from '@vinaup/ui/cores';
-import { CopyToClipboard, VideoSection, SectionCarousel, SectionCarouselSlide } from '@vinaup/ui/landing';
+import Link from 'next/link';
+import { Route } from 'next';
+import {
+  CopyToClipboard,
+  VideoSection,
+  SectionCarousel,
+  SectionCarouselSlide,
+} from '@vinaup/ui/landing';
 import { notFound } from 'next/navigation';
 import { FaRegCopy, FaRegEye, FaShareAlt } from 'react-icons/fa';
 import { IoIosPricetag } from 'react-icons/io';
@@ -83,22 +90,28 @@ export default async function LandingDiaryDetailPageContent({
   };
 
   const renderDiaryCategories = () => {
-    const categories =
+    const categoryEntries =
       diaryData.diaryCategoryDiaries
-        ?.map((dcd) => dcd.diaryCategory?.title)
-        .filter(Boolean) || [];
-    const hasCategories = categories.length > 0;
+        ?.map((dcd) => dcd.diaryCategory)
+        .filter((c): c is NonNullable<typeof c> => !!c) || [];
+
+    if (categoryEntries.length === 0) return <></>;
 
     return (
-      <>
-        {hasCategories && (
-          <Group gap={4}>
+      <Group gap={4}>
+        {categoryEntries.map((cat) => (
+          <Link
+            key={cat.id}
+            href={`/nhat-ky/${cat.endpoint}` as Route}
+            prefetch
+            style={{ textDecoration: 'none' }}
+          >
             <Text fz={18} c={'white'}>
-              {categories.join('; ')}
+              {cat.title}
             </Text>
-          </Group>
-        )}
-      </>
+          </Link>
+        ))}
+      </Group>
     );
   };
 
@@ -160,10 +173,10 @@ export default async function LandingDiaryDetailPageContent({
       <section className={classes.diaryDetailHeader}>
         <Container size={'lg'} className={classes.diaryDetailHeaderContainer}>
           <Group gap={20} align={'center'}>
-            <VinaupHomeIcon size={30} stroke="white" />
-            <Text classNames={{ root: classes.diaryTitle }}>
-              {diaryData.title}
-            </Text>
+            <Link href={'/nhat-ky' as Route} prefetch>
+              <VinaupGridListIcon size={30} fill="white" />
+            </Link>
+            <Text classNames={{ root: classes.diaryTitle }}>{diaryData.title}</Text>
           </Group>
         </Container>
       </section>
@@ -178,13 +191,17 @@ export default async function LandingDiaryDetailPageContent({
           </Group>
         </Container>
       </section>
-      {diaryData.additionalImagesPosition === 'top' && additionalImageSlides.length > 0 && (
-        <section className={classes.diaryCarouselSection}>
-          <Container size={'lg'} className={classes.diaryCarouselSectionContainer}>
-            {renderAdditionalImagesCarousel()}
-          </Container>
-        </section>
-      )}
+      {diaryData.additionalImagesPosition === 'top' &&
+        additionalImageSlides.length > 0 && (
+          <section className={classes.diaryCarouselSection}>
+            <Container
+              size={'lg'}
+              className={classes.diaryCarouselSectionContainer}
+            >
+              {renderAdditionalImagesCarousel()}
+            </Container>
+          </section>
+        )}
       {diaryData.videoPosition === 'top' && diaryData.videoUrl && (
         <section className={classes.diaryVideoSection}>
           <Container size={'lg'} className={classes.diaryVideoSectionContainer}>
@@ -212,13 +229,17 @@ export default async function LandingDiaryDetailPageContent({
           </Container>
         </section>
       )}
-      {diaryData.additionalImagesPosition !== 'top' && additionalImageSlides.length > 0 && (
-        <section className={classes.diaryCarouselSection}>
-          <Container size={'lg'} className={classes.diaryCarouselSectionContainer}>
-            {renderAdditionalImagesCarousel()}
-          </Container>
-        </section>
-      )}
+      {diaryData.additionalImagesPosition !== 'top' &&
+        additionalImageSlides.length > 0 && (
+          <section className={classes.diaryCarouselSection}>
+            <Container
+              size={'lg'}
+              className={classes.diaryCarouselSectionContainer}
+            >
+              {renderAdditionalImagesCarousel()}
+            </Container>
+          </section>
+        )}
       <section className={classes.diaryLocationSection}>
         <Container size={'lg'} className={classes.diaryLocationSectionContainer}>
           {renderDestinationAndCategory()}

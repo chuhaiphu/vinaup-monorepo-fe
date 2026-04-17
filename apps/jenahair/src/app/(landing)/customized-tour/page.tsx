@@ -1,6 +1,5 @@
 import { getAllTourCategoriesActionPublic } from '@/actions/tour-category-action';
 import CustomizedTourPageContainer from '@/components/mains/customized-tour-page/customize-tour-page-container';
-import SearchBar from '@/components/primitives/search-bar/search-bar';
 import { Box, Group, Title } from '@mantine/core';
 import { IoChevronBack } from 'react-icons/io5';
 import Link from 'next/link';
@@ -15,7 +14,7 @@ export default async function CustomizedTourPage() {
 
   return (
     <div className={classes.customizedTourPageRoot}>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Group justify="space-between" align="center" mb={'lg'}>
         <Group align="center" gap={4}>
           <Link href="/" className={classes.backIcon}>

@@ -5,9 +5,9 @@ import { IBookingResponse } from '@/interfaces/booking-interface';
 import { ICustomTourRequestResponse } from '@/interfaces/custom-tour-request-interface';
 import { ICustomerContactResponse } from '@/interfaces/customer-contact-interface';
 import classes from './admin-page-content.module.scss';
-import BookingsTab from '@/components/tabs/bookings-tab';
-import CustomTourRequestsTab from '@/components/tabs/custom-tour-requests-tab';
-import CustomerContactsTab from '@/components/tabs/customer-contacts-tab';
+import BookingsTab from '@/components/mains/admin-page-content/admin-page-tabs/bookings-tab';
+import CustomTourRequestsTab from '@/components/mains/admin-page-content/admin-page-tabs/custom-tour-requests-tab';
+import CustomerContactsTab from '@/components/mains/admin-page-content/admin-page-tabs/customer-contacts-tab';
 import { use } from 'react';
 
 interface AdminPageContentProps {

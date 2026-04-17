@@ -1,6 +1,5 @@
 import { Group, Stack, Loader } from '@mantine/core';
 import classes from './page.module.scss';
-import SearchBar from '@/components/primitives/search-bar/search-bar';
 import TourGrid from '@/components/grids/tour-grid/tour-grid';
 import { getAllToursActionPublic } from '@/actions/tour-action';
 import { Suspense } from 'react';
@@ -24,7 +23,7 @@ export default async function TourPage({
 }) {
   return (
     <>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Group align="center" justify="space-between">
         <Stack gap={6}>
           <h2 className={classes.sectionTitle}>Vietnam Landtours</h2>

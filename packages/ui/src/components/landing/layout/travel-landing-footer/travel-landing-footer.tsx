@@ -1,4 +1,4 @@
-import classes from './footer.module.scss';
+import classes from './travel-landing-footer.module.scss';
 import { Container, Grid, Text, Group, ActionIcon, GridCol } from '@mantine/core';
 import {
   FaFacebookF,
@@ -13,11 +13,11 @@ export interface FooterColumn {
   links: string[];
 }
 
-export interface FooterProps {
+export interface TravelLandingFooterProps {
   columns: FooterColumn[];
 }
 
-export function Footer({ columns }: Readonly<FooterProps>) {
+export function TravelLandingFooter({ columns }: Readonly<TravelLandingFooterProps>) {
   return (
     <footer className={classes.footer}>
       <Container size={'xl'} className={classes.inner}>

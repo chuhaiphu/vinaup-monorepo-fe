@@ -1,6 +1,6 @@
 import { IDiaryCategoryResponse } from '@/interfaces/diary-category-interface';
 import { Group } from '@mantine/core';
-import { VinaupHomeIcon } from '@vinaup/ui/cores';
+import { VinaupGridListIcon } from '@vinaup/ui/cores';
 import { Route } from 'next';
 import Link from 'next/link';
 import classes from './diary-category-tags.module.scss';
@@ -34,7 +34,7 @@ export default function DiaryCategoryTags({
         scroll={false}
         prefetch={true}
       >
-        <VinaupHomeIcon size={20} stroke="currentColor" />
+        <VinaupGridListIcon size={20} fill="currentColor" />
       </Link>
       {categoriesWithoutRoot.map((category) => {
         const isActive = category.endpoint === activeEndpoint;

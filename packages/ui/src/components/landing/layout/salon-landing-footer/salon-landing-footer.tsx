@@ -1,9 +1,8 @@
-// footer.tsx
 import { Container, Grid, GridCol, Group, Text, Box, Anchor } from '@mantine/core';
 import Image from 'next/image';
-import classes from './footer.module.scss';
+import classes from './salon-landing-footer.module.scss';
 
-export function Footer() {
+export function SalonLandingFooter() {
   return (
     <Box component="footer" className={classes.footerWrapper}>
       <Container
@@ -22,9 +21,9 @@ export function Footer() {
                   <Image
                     src="/favicon.ico"
                     alt="Jenahair.com Logo"
-                    // Chỉnh kích thước logo trong style css để điều chỉnh reponsive
                     width={120}
                     height={120}
+                    style={{ height: 'auto' }}
                     className={classes.logoImage}
                     unoptimized
                   />

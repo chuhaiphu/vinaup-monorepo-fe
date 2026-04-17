@@ -1,6 +1,5 @@
 import { getTourByEndpointActionPublic } from '@/actions/tour-action';
 import { notFound } from 'next/navigation';
-import SearchBar from '@/components/primitives/search-bar/search-bar';
 import { Group, Title, Box } from '@mantine/core';
 import { IoChevronBack } from 'react-icons/io5';
 import Link from 'next/link';
@@ -23,7 +22,7 @@ export default async function TourDetailBookingPage({
 
   return (
     <>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Group justify="space-between" align="center" mb={'lg'}>
         <Group align="center" gap={4}>
           <Link
