@@ -9,7 +9,7 @@ interface LayoutSiderState {
 }
 
 export const useLayoutSiderStore = create<LayoutSiderState>((set) => ({
-  collapsed: true,
+  collapsed: false,
   toggle: () => set((state) => ({ collapsed: !state.collapsed })),
   open: () => set({ collapsed: false }),
   close: () => set({ collapsed: true }),

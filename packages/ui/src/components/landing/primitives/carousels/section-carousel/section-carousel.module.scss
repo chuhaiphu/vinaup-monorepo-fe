@@ -23,6 +23,7 @@
 
 .landingCarousel {
   overflow: hidden;
+  border-radius: 0.5rem;
 
   @media screen and (max-width: 992px) {
     height: 60vh !important;

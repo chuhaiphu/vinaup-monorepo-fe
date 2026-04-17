@@ -177,7 +177,7 @@ export default function AdminSettingOverviewPageContent({
                 color="teal"
                 size="sm"
               >
-                Save Changes
+                Save
               </Button>
             </Group>
             <Stack gap={2}>

@@ -5,7 +5,7 @@ import {
   VinaupLocationIcon as LocationIcon,
   VinaupHomeIcon,
 } from '@vinaup/ui/cores';
-import { CopyToClipboard, VideoSection } from '@vinaup/ui/landing';
+import { CopyToClipboard, VideoSection, SectionCarousel, SectionCarouselSlide } from '@vinaup/ui/landing';
 import { notFound } from 'next/navigation';
 import { FaRegCopy, FaRegEye, FaShareAlt } from 'react-icons/fa';
 import { IoIosPricetag } from 'react-icons/io';
@@ -35,6 +35,14 @@ export default async function LandingDiaryDetailPageContent({
 
   const diaryData = diaryResponse.data;
   const currentUrl = `https://jenahair.com/nhat-ky/${endpoint}`;
+
+  const additionalImageSlides: SectionCarouselSlide[] =
+    diaryData.additionalImageUrls.map((url) => ({ src: url }));
+
+  const renderAdditionalImagesCarousel = () => {
+    if (additionalImageSlides.length === 0) return <></>;
+    return <SectionCarousel slides={additionalImageSlides} height={480} />;
+  };
 
   const renderVideoSection = (
     videoUrl?: string,
@@ -170,6 +178,13 @@ export default async function LandingDiaryDetailPageContent({
           </Group>
         </Container>
       </section>
+      {diaryData.additionalImagesPosition === 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.diaryCarouselSection}>
+          <Container size={'lg'} className={classes.diaryCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
+          </Container>
+        </section>
+      )}
       {diaryData.videoPosition === 'top' && diaryData.videoUrl && (
         <section className={classes.diaryVideoSection}>
           <Container size={'lg'} className={classes.diaryVideoSectionContainer}>
@@ -194,6 +209,13 @@ export default async function LandingDiaryDetailPageContent({
               diaryData.videoThumbnailUrl || undefined,
               diaryData.title || undefined
             )}
+          </Container>
+        </section>
+      )}
+      {diaryData.additionalImagesPosition !== 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.diaryCarouselSection}>
+          <Container size={'lg'} className={classes.diaryCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
           </Container>
         </section>
       )}

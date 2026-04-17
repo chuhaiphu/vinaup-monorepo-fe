@@ -243,7 +243,9 @@ function AdminDiaryDetailPageContentInner({
   const handleSelectMainImage = async (imageUrl: string) => {
     setMainImageLoading(true);
     try {
-      await updateDiaryActionPrivate(currentDiaryData.id, { mainImageUrl: imageUrl });
+      await updateDiaryActionPrivate(currentDiaryData.id, {
+        mainImageUrl: imageUrl,
+      });
       setMainImageUrl(imageUrl);
     } catch (error) {
       notifications.show({
@@ -829,7 +831,7 @@ function AdminDiaryDetailPageContentInner({
                     color="teal"
                     size="sm"
                   >
-                    Save Changes
+                    Save
                   </Button>
                   <Button
                     onClick={() => {

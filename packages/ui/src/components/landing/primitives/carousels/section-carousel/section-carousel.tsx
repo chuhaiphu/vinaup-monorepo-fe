@@ -67,14 +67,14 @@ export function SectionCarousel({
         orientation={orientation}
         plugins={[autoplay.current]}
         onMouseEnter={autoplay.current.stop}
-        onMouseLeave={() => autoplay.current.play()}
+        onMouseLeave={autoplay.current.reset}
       >
         {validSlides.map((slide, index) => {
           return (
             <CarouselSlide pb={0} key={index}>
               <div className={classes.slideInner}>
                 <MediaCard
-                  title={slide.titleMain || ''}
+                  title={slide.titleMain}
                   src={slide.src}
                   href={slide.href}
                   height={height}

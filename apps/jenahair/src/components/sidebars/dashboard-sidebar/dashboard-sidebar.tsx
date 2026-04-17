@@ -1,14 +1,13 @@
 'use client';
 
 import React, { useMemo } from 'react';
-import { AppShellNavbar, Text, Burger, Group } from '@mantine/core';
+import { AppShellNavbar, Text, Group } from '@mantine/core';
 import { NavItemProps } from './dashboard-nav/_props';
 import { VersionSection } from '@/components/primitives/version-section/version-section';
 import { DashboardNav } from './dashboard-nav/dashboard-nav';
 import classes from './dashboard-sidebar.module.scss';
 import { GoDot, GoDotFill } from 'react-icons/go';
 import { VinaupHomeIcon as HomeIcon } from '@vinaup/ui/cores';
-import { useLayoutSiderStore } from '@/libs/zustand/layout-sider-store';
 import { IUserResponse } from '@/interfaces/user-interface';
 
 interface DashboardSidebarProps {
@@ -16,8 +15,6 @@ interface DashboardSidebarProps {
 }
 
 export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
-  const { close } = useLayoutSiderStore();
-
   const navItems: NavItemProps[] = useMemo(() => {
     const items: NavItemProps[] = [
       {
@@ -42,9 +39,9 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
           {
             key: 'tour-categories',
             label: 'Tour Categories',
-            path: '/adminup/tour-category'
+            path: '/adminup/tour-category',
           },
-        ]
+        ],
       },
       {
         key: 'blog',
@@ -60,9 +57,9 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
           {
             key: 'blog-categories',
             label: 'Blog Categories',
-            path: '/adminup/blog-category'
+            path: '/adminup/blog-category',
           },
-        ]
+        ],
       },
       {
         key: 'diary',
@@ -78,9 +75,9 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
           {
             key: 'diary-categories',
             label: 'Diary Categories',
-            path: '/adminup/diary-category'
+            path: '/adminup/diary-category',
           },
-        ]
+        ],
       },
       {
         key: 'page',
@@ -110,17 +107,17 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
           {
             key: 'media',
             label: 'Media',
-            path: '/adminup/media'
-          }
-        ]
+            path: '/adminup/media',
+          },
+        ],
       },
       {
         key: 'setting',
         label: 'Settings',
         rightSection: <GoDot size={24} />,
         rightSectionActive: <GoDotFill color="var(--vinaup-yellow)" size={24} />,
-        path: '/adminup/setting'
-      }
+        path: '/adminup/setting',
+      },
     ];
     // Add User Management menu only for superadmin
     if (userData.role === 'supadmin') {
@@ -129,7 +126,7 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
         label: 'Users',
         rightSection: <GoDot size={24} />,
         rightSectionActive: <GoDotFill color="var(--vinaup-yellow)" size={24} />,
-        path: '/adminup/user'
+        path: '/adminup/user',
       });
     }
 
@@ -142,13 +139,8 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
         <div className={classes.containerTop}>
           <Group justify="space-between" align="center" pr="md">
             <Text className={classes.logoText}>Jena Hair</Text>
-            <Burger classNames={{
-              root: classes.burger
-            }} opened={true} onClick={close} hiddenFrom="xs" size="xs" color="white" />
           </Group>
-          <DashboardNav
-            navItems={navItems}
-          />
+          <DashboardNav navItems={navItems} />
         </div>
         <div className={classes.containerBottom}>
           <VersionSection />

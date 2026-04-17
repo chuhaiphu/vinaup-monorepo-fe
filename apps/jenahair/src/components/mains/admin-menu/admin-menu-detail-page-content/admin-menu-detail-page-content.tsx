@@ -388,7 +388,7 @@ function AdminMenuDetailPageContentInner({
                     color="teal"
                     size="xs"
                   >
-                    Save Changes
+                    Save
                   </Button>
                   <Button
                     onClick={() => {

@@ -1,40 +1,48 @@
 'use client';
 import { NavLink } from '@mantine/core';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { NavItemProps } from './_props';
 import { FaChevronUp } from 'react-icons/fa6';
 import Link from 'next/link';
 
 import classes from './dashboard-nav.module.scss';
 import { isPathActive } from '@/utils/function-helpers';
-import { useLayoutSiderStore } from '@/libs/zustand/layout-sider-store';
 
 export function DashboardNav({ navItems }: Readonly<{ navItems: NavItemProps[] }>) {
   const pathName = usePathname();
-  const { close } = useLayoutSiderStore();
 
-  const [openedItems, setOpenedItems] = useState<Record<string, boolean>>({});
-  const navItemsRef = useRef(navItems);
-
-  useEffect(() => {
-    navItemsRef.current = navItems;
-  }, [navItems]);
-
-  useEffect(() => {
-    setOpenedItems((prev) => {
-      const next = { ...prev };
-      navItemsRef.current.forEach((item) => {
-        if (
-          item.childrens?.some((c) => c.path === pathName) ||
-          item.defaultOpened
-        ) {
-          next[item.key] = true;
-        }
-      });
-      return next;
+  const [openedItems, setOpenedItems] = useState<Record<string, boolean>>(() => {
+    const initialState: Record<string, boolean> = {};
+    navItems.forEach((item) => {
+      if (item.childrens?.some((c) => c.path === pathName) || item.defaultOpened) {
+        initialState[item.key] = true;
+      }
     });
-  }, [pathName]);
+    return initialState;
+  });
+
+  const [prevPathName, setPrevPathName] = useState(pathName);
+
+  if (pathName !== prevPathName) {
+    setPrevPathName(pathName);
+
+    const next = { ...openedItems };
+    let hasChanges = false;
+
+    navItems.forEach((item) => {
+      if (item.childrens?.some((c) => c.path === pathName)) {
+        if (!next[item.key]) {
+          next[item.key] = true;
+          hasChanges = true;
+        }
+      }
+    });
+
+    if (hasChanges) {
+      setOpenedItems(next);
+    }
+  }
 
   const handleToggle = (key: string, opened: boolean) => {
     setOpenedItems((prev) => ({ ...prev, [key]: opened }));
@@ -92,7 +100,6 @@ export function DashboardNav({ navItems }: Readonly<{ navItems: NavItemProps[] }
             label={item.label}
             component={Link}
             href={item.path}
-            onClick={close}
             active={isActive}
             rightSection={<div className={classes.iconWrapper}>{icon}</div>}
             classNames={{
@@ -112,7 +119,6 @@ export function DashboardNav({ navItems }: Readonly<{ navItems: NavItemProps[] }
           label={item.label}
           component={Link}
           href={item.path}
-          onClick={close}
           rightSection={<div className={classes.iconWrapper}>{icon}</div>}
           classNames={{
             root: `${classes.item} ${classes.single} ${isActive ? classes.active : ''}`,

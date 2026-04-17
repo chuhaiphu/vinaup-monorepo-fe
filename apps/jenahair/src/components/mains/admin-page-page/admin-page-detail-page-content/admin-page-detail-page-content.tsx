@@ -595,7 +595,7 @@ function AdminPageDetailPageContentInner({
                     color="teal"
                     size="sm"
                   >
-                    Save Changes
+                    Save
                   </Button>
                   <Button
                     onClick={() => {

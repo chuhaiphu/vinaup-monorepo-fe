@@ -13,16 +13,10 @@ export function DashboardHeader({ userData }: { userData: IUserResponse }) {
     <AppShellHeader>
       <div className={classes.dashboardHeader}>
         <Group justify="space-between" align="center" h="100%">
-          <Group>
-            <Burger opened={!collapsed} onClick={toggle} hiddenFrom="sm" size="sm" />
-          </Group>
+          <Burger opened={!collapsed} onClick={toggle} size="sm" />
           <UserSection userData={userData} />
         </Group>
       </div>
     </AppShellHeader>
   );
 }
-
-
-
-

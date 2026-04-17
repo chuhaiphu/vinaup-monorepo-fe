@@ -77,7 +77,7 @@ export default function AdminSettingSeoPageContent({
               color="teal"
               size="sm"
             >
-              Save Changes
+              Save
             </Button>
           </Group>
           <Stack gap={2}>

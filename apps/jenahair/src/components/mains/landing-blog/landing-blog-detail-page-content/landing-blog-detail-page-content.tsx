@@ -5,7 +5,7 @@ import {
   VinaupLocationIcon as LocationIcon,
   VinaupHomeIcon,
 } from '@vinaup/ui/cores';
-import { CopyToClipboard, VideoSection } from '@vinaup/ui/landing';
+import { CopyToClipboard, VideoSection, SectionCarousel, SectionCarouselSlide } from '@vinaup/ui/landing';
 import { notFound } from 'next/navigation';
 import { FaRegCopy, FaRegEye, FaShareAlt } from 'react-icons/fa';
 import { IoIosPricetag } from 'react-icons/io';
@@ -35,6 +35,14 @@ export default async function LandingBlogDetailPageContent({
 
   const blogData = blogResponse.data;
   const currentUrl = `https://jenahair.com/blogs/${endpoint}`;
+
+  const additionalImageSlides: SectionCarouselSlide[] =
+    blogData.additionalImageUrls.map((url) => ({ src: url }));
+
+  const renderAdditionalImagesCarousel = () => {
+    if (additionalImageSlides.length === 0) return <></>;
+    return <SectionCarousel slides={additionalImageSlides} height={480} />;
+  };
 
   const renderVideoSection = (
     videoUrl?: string,
@@ -174,6 +182,13 @@ export default async function LandingBlogDetailPageContent({
           </Group>
         </Container>
       </section>
+      {blogData.additionalImagesPosition === 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.blogCarouselSection}>
+          <Container size={'lg'} className={classes.blogCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
+          </Container>
+        </section>
+      )}
       {blogData.videoPosition === 'top' && blogData.videoUrl && (
         <section className={classes.blogVideoSection}>
           <Container size={'lg'} className={classes.blogVideoSectionContainer}>
@@ -198,6 +213,13 @@ export default async function LandingBlogDetailPageContent({
               blogData.videoThumbnailUrl || undefined,
               blogData.title || undefined
             )}
+          </Container>
+        </section>
+      )}
+      {blogData.additionalImagesPosition !== 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.blogCarouselSection}>
+          <Container size={'lg'} className={classes.blogCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
           </Container>
         </section>
       )}

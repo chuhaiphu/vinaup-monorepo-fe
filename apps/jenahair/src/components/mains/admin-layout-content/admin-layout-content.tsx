@@ -54,7 +54,10 @@ export default function AdminLayoutContent({
         navbar={{
           width: '16rem',
           breakpoint: 'sm',
-          collapsed: { mobile: collapsed },
+          collapsed: {
+            desktop: collapsed,
+            mobile: collapsed,
+          },
         }}
       >
         <DashboardSidebar userData={initialUser} />

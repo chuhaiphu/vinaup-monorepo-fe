@@ -164,7 +164,7 @@ export default function SmtpPageContent({
               color="teal"
               size="sm"
             >
-              Save Changes
+              Save
             </Button>
           </Group>
 

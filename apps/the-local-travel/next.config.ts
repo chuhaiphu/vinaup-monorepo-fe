@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["10.149.35.43", "localhost:3001"],
+  allowedDevOrigins: ['10.149.35.43', 'localhost:3001'],
   transpilePackages: ['@vinaup/ui', '@vinaup/utils'],
   images: {
     remotePatterns: [
@@ -20,6 +20,10 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'cdn.haitrieu.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.jenahair.com',
       },
     ],
   },
