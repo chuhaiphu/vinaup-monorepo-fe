@@ -33,7 +33,12 @@ export function HeaderSplitSearchWithSocialMedia({
         >
           {/* LEFT: Logo + Search */}
           <Group gap="sm" wrap="nowrap">
-            <Link href="/" className={classes.logoSection}>
+            <Link
+              href="/"
+              className={classes.logoSection}
+              aria-label="Jena Hair - Trang chủ"
+              title="Về trang chủ"
+            >
               {logo}
             </Link>
 
@@ -68,6 +73,7 @@ export function HeaderSplitSearchWithSocialMedia({
             <NavigationControl
               navLinks={navLinks}
               iconSvg={<MenuSquareIcon size={32} fill="var(--vinaup-amber)" />}
+              menuButtonLabel="Mở menu điều hướng"
             />
           </Group>
         </Group>

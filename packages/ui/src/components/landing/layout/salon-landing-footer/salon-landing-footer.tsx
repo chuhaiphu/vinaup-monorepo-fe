@@ -17,17 +17,13 @@ export function SalonLandingFooter() {
             <GridCol span={{ base: 12, md: 6 }}>
               <div className={classes.contactBlock}>
                 {/* Logo */}
-                <div className={classes.logoWrapper}>
-                  <Image
-                    src="/favicon.ico"
-                    alt="Jenahair.com Logo"
-                    width={120}
-                    height={120}
-                    style={{ height: 'auto' }}
-                    className={classes.logoImage}
-                    unoptimized
-                  />
-                </div>
+                <Image
+                  src="/images/logo-icon.svg"
+                  alt="Jenahair.com Logo"
+                  width={120}
+                  height={120}
+                  className={classes.logoImage}
+                />
 
                 {/* Chữ Liên hệ */}
                 <div className={classes.contactInfo}>

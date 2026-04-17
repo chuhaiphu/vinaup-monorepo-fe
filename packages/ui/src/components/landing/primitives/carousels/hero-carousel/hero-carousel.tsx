@@ -72,6 +72,7 @@ export function HeroCarousel({
               alt={slide.alt}
               fill
               priority={index === 0}
+              fetchPriority={index === 0 ? 'high' : 'auto'}
               sizes="100vw"
               style={{ objectFit: 'cover' }}
               className={classes.slideImage}

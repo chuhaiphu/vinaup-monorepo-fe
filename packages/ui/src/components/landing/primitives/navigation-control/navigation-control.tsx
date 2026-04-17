@@ -9,11 +9,13 @@ import { Sidebar } from '../../layout/sidebar/sidebar';
 export interface NavigationControlProps {
   iconSvg: React.ReactNode;
   navLinks: NavLinkItem[];
+  menuButtonLabel?: string;
 }
 
 export default function NavigationControl({
   iconSvg,
   navLinks,
+  menuButtonLabel = 'Open navigation menu',
 }: Readonly<NavigationControlProps>) {
   const [opened, { open, close }] = useDisclosure(false);
   return (
@@ -30,6 +32,8 @@ export default function NavigationControl({
         size="xl"
         className={classes.menuIcon}
         onClick={open}
+        aria-label={menuButtonLabel}
+        title={menuButtonLabel}
       >
         {iconSvg}
       </ActionIcon>

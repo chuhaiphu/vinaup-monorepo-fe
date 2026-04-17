@@ -39,7 +39,12 @@ export function HeaderCenteredLogo({
             </Box>
 
             {/* GIỮA: Logo */}
-            <Link href="/" className={classes.logoLink}>
+            <Link
+              href="/"
+              className={classes.logoLink}
+              aria-label="The Local Travel - Trang chủ"
+              title="Về trang chủ"
+            >
               <Text className={classes.logoText}>The Local Travel</Text>
             </Link>
 
@@ -55,6 +60,8 @@ export function HeaderCenteredLogo({
                 radius="xl"
                 size="lg"
                 className={classes.searchIcon}
+                aria-label="Mở tìm kiếm"
+                title="Mở tìm kiếm"
               >
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
@@ -62,6 +69,7 @@ export function HeaderCenteredLogo({
               <NavigationControl
                 navLinks={navLinks}
                 iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />}
+                menuButtonLabel="Mở menu điều hướng"
               />
             </Group>
           </Group>

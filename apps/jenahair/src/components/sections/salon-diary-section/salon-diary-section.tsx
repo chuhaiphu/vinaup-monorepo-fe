@@ -1,9 +1,8 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import { Container, Stack } from '@mantine/core';
 import Link from 'next/link';
 import { getAllDiariesActionPublic } from '@/actions/diary-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';
-import DiaryGridSkeleton from '@/components/grids/diary-grid/diary-grid-skeleton';
 import classes from './salon-diary-section.module.scss';
 
 async function SalonDiaryContent() {
@@ -13,7 +12,11 @@ async function SalonDiaryContent() {
   return <DiaryGrid diaries={diaries} showPagination={false} />;
 }
 
-export function SalonDiarySection() {
+export async function SalonDiarySection() {
+  // only use 'use cache' for landing page component only,
+  // to prevent cucumulative layout shift.
+  'use cache';
+
   return (
     <section>
       <Container size={'xl'}>
@@ -31,9 +34,9 @@ export function SalonDiarySection() {
             </p>
           </div>
 
-          <Suspense fallback={<DiaryGridSkeleton itemCount={8} />}>
-            <SalonDiaryContent />
-          </Suspense>
+          {/* <Suspense fallback={<DiaryGridSkeleton itemCount={8} />}> */}
+          <SalonDiaryContent />
+          {/* </Suspense> */}
 
           <Link href="/nhat-ky" className={classes.seeMore} prefetch={true}>
             Xem thêm

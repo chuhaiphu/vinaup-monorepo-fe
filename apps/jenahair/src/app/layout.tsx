@@ -1,8 +1,5 @@
 import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
-import '@mantine/carousel/styles.css';
-import '@mantine/tiptap/styles.css';
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core';
 
 import './globals.scss';
@@ -10,6 +7,7 @@ import './globals.scss';
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { MantineConfigProvider } from '@vinaup/ui/libs/mantine';
+import { merriweather } from './font';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jenahair.com'),
@@ -34,7 +32,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang="en" {...mantineHtmlProps} className={merriweather.variable}>
       <head>
         <ColorSchemeScript />
       </head>

@@ -1,3 +1,5 @@
+import '@mantine/carousel/styles.css';
+
 import { MaintenanceGuard } from '@/components/guards/maintenance-guard';
 import classes from './layout.module.scss';
 import { getAppConfigActionPublic } from '@/actions/app-config-action';
@@ -10,7 +12,6 @@ import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
 import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
 import { HeaderSplitSearchWithSocialMedia } from '@vinaup/ui/landing';
 import { SalonLandingFooter } from '@vinaup/ui/landing';
-import { merriweather } from '../font';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -113,7 +114,7 @@ export default async function LandingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className={`${classes.landingLayout} ${merriweather.className}`}>
+    <main className={classes.landingLayout}>
       <Suspense fallback={null}>{/* <MaintenanceGuard /> */}</Suspense>
       <HeaderSplitSearchWithSocialMedia
         navLinks={NAV_LINKS}
