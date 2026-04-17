@@ -1,12 +1,11 @@
 import { getAllDiariesActionPublic } from '@/actions/diary-action';
 import { getAllDiaryCategoriesActionPublic } from '@/actions/diary-category-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';
-import DiaryCategoryTags from '@/components/primitives/landing-diary-category/diary-category-tags';
-import { Stack, Loader, Box, Container, Text } from '@mantine/core';
+import DiaryCategoryTags from '@/components/primitives/diary-category-tags/diary-category-tags';
+import { Stack, Box, Container } from '@mantine/core';
 import classes from './page.module.scss';
 import { Suspense } from 'react';
-import { VideoSection } from '@vinaup/ui/landing';
-import { IDiaryCategoryResponse } from '@/interfaces/diary-category-interface';
+import DiaryGridSkeleton from '@/components/grids/diary-grid/diary-grid-skeleton';
 
 export type DiaryCategoryPageQueryParams = {
   q?: string;
@@ -22,12 +21,7 @@ async function DiaryIndexPageContent({
   const queryParams = await searchParams;
   const diariesData = diariesResponse.data || [];
 
-  return (
-    <DiaryGrid
-      queryParams={queryParams}
-      diaries={diariesData}
-    />
-  );
+  return <DiaryGrid queryParams={queryParams} diaries={diariesData} />;
 }
 
 export default async function DiaryIndexPage({
@@ -54,21 +48,10 @@ export default async function DiaryIndexPage({
         </Stack>
       </Container>
 
-      <Suspense fallback={<Loader size={64} />}>
-        <Container size="xl">
-          <DiaryIndexPageContent
-            searchParams={searchParams}
-          />
-        </Container>
-      </Suspense>
-
-      {/* --- 4. YOUTUBE --- */}
       <Container size="xl">
-        <VideoSection
-          url="https://www.youtube.com/watch?v=0VdBHRVy4Cw"
-          title="Video Title"
-          height={480}
-        />
+        <Suspense fallback={<DiaryGridSkeleton />}>
+          <DiaryIndexPageContent searchParams={searchParams} />
+        </Suspense>
       </Container>
     </div>
   );

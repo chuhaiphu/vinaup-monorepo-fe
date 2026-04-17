@@ -1,7 +1,7 @@
 import { getAllDiaryCategoriesActionPublic } from '@/actions/diary-category-action';
 import { getDiaryCategoryDiariesByDiaryCategoryIdActionPublic } from '@/actions/diary-category-diary-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';
-import DiaryCategoryTags from '@/components/primitives/landing-diary-category/diary-category-tags';
+import DiaryCategoryTags from '@/components/primitives/diary-category-tags/diary-category-tags';
 import { IDiaryCategoryResponse } from '@/interfaces/diary-category-interface';
 import { IDiaryResponse } from '@/interfaces/diary-interface';
 import { Box, Container, Stack } from '@mantine/core';
@@ -25,28 +25,28 @@ export default async function LandingDiaryCategoryPageContent({
 }: LandingDiaryCategoryPageContentProps) {
   const queryParams = await searchParams;
 
-  const [diaryCategoriesResponse, diaryCategoryDiariesResponse] =
-    await Promise.all([
+  const [diaryCategoriesResponse, diaryCategoryDiariesResponse] = await Promise.all(
+    [
       getAllDiaryCategoriesActionPublic(),
       getDiaryCategoryDiariesByDiaryCategoryIdActionPublic(category.id),
-    ]);
+    ]
+  );
 
   const diaryCategories = diaryCategoriesResponse.data || [];
 
   const diariesInCategory: IDiaryResponse[] =
     diaryCategoryDiariesResponse.success && diaryCategoryDiariesResponse.data
       ? diaryCategoryDiariesResponse.data
-        .map((dcd) => dcd.diary)
-        .filter(
-          (diary): diary is IDiaryResponse =>
-            diary !== undefined && diary.visibility === 'public'
-        )
+          .map((dcd) => dcd.diary)
+          .filter(
+            (diary): diary is IDiaryResponse =>
+              diary !== undefined && diary.visibility === 'public'
+          )
       : [];
 
   const sortedDiaries = [...diariesInCategory]
     .sort(
-      (a, b) =>
-        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     )
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
@@ -80,9 +80,7 @@ export default async function LandingDiaryCategoryPageContent({
           activeEndpoint={category.endpoint}
         />
         <Box mt={'sm'}>
-          {category.videoPosition === 'top' &&
-            renderVideoSection()
-          }
+          {category.videoPosition === 'top' && renderVideoSection()}
         </Box>
         <Stack gap="sm" mt={'sm'}>
           {!isHtmlDescriptionEmpty(category.description) && (

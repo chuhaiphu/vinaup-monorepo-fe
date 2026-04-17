@@ -36,9 +36,7 @@ export async function generateStaticParams() {
 
   const params = [...diaryParams, ...categoryParams];
 
-  return params.length > 0
-    ? params
-    : [{ endpoint: DIARY_ENDPOINT_PLACEHOLDER }];
+  return params.length > 0 ? params : [{ endpoint: DIARY_ENDPOINT_PLACEHOLDER }];
 }
 
 export async function generateMetadata({

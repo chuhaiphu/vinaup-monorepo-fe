@@ -1,30 +1,30 @@
-import LandingDiaryDetailPageContent from '@/components/mains/landing-diary/landing-diary-detail-page-content/landing-diary-detail-page-content';
-import LandingDiaryDetailPageContentSkeleton from '@/components/mains/landing-diary/landing-diary-detail-page-content/landing-diary-detail-page-content-skeleton';
-import LandingDiaryCategoryPageContent from '@/components/mains/landing-diary/landing-diary-category-page/landing-diary-category-page-content';
-import LandingDiaryCategoryPageContentSkeleton from '@/components/mains/landing-diary/landing-diary-category-page/landing-diary-category-page-content-skeleton';
+import LandingBlogDetailPageContent from '@/components/mains/landing-blog/landing-blog-detail-page-content/landing-blog-detail-page-content';
+import LandingBlogDetailSkeleton from '@/components/mains/landing-blog/landing-blog-detail-page-content/landing-blog-detail-skeleton';
+import LandingBlogCategoryPageContent from '@/components/mains/landing-blog/landing-blog-category-page/landing-blog-category-page-content';
+import LandingBlogCategoryPageContentSkeleton from '@/components/mains/landing-blog/landing-blog-category-page/landing-blog-category-page-content-skeleton';
 import {
-  getAllDiariesActionPublic,
-  getDiaryByEndpointActionPublic,
-} from '@/actions/diary-action';
+  getAllBlogsActionPublic,
+  getBlogByEndpointActionPublic,
+} from '@/actions/blog-action';
 import {
-  getAllDiaryCategoriesActionPublic,
-  getDiaryCategoryByEndpointActionPublic,
-} from '@/actions/diary-category-action';
+  getAllBlogCategoriesActionPublic,
+  getBlogCategoryByEndpointActionPublic,
+} from '@/actions/blog-category-action';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-const DIARY_ENDPOINT_PLACEHOLDER = '__placeholder__';
+const BLOG_ENDPOINT_PLACEHOLDER = '__placeholder__';
 
 export async function generateStaticParams() {
-  const [diariesResponse, categoriesResponse] = await Promise.all([
-    getAllDiariesActionPublic(),
-    getAllDiaryCategoriesActionPublic(),
+  const [blogsResponse, categoriesResponse] = await Promise.all([
+    getAllBlogsActionPublic(),
+    getAllBlogCategoriesActionPublic(),
   ]);
 
-  const diaryParams =
-    diariesResponse.success && diariesResponse.data
-      ? diariesResponse.data.map((diary) => ({ endpoint: diary.endpoint }))
+  const blogParams =
+    blogsResponse.success && blogsResponse.data
+      ? blogsResponse.data.map((blog) => ({ endpoint: blog.endpoint }))
       : [];
 
   const categoryParams =
@@ -34,11 +34,11 @@ export async function generateStaticParams() {
           .map((category) => ({ endpoint: category.endpoint }))
       : [];
 
-  const params = [...diaryParams, ...categoryParams];
+  const params = [...blogParams, ...categoryParams];
 
   return params.length > 0
     ? params
-    : [{ endpoint: DIARY_ENDPOINT_PLACEHOLDER }];
+    : [{ endpoint: BLOG_ENDPOINT_PLACEHOLDER }];
 }
 
 export async function generateMetadata({
@@ -48,28 +48,28 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { endpoint } = await params;
 
-  const diaryResponse = await getDiaryByEndpointActionPublic(endpoint);
-  if (diaryResponse.success && diaryResponse.data) {
-    const diary = diaryResponse.data;
-    const description = diary.content
-      ? diary.content.replace(/<[^>]*>/g, '').substring(0, 160)
+  const blogResponse = await getBlogByEndpointActionPublic(endpoint);
+  if (blogResponse.success && blogResponse.data) {
+    const blog = blogResponse.data;
+    const description = blog.content
+      ? blog.content.replace(/<[^>]*>/g, '').substring(0, 160)
       : 'Discover expert hair care tips, styling inspiration, and salon insights from Jena Hair';
 
     return {
-      title: `${diary.title} | Jena Hair`,
+      title: `${blog.title} | Jena Hair`,
       description,
       openGraph: {
-        title: diary.title,
+        title: blog.title,
         description,
-        images: diary.mainImageUrl ? [diary.mainImageUrl] : [],
+        images: blog.mainImageUrl ? [blog.mainImageUrl] : [],
       },
       alternates: {
-        canonical: `https://jenahair.com/nhat-ky/${endpoint}`,
+        canonical: `https://jenahair.com/blogs/${endpoint}`,
       },
     };
   }
 
-  const categoryResponse = await getDiaryCategoryByEndpointActionPublic(endpoint);
+  const categoryResponse = await getBlogCategoryByEndpointActionPublic(endpoint);
   if (categoryResponse.success && categoryResponse.data) {
     const category = categoryResponse.data;
     const description = category.description
@@ -85,45 +85,45 @@ export async function generateMetadata({
         images: category.mainImageUrl ? [category.mainImageUrl] : [],
       },
       alternates: {
-        canonical: `https://jenahair.com/nhat-ky/${endpoint}`,
+        canonical: `https://jenahair.com/blogs/${endpoint}`,
       },
     };
   }
 
   return {
-    title: 'Diary Not Found',
+    title: 'Blog Not Found',
   };
 }
 
-type DiaryEndpointPageProps = {
+type BlogEndpointPageProps = {
   params: Promise<{ endpoint: string }>;
   searchParams: Promise<{ q?: string; destinations?: string }>;
 };
 
-export default async function DiaryEndpointPage({
+export default async function BlogEndpointPage({
   params,
   searchParams,
-}: DiaryEndpointPageProps) {
+}: BlogEndpointPageProps) {
   const { endpoint } = await params;
 
-  if (endpoint === DIARY_ENDPOINT_PLACEHOLDER) {
+  if (endpoint === BLOG_ENDPOINT_PLACEHOLDER) {
     notFound();
   }
 
-  const diaryResponse = await getDiaryByEndpointActionPublic(endpoint);
-  if (diaryResponse.success && diaryResponse.data) {
+  const blogResponse = await getBlogByEndpointActionPublic(endpoint);
+  if (blogResponse.success && blogResponse.data) {
     return (
-      <Suspense fallback={<LandingDiaryDetailPageContentSkeleton />}>
-        <LandingDiaryDetailPageContent params={params} />
+      <Suspense fallback={<LandingBlogDetailSkeleton />}>
+        <LandingBlogDetailPageContent params={params} />
       </Suspense>
     );
   }
 
-  const categoryResponse = await getDiaryCategoryByEndpointActionPublic(endpoint);
+  const categoryResponse = await getBlogCategoryByEndpointActionPublic(endpoint);
   if (categoryResponse.success && categoryResponse.data) {
     return (
-      <Suspense fallback={<LandingDiaryCategoryPageContentSkeleton />}>
-        <LandingDiaryCategoryPageContent
+      <Suspense fallback={<LandingBlogCategoryPageContentSkeleton />}>
+        <LandingBlogCategoryPageContent
           category={categoryResponse.data}
           searchParams={searchParams}
         />

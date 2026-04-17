@@ -1,16 +1,16 @@
 import { Box, Container, Stack } from '@mantine/core';
 import { Skeleton } from '@vinaup/ui/landing';
-import DiaryGridSkeleton from '@/components/grids/diary-grid/diary-grid-skeleton';
-import DiaryCategoryTagsSkeleton from '@/components/primitives/diary-category-tags/diary-category-tags-skeleton';
-import classes from './landing-diary-category-page-content.module.scss';
+import BlogGridSkeleton from '@/components/grids/blog-grid/blog-grid-skeleton';
+import BlogCategoryTagsSkeleton from '@/components/primitives/blog-category-tags/blog-category-tags-skeleton';
+import classes from './landing-blog-category-page-content.module.scss';
 
 const DESCRIPTION_LINES = [92, 86, 78];
 
-export default function LandingDiaryCategoryPageContentSkeleton() {
+export default function LandingBlogCategoryPageContentSkeleton() {
   return (
-    <div className={classes.diaryCategoryPage}>
+    <div className={classes.blogCategoryPage}>
       {/* --- 1. ORANGE HEADER --- */}
-      <Box className={classes.diaryCategoryHeader}>
+      <Box className={classes.blogCategoryHeader}>
         <Container size={'xl'}>
           <Box style={{ width: '50%', margin: '0 auto' }}>
             <Skeleton height={36} borderRadius={6} />
@@ -19,8 +19,8 @@ export default function LandingDiaryCategoryPageContentSkeleton() {
       </Box>
 
       {/* --- 2. INTRO SECTION --- */}
-      <Container size={'xl'} className={classes.diaryCategoryIntro}>
-        <DiaryCategoryTagsSkeleton />
+      <Container size={'xl'} className={classes.blogCategoryIntro}>
+        <BlogCategoryTagsSkeleton />
         <Stack gap="sm" mt={'sm'}>
           {DESCRIPTION_LINES.map((width, index) => (
             <Skeleton
@@ -34,7 +34,7 @@ export default function LandingDiaryCategoryPageContentSkeleton() {
       </Container>
 
       <Container size="xl">
-        <DiaryGridSkeleton />
+        <BlogGridSkeleton />
       </Container>
     </div>
   );

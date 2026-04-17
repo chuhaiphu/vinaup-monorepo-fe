@@ -1,36 +1,34 @@
+'use client';
+
 import { IBlogResponse } from '@/interfaces/blog-interface';
-import { IBlogCategoryResponse } from '@/interfaces/blog-category-interface';
-import { Text } from '@mantine/core';
-import BlogGridContent from './blog-grid-content';
+import { Grid, GridCol, Pagination, Text } from '@mantine/core';
+import Link from 'next/link';
+import { useState } from 'react';
+import BlogItem from './blog-item/blog-item';
+import classes from './blog-grid.module.scss';
+import { Route } from 'next';
+
+type BlogGridProps = {
+  queryParams?: {
+    q?: string;
+    destinations?: string;
+  };
+  blogs: IBlogResponse[];
+  pageSize?: number;
+};
 
 export default function BlogGrid({
   queryParams,
   blogs,
-  blogCategories,
-}: {
-  queryParams?: {
-    q?: string;
-    destinations?: string;
-    up?: string;
-  };
-  blogs: IBlogResponse[];
-  blogCategories?: IBlogCategoryResponse[];
-}) {
-  if (!blogs || blogs.length === 0) {
-    return (
-      <Text c={'#F9F9F9'} fz="xl" ta="center" mt="xl">
-        No blogs available
-      </Text>
-    );
-  }
+  pageSize = 16,
+}: BlogGridProps) {
+  const [page, setPage] = useState(1);
+
+  let filteredBlogs = blogs ?? [];
 
   const searchQuery = queryParams?.q;
   const destinationsFilter = queryParams?.destinations;
-  const categoryEndpointsFilter = queryParams?.up;
 
-  let filteredBlogs = blogs;
-
-  // Filter by search query
   if (searchQuery) {
     filteredBlogs = filteredBlogs.filter(
       (blog) =>
@@ -40,7 +38,6 @@ export default function BlogGrid({
     );
   }
 
-  // Filter by destinations
   if (destinationsFilter) {
     const selectedDestinations = destinationsFilter.split(',').filter(Boolean);
     if (selectedDestinations.length > 0) {
@@ -54,24 +51,12 @@ export default function BlogGrid({
     }
   }
 
-  // Filter by selected blog category endpoints (OR logic)
-  if (categoryEndpointsFilter) {
-    const selectedCategoryEndpoints = categoryEndpointsFilter
-      .split(',')
-      .map((endpoint) => endpoint.trim())
-      .filter(Boolean);
-
-    if (selectedCategoryEndpoints.length > 0) {
-      const selectedCategoryIds = (blogCategories || [])
-        .filter((category) => selectedCategoryEndpoints.includes(category.endpoint))
-        .map((category) => category.id);
-
-      filteredBlogs = filteredBlogs.filter((blog) =>
-        blog.blogCategoryBlogs.some((pivot) =>
-          selectedCategoryIds.includes(pivot.blogCategoryId)
-        )
-      );
-    }
+  if (!blogs || blogs.length === 0) {
+    return (
+      <Text c={'#F9F9F9'} fz="xl" ta="center" mt="xl">
+        No blogs available
+      </Text>
+    );
   }
 
   if (filteredBlogs.length === 0) {
@@ -82,5 +67,27 @@ export default function BlogGrid({
     );
   }
 
-  return <BlogGridContent blogs={filteredBlogs} />;
+  const total = filteredBlogs.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const start = (page - 1) * pageSize;
+  const paginated = filteredBlogs.slice(start, start + pageSize);
+
+  return (
+    <>
+      <Grid mt={'lg'} mb={'md'} gap="lg">
+        {paginated.map((item) => (
+          <GridCol span={{ base: 12, md: 6 }} key={item.id}>
+            <Link href={`/blogs/${item.endpoint}` as Route} className={classes.cardLink}>
+              <BlogItem item={item} />
+            </Link>
+          </GridCol>
+        ))}
+      </Grid>
+      {totalPages > 1 && (
+        <div className={classes.paginationWrapper}>
+          <Pagination total={totalPages} value={page} onChange={setPage} />
+        </div>
+      )}
+    </>
+  );
 }

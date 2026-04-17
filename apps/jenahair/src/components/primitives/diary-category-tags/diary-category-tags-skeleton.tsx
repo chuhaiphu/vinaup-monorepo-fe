@@ -13,15 +13,32 @@ export default function DiaryCategoryTagsSkeleton({
 }: DiaryCategoryTagsSkeletonProps) {
   return (
     <Group gap="sm" className={classes.tagsWrapper}>
-      <Box p={6} bg={'white'} bdrs={'lg'}>
-        <Skeleton width={44} height={44} borderRadius={10} />
+      <Box
+        style={{
+          border: '2px solid rgba(255,255,255,0.35)',
+          borderRadius: 10,
+          padding: '0.7rem',
+          display: 'inline-flex',
+          alignItems: 'center',
+        }}
+      >
+        <Skeleton width={20} height={20} borderRadius={999} />
       </Box>
       {Array.from({ length: itemCount }).map((_, index) => (
-        <Box key={index} p={6} bg={'white'} bdrs={'lg'}>
+        <Box
+          key={index}
+          style={{
+            border: '2px solid rgba(255,255,255,0.35)',
+            borderRadius: 10,
+            padding: '0.7rem 1.1rem',
+            display: 'inline-flex',
+            alignItems: 'center',
+          }}
+        >
           <Skeleton
             width={TAG_WIDTHS[index % TAG_WIDTHS.length]}
-            height={44}
-            borderRadius={10}
+            height={20}
+            borderRadius={6}
           />
         </Box>
       ))}

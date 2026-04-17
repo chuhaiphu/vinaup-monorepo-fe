@@ -174,20 +174,33 @@ export default async function LandingBlogDetailPageContent({
           </Group>
         </Container>
       </section>
+      {blogData.videoPosition === 'top' && blogData.videoUrl && (
+        <section className={classes.blogVideoSection}>
+          <Container size={'lg'} className={classes.blogVideoSectionContainer}>
+            {renderVideoSection(
+              blogData.videoUrl || undefined,
+              blogData.videoThumbnailUrl || undefined,
+              blogData.title || undefined
+            )}
+          </Container>
+        </section>
+      )}
       <section className={classes.blogDetailContent}>
         <Container size={'lg'} className={classes.blogDetailContentContainer}>
           {renderHTMLContent(blogData.content)}
         </Container>
       </section>
-      <section className={classes.blogVideoSection}>
-        <Container size={'lg'} className={classes.blogVideoSectionContainer}>
-          {renderVideoSection(
-            blogData.videoUrl || undefined,
-            blogData.videoThumbnailUrl || undefined,
-            blogData.title || undefined
-          )}
-        </Container>
-      </section>
+      {blogData.videoPosition !== 'top' && blogData.videoUrl && (
+        <section className={classes.blogVideoSection}>
+          <Container size={'lg'} className={classes.blogVideoSectionContainer}>
+            {renderVideoSection(
+              blogData.videoUrl || undefined,
+              blogData.videoThumbnailUrl || undefined,
+              blogData.title || undefined
+            )}
+          </Container>
+        </section>
+      )}
       <section className={classes.blogLocationSection}>
         <Container size={'lg'} className={classes.blogLocationSectionContainer}>
           {renderDestinationAndCategory()}
