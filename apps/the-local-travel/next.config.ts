@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'media.jenahair.com',
+        pathname: '/**',
       },
     ],
   },
