@@ -1,3 +1,5 @@
+'use client';
+
 import { Group, ActionIcon, Container, TextInput } from '@mantine/core';
 import { IoSearch } from 'react-icons/io5';
 // Đã sửa lại đúng chuẩn import CSS Module của Next.js
@@ -6,22 +8,29 @@ import Link from 'next/link';
 import NavigationControl from '../../../primitives/navigation-control/navigation-control';
 import { NavLinkItem, SocialLinkItem } from '../types';
 import MenuSquareIcon from '../../../../../cores/icons/menu-square-icon';
+import clsx from 'clsx';
+import { useWindowScroll } from '@mantine/hooks';
 
-// 1. Đổi tên Interface
 export interface HeaderSplitSearchWithSocialMediaProps {
   navLinks: NavLinkItem[];
   socialLinks: SocialLinkItem[];
   logo: React.ReactNode;
 }
 
-// 2. Đổi tên Component
 export function HeaderSplitSearchWithSocialMedia({
   navLinks,
   socialLinks,
   logo,
 }: Readonly<HeaderSplitSearchWithSocialMediaProps>) {
+  const [scroll] = useWindowScroll();
+  const isScrolled = scroll.y > 10;
+
   return (
-    <header className={classes.headerWrapper}>
+    <header
+      className={clsx(classes.headerWrapper, {
+        [classes.scrolled]: isScrolled
+      })}
+    >
       <Container size={'xl'} h="100%">
         <Group
           h="100%"

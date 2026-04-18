@@ -1,6 +1,6 @@
 'use client';
 
-import { Group, ActionIcon, Text, Drawer, Divider, TextInput } from '@mantine/core';
+import { Group, ActionIcon, Text, Drawer, TextInput } from '@mantine/core';
 import { IoSearch, IoHomeOutline, IoClose } from 'react-icons/io5';
 import Link from 'next/link';
 import type { Route } from 'next';
@@ -29,7 +29,6 @@ export function Sidebar({
       withCloseButton={false}
       classNames={{ content: classes.drawerContent }}
     >
-      {/* Nút X hình tròn kính nằm ở ngoài rìa của Sidebar */}
       <ActionIcon
         onClick={close}
         radius="xl"
@@ -40,23 +39,23 @@ export function Sidebar({
         <IoClose size={24} />
       </ActionIcon>
 
-      {/* Tiêu đề Sidebar (Biểu tượng Home) */}
-      <Group className={classes.sidebarHeader} gap="xs">
-        <IoHomeOutline size={20} strokeWidth={2} />
-        <Text size="lg" fw={600}>
-          Home
-        </Text>
-      </Group>
+      {/* 1. Gắn link vào Header (Auto Home) */}
+      <Link href={"/" as Route} className={classes.homeLink} onClick={close}>
+        <Group className={classes.sidebarHeader} gap="xs">
+          <IoHomeOutline size={20} strokeWidth={2} />
+          <Text size="lg" fw={600}>
+            Home
+          </Text>
+        </Group>
+      </Link>
 
       <TextInput
         placeholder="Search..."
         leftSection={<IoSearch size={18} />}
         radius="md"
         mt="md"
-        mb="xs"
+        mb={0} // 2. Ép margin-bottom = 0 để kéo text ở dưới lên
       />
-
-      <Divider my="sm" />
 
       {/* Danh sách Link Navigation */}
       <div className={classes.navLinksContainer}>
@@ -65,7 +64,7 @@ export function Sidebar({
             key={link.label}
             href={link.href as Route}
             className={`${classes.sidebarLink} ${link.active ? classes.active : ''}`}
-            onClick={close} // Đóng sidebar sau khi nhấn link
+            onClick={close}
           >
             {link.label}
           </Link>

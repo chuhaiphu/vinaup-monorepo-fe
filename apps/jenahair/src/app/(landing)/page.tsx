@@ -20,13 +20,13 @@ const PARTNER_BRANDS = [
 export default function Home() {
   return (
     <div>
-      <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" />
 
-      <Container size={'xl'} pt="3rem">
+      <Container size={'xl'}>
+        <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" borderRadius={20} />
         <BrandIntroduction />
       </Container>
 
-      <Stack gap="3rem" pt="3rem">
+      <Stack gap="3rem" pt="3rem" pb="3rem">
         <AutoScrollCarousel>
           {PARTNER_BRANDS.map((brand, index) => (
             <div key={index} className={classes.brandItem}>

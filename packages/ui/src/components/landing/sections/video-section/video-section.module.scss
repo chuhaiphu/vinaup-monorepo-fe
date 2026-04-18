@@ -3,6 +3,8 @@
   width: 100%;
   border-radius: 0.85rem;
   overflow: hidden;
+  height: 100%;
+  flex-grow: 1;
 
   &::before {
     content: '';

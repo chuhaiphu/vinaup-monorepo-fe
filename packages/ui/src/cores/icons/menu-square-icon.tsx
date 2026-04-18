@@ -13,41 +13,51 @@ export default function MenuSquareIcon({
         <svg
             width={size}
             height={size}
-            viewBox="-1 -1 38 38"
+            viewBox="0 0 57 55"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={className}
-            style={{ overflow: 'visible' }} // Đảm bảo không bị cắt cạnh
-            preserveAspectRatio="xMidYMid meet" // Giữ đúng tỉ lệ khi thay đổi size
         >
             <rect
-                x={36}
-                y={22}
-                width={36}
-                height={7}
-                rx={3.5}
-                transform="rotate(-180 36 22)"
-                fill={fill}
+                x={56.0985}
+                y={32.9539}
+                width={56.0985}
+                height={10.908}
+                rx={5.45402}
+                transform="rotate(-180 56.0985 32.9539)"
+                fill="#F16406"
             />
             <rect
-                x={36}
-                y={36}
-                width={25}
-                height={6.99999}
-                rx={3.5}
-                transform="rotate(-180 36 36)"
-                fill={fill}
+                x={56.0985}
+                y={55}
+                width={38.9573}
+                height={10.908}
+                rx={5.45402}
+                transform="rotate(-180 56.0985 55)"
+                fill="#F16406"
             />
             <ellipse
-                cx={3.5}
-                cy={32.5}
-                rx={3.5}
-                ry={3.5}
-                transform="rotate(-180 3.5 32.5)"
-                fill={fill}
+                cx={5.454}
+                cy={49.546}
+                rx={5.45402}
+                ry={5.45402}
+                transform="rotate(-180 5.454 49.546)"
+                fill="#F16406"
             />
-            <rect width={25} height={6.99999} rx={3.5} fill={fill} />
-            <ellipse cx={32.5} cy={3.5} rx={3.5} ry={3.5} fill={fill} />
+            <rect
+                x={0.00012207}
+                width={38.9573}
+                height={10.908}
+                rx={5.45401}
+                fill="#F16406"
+            />
+            <ellipse
+                cx={50.6445}
+                cy={5.45402}
+                rx={5.45402}
+                ry={5.45402}
+                fill="#F16406"
+            />
         </svg>
     )
 }

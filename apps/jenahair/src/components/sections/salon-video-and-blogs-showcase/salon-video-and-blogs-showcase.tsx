@@ -48,7 +48,6 @@ export async function SalonVideoAndBlogsShowcase({
                   url={videoUrl}
                   title={videoTitle}
                   thumbnailUrl={videoThumbnailUrl}
-                  height={400}
                 />
               </Stack>
             </GridCol>

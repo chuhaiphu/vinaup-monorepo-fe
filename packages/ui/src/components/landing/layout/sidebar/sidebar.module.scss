@@ -1,11 +1,10 @@
-/* Ghi đè để Drawer không cắt mất nút X nằm bên ngoài */
 .drawerContent {
     overflow: visible !important;
 }
 
 .sidebarCloseBtn {
     position: absolute;
-    background: rgba(0, 0, 0, 0.4) !important; // Nền kính đen mờ để dễ thấy trên mọi nền màu
+    background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -19,50 +18,57 @@
         transform: scale(1.05);
     }
 
-    /* Các vị trí tương ứng với hướng mở của Sidebar */
     &[data-position="right"] {
         top: 1rem;
-        left: -3.5rem; // Đẩy xa ra một chút
+        left: -3.5rem;
     }
-
     &[data-position="left"] {
         top: 1rem;
         right: -3.5rem;
     }
-
     &[data-position="top"] {
         bottom: -3.5rem;
         right: 1.5rem;
     }
-
     &[data-position="bottom"] {
         top: -3.5rem;
         right: 1.5rem;
     }
 }
 
+.homeLink {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
 .sidebarHeader {
     color: #1a1a1a;
     margin-bottom: 0.5rem;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.7;
+    }
 }
 
 .navLinksContainer {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    margin-top: 0.75rem;
 }
 
 .sidebarLink {
     text-decoration: none;
-    color: #333333; // Màu chữ tối để dễ đọc trên nền trắng
-    font-size: 1rem;
+    color: #333333;
+    font-size: 1.125rem;
     font-weight: 500;
     transition: color 0.2s, transform 0.2s;
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
 
     &:hover {
-        background-color: rgba(211, 211, 211, 0.3); // Nền sáng nhẹ khi hover
-        transform: translateX(5px); // Tạo hiệu ứng nhẹ khi hover
+        background-color: rgba(211, 211, 211, 0.3);
+        transform: translateX(5px);
     }
 }
