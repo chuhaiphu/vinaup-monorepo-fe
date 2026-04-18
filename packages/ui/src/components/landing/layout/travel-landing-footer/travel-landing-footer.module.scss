@@ -4,7 +4,6 @@
     background-color: var(--brand-green);
     color: var(--vinaup-white);
     padding-top: 2rem;
-    font-family: var(--font-main);
     margin-top: 4rem;
 }
 
@@ -36,7 +35,6 @@
     padding: 0 1.5rem;
     font-size: 1rem;
     outline: none;
-    font-family: var(--font-main);
     color: var(--vinaup-dark-gray);
 
     &::placeholder {
@@ -76,7 +74,6 @@
 }
 
 .columnTitle {
-    font-family: var(--font-heading);
     font-weight: 700;
     font-size: clamp(1rem, 2vw, 1.25rem); // Từ 16px đến 18px
     margin-bottom: 1.5rem;

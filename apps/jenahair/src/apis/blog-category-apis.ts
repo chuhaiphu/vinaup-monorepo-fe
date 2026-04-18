@@ -25,7 +25,7 @@ export async function createBlogCategoryApiPrivate(data: ICreateBlogCategory) {
 }
 
 export async function getAllBlogCategoriesAdminApiPrivate() {
-  return apiPrivate<IBlogCategoryResponse[]>('/blog-categories/admin/list', {
+  return apiPrivate<IBlogCategoryResponse[]>('/blog-categories/admin', {
     method: 'GET',
   });
 }

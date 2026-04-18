@@ -12,6 +12,7 @@ import {
   createPageApiPrivate,
   getPageByIdApiPrivate,
   getPageByEndpointApiPublic,
+  getAllPagesApiPublic,
   getAllPagesAdminApiPrivate,
   updatePageApiPrivate,
   deletePageApiPrivate,
@@ -46,6 +47,15 @@ export async function getAllPagesAdminActionPrivate(): Promise<
   ActionResponse<IPageResponse[]>
 > {
   return executeApi(async () => getAllPagesAdminApiPrivate());
+}
+
+export async function getAllPagesPublicActionPublic(): Promise<
+  ActionResponse<IPageResponse[]>
+> {
+  'use cache';
+  cacheLife('hours');
+  cacheTag('pages');
+  return executeApi(async () => getAllPagesApiPublic());
 }
 
 export async function getAllPagesVisibleActionPrivate(): Promise<

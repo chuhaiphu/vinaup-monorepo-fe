@@ -15,7 +15,7 @@ export async function createCustomerContactApiPublic(data: ICreateCustomerContac
 
 // ==================== ADMIN ROUTES ====================
 export async function getAllCustomerContactsAdminApiPrivate() {
-  return apiPrivate<ICustomerContactResponse[]>(`/contacts/admin/list`, {
+  return apiPrivate<ICustomerContactResponse[]>(`/contacts/admin`, {
     method: 'GET',
   });
 }

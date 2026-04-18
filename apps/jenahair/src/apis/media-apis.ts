@@ -2,7 +2,7 @@ import { ICreateMedia, IMediaResponse, IUpdateMedia } from "@/interfaces/media-i
 import { apiPrivate } from "./_base";
 
 export async function createMediaApiPrivate(data: ICreateMedia) {
-  return apiPrivate<IMediaResponse>('/admin/media', {
+  return apiPrivate<IMediaResponse>('/media/admin', {
     method: 'POST',
     body: JSON.stringify(data),
   });
@@ -10,32 +10,32 @@ export async function createMediaApiPrivate(data: ICreateMedia) {
 
 export async function getAllMediaApiPrivate(folder?: string) {
   const queryString = folder ? `?folder=${encodeURIComponent(folder)}` : '';
-  return apiPrivate<IMediaResponse[]>(`/admin/media${queryString}`, {
+  return apiPrivate<IMediaResponse[]>(`/media/admin${queryString}`, {
     method: 'GET',
   });
 }
 
 export async function getMediaFoldersApiPrivate() {
-  return apiPrivate<string[]>('/admin/media/folders', {
+  return apiPrivate<string[]>('/media/admin/folders', {
     method: 'GET',
   });
 }
 
 export async function getMediaByIdApiPrivate(id: string) {
-  return apiPrivate<IMediaResponse>(`/admin/media/${id}`, {
+  return apiPrivate<IMediaResponse>(`/media/admin/${id}`, {
     method: 'GET',
   });
 }
 
 export async function updateMediaApiPrivate(id: string, data: IUpdateMedia) {
-  return apiPrivate<IMediaResponse>(`/admin/media/${id}`, {
+  return apiPrivate<IMediaResponse>(`/media/admin/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   });
 }
 
 export async function deleteMediaApiPrivate(id: string) {
-  return apiPrivate<void>(`/admin/media/${id}`, {
+  return apiPrivate<void>(`/media/admin/${id}`, {
     method: 'DELETE',
   });
 }

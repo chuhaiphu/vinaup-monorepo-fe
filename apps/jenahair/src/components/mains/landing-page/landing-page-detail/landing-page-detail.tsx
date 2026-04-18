@@ -1,39 +1,31 @@
 'use client';
 
 import { IPageResponse } from '@/interfaces/page-interface';
-import { Grid, GridCol, Group, Image, Paper, Stack, Text } from '@mantine/core';
-import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
-import classes from './landing-page-detail.module.scss';
+import { Container, Group, Stack, Text } from '@mantine/core';
+import { VinaupLocationIcon as LocationIcon, VinaupGridListIcon } from '@vinaup/ui/cores';
+import Link from 'next/link';
+import { Route } from 'next';
 import {
   SectionCarouselSlide,
   SectionCarousel,
+  VideoSection,
 } from '@vinaup/ui/landing';
-import { VideoSection } from '@vinaup/ui/landing';
-import { RiCheckDoubleFill } from 'react-icons/ri';
-import { SERVICE_ITEMS } from '@/constants';
 import ContactForm from '@/components/forms/contact-form/contact-form';
 import { submitCustomerContactActionPublic } from '@/actions/customer-contact-action';
+import classes from './landing-page-detail.module.scss';
 
 interface LandingPageDetailProps {
   page: IPageResponse;
+  allPages: IPageResponse[];
 }
 
-export default function LandingPageDetail({ page }: LandingPageDetailProps) {
+export default function LandingPageDetail({ page, allPages }: LandingPageDetailProps) {
   const additionalImageSlides: SectionCarouselSlide[] = page.additionalImageUrls.map(
-    (url) => ({
-      src: url,
-    })
+    (url) => ({ src: url })
   );
-
-  const staticServiceSlides: SectionCarouselSlide[] = SERVICE_ITEMS.map((item) => ({
-    src: item.imageUrl,
-    titleMain: item.name,
-    href: item.endpoint,
-  }));
 
   const handleContactSubmit = async (formData: FormData) => {
     const result = await submitCustomerContactActionPublic(formData);
-
     if (result.success) {
       alert('Your contact request has been submitted successfully!');
     } else {
@@ -42,20 +34,12 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
   };
 
   const renderAdditionalImagesCarousel = () => {
-    if (additionalImageSlides.length === 0) {
-      return <></>;
-    }
+    if (additionalImageSlides.length === 0) return <></>;
     return <SectionCarousel slides={additionalImageSlides} height={480} />;
   };
 
-  const renderVideoSection = (
-    videoUrl?: string,
-    thumbnailUrl?: string,
-    title?: string
-  ) => {
-    if (!videoUrl) {
-      return <></>;
-    }
+  const renderVideoSection = (videoUrl?: string, thumbnailUrl?: string, title?: string) => {
+    if (!videoUrl) return <></>;
     return (
       <VideoSection
         url={videoUrl}
@@ -66,24 +50,8 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
     );
   };
 
-  // const renderHTMLDescription = (htmlDescription: string | undefined | null) => {
-  //   if (!htmlDescription || htmlDescription.trim() === '' || htmlDescription.trim() === '<p></p>') {
-  //     return <></>
-  //   }
-  //   return (
-  //     <Stack gap={2}>
-  //       <Text size="xl" fw={'bold'} c={'var(--vinaup-yellow)'}>Overview:</Text>
-  //       <div dangerouslySetInnerHTML={{ __html: htmlDescription }} className={classes.htmlDescription}></div>
-  //     </Stack>
-  //   );
-  // }
-
   const renderHTMLContent = (htmlContent: string | undefined | null) => {
-    if (
-      !htmlContent ||
-      htmlContent.trim() === '' ||
-      htmlContent.trim() === '<p></p>'
-    ) {
+    if (!htmlContent || htmlContent.trim() === '' || htmlContent.trim() === '<p></p>') {
       return <></>;
     }
     return (
@@ -91,157 +59,127 @@ export default function LandingPageDetail({ page }: LandingPageDetailProps) {
         <div
           dangerouslySetInnerHTML={{ __html: htmlContent }}
           className={classes.htmlContent}
-        ></div>
+        />
       </Stack>
     );
   };
 
-  return (
-    <div className={classes.pageDetailContainer}>
-      <Stack gap={'sm'} mb={'lg'}>
-        <h1 className={classes.sectionTitle}>{page.title}</h1>
-        {page.destinations.length > 0 && (
-          <Group gap={4}>
-            <LocationIcon size={20} />
-            <Text fz={15} c={'white'}>
-              {page.destinations.join(', ')}
+  const renderPageTitles = () => {
+    const otherPages = allPages.filter((p) => p.endpoint !== page.endpoint);
+    if (otherPages.length === 0) return <></>;
+    return (
+      <Group gap={4}>
+        {otherPages.map((p) => (
+          <Link
+            key={p.id}
+            href={`/pages/${p.endpoint}` as Route}
+            prefetch
+            style={{ textDecoration: 'none' }}
+          >
+            <Text fz={18} c={'white'}>
+              {p.title}
             </Text>
+          </Link>
+        ))}
+      </Group>
+    );
+  };
+
+  const renderDestination = () => {
+    if (!page.destinations || page.destinations.length === 0) return null;
+    return (
+      <Group gap={6}>
+        <LocationIcon size={20} fill="var(--vinaup-amber)" />
+        <Text fz={18} c={'white'}>
+          {page.destinations.join(', ')}
+        </Text>
+      </Group>
+    );
+  };
+
+  return (
+    <div className={classes.pageDetailPage}>
+      <section className={classes.pageDetailHeader}>
+        <Container size={'lg'} className={classes.pageDetailHeaderContainer}>
+          <Group gap={20} align={'center'}>
+            <Text classNames={{ root: classes.pageTitle }}>{page.title}</Text>
           </Group>
-        )}
-      </Stack>
-      <Grid
-        gap={'xl'}
-        classNames={{
-          root: classes.mainContent,
-        }}
-      >
-        <GridCol
-          span={{ base: 12, sm: 12, md: 8, lg: 8, xl: 8 }}
-          classNames={{
-            col: classes.leftCol,
-          }}
-        >
-          {page.additionalImagesPosition === 'top' &&
-            renderAdditionalImagesCarousel()}
-          {page.videoPosition === 'top' &&
-            renderVideoSection(
+        </Container>
+      </section>
+
+      <section className={classes.pageDetailInfo}>
+        <Container size={'lg'} className={classes.pageDetailInfoContainer}>
+          <Group gap={12} align={'center'} classNames={{ root: classes.pageLinks }}>
+            <VinaupGridListIcon size={24} fill="var(--vinaup-amber)" />
+            {renderPageTitles()}
+          </Group>
+        </Container>
+      </section>
+
+      {page.additionalImagesPosition === 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.pageCarouselSection}>
+          <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
+          </Container>
+        </section>
+      )}
+
+      {page.videoPosition === 'top' && page.videoUrl && (
+        <section className={classes.pageVideoSection}>
+          <Container size={'lg'} className={classes.pageVideoSectionContainer}>
+            {renderVideoSection(
               page.videoUrl || undefined,
               page.videoThumbnailUrl || undefined,
               page.title
             )}
-          {/* {renderHTMLDescription(page.description)} */}
+          </Container>
+        </section>
+      )}
+
+      <section className={classes.pageDetailContent}>
+        <Container size={'lg'} className={classes.pageDetailContentContainer}>
           {renderHTMLContent(page.content)}
-          {/* Show contact form if page type is "contact" */}
           {page.type === 'contact' && (
-            <Paper
-              shadow="xs"
-              mt={'md'}
-              mb={'md'}
-              p={'md'}
-              bg={'white'}
-              bdrs={'lg'}
-            >
-              <ContactForm
-                onSubmit={handleContactSubmit}
-                nameFieldName="name"
-                emailFieldName="email"
-                phoneFieldName="phone"
-                notesFieldName="notes"
-                notesLabel="Your message"
-                notesPlaceholder="Enter your message"
-                phoneEmailLayout="inline"
-                showTitle={false}
-              />
-            </Paper>
+            <ContactForm
+              onSubmit={handleContactSubmit}
+              nameFieldName="name"
+              emailFieldName="email"
+              phoneFieldName="phone"
+              notesFieldName="notes"
+              notesLabel="Your message"
+              notesPlaceholder="Enter your message"
+              phoneEmailLayout="inline"
+              showTitle={false}
+            />
           )}
-          {page.additionalImagesPosition === 'bottom' &&
-            renderAdditionalImagesCarousel()}
-          {page.videoPosition === 'bottom' &&
-            renderVideoSection(
+        </Container>
+      </section>
+
+      {page.videoPosition !== 'top' && page.videoUrl && (
+        <section className={classes.pageVideoSection}>
+          <Container size={'lg'} className={classes.pageVideoSectionContainer}>
+            {renderVideoSection(
               page.videoUrl || undefined,
               page.videoThumbnailUrl || undefined,
               page.title
             )}
-        </GridCol>
-        <GridCol
-          span={{ base: 12, sm: 12, md: 4, lg: 4, xl: 4 }}
-          classNames={{
-            col: classes.rightCol,
-          }}
-        >
-          <Stack gap={'lg'}>
-            {page.mainImageUrl && (
-              <Image
-                src={page.mainImageUrl}
-                alt={page.title || ''}
-                height={480}
-                bdrs={'lg'}
-              />
-            )}
+          </Container>
+        </section>
+      )}
 
-            <Paper
-              shadow="0"
-              bg={'transparent'}
-              mb={'lg'}
-              pt={'sm'}
-              pb={'sm'}
-              pl={'md'}
-              pr={'md'}
-              classNames={{
-                root: classes.whyBox,
-              }}
-            >
-              <Stack gap={'sm'}>
-                <Text
-                  classNames={{ root: classes.title }}
-                  c={'#FCBE11'}
-                  fz={24}
-                  fw={'bold'}
-                >
-                  Why you should choose us?
-                </Text>
-                <Group wrap="nowrap">
-                  <RiCheckDoubleFill size={32} color="#FCBE11" />
-                  <Text
-                    classNames={{ root: classes.subTitle }}
-                    c={'#FCBE11'}
-                    fz={18}
-                  >
-                    We have Vietnam tourism license
-                  </Text>
-                </Group>
-                <Group wrap="nowrap">
-                  <RiCheckDoubleFill size={32} color="#FCBE11" />
-                  <Text
-                    classNames={{ root: classes.subTitle }}
-                    c={'#FCBE11'}
-                    fz={18}
-                  >
-                    We have good agencies
-                  </Text>
-                </Group>
-                <Group wrap="nowrap">
-                  <RiCheckDoubleFill size={32} color="#FCBE11" />
-                  <Text
-                    classNames={{ root: classes.subTitle }}
-                    c={'#FCBE11'}
-                    fz={18}
-                  >
-                    We try make you happy
-                  </Text>
-                </Group>
-              </Stack>
-            </Paper>
-          </Stack>
+      {page.additionalImagesPosition !== 'top' && additionalImageSlides.length > 0 && (
+        <section className={classes.pageCarouselSection}>
+          <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
+            {renderAdditionalImagesCarousel()}
+          </Container>
+        </section>
+      )}
 
-          <SectionCarousel
-            slides={staticServiceSlides}
-            height={400}
-            orientation="vertical"
-            loop={true}
-          />
-        </GridCol>
-      </Grid>
+      <section className={classes.pageLocationSection}>
+        <Container size={'lg'} className={classes.pageLocationSectionContainer}>
+          {renderDestination()}
+        </Container>
+      </section>
     </div>
   );
 }

@@ -53,7 +53,7 @@ export async function createTourApiPrivate(data: ICreateTour) {
 
 export async function getAllToursAdminApiPrivate(filter?: TourFilterParams) {
   const queryString = buildQueryString(filter);
-  return apiPrivate<ITourResponse[]>(`/tours/admin/list${queryString}`, {
+  return apiPrivate<ITourResponse[]>(`/tours/admin${queryString}`, {
     method: 'GET',
   });
 }

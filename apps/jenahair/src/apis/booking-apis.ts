@@ -30,7 +30,7 @@ export async function createBookingApiPublic(data: ICreateBooking) {
 
 export async function getAllBookingsAdminApiPrivate(filter?: BookingFilterParams) {
   const queryString = buildQueryString(filter);
-  return apiPrivate<IBookingResponse[]>(`/bookings/admin/list${queryString}`, {
+  return apiPrivate<IBookingResponse[]>(`/bookings/admin${queryString}`, {
     method: 'GET',
   });
 }

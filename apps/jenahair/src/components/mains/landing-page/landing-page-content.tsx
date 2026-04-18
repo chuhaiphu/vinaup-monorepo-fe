@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { getPageByEndpointActionPublic } from '@/actions/page-action';
+import { getPageByEndpointActionPublic, getAllPagesPublicActionPublic } from '@/actions/page-action';
 import LandingPageDetail from '@/components/mains/landing-page/landing-page-detail/landing-page-detail';
 
 export default async function LandingPageContent({
@@ -9,10 +9,16 @@ export default async function LandingPageContent({
 }) {
   const { endpoint } = await params;
 
-  const pageResponse = await getPageByEndpointActionPublic(endpoint);
-  if (pageResponse.success && pageResponse.data) {
-    return <LandingPageDetail page={pageResponse.data} />;
+  const [pageResponse, allPagesResponse] = await Promise.all([
+    getPageByEndpointActionPublic(endpoint),
+    getAllPagesPublicActionPublic(),
+  ]);
+
+  if (!pageResponse.success || !pageResponse.data) {
+    notFound();
   }
 
-  notFound();
+  const allPages = allPagesResponse.success ? (allPagesResponse.data ?? []) : [];
+
+  return <LandingPageDetail page={pageResponse.data} allPages={allPages} />;
 }

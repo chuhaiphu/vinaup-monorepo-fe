@@ -51,7 +51,7 @@ export async function createDiaryApiPrivate(data: ICreateDiary) {
 
 export async function getAllDiariesAdminApiPrivate(filter?: DiaryFilterParams) {
   const queryString = buildQueryString(filter);
-  return apiPrivate<IDiaryResponse[]>(`/diaries/admin/list${queryString}`, {
+  return apiPrivate<IDiaryResponse[]>(`/diaries/admin${queryString}`, {
     method: 'GET',
   });
 }

@@ -25,7 +25,7 @@ export async function createDiaryCategoryApiPrivate(data: ICreateDiaryCategory) 
 }
 
 export async function getAllDiaryCategoriesAdminApiPrivate() {
-  return apiPrivate<IDiaryCategoryResponse[]>('/diary-categories/admin/list', {
+  return apiPrivate<IDiaryCategoryResponse[]>('/diary-categories/admin', {
     method: 'GET',
   });
 }

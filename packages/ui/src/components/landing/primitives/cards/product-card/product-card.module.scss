@@ -72,7 +72,6 @@
 }
 
 .title {
-  font-family: var(--font-heading);
   font-weight: 700;
   color: var(--brand-green);
   line-height: 1.4;
@@ -118,7 +117,6 @@
 .bookButton {
   background-color: var(--brand-green);
   color: var(--vinaup-white);
-  font-family: var(--font-main);
   font-weight: 600;
   transition: all 0.2s ease;
   font-size: clamp(0.875rem, 2vw, 1rem);

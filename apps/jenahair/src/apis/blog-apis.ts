@@ -51,7 +51,7 @@ export async function createBlogApiPrivate(data: ICreateBlog) {
 
 export async function getAllBlogsAdminApiPrivate(filter?: BlogFilterParams) {
   const queryString = buildQueryString(filter);
-  return apiPrivate<IBlogResponse[]>(`/blogs/admin/list${queryString}`, {
+  return apiPrivate<IBlogResponse[]>(`/blogs/admin${queryString}`, {
     method: 'GET',
   });
 }

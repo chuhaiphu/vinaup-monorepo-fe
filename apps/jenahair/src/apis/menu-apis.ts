@@ -4,7 +4,7 @@ import { apiPrivate, apiPublic } from "./_base";
 // ==================== PUBLIC ROUTES ====================
 
 export async function getRootMenusApiPublic() {
-  return apiPublic<IMenuResponse[]>('/menus', {
+  return apiPublic<IMenuResponse[]>('/menus/roots', {
     method: 'GET',
   });
 }
@@ -19,13 +19,13 @@ export async function createMenuApiPrivate(data: ICreateMenu) {
 }
 
 export async function getAllMenusApiPublic() {
-  return apiPublic<IMenuResponse[]>('/menus/list', {
+  return apiPublic<IMenuResponse[]>('/menus', {
     method: 'GET',
   });
 }
 
 export async function getAllMenusAdminApiPrivate() {
-  return apiPrivate<IMenuResponse[]>('/menus/admin/list', {
+  return apiPrivate<IMenuResponse[]>('/menus/admin', {
     method: 'GET',
   });
 }

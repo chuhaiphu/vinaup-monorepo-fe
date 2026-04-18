@@ -1,15 +1,74 @@
-.pageDetailContainer {
-  .sectionTitle {
-    font-weight: 400;
-    font-size: 2rem;
-    line-height: 2rem;
-    color: #00E1FF;
+.pageDetailPage {
+  .pageDetailHeader {
+    background-color: var(--vinaup-amber, #f16406);
+    padding: 1.5rem 0;
+    text-align: center;
+
+    .pageDetailHeaderContainer {
+      padding: 0;
+    }
+
+    .pageTitle {
+      color: #ffffff;
+      font-size: clamp(1.25rem, 4vw, 2rem);
+      text-shadow: 0px 2px 4px rgba(1, 23, 45, 0.5);
+      font-weight: 700;
+    }
   }
 
-  .htmlDescription,
+  .pageDetailInfo {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    .pageDetailInfoContainer {
+      padding: 0;
+    }
+
+    .pageLinks {
+      flex-wrap: wrap;
+      gap: 8px 16px;
+    }
+  }
+
+  .pageDetailContent {
+    .pageDetailContentContainer {
+      padding: 1.25rem;
+      background: #ffffff;
+      opacity: 0.75;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 0.5rem;
+    }
+  }
+
+  .pageCarouselSection {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    .pageCarouselSectionContainer {
+      padding: 0;
+    }
+  }
+
+  .pageVideoSection {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    .pageVideoSectionContainer {
+      padding: 0;
+    }
+  }
+
+  .pageLocationSection {
+    margin-top: 1rem;
+
+    .pageLocationSectionContainer {
+      padding: 0;
+    }
+  }
+
   .htmlContent {
-    >* {
-      color: white;
+    > * {
+      color: black;
     }
 
     h1 {
@@ -20,6 +79,8 @@
     h2 {
       font-size: 1.4rem;
       line-height: 2.2rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     h3 {
@@ -28,7 +89,7 @@
     }
 
     a {
-      color: #00E1FF;
+      color: var(--vinaup-amber);
       text-decoration: none;
     }
 
@@ -37,62 +98,38 @@
     }
 
     hr {
-      border: 0.5px solid rgb(255, 255, 255);
+      border: 0.5px solid rgb(0, 0, 0);
     }
 
-    // Make sure empty paragraphs have height to present the nextline effect in sync with Editor
     p {
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      line-height: 1.5rem;
+      margin-bottom: 0.75rem;
     }
 
     p:empty {
-      padding: 1.1rem;
+      padding: 0.25rem;
     }
 
     blockquote {
-      border-left: 4px solid #00E1FF;
       margin: 1.5rem 0;
       padding-left: 1.5rem;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.05);
+      color: black;
+      background: rgb(0, 0, 0, 0.05);
       padding: 1rem;
-      border-radius: 0 0.5rem 0.5rem 0;
+      border-radius: 0.5rem;
 
       p {
         margin: 0;
       }
     }
 
-    // Make sure ul is displayed vertically aligned with the text
-    ul {
+    ul,
+    ol {
       list-style-position: inside;
     }
 
-    li>p {
+    li > p {
       display: inline;
-    }
-  }
-
-  .mainContent {
-    .rightCol {
-      .mainImageWrapper {
-        position: relative;
-        height: 480px;
-        border-radius: 0.75rem;
-        overflow: hidden;
-      }
-
-      .whyBox {
-        border: 2px solid #FCBE11;
-        border-radius: 0.5rem;
-
-        .title,
-        .subTitle {
-          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
-      }
     }
   }
 }

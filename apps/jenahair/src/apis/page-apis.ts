@@ -3,6 +3,12 @@ import { apiPrivate, apiPublic } from "./_base";
 
 // ==================== PUBLIC ROUTES ====================
 
+export async function getAllPagesApiPublic() {
+  return apiPublic<IPageResponse[]>('/pages', {
+    method: 'GET',
+  });
+}
+
 export async function getPageByEndpointApiPublic(endpoint: string) {
   return apiPublic<IPageResponse>(`/pages/${endpoint}`, {
     method: 'GET',
@@ -19,7 +25,7 @@ export async function createPageApiPrivate(data: ICreatePage) {
 }
 
 export async function getAllPagesAdminApiPrivate() {
-  return apiPrivate<IPageResponse[]>('/pages/admin/list', {
+  return apiPrivate<IPageResponse[]>('/pages/admin', {
     method: 'GET',
   });
 }

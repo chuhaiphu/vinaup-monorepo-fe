@@ -30,11 +30,9 @@
 
 .searchInput {
   color: white;
-  font-family: var(--font-merriweather, sans-serif);
 
   &::placeholder {
     color: var(--vinaup-mint);
-    font-family: var(--font-merriweather, sans-serif);
     opacity: 0.6;
     font-weight: 400;
     font-style: italic;
