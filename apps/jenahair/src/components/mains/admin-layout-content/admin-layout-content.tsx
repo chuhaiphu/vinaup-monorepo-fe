@@ -8,7 +8,6 @@ import { IUserResponse } from '@/interfaces/user-interface';
 import { useLayoutSiderStore } from '@/libs/zustand/layout-sider-store';
 import { AuthProvider } from '@/providers/auth-provider';
 import { AppShell, AppShellMain } from '@mantine/core';
-import { Notifications } from '@mantine/notifications';
 import { redirect } from 'next/navigation';
 import { use } from 'react';
 import classes from './admin-layout-content.module.scss';
@@ -26,12 +25,7 @@ export default function AdminLayoutContent({
   const { collapsed } = useLayoutSiderStore();
 
   if (!userData.success || !userData.data) {
-    Notifications.show({
-      title: 'Error',
-      message: 'Session expired. Please log in again.',
-      color: 'red',
-    });
-    redirect('/login');
+    redirect('/login?invalid=1');
   }
 
   const initialUser = {

@@ -2,6 +2,7 @@ import { HttpResponse } from '@/interfaces/_base-interface';
 import { ApiError } from '@vinaup/utils/api-error';
 import { parseSetCookie } from '@/utils/function-helpers';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
 const API_URL = process.env.API_URL;
 
@@ -85,12 +86,18 @@ export async function apiPrivate<T>(
         expires: parsedCookie.options.expires,
       });
     }
+
+    if (response.status === 401) {
+      redirect('/login?invalid=1');
+    }
+
     const httpResponse: HttpResponse<T> = await response.json();
     return httpResponse;
   } catch (error) {
     if (error instanceof ApiError) {
       throw error;
     }
+    // Backend is unreachable
     throw new ApiError(
       error instanceof Error ? error.message : 'Unexpected error occurred',
       'UNKNOWN',
