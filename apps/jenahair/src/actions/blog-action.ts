@@ -40,7 +40,7 @@ export async function getBlogByEndpointActionPublic(
   endpoint: string
 ): Promise<ActionResponse<IBlogResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('blogs', `blog:${endpoint}`);
   return executeApi(async () => getBlogByEndpointApiPublic(endpoint));
 }
@@ -55,7 +55,7 @@ export async function getAllBlogsActionPublic(): Promise<
   ActionResponse<IBlogResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('blogs');
   return executeApi(async () => getAllBlogsApiPublic({ visibility: 'public' }));
 }

@@ -38,7 +38,7 @@ export async function getTourCategoryByEndpointActionPublic(
   endpoint: string
 ): Promise<ActionResponse<ITourCategoryResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('tour-categories', `tour-category:${endpoint}`);
   return executeApi(async () => getTourCategoryByEndpointApiPublic(endpoint));
 }
@@ -47,7 +47,7 @@ export async function getAllTourCategoriesActionPublic(): Promise<
   ActionResponse<ITourCategoryResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('tour-categories');
   return executeApi(async () => getAllTourCategoriesApiPublic());
 }

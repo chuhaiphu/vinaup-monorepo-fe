@@ -3,8 +3,8 @@ export * from './layout/travel-landing-footer/travel-landing-footer';
 export * from './layout/salon-landing-footer/salon-landing-footer';
 export * from './layout/header/types';
 export * from './layout/header/header-centered-logo/header-centered-logo';
-export * from './layout/header/header-split-search-with-social-media/header-split-search-with-social-media';
-export * from './layout/drawer/drawer';
+export * from './layout/header/header-with-search-and-sidebar/header-with-search-and-sidebar';
+export * from './layout/sidebar/sidebar';
 export * from './layout/scroll-to-top/scroll-to-top';
 
 // sections

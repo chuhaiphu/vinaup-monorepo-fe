@@ -39,7 +39,7 @@ export async function getDiaryCategoryByEndpointActionPublic(
   endpoint: string
 ): Promise<ActionResponse<IDiaryCategoryResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('diary-categories', `diary-category:${endpoint}`);
   return executeApi(async () => getDiaryCategoryByEndpointApiPublic(endpoint));
 }
@@ -54,7 +54,7 @@ export async function getAllDiaryCategoriesActionPublic(): Promise<
   ActionResponse<IDiaryCategoryResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('diary-categories');
   return executeApi(async () => getAllDiaryCategoriesApiPublic());
 }

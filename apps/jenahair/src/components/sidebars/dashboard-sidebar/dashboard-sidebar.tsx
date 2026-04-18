@@ -109,6 +109,11 @@ export default function DashboardSidebar({ userData }: DashboardSidebarProps) {
             label: 'Media',
             path: '/adminup/media',
           },
+          {
+            key: 'theme',
+            label: 'Theme',
+            path: '/adminup/theme',
+          },
         ],
       },
       {

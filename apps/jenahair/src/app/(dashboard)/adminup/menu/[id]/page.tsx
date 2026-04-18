@@ -4,7 +4,6 @@ import {
   getAvailableSortOrdersActionPrivate,
   getMenuByIdActionPrivate,
 } from '@/actions/menu-action';
-import { getAllTourCategoriesActionPublic } from '@/actions/tour-category-action';
 import { Suspense } from 'react';
 
 export default function AdminMenuDetailPage({
@@ -14,7 +13,6 @@ export default function AdminMenuDetailPage({
 }) {
   const currentMenuPromise = params.then((params) => getMenuByIdActionPrivate(params.id));
   const menusPromise = getAllMenusActionPrivate();
-  const tourCategoriesPromise = getAllTourCategoriesActionPublic();
   const availableSortOrdersPromise = currentMenuPromise.then((res) =>
     getAvailableSortOrdersActionPrivate(res.data?.parent?.id || '')
   );
@@ -24,7 +22,6 @@ export default function AdminMenuDetailPage({
       <AdminMenuDetailPageContent
         currentMenuPromise={currentMenuPromise}
         menusPromise={menusPromise}
-        tourCategoriesPromise={tourCategoriesPromise}
         availableSortOrdersPromise={availableSortOrdersPromise}
       />
     </Suspense>

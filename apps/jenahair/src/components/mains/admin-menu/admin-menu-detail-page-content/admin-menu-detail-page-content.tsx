@@ -9,7 +9,6 @@ import {
   Modal,
   Paper,
   Select,
-  SelectProps,
   Stack,
   Text,
   TextInput,
@@ -22,7 +21,6 @@ import {
   deleteMenuActionPrivate,
 } from '@/actions/menu-action';
 import { IMenuResponse } from '@/interfaces/menu-interface';
-import { ITourCategoryResponse } from '@/interfaces/tour-category-interface';
 import { FaCaretDown } from 'react-icons/fa6';
 import { GrTrash } from 'react-icons/gr';
 import { TreeManager } from '@vinaup/utils/tree-manager';
@@ -32,19 +30,16 @@ import { ActionResponse } from '@/interfaces/_base-interface';
 interface AdminMenuDetailPageContentProps {
   currentMenuPromise: Promise<ActionResponse<IMenuResponse>>;
   menusPromise: Promise<ActionResponse<IMenuResponse[]>>;
-  tourCategoriesPromise: Promise<ActionResponse<ITourCategoryResponse[]>>;
   availableSortOrdersPromise: Promise<ActionResponse<number[]>>;
 }
 
 export default function AdminMenuDetailPageContent({
   currentMenuPromise,
   menusPromise,
-  tourCategoriesPromise,
   availableSortOrdersPromise,
 }: AdminMenuDetailPageContentProps) {
   const currentMenuResult = use(currentMenuPromise);
   const menusResult = use(menusPromise);
-  const tourCategoriesResult = use(tourCategoriesPromise);
   const availableSortOrdersResult = use(availableSortOrdersPromise);
 
   if (!currentMenuResult.success || !currentMenuResult.data) {
@@ -53,14 +48,12 @@ export default function AdminMenuDetailPageContent({
 
   const currentMenu = currentMenuResult.data;
   const menusData = menusResult.data ?? [];
-  const tourCategoriesData = tourCategoriesResult.data ?? [];
   const availableSortOrdersData = availableSortOrdersResult.data ?? [];
 
   return (
     <AdminMenuDetailPageContentInner
       currentMenu={currentMenu}
       menusData={menusData}
-      tourCategoriesData={tourCategoriesData}
       availableSortOrdersData={availableSortOrdersData}
     />
   );
@@ -70,26 +63,18 @@ interface AdminMenuDetailPageContentInnerProps {
   currentMenu: IMenuResponse;
   menusData: IMenuResponse[];
   availableSortOrdersData: number[];
-  tourCategoriesData: ITourCategoryResponse[];
 }
 
 function AdminMenuDetailPageContentInner({
   currentMenu,
   menusData,
   availableSortOrdersData,
-  tourCategoriesData,
 }: AdminMenuDetailPageContentInnerProps) {
   const [title, setTitle] = useState<string>(currentMenu.title);
   const [parentId, setParentId] = useState<string | null>(
     currentMenu.parent?.id || null
   );
   const [sortOrder, setSortOrder] = useState<number>(currentMenu.sortOrder || 0);
-  const [targetType, setTargetType] = useState<string | null>(
-    currentMenu.targetType || null
-  );
-  const [targetId, setTargetId] = useState<string | null>(
-    currentMenu.targetId || null
-  );
   const [customUrl, setCustomUrl] = useState<string>(currentMenu.customUrl || '');
 
   const [isSavingAll, setIsSavingAll] = useState<boolean>(false);
@@ -109,13 +94,6 @@ function AdminMenuDetailPageContentInner({
     return new TreeManager(menusData);
   }, [menusData]);
 
-  const tourCategoryTreeManager = useMemo(() => {
-    if (tourCategoriesData.length === 0) {
-      return null;
-    }
-    return new TreeManager(tourCategoriesData);
-  }, [tourCategoriesData]);
-
   // Filter out current menu and its children from parent options
   const excludedIds = menuTreeManager?.toIds(
     menuTreeManager?.toFlatList(currentMenu.id) ?? []
@@ -126,68 +104,6 @@ function AdminMenuDetailPageContentInner({
     .filter((menu) => !excludedIds?.has(menu.id))
     .map((menu) => ({ value: menu.id, label: menu.title }));
 
-  // Tour category options record for renderTourCategoryOption
-  const tourCategoryOptionsData: Record<string, ITourCategoryResponse> =
-    tourCategoriesData.reduce(
-      (acc, tourCategory) => {
-        acc[tourCategory.id] = tourCategory;
-        return acc;
-      },
-      {} as Record<string, ITourCategoryResponse>
-    );
-
-  // Helper function to get parent chain recursively
-  const getOptionChain = (tourCategoryId: string): ITourCategoryResponse[] => {
-    const tourCategoryChain = tourCategoryOptionsData[tourCategoryId];
-    if (!tourCategoryChain) return [];
-    if (tourCategoryChain.parent) {
-      return [...getOptionChain(tourCategoryChain.parent.id), tourCategoryChain];
-    }
-    return [tourCategoryChain];
-  };
-
-  const getOptionChainWithoutRoot = (
-    tourCategoryId: string
-  ): ITourCategoryResponse[] => {
-    const parentChain = getOptionChain(tourCategoryId);
-    return parentChain.slice(1);
-  };
-
-  const renderTourCategoryOption: SelectProps['renderOption'] = ({ option }) => {
-    const parentChain = getOptionChainWithoutRoot(option.value);
-
-    // If has parent(s), show the full chain
-    if (parentChain.length > 1) {
-      return (
-        <Group gap="xs" wrap="nowrap">
-          {parentChain.map((category, index) => (
-            <Group key={category.id} gap="xs" wrap="nowrap">
-              <Text
-                size="sm"
-                fw={index === parentChain.length - 1 ? 500 : 400}
-                c={index === parentChain.length - 1 ? undefined : 'dark.3'}
-              >
-                {category.title}
-              </Text>
-              {index < parentChain.length - 1 && (
-                <Text size="sm" c="dark.3" fw={300}>
-                  ›
-                </Text>
-              )}
-            </Group>
-          ))}
-        </Group>
-      );
-    }
-
-    // Root category (no parent)
-    return (
-      <Text size="sm" fw={500}>
-        {tourCategoryOptionsData[option.value]?.title || option.label}
-      </Text>
-    );
-  };
-
   const handleSaveAll = async () => {
     setIsSavingAll(true);
     try {
@@ -195,8 +111,6 @@ function AdminMenuDetailPageContentInner({
         title,
         parentId: parentId || undefined,
         sortOrder,
-        targetType: targetType || undefined,
-        targetId: targetId || undefined,
         customUrl: customUrl || undefined,
       });
       notifications.show({
@@ -280,62 +194,16 @@ function AdminMenuDetailPageContentInner({
               </Stack>
 
               <Stack gap={'xs'} mt={'md'}>
-                <Text>Target Type</Text>
-                <Select
+                <Text>Custom URL</Text>
+                <TextInput
                   size="md"
-                  placeholder="Select target type"
-                  data={[
-                    { value: 'tour-category', label: 'Tour Category' },
-                    { value: 'custom-url', label: 'Custom URL' },
-                  ]}
-                  allowDeselect={false}
-                  value={targetType}
-                  onChange={(value) => {
-                    if (value === targetType) return;
-                    setTargetType(value);
-                    setTargetId(null);
-                    setCustomUrl('');
+                  placeholder="Enter custom URL"
+                  value={customUrl}
+                  onChange={(e) => {
+                    setCustomUrl(e.target.value);
                   }}
                 />
               </Stack>
-
-              {targetType === 'tour-category' && (
-                <Stack gap={'xs'} mt={'md'}>
-                  <Text>Tour Category</Text>
-                  <Select
-                    size="md"
-                    placeholder="Select tour category"
-                    data={
-                      tourCategoryTreeManager
-                        ?.toFlatListWithoutRoot()
-                        .map((tourCategory) => ({
-                          value: tourCategory.id,
-                          label: tourCategory.title,
-                        })) ?? []
-                    }
-                    value={targetId}
-                    searchable
-                    nothingFoundMessage="No tour category found"
-                    renderOption={renderTourCategoryOption}
-                    onChange={(value) => setTargetId(value)}
-                    clearable
-                  />
-                </Stack>
-              )}
-
-              {targetType === 'custom-url' && (
-                <Stack gap={'xs'} mt={'md'}>
-                  <Text>Custom URL</Text>
-                  <TextInput
-                    size="md"
-                    placeholder="Enter custom URL"
-                    value={customUrl}
-                    onChange={(e) => {
-                      setCustomUrl(e.target.value);
-                    }}
-                  />
-                </Stack>
-              )}
             </Paper>
           </Stack>
         </GridCol>

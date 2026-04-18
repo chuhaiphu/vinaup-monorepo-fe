@@ -2,25 +2,24 @@
 
 import { Group, ActionIcon, Container, TextInput } from '@mantine/core';
 import { IoSearch } from 'react-icons/io5';
-// Đã sửa lại đúng chuẩn import CSS Module của Next.js
-import classes from './header-split-search-with-social-media.module.scss';
+import classes from './header-with-search-and-sidebar.module.scss';
 import Link from 'next/link';
-import NavigationControl from '../../../primitives/navigation-control/navigation-control';
-import { NavLinkItem, SocialLinkItem } from '../types';
-import MenuSquareIcon from '../../../../../cores/icons/menu-square-icon';
+import { SocialLinkItem } from '../types';
 import clsx from 'clsx';
 import { useWindowScroll } from '@mantine/hooks';
+import NavigationControl from '../../../primitives/navigation-control/navigation-control';
+import { MenuSquareIcon } from '../../../../../cores';
 
 export interface HeaderSplitSearchWithSocialMediaProps {
-  navLinks: NavLinkItem[];
   socialLinks: SocialLinkItem[];
   logo: React.ReactNode;
+  sidebarChildren?: React.ReactNode;
 }
 
-export function HeaderSplitSearchWithSocialMedia({
-  navLinks,
+export function HeaderWithSearchAndSidebar({
   socialLinks,
   logo,
+  sidebarChildren,
 }: Readonly<HeaderSplitSearchWithSocialMediaProps>) {
   const [scroll] = useWindowScroll();
   const isScrolled = scroll.y > 10;
@@ -28,13 +27,15 @@ export function HeaderSplitSearchWithSocialMedia({
   return (
     <header
       className={clsx(classes.headerWrapper, {
-        [classes.scrolled]: isScrolled
+        [classes.scrolled]: isScrolled,
       })}
     >
       <Container size={'xl'} h="100%">
+        {sidebarChildren}
+
         <Group
           h="100%"
-          w="100%" // Đảm bảo bung rộng 100% để space-between hoạt động
+          w="100%"
           justify="space-between"
           align="center"
           wrap="nowrap"
@@ -80,7 +81,6 @@ export function HeaderSplitSearchWithSocialMedia({
             </Group>
 
             <NavigationControl
-              navLinks={navLinks}
               iconSvg={<MenuSquareIcon size={32} fill="var(--vinaup-amber)" />}
               menuButtonLabel="Mở menu điều hướng"
             />

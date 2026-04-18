@@ -1,7 +1,9 @@
+/** Flat or tree nav items for headers; tree uses optional `children`. */
 export interface NavLinkItem {
   label: string;
   href: string;
   active?: boolean;
+  children?: NavLinkItem[];
 }
 
 export interface SocialLinkItem {

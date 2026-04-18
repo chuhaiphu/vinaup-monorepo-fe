@@ -102,7 +102,7 @@ export async function getAllSectionUIsActionPublic(): Promise<
   ActionResponse<IDynamicSectionUIResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('section-ui');
   return executeApi(async () => getAllSectionUIsApiPublic());
 }
@@ -111,7 +111,7 @@ export async function getUsedSectionUIPositionsActionPublic(): Promise<
   ActionResponse<number[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('section-ui');
   return executeApi(async () => getUsedSectionUIPositionsApiPublic());
 }
@@ -120,7 +120,7 @@ export async function getSectionUIByPositionActionPublic(
   position: number
 ): Promise<ActionResponse<IDynamicSectionUIResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('section-ui');
   return executeApi(async () => getSectionUIByPositionApiPublic(position));
 }
@@ -129,7 +129,7 @@ export async function getSectionUIByIdActionPublic(
   id: string
 ): Promise<ActionResponse<IDynamicSectionUIResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('section-ui');
   return executeApi(async () => getSectionUIByIdApiPublic(id));
 }

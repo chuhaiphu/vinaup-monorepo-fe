@@ -38,7 +38,7 @@ export async function getPageByEndpointActionPublic(
   endpoint: string
 ): Promise<ActionResponse<IPageResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('pages', `page:${endpoint}`);
   return executeApi(async () => getPageByEndpointApiPublic(endpoint));
 }
@@ -53,7 +53,7 @@ export async function getAllPagesPublicActionPublic(): Promise<
   ActionResponse<IPageResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('pages');
   return executeApi(async () => getAllPagesApiPublic());
 }

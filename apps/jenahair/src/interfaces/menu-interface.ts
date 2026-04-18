@@ -7,8 +7,6 @@ export interface IUpdateMenu extends Partial<ICreateMenu> {
   title?: string;
   description?: string;
   parentId?: string;
-  targetType?: string;
-  targetId?: string;
   customUrl?: string;
   sortOrder?: number;
 }
@@ -19,8 +17,6 @@ export interface IMenuResponse {
   description: string | null;
   parent?: IMenuResponse | null;
   children?: IMenuResponse[];
-  targetType: string;
-  targetId: string | null;
   customUrl: string | null;
   isRoot: boolean;
   sortOrder: number;

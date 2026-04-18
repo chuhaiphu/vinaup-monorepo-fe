@@ -1,0 +1,16 @@
+.columnRoot {
+  flex-grow: 1;
+}
+
+.blogLink {
+  text-decoration: none;
+}
+
+.hiddenTemplate {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.emptyPlaceholder {
+  min-height: 200px;
+}

@@ -6,6 +6,7 @@ import type { Route } from 'next';
 import NavigationControl from '../../../primitives/navigation-control/navigation-control';
 import { NavLinkItem, SocialLinkItem, HeaderProps } from '../types';
 import { RxHamburgerMenu } from 'react-icons/rx';
+import { Sidebar } from '../../sidebar/sidebar';
 
 export function HeaderCenteredLogo({
   navLinks,
@@ -13,6 +14,8 @@ export function HeaderCenteredLogo({
 }: Readonly<HeaderProps>) {
   return (
     <header className={classes.headerWrapper}>
+      <Sidebar navLinks={navLinks} drawerPosition="right" />
+
       {/* HÀNG 1: Logo & Socials */}
       <div className={classes.topRow}>
         <Container size={'xl'} h="100%">
@@ -67,7 +70,6 @@ export function HeaderCenteredLogo({
               </ActionIcon>
 
               <NavigationControl
-                navLinks={navLinks}
                 iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />}
                 menuButtonLabel="Mở menu điều hướng"
               />

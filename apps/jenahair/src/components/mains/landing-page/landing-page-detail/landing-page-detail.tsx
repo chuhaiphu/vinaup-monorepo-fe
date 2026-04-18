@@ -2,7 +2,10 @@
 
 import { IPageResponse } from '@/interfaces/page-interface';
 import { Container, Group, Stack, Text } from '@mantine/core';
-import { VinaupLocationIcon as LocationIcon, VinaupGridListIcon } from '@vinaup/ui/cores';
+import {
+  VinaupLocationIcon as LocationIcon,
+  VinaupHomeIcon as HomeIcon,
+} from '@vinaup/ui/cores';
 import Link from 'next/link';
 import { Route } from 'next';
 import {
@@ -19,10 +22,12 @@ interface LandingPageDetailProps {
   allPages: IPageResponse[];
 }
 
-export default function LandingPageDetail({ page, allPages }: LandingPageDetailProps) {
-  const additionalImageSlides: SectionCarouselSlide[] = page.additionalImageUrls.map(
-    (url) => ({ src: url })
-  );
+export default function LandingPageDetail({
+  page,
+  allPages,
+}: LandingPageDetailProps) {
+  const additionalImageSlides: SectionCarouselSlide[] =
+    page.additionalImageUrls.map((url) => ({ src: url }));
 
   const handleContactSubmit = async (formData: FormData) => {
     const result = await submitCustomerContactActionPublic(formData);
@@ -38,7 +43,11 @@ export default function LandingPageDetail({ page, allPages }: LandingPageDetailP
     return <SectionCarousel slides={additionalImageSlides} height={480} />;
   };
 
-  const renderVideoSection = (videoUrl?: string, thumbnailUrl?: string, title?: string) => {
+  const renderVideoSection = (
+    videoUrl?: string,
+    thumbnailUrl?: string,
+    title?: string
+  ) => {
     if (!videoUrl) return <></>;
     return (
       <VideoSection
@@ -51,7 +60,11 @@ export default function LandingPageDetail({ page, allPages }: LandingPageDetailP
   };
 
   const renderHTMLContent = (htmlContent: string | undefined | null) => {
-    if (!htmlContent || htmlContent.trim() === '' || htmlContent.trim() === '<p></p>') {
+    if (
+      !htmlContent ||
+      htmlContent.trim() === '' ||
+      htmlContent.trim() === '<p></p>'
+    ) {
       return <></>;
     }
     return (
@@ -65,22 +78,24 @@ export default function LandingPageDetail({ page, allPages }: LandingPageDetailP
   };
 
   const renderPageTitles = () => {
-    const otherPages = allPages.filter((p) => p.endpoint !== page.endpoint);
-    if (otherPages.length === 0) return <></>;
+    if (allPages.length === 0) return <></>;
     return (
-      <Group gap={4}>
-        {otherPages.map((p) => (
-          <Link
-            key={p.id}
-            href={`/pages/${p.endpoint}` as Route}
-            prefetch
-            style={{ textDecoration: 'none' }}
-          >
-            <Text fz={18} c={'white'}>
+      <Group gap={'sm'} className={classes.pageTags}>
+        {allPages.map((p) => {
+          const isActive = p.endpoint === page.endpoint;
+          return (
+            <Link
+              key={p.id}
+              href={`/${p.endpoint}` as Route}
+              className={`${classes.pageTagItem} ${isActive ? classes.pageTagItemActive : ''}`.trim()}
+              aria-current={isActive ? 'page' : undefined}
+              scroll={false}
+              prefetch
+            >
               {p.title}
-            </Text>
-          </Link>
-        ))}
+            </Link>
+          );
+        })}
       </Group>
     );
   };
@@ -109,20 +124,18 @@ export default function LandingPageDetail({ page, allPages }: LandingPageDetailP
 
       <section className={classes.pageDetailInfo}>
         <Container size={'lg'} className={classes.pageDetailInfoContainer}>
-          <Group gap={12} align={'center'} classNames={{ root: classes.pageLinks }}>
-            <VinaupGridListIcon size={24} fill="var(--vinaup-amber)" />
-            {renderPageTitles()}
-          </Group>
+          {renderPageTitles()}
         </Container>
       </section>
 
-      {page.additionalImagesPosition === 'top' && additionalImageSlides.length > 0 && (
-        <section className={classes.pageCarouselSection}>
-          <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
-            {renderAdditionalImagesCarousel()}
-          </Container>
-        </section>
-      )}
+      {page.additionalImagesPosition === 'top' &&
+        additionalImageSlides.length > 0 && (
+          <section className={classes.pageCarouselSection}>
+            <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
+              {renderAdditionalImagesCarousel()}
+            </Container>
+          </section>
+        )}
 
       {page.videoPosition === 'top' && page.videoUrl && (
         <section className={classes.pageVideoSection}>
@@ -167,13 +180,14 @@ export default function LandingPageDetail({ page, allPages }: LandingPageDetailP
         </section>
       )}
 
-      {page.additionalImagesPosition !== 'top' && additionalImageSlides.length > 0 && (
-        <section className={classes.pageCarouselSection}>
-          <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
-            {renderAdditionalImagesCarousel()}
-          </Container>
-        </section>
-      )}
+      {page.additionalImagesPosition !== 'top' &&
+        additionalImageSlides.length > 0 && (
+          <section className={classes.pageCarouselSection}>
+            <Container size={'lg'} className={classes.pageCarouselSectionContainer}>
+              {renderAdditionalImagesCarousel()}
+            </Container>
+          </section>
+        )}
 
       <section className={classes.pageLocationSection}>
         <Container size={'lg'} className={classes.pageLocationSectionContainer}>

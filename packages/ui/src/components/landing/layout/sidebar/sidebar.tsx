@@ -4,21 +4,88 @@ import { Group, ActionIcon, Text, Drawer, TextInput } from '@mantine/core';
 import { IoSearch, IoHomeOutline, IoClose } from 'react-icons/io5';
 import Link from 'next/link';
 import type { Route } from 'next';
+import { useState, type ReactNode } from 'react';
 import classes from './sidebar.module.scss';
+import { useSidebarStore } from '../../../../libs';
 
-interface SidebarProps {
-  opened: boolean;
-  close: () => void;
-  drawerPosition?: 'right' | 'left' | 'top' | 'bottom';
-  navLinks: { label: string; href: string; active?: boolean }[];
+export interface SidebarNavLink {
+  id?: string;
+  label: string;
+  href: string;
+  external?: boolean;
+  children?: SidebarNavLink[];
 }
 
-export function Sidebar({
-  opened,
-  close,
-  drawerPosition = 'right',
-  navLinks,
-}: SidebarProps) {
+interface SidebarProps {
+  drawerPosition?: 'right' | 'left' | 'top' | 'bottom';
+  navLinks: SidebarNavLink[];
+}
+
+function filterLinks(links: SidebarNavLink[], query: string): SidebarNavLink[] {
+  if (!query) return links;
+
+  const q = query.toLowerCase();
+
+  return links.flatMap((link) => {
+    const matchLabel = link.label.toLowerCase().includes(q);
+
+    // recursive find in children
+    const filteredChildren = link.children ? filterLinks(link.children, q) : [];
+
+    // if current node matches or has matching children, include it in results
+    if (matchLabel || filteredChildren.length > 0) {
+      return [{ ...link, children: filteredChildren }];
+    }
+
+    return [];
+  });
+}
+
+export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
+  const opened = useSidebarStore((state) => state.opened);
+  const close = useSidebarStore((state) => state.close);
+  const [search, setSearch] = useState('');
+
+  const filtered = filterLinks(navLinks, search);
+
+  const renderNavNode = (link: SidebarNavLink, depth: number): ReactNode => {
+    const key = link.id ?? `${link.href}-${link.label}-${depth}`;
+    const paddingLeft = depth > 0 ? depth * 16 + 12 : 12;
+
+    const row = link.external ? (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={classes.sidebarLink}
+        style={{ paddingLeft }}
+        onClick={close}
+      >
+        {link.label}
+      </a>
+    ) : (
+      <Link
+        href={link.href as Route}
+        className={classes.sidebarLink}
+        style={{ paddingLeft }}
+        onClick={close}
+      >
+        {link.label}
+      </Link>
+    );
+
+    return (
+      <div key={key} className={classes.navNode}>
+        {row}
+        {link.children?.length ? (
+          <div className={classes.navChildren}>
+            {link.children.map((child) => renderNavNode(child, depth + 1))}
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+
   return (
     <Drawer
       opened={opened}
@@ -39,36 +106,27 @@ export function Sidebar({
         <IoClose size={24} />
       </ActionIcon>
 
-      {/* 1. Gắn link vào Header (Auto Home) */}
-      <Link href={"/" as Route} className={classes.homeLink} onClick={close}>
-        <Group className={classes.sidebarHeader} gap="xs">
-          <IoHomeOutline size={20} strokeWidth={2} />
-          <Text size="lg" fw={600}>
-            Home
-          </Text>
-        </Group>
-      </Link>
+      <Group className={classes.sidebarHeader} gap="xs">
+        <IoHomeOutline size={20} strokeWidth={2} />
+        <Text size="lg" fw={600}>
+          Home
+        </Text>
+      </Group>
 
-      <TextInput
-        placeholder="Search..."
-        leftSection={<IoSearch size={18} />}
-        radius="md"
-        mt="md"
-        mb={0} // 2. Ép margin-bottom = 0 để kéo text ở dưới lên
-      />
+      <div className={classes.searchSection}>
+        <TextInput
+          placeholder="Search..."
+          leftSection={<IoSearch size={18} />}
+          radius="md"
+          mt="md"
+          mb={0}
+          value={search}
+          onChange={(e) => setSearch(e.currentTarget.value)}
+        />
+      </div>
 
-      {/* Danh sách Link Navigation */}
       <div className={classes.navLinksContainer}>
-        {navLinks.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href as Route}
-            className={`${classes.sidebarLink} ${link.active ? classes.active : ''}`}
-            onClick={close}
-          >
-            {link.label}
-          </Link>
-        ))}
+        {filtered.map((link) => renderNavNode(link, 0))}
       </div>
     </Drawer>
   );

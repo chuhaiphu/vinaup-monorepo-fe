@@ -1,22 +1,12 @@
 // import { Suspense } from 'react';
 import { Container, Grid, GridCol, Stack, Group } from '@mantine/core';
 import Link from 'next/link';
-import { VideoSection } from '@vinaup/ui/landing';
 import { VinaupGridListIcon } from '@vinaup/ui/cores';
 import classes from './salon-video-and-blogs-showcase.module.scss';
 import { BlogsColumn } from './blogs-column';
+import { VideoSectionShowcase } from './video-section-showcase';
 
-export interface SalonVideoAndBlogsShowcaseProps {
-  videoUrl: string;
-  videoTitle?: string;
-  videoThumbnailUrl?: string;
-}
-
-export async function SalonVideoAndBlogsShowcase({
-  videoUrl,
-  videoTitle,
-  videoThumbnailUrl,
-}: Readonly<SalonVideoAndBlogsShowcaseProps>) {
+export async function SalonVideoAndBlogsShowcase() {
   // only use 'use cache' for landing page component only,
   // to prevent cucumulative layout shift.
   'use cache';
@@ -44,11 +34,7 @@ export async function SalonVideoAndBlogsShowcase({
                   </Link>
                 </Group>
 
-                <VideoSection
-                  url={videoUrl}
-                  title={videoTitle}
-                  thumbnailUrl={videoThumbnailUrl}
-                />
+                <VideoSectionShowcase />
               </Stack>
             </GridCol>
 

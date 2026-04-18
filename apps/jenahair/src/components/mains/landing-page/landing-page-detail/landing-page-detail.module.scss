@@ -5,7 +5,17 @@
     text-align: center;
 
     .pageDetailHeaderContainer {
+      margin: 0 auto;
       padding: 0;
+    }
+
+    .pageHomeLink {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      line-height: 0;
     }
 
     .pageTitle {
@@ -24,9 +34,47 @@
       padding: 0;
     }
 
-    .pageLinks {
+    .pageTags {
       flex-wrap: wrap;
-      gap: 8px 16px;
+      gap: 0.625rem;
+    }
+
+    .pageTagItem {
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      background: transparent;
+      padding: 0.7rem 1.1rem;
+      border-radius: 10px;
+      font-size: clamp(0.95rem, 2.2vw, 1.2rem);
+      line-height: 1.5;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      text-align: center;
+      max-width: 100%;
+      word-break: break-word;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+      }
+
+      @media (max-width: 600px) {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    .pageTagItemActive {
+      background: #ffffff;
+      border-color: var(--vinaup-amber);
+      color: var(--vinaup-amber);
+
+      &:hover {
+        background: #ffffff;
+      }
     }
   }
 

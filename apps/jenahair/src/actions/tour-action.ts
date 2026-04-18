@@ -40,7 +40,7 @@ export async function getTourByEndpointActionPublic(
   endpoint: string
 ): Promise<ActionResponse<ITourResponse>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('tours', `tour:${endpoint}`);
   return executeApi(async () => getTourByEndpointApiPublic(endpoint));
 }
@@ -55,7 +55,7 @@ export async function getAllToursActionPublic(): Promise<
   ActionResponse<ITourResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('tours');
   return executeApi(async () => getAllToursApiPublic({ visibility: 'public' }));
 }
@@ -64,7 +64,7 @@ export async function getAllToursPinnedToHomeActionPublic(): Promise<
   ActionResponse<ITourResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('tours');
   return executeApi(async () =>
     getAllToursApiPublic({ visibility: 'public', pinnedToHome: true })

@@ -80,7 +80,7 @@ export const formatFileSize = (bytes: number): string => {
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
 };
 
 export const cx = (...classNames: (string | undefined)[]): string => {
@@ -126,4 +126,24 @@ export function parseSetCookie(setCookie: string | null): ParsedCookie {
   }
 
   return { name, value, options };
+}
+
+export function parseEndpoint(endpoint: string | null | undefined): string {
+  if (!endpoint) {
+    return '/';
+  }
+
+  if (
+    endpoint.startsWith('http://') ||
+    endpoint.startsWith('https://') ||
+    endpoint.startsWith('/')
+  ) {
+    return endpoint;
+  }
+
+  return `https://${endpoint}`;
+}
+
+export function isExternalEndpoint(endpoint: string): boolean {
+  return endpoint.startsWith('http://') || endpoint.startsWith('https://');
 }

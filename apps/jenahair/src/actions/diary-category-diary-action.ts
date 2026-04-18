@@ -62,7 +62,7 @@ export async function getDiaryCategoryDiariesByDiaryIdActionPublic(
   diaryId: string
 ): Promise<ActionResponse<IDiaryCategoryDiaryResponse[]>> {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('diary-category-diaries', `diary-category-diaries:diary:${diaryId}`);
   return executeApi(async () => getDiaryCategoryDiariesByDiaryIdApiPublic(diaryId));
 }
@@ -71,8 +71,11 @@ export async function getDiaryCategoryDiariesByDiaryCategoryIdActionPublic(
   diaryCategoryId: string
 ): Promise<ActionResponse<IDiaryCategoryDiaryResponse[]>> {
   'use cache';
-  cacheLife('hours');
-  cacheTag('diary-category-diaries', `diary-category-diaries:category:${diaryCategoryId}`);
+  cacheLife('default');
+  cacheTag(
+    'diary-category-diaries',
+    `diary-category-diaries:category:${diaryCategoryId}`
+  );
   return executeApi(async () =>
     getDiaryCategoryDiariesByDiaryCategoryIdApiPublic(diaryCategoryId)
   );
@@ -82,7 +85,7 @@ export async function getAllDiaryCategoryDiariesActionPublic(): Promise<
   ActionResponse<IDiaryCategoryDiaryResponse[]>
 > {
   'use cache';
-  cacheLife('hours');
+  cacheLife('default');
   cacheTag('diary-category-diaries');
   return executeApi(async () => getAllDiaryCategoryDiariesApiPublic());
 }
@@ -103,7 +106,9 @@ export async function updateDiaryCategoryDiaryActionPrivate(
 export async function deleteDiaryCategoryDiaryActionPrivate(
   id: string
 ): Promise<ActionResponse<void>> {
-  const result = await executeApi(async () => deleteDiaryCategoryDiaryApiPrivate(id));
+  const result = await executeApi(async () =>
+    deleteDiaryCategoryDiaryApiPrivate(id)
+  );
   if (result.success) {
     invalidateDiaryCategoryDiaryTags();
   }
