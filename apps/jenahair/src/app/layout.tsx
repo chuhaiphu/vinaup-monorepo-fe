@@ -16,12 +16,13 @@ export const metadata: Metadata = {
     template: '%s | Jena Hair',
   },
   description:
-    'Jena Hair provides premium hair styling, restorative treatments, and personalized beauty services to elevate your daily look.',
+    'Jena Hair - Salon tóc cao cấp tại Việt Nam. Dịch vụ tạo kiểu, phục hồi và chăm sóc tóc chuyên nghiệp.',
   applicationName: 'Jena Hair',
   openGraph: {
     siteName: 'Jena Hair',
     type: 'website',
-    locale: 'en_US',
+    locale: 'vi_VN',
+    images: ['/images/group1.png'],
   },
   alternates: {
     canonical: 'https://jenahair.com',
@@ -33,7 +34,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 
   return (
-    <html lang="en" {...mantineHtmlProps} className={openSans.variable}>
+    <html lang="vi" {...mantineHtmlProps} className={openSans.variable}>
       <head>
         <ColorSchemeScript />
       </head>

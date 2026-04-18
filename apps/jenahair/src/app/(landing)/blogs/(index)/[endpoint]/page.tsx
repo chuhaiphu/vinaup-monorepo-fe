@@ -53,7 +53,7 @@ export async function generateMetadata({
     const blog = blogResponse.data;
     const description = blog.content
       ? blog.content.replace(/<[^>]*>/g, '').substring(0, 160)
-      : 'Discover expert hair care tips, styling inspiration, and salon insights from Jena Hair';
+      : 'Khám phá các mẹo chăm sóc tóc, cảm hứng tạo kiểu và chia sẻ từ Jena Hair';
 
     return {
       title: `${blog.title} | Jena Hair`,
@@ -61,7 +61,7 @@ export async function generateMetadata({
       openGraph: {
         title: blog.title,
         description,
-        images: blog.mainImageUrl ? [blog.mainImageUrl] : [],
+        images: blog.mainImageUrl ? [blog.mainImageUrl] : ['/images/group1.png'],
       },
       alternates: {
         canonical: `https://jenahair.com/blogs/${endpoint}`,
@@ -74,7 +74,7 @@ export async function generateMetadata({
     const category = categoryResponse.data;
     const description = category.description
       ? category.description.replace(/<[^>]*>/g, '').substring(0, 160)
-      : 'Discover expert hair care tips, styling inspiration, and salon insights from Jena Hair';
+      : 'Khám phá các mẹo chăm sóc tóc, cảm hứng tạo kiểu và chia sẻ từ Jena Hair';
 
     return {
       title: `${category.title} | Jena Hair`,

@@ -23,16 +23,9 @@ export async function generateMetadata(): Promise<Metadata> {
         description: config?.websiteDescription || '',
         url: 'https://jenahair.com',
         siteName: config?.websiteTitle || '',
-        images: [
-          {
-            url: 'https://jenahair.com/images/vietnam-sightseeing-sample.jpg',
-            width: 1200,
-            height: 630,
-            alt: 'Jena Hair signature salon services',
-          },
-        ],
-        locale: 'en_US',
+        locale: 'vi_VN',
         type: 'website',
+        images: ['/images/group1.png'],
       },
       alternates: {
         canonical: 'https://jenahair.com',
@@ -43,26 +36,19 @@ export async function generateMetadata(): Promise<Metadata> {
     return {
       title: 'Jena Hair',
       description:
-        'Jena Hair offers premium salon experiences, modern cuts, and restorative hair care tailored to your style.',
+        'Jena Hair - Salon tóc cao cấp tại Việt Nam. Dịch vụ tạo kiểu, phục hồi và chăm sóc tóc chuyên nghiệp.',
       icons: {
         icon: '/favicon.ico',
       },
       openGraph: {
         title: 'Jena Hair',
         description:
-          'Jena Hair offers premium salon experiences, modern cuts, and restorative hair care tailored to your style.',
+          'Jena Hair - Salon tóc cao cấp tại Việt Nam. Dịch vụ tạo kiểu, phục hồi và chăm sóc tóc chuyên nghiệp.',
         url: 'https://jenahair.com',
         siteName: 'Jena Hair',
-        images: [
-          {
-            url: 'https://jenahair.com/images/vietnam-sightseeing-sample.jpg',
-            width: 1200,
-            height: 630,
-            alt: 'Jena Hair signature salon services',
-          },
-        ],
-        locale: 'en_US',
+        locale: 'vi_VN',
         type: 'website',
+        images: ['/images/group1.png'],
       },
       alternates: {
         canonical: 'https://jenahair.com',

@@ -51,7 +51,7 @@ export async function generateMetadata({
     const diary = diaryResponse.data;
     const description = diary.content
       ? diary.content.replace(/<[^>]*>/g, '').substring(0, 160)
-      : 'Discover expert hair care tips, styling inspiration, and salon insights from Jena Hair';
+      : 'Khám phá các mẹo chăm sóc tóc, cảm hứng tạo kiểu và chia sẻ từ Jena Hair';
 
     return {
       title: `${diary.title} | Jena Hair`,
@@ -59,7 +59,7 @@ export async function generateMetadata({
       openGraph: {
         title: diary.title,
         description,
-        images: diary.mainImageUrl ? [diary.mainImageUrl] : [],
+        images: diary.mainImageUrl ? [diary.mainImageUrl] : ['/images/group1.png'],
       },
       alternates: {
         canonical: `https://jenahair.com/nhat-ky/${endpoint}`,
@@ -72,7 +72,7 @@ export async function generateMetadata({
     const category = categoryResponse.data;
     const description = category.description
       ? category.description.replace(/<[^>]*>/g, '').substring(0, 160)
-      : 'Discover expert hair care tips, styling inspiration, and salon insights from Jena Hair';
+      : 'Khám phá các mẹo chăm sóc tóc, cảm hứng tạo kiểu và chia sẻ từ Jena Hair';
 
     return {
       title: `${category.title} | Jena Hair`,
