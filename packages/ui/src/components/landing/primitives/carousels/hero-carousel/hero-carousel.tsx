@@ -20,6 +20,7 @@ interface HeroCarouselProps {
   data: HeroSlide[];
   height?: string | number;
   overlayOpacity?: number;
+  borderRadius?: string | number;
 }
 
 export function HeroCarousel({
@@ -27,6 +28,7 @@ export function HeroCarousel({
   data,
   height = '80vh',
   overlayOpacity = 0.6,
+  borderRadius = '0',
 }: HeroCarouselProps) {
   const autoplay = useRef(
     Autoplay({
@@ -44,6 +46,7 @@ export function HeroCarousel({
         {
           '--carousel-height': height,
           '--carousel-overlay-opacity': overlayOpacity,
+          '--carousel-border-radius': typeof borderRadius === 'number' ? `${borderRadius}px` : borderRadius,
         } as React.CSSProperties
       }
     >

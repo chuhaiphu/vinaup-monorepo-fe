@@ -20,7 +20,7 @@ export async function SalonDiarySection() {
   return (
     <section>
       <Container size={'xl'}>
-        <Stack gap="2rem">
+        <Stack gap="3rem">
           <div className={classes.header}>
             <h2 className={classes.title}>Nhật ký cắt tóc nữ</h2>
             <p className={classes.description}>

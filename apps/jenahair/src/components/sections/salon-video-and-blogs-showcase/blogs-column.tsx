@@ -12,7 +12,7 @@ export async function BlogsColumn() {
   const second = blogs[1];
 
   return (
-    <Stack gap="lg" justify="space-between" style={{ flexGrow: 1 }}>
+    <Stack gap="lg" justify="space-start" style={{ flexGrow: 1 }}>
       {first && (
         <Link
           href={`/blogs/${first.endpoint}` as Route}

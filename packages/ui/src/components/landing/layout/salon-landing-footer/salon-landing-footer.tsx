@@ -68,7 +68,15 @@ export function SalonLandingFooter() {
             style={{ color: 'inherit' }}
             className={classes.copyrightText}
           >
-            <span className={classes.brandName}>Jenahair</span> © 2026 by VinaUp
+            <span className={classes.brandName}>Jenahair</span> © 2026 by{' '}
+            <Anchor 
+              href="https://vinaup.net" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              size=""
+            >
+              VinaUp
+            </Anchor>
           </Text>
         </div>
       </Container>

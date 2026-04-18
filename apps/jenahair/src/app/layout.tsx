@@ -31,13 +31,16 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+
   return (
     <html lang="en" {...mantineHtmlProps} className={openSans.variable}>
       <head>
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineConfigProvider>{children}</MantineConfigProvider>
+        <MantineConfigProvider>
+          {children}
+        </MantineConfigProvider>
       </body>
     </html>
   );

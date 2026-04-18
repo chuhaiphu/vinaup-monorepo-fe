@@ -25,7 +25,7 @@ export default function MantineConfigProviderContainer({
           if (size === 'xl') {
             return {
               root: {
-                '--container-size': '1440px',
+                '--container-size': '1232px',
               },
             }
           }

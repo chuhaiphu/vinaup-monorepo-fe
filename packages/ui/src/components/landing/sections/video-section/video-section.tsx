@@ -9,7 +9,7 @@ import { BsPlayBtnFill } from 'react-icons/bs';
 interface VideoPlayerProps {
   url?: string;
   title?: string;
-  height?: number;
+  height?: number | string;
   thumbnailUrl?: string;
 }
 
@@ -32,7 +32,10 @@ export function VideoSection({
     : embedUrl;
 
   return (
-    <div className={classes.videoContainer} style={{ height: height || '640px' }}>
+    <div 
+      className={classes.videoContainer} 
+      // style={{ height: typeof height === 'number' ? `${height}px` : height || '640px' }}
+    >
       {!isPlaying && thumbnailUrl && (
         <div
           className={classes.thumbnail}
