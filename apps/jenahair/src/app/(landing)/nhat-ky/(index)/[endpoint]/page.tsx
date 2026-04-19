@@ -102,6 +102,7 @@ export default async function DiaryEndpointPage({
   params,
   searchParams,
 }: DiaryEndpointPageProps) {
+
   const { endpoint } = await params;
 
   if (endpoint === DIARY_ENDPOINT_PLACEHOLDER) {

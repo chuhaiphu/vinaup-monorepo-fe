@@ -1,11 +1,9 @@
 'use client';
 
 import { IPageResponse } from '@/interfaces/page-interface';
+import { IAppConfigResponse } from '@/interfaces/app-config-interface';
 import { Container, Group, Stack, Text } from '@mantine/core';
-import {
-  VinaupLocationIcon as LocationIcon,
-  VinaupHomeIcon as HomeIcon,
-} from '@vinaup/ui/cores';
+import { VinaupLocationIcon as LocationIcon } from '@vinaup/ui/cores';
 import Link from 'next/link';
 import { Route } from 'next';
 import {
@@ -13,30 +11,26 @@ import {
   SectionCarousel,
   VideoSection,
 } from '@vinaup/ui/landing';
-import ContactForm from '@/components/forms/contact-form/contact-form';
-import { submitCustomerContactActionPublic } from '@/actions/customer-contact-action';
-import classes from './landing-page-detail.module.scss';
+import ContactPageContent from '@/components/mains/landing-page/contact-page-content/contact-page-content';
+import classes from './dynamic-endpoint-page-content.module.scss';
 
-interface LandingPageDetailProps {
-  page: IPageResponse;
+interface DynamicEndpointPageContentProps {
+  page: IPageResponse | undefined;
   allPages: IPageResponse[];
+  appConfig?: IAppConfigResponse;
 }
 
-export default function LandingPageDetail({
+export default function DynamicEndpointPageContent({
   page,
   allPages,
-}: LandingPageDetailProps) {
+  appConfig,
+}: DynamicEndpointPageContentProps) {
+  if (!page) {
+    return <div className={classes.pageDetailPage}>Page not found</div>;
+  }
+
   const additionalImageSlides: SectionCarouselSlide[] =
     page.additionalImageUrls.map((url) => ({ src: url }));
-
-  const handleContactSubmit = async (formData: FormData) => {
-    const result = await submitCustomerContactActionPublic(formData);
-    if (result.success) {
-      alert('Your contact request has been submitted successfully!');
-    } else {
-      alert(result.error || 'Submission failed. Please try again.');
-    }
-  };
 
   const renderAdditionalImagesCarousel = () => {
     if (additionalImageSlides.length === 0) return <></>;
@@ -153,17 +147,7 @@ export default function LandingPageDetail({
         <Container size={'lg'} className={classes.pageDetailContentContainer}>
           {renderHTMLContent(page.content)}
           {page.type === 'contact' && (
-            <ContactForm
-              onSubmit={handleContactSubmit}
-              nameFieldName="name"
-              emailFieldName="email"
-              phoneFieldName="phone"
-              notesFieldName="notes"
-              notesLabel="Your message"
-              notesPlaceholder="Enter your message"
-              phoneEmailLayout="inline"
-              showTitle={false}
-            />
+            <ContactPageContent appConfig={appConfig} />
           )}
         </Container>
       </section>

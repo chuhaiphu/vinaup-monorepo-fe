@@ -1,4 +1,3 @@
-import { getAllBlogCategoriesActionPublic } from '@/actions/blog-category-action';
 import { getBlogCategoryBlogsByBlogCategoryIdActionPublic } from '@/actions/blog-category-blog-action';
 import BlogGrid from '@/components/grids/blog-grid/blog-grid';
 import BlogCategoryTags from '@/components/primitives/blog-category-tags/blog-category-tags';
@@ -7,6 +6,8 @@ import { IBlogResponse } from '@/interfaces/blog-interface';
 import { Box, Container, Stack } from '@mantine/core';
 import { VideoSection } from '@vinaup/ui/landing';
 import classes from './landing-blog-category-page-content.module.scss';
+import { Suspense } from 'react';
+import BlogCategoryTagsSkeleton from '@/components/primitives/blog-category-tags/blog-category-tags-skeleton';
 
 type LandingBlogCategoryPageContentProps = {
   category: IBlogCategoryResponse;
@@ -25,12 +26,8 @@ export default async function LandingBlogCategoryPageContent({
 }: LandingBlogCategoryPageContentProps) {
   const queryParams = await searchParams;
 
-  const [blogCategoriesResponse, blogCategoryBlogsResponse] = await Promise.all([
-    getAllBlogCategoriesActionPublic(),
-    getBlogCategoryBlogsByBlogCategoryIdActionPublic(category.id),
-  ]);
-
-  const blogCategories = blogCategoriesResponse.data || [];
+  const blogCategoryBlogsResponse =
+    await getBlogCategoryBlogsByBlogCategoryIdActionPublic(category.id);
 
   const blogsInCategory: IBlogResponse[] =
     blogCategoryBlogsResponse.success && blogCategoryBlogsResponse.data
@@ -73,10 +70,9 @@ export default async function LandingBlogCategoryPageContent({
 
       {/* --- 2. INTRO SECTION --- */}
       <Container size={'xl'} className={classes.blogCategoryIntro}>
-        <BlogCategoryTags
-          blogCategories={blogCategories}
-          activeEndpoint={category.endpoint}
-        />
+        <Suspense fallback={<BlogCategoryTagsSkeleton />}>
+          <BlogCategoryTags activeEndpoint={category.endpoint} />
+        </Suspense>
         <Box mt={'sm'}>
           {category.videoPosition === 'top' && renderVideoSection()}
         </Box>

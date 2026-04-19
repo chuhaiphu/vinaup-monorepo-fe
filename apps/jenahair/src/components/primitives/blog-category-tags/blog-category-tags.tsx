@@ -1,17 +1,18 @@
-import { IBlogCategoryResponse } from '@/interfaces/blog-category-interface';
 import { Group } from '@mantine/core';
 import { VinaupGridListIcon } from '@vinaup/ui/cores';
 import { Route } from 'next';
 import Link from 'next/link';
 import classes from './blog-category-tags.module.scss';
+import { getAllBlogCategoriesActionPublic } from '@/actions/blog-category-action';
 
-export default function BlogCategoryTags({
-  blogCategories,
+export default async function BlogCategoryTags({
   activeEndpoint,
 }: {
-  blogCategories: IBlogCategoryResponse[];
   activeEndpoint?: string;
 }) {
+  const blogCategoriesResponse = await getAllBlogCategoriesActionPublic();
+  const blogCategories = blogCategoriesResponse.data || [];
+
   const sortedCategories = [...blogCategories].sort(
     (a, b) => a.sortOrder - b.sortOrder
   );

@@ -6,6 +6,7 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 import { SalonLandingFooter } from '@vinaup/ui/landing';
 import LandingHeader from '@/components/headers/landing-header/landing-header';
+import { MaintenanceGuard } from '@/components/guards/maintenance-guard';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -64,7 +65,9 @@ export default async function LandingLayout({
 }) {
   return (
     <main className={classes.landingLayout}>
-      <Suspense fallback={null}>{/* <MaintenanceGuard /> */}</Suspense>
+      <Suspense fallback={null}>
+        <MaintenanceGuard />
+      </Suspense>
       <LandingHeader />
       {children}
       <SalonLandingFooter />

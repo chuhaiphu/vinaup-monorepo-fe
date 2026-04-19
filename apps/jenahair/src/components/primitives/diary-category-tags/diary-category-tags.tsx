@@ -1,17 +1,18 @@
-import { IDiaryCategoryResponse } from '@/interfaces/diary-category-interface';
 import { Group } from '@mantine/core';
 import { VinaupGridListIcon } from '@vinaup/ui/cores';
 import { Route } from 'next';
 import Link from 'next/link';
 import classes from './diary-category-tags.module.scss';
+import { getAllDiaryCategoriesActionPublic } from '@/actions/diary-category-action';
 
-export default function DiaryCategoryTags({
-  diaryCategories,
+export default async function DiaryCategoryTags({
   activeEndpoint,
 }: {
-  diaryCategories: IDiaryCategoryResponse[];
   activeEndpoint?: string;
 }) {
+  const diaryCategoriesResponse = await getAllDiaryCategoriesActionPublic();
+  const diaryCategories = diaryCategoriesResponse.data || [];
+
   const sortedCategories = [...diaryCategories].sort(
     (a, b) => a.sortOrder - b.sortOrder
   );

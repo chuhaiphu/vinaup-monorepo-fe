@@ -1,11 +1,11 @@
 import { getAllDiariesActionPublic } from '@/actions/diary-action';
-import { getAllDiaryCategoriesActionPublic } from '@/actions/diary-category-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';
 import DiaryCategoryTags from '@/components/primitives/diary-category-tags/diary-category-tags';
 import { Stack, Box, Container } from '@mantine/core';
 import classes from './page.module.scss';
 import { Suspense } from 'react';
 import DiaryGridSkeleton from '@/components/grids/diary-grid/diary-grid-skeleton';
+import DiaryCategoryTagsSkeleton from '@/components/primitives/diary-category-tags/diary-category-tags-skeleton';
 
 export type DiaryCategoryPageQueryParams = {
   q?: string;
@@ -29,9 +29,6 @@ export default async function DiaryIndexPage({
 }: {
   searchParams: Promise<DiaryCategoryPageQueryParams>;
 }) {
-  const diaryCategoriesResponse = await getAllDiaryCategoriesActionPublic();
-  const diaryCategories = diaryCategoriesResponse.data || [];
-
   return (
     <div className={classes.pageWrapper}>
       {/* --- 1. ORANGE HEADER --- */}
@@ -44,7 +41,9 @@ export default async function DiaryIndexPage({
       {/* --- 2. INTRO SECTION --- */}
       <Container size={'xl'} className={classes.introSection}>
         <Stack gap="sm">
-          <DiaryCategoryTags diaryCategories={diaryCategories} />
+          <Suspense fallback={<DiaryCategoryTagsSkeleton />}>
+            <DiaryCategoryTags />
+          </Suspense>
         </Stack>
       </Container>
 

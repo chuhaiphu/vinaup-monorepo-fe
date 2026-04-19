@@ -36,9 +36,7 @@ export async function generateStaticParams() {
 
   const params = [...blogParams, ...categoryParams];
 
-  return params.length > 0
-    ? params
-    : [{ endpoint: BLOG_ENDPOINT_PLACEHOLDER }];
+  return params.length > 0 ? params : [{ endpoint: BLOG_ENDPOINT_PLACEHOLDER }];
 }
 
 export async function generateMetadata({

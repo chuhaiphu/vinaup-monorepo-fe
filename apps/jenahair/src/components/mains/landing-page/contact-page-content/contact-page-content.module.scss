@@ -1,0 +1,30 @@
+.contactInfoCard {
+  background-color: #3d4c38;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  height: 100%;
+
+  .contactInfoTitle {
+    color: #ffffff;
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+  }
+
+  .iconWrapper {
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .itemLabel {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .itemValue {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+}

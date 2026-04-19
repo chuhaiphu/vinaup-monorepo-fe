@@ -1,4 +1,3 @@
-import { getAllDiaryCategoriesActionPublic } from '@/actions/diary-category-action';
 import { getDiaryCategoryDiariesByDiaryCategoryIdActionPublic } from '@/actions/diary-category-diary-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';
 import DiaryCategoryTags from '@/components/primitives/diary-category-tags/diary-category-tags';
@@ -25,14 +24,8 @@ export default async function LandingDiaryCategoryPageContent({
 }: LandingDiaryCategoryPageContentProps) {
   const queryParams = await searchParams;
 
-  const [diaryCategoriesResponse, diaryCategoryDiariesResponse] = await Promise.all(
-    [
-      getAllDiaryCategoriesActionPublic(),
-      getDiaryCategoryDiariesByDiaryCategoryIdActionPublic(category.id),
-    ]
-  );
-
-  const diaryCategories = diaryCategoriesResponse.data || [];
+  const diaryCategoryDiariesResponse =
+    await getDiaryCategoryDiariesByDiaryCategoryIdActionPublic(category.id);
 
   const diariesInCategory: IDiaryResponse[] =
     diaryCategoryDiariesResponse.success && diaryCategoryDiariesResponse.data
@@ -75,10 +68,7 @@ export default async function LandingDiaryCategoryPageContent({
 
       {/* --- 2. INTRO SECTION --- */}
       <Container size={'xl'} className={classes.diaryCategoryIntro}>
-        <DiaryCategoryTags
-          diaryCategories={diaryCategories}
-          activeEndpoint={category.endpoint}
-        />
+        <DiaryCategoryTags activeEndpoint={category.endpoint} />
         <Box mt={'sm'}>
           {category.videoPosition === 'top' && renderVideoSection()}
         </Box>
