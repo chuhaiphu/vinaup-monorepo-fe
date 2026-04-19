@@ -34,7 +34,7 @@ export function VideoSection({
   return (
     <div 
       className={classes.videoContainer} 
-      // style={{ height: typeof height === 'number' ? `${height}px` : height || '640px' }}
+      style={{ height: typeof height === 'number' ? `${height}px` : height }}
     >
       {!isPlaying && thumbnailUrl && (
         <div

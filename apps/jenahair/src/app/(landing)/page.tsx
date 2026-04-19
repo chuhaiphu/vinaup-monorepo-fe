@@ -22,11 +22,13 @@ export default function Home() {
     <div>
 
       <Container size={'xl'}>
-        <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" borderRadius={20} />
-        <BrandIntroduction />
+        <Stack gap="3rem">
+          <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" borderRadius={20} />
+          <BrandIntroduction />
+        </Stack>
       </Container>
 
-      <Stack gap="3rem" pt="3rem" pb="3rem">
+      <Stack gap="3rem" pt="3rem">
         <AutoScrollCarousel>
           {PARTNER_BRANDS.map((brand, index) => (
             <div key={index} className={classes.brandItem}>

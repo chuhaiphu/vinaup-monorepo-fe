@@ -7,6 +7,7 @@ import { useState } from 'react';
 import DiaryItem from './diary-item/diary-item';
 import classes from './diary-grid.module.scss';
 import { Route } from 'next';
+import { Carousel, CarouselSlide } from '@mantine/carousel';
 
 type DiaryGridProps = {
   queryParams?: {
@@ -74,17 +75,43 @@ export default function DiaryGrid({
   const start = (page - 1) * pageSize;
   const paginated = filteredDiaries.slice(start, start + pageSize);
 
+  const renderDiaryCard = (item: IDiaryResponse) => (
+    <Link href={`/nhat-ky/${item.endpoint}` as Route} className={classes.cardLink}>
+      <DiaryItem item={item} />
+    </Link>
+  );
+
   return (
     <>
-      <Grid mt={'lg'} mb={'md'} gap="lg">
+      {/* Desktop and tablet grid view */}
+      <Grid mt={'lg'} mb={'md'} gap="lg" visibleFrom="md">
         {paginated.map((item) => (
           <GridCol span={{ base: 12, sm: 6, md: 3 }} key={item.id}>
-            <Link href={`/nhat-ky/${item.endpoint}` as Route} className={classes.cardLink}>
-              <DiaryItem item={item} />
-            </Link>
+            {renderDiaryCard(item)}
           </GridCol>
         ))}
       </Grid>
+
+      {/* Mobile carousel view */}
+      <Carousel
+        mt="lg"
+        mb="md"
+        slideSize="80%"
+        slideGap="md"
+        withControls={false}
+        hiddenFrom="md"
+        classNames={{
+          container: classes.carouselContainer,
+          viewport: classes.carouselViewport,
+        }}
+      >
+        {paginated.map((item) => (
+          <CarouselSlide key={item.id}>
+            {renderDiaryCard(item)}
+          </CarouselSlide>
+        ))}
+      </Carousel>
+
       {showPagination && totalPages > 1 && (
         <div className={classes.paginationWrapper}>
           <Pagination total={totalPages} value={page} onChange={setPage} />

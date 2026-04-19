@@ -106,10 +106,18 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
         <IoClose size={24} />
       </ActionIcon>
 
-      <Group className={classes.sidebarHeader} gap="xs">
-        <IoHomeOutline size={20} strokeWidth={2} />
-        <Text size="lg" fw={600}>
-          Home
+      <Group justify="space-between" align="center" mb="sm">
+        <Link href={"/" as Route} className={classes.homeLink} onClick={close}>
+          <Group className={classes.sidebarHeader} gap="xs">
+            <IoHomeOutline size={20} strokeWidth={2} />
+            <Text size="lg" fw={600}>
+              Home
+            </Text>
+          </Group>
+        </Link>
+
+        <Text className={classes.brandTitle}>
+          Jenahair
         </Text>
       </Group>
 

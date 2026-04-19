@@ -1,6 +1,6 @@
 .footerWrapper {
   background-color: transparent;
-  margin-top: 1rem;
+  margin-top: 3rem;
 }
 
 .footerContainer {
@@ -102,9 +102,11 @@
 
 .copyright {
   text-align: center;
-  padding: 2rem 0;
   color: #ffffff;
-  max-height: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   @media (max-width: 768px) {
     padding: 1.5rem 0;
