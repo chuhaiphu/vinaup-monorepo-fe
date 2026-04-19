@@ -69,14 +69,11 @@ export default async function LandingHeader() {
 
   const socialLinks = socialLinksData
     .filter((item) => item.isActive)
-    .map((item) => {
+    .flatMap((item) => {
       const key = item.platform.toLowerCase();
       const iconConfig = SOCIAL_ICON_MAP[key];
-      return {
-        icon: iconConfig.icon,
-        href: item.url,
-        label: iconConfig.label,
-      };
+      if (!iconConfig) return [];
+      return [{ icon: iconConfig.icon, href: item.url, label: iconConfig.label }];
     });
 
   const navLinks = buildNavLinks(menusResponse.data ?? []);
