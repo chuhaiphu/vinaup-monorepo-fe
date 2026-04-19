@@ -68,15 +68,12 @@ export default async function LandingHeader() {
   const socialLinksData = socialLinksResponse.data?.value ?? [];
 
   const socialLinks = socialLinksData
-    .filter((item) => item.isActive && SOCIAL_ICON_MAP[item.platform.toLowerCase()])
-    .map((item) => {
+    .filter((item) => item.isActive)
+    .flatMap((item) => {
       const key = item.platform.toLowerCase();
       const iconConfig = SOCIAL_ICON_MAP[key];
-      return {
-        icon: iconConfig.icon,
-        href: item.url,
-        label: iconConfig.label,
-      };
+      if (!iconConfig) return [];
+      return [{ icon: iconConfig.icon, href: item.url, label: iconConfig.label }];
     });
 
   const navLinks = buildNavLinks(menusResponse.data ?? []);
