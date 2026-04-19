@@ -22,14 +22,17 @@
         top: 1rem;
         left: -3.5rem;
     }
+
     &[data-position="left"] {
         top: 1rem;
         right: -3.5rem;
     }
+
     &[data-position="top"] {
         bottom: -3.5rem;
         right: 1.5rem;
     }
+
     &[data-position="bottom"] {
         top: -3.5rem;
         right: 1.5rem;
@@ -37,8 +40,6 @@
 }
 
 .searchSection {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    padding-bottom: 0.75rem;
     margin-bottom: 0.25rem;
 }
 
@@ -60,7 +61,7 @@
 .sidebarLink {
     text-decoration: none;
     color: var(--vinaup-black);
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 500;
     padding: 0.5rem 0.75rem;
     padding-left: 12px;
@@ -73,4 +74,17 @@
         background-color: rgba(211, 211, 211, 0.3);
         transform: translateX(5px);
     }
+}
+
+.homeLink {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.brandTitle {
+    color: var(--vinaup-black);
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.5px;
 }

@@ -68,7 +68,7 @@ export default async function LandingHeader() {
   const socialLinksData = socialLinksResponse.data?.value ?? [];
 
   const socialLinks = socialLinksData
-    .filter((item) => item.isActive)
+    .filter((item) => item.isActive && SOCIAL_ICON_MAP[item.platform.toLowerCase()])
     .map((item) => {
       const key = item.platform.toLowerCase();
       const iconConfig = SOCIAL_ICON_MAP[key];
