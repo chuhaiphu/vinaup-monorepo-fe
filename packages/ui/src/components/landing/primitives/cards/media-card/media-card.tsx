@@ -61,7 +61,6 @@ export function MediaCard({
     </div>
   );
 
-  // 3. Render có Link hoặc không có Link
   if (href) {
     return (
       <Link href={href as Route} className={classes.linkWrapper}>

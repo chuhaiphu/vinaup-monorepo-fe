@@ -44,10 +44,3 @@
     background: #ffffff;
   }
 }
-
-.pendingCursor {
-  &,
-  & * {
-    cursor: wait !important;
-  }
-}

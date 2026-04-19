@@ -8,8 +8,5 @@ export async function VideoSectionShowcase() {
     (item) => item.platform.toLowerCase() === 'youtube' && item.isActive
   );
 
-  // return <VideoSection url={youtubeItem?.url ?? ''} />;
-
-  //Test 
-  return <VideoSection url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"/>;
+  return <VideoSection url={youtubeItem?.url ?? ''} />;
 }
