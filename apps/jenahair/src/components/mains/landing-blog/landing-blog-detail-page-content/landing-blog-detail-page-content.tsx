@@ -118,12 +118,12 @@ export default async function LandingBlogDetailPageContent({
   const renderBlogAction = () => {
     return (
       <>
-        <Group gap={6}>
+        {/* <Group gap={6}>
           <FaShareAlt color="var(--vinaup-amber)" size={18} />
           <Text fz={18} c={'white'}>
             Share
           </Text>
-        </Group>
+        </Group> */}
         <Group gap={6}>
           <LikeBlogButton blogId={blogData.id} likes={blogData.likes || 0} />
         </Group>
@@ -133,14 +133,14 @@ export default async function LandingBlogDetailPageContent({
             {blogData.views || 0}
           </Text>
         </Group>
-        <Group gap={6}>
-          <FaRegCopy color="var(--vinaup-amber)" size={18} />
-          <CopyToClipboard content={currentUrl}>
+        <CopyToClipboard content={currentUrl}>
+          <Group gap={6}>
+            <FaRegCopy color="var(--vinaup-amber)" size={18} />
             <Text fz={18} c={'white'}>
               Link
             </Text>
-          </CopyToClipboard>
-        </Group>
+          </Group>
+        </CopyToClipboard>
       </>
     );
   };

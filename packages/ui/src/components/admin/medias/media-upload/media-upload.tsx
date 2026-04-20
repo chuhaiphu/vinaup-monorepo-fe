@@ -1,11 +1,27 @@
 'use client';
 import '@mantine/dropzone/styles.css';
-import { Group, Text, Loader, Stack, Paper, Image, Grid, GridCol, UnstyledButton } from "@mantine/core";
-import { Dropzone, DropzoneAccept, DropzoneIdle, DropzoneReject, FileRejection } from '@mantine/dropzone';
-import { TbUpload, TbPhoto } from "react-icons/tb";
-import { HiOutlineX } from "react-icons/hi";
-import { useState, useEffect } from "react";
-import { notifications } from "@mantine/notifications";
+import {
+  Group,
+  Text,
+  Loader,
+  Stack,
+  Paper,
+  Image,
+  Grid,
+  GridCol,
+  UnstyledButton,
+} from '@mantine/core';
+import {
+  Dropzone,
+  DropzoneAccept,
+  DropzoneIdle,
+  DropzoneReject,
+  FileRejection,
+} from '@mantine/dropzone';
+import { TbUpload, TbPhoto } from 'react-icons/tb';
+import { HiOutlineX } from 'react-icons/hi';
+import { useState, useEffect } from 'react';
+import { notifications } from '@mantine/notifications';
 import { cx, validateImageFile, formatFileSize } from '@vinaup/utils';
 import defaultClasses from './media-upload.module.scss';
 import type { ICreateMedia, MediaUploadHandlers } from '../_types';
@@ -69,7 +85,7 @@ export function MediaUpload({
   const handleDrop = async (files: File[]) => {
     if (files.length === 0) return;
 
-    const invalidFiles = files.filter(file => !validateImageFile(file));
+    const invalidFiles = files.filter((file) => !validateImageFile(file));
     if (invalidFiles.length > 0) {
       notifications.show({
         title: 'Invalid file type',
@@ -159,7 +175,10 @@ export function MediaUpload({
     } catch (error) {
       notifications.show({
         title: 'Copy failed',
-        message: error instanceof Error ? error.message : 'Failed to copy link to clipboard',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'Failed to copy link to clipboard',
         color: 'red',
       });
     }
@@ -169,7 +188,7 @@ export function MediaUpload({
     <Stack
       gap="lg"
       classNames={{
-        root: classNames?.rootStack?.root
+        root: classNames?.rootStack?.root,
       }}
     >
       <Dropzone
@@ -186,7 +205,7 @@ export function MediaUpload({
           gap="xl"
           mih={220}
           classNames={{
-            root: classNames?.dropzoneGroup?.root
+            root: classNames?.dropzoneGroup?.root,
           }}
         >
           {isUploading ? (
@@ -210,7 +229,7 @@ export function MediaUpload({
               size="xl"
               inline
               classNames={{
-                root: classNames?.dropzoneText?.root
+                root: classNames?.dropzoneText?.root,
               }}
             >
               Drag images here or click to select files
@@ -221,10 +240,10 @@ export function MediaUpload({
               inline
               mt={7}
               classNames={{
-                root: classNames?.dropzoneSubtext?.root
+                root: classNames?.dropzoneSubtext?.root,
               }}
             >
-              (png, jpg, jpeg; Size ≤ 2M)
+              (png, jpg, jpeg; Size ≤ 5Mbs)
             </Text>
           </div>
         </Group>
@@ -232,15 +251,18 @@ export function MediaUpload({
 
       {uploadFiles.length > 0 && (
         <Stack
-          gap='xs'
+          gap="xs"
           classNames={{
-            root: classNames?.recentStack?.root
+            root: classNames?.recentStack?.root,
           }}
         >
           <Text
             fw={500}
             classNames={{
-              root: cx(defaultClasses.sectionTitleRoot, classNames?.sectionTitle?.root)
+              root: cx(
+                defaultClasses.sectionTitleRoot,
+                classNames?.sectionTitle?.root
+              ),
             }}
           >
             Recently Uploaded Images
@@ -253,48 +275,65 @@ export function MediaUpload({
                   withBorder
                   radius="md"
                   classNames={{
-                    root: classNames?.itemPaper?.root
+                    root: classNames?.itemPaper?.root,
                   }}
                 >
                   <Stack
                     gap={6}
                     classNames={{
-                      root: classNames?.itemStack?.root
+                      root: classNames?.itemStack?.root,
                     }}
                   >
-                    <div className={cx(defaultClasses.imageContainer, classNames?.imageContainer)}>
+                    <div
+                      className={cx(
+                        defaultClasses.imageContainer,
+                        classNames?.imageContainer
+                      )}
+                    >
                       <Image
                         src={item.preview}
                         alt={item.file.name}
                         fit="cover"
                         classNames={{
-                          root: cx(defaultClasses.itemImageRoot, classNames?.itemImage?.root)
+                          root: cx(
+                            defaultClasses.itemImageRoot,
+                            classNames?.itemImage?.root
+                          ),
                         }}
                       />
                       {item.status === 'uploading' && (
-                        <div className={cx(defaultClasses.uploadingOverlay, classNames?.uploadingOverlay)}>
+                        <div
+                          className={cx(
+                            defaultClasses.uploadingOverlay,
+                            classNames?.uploadingOverlay
+                          )}
+                        >
                           <Loader size="sm" color="white" />
                         </div>
                       )}
                       {item.status === 'success' && (
-                        <div className={cx(
-                          defaultClasses.statusBadge,
-                          defaultClasses.statusBadgeSuccess,
-                          classNames?.statusBadge,
-                          classNames?.statusBadgeSuccess
-                        )}>
+                        <div
+                          className={cx(
+                            defaultClasses.statusBadge,
+                            defaultClasses.statusBadgeSuccess,
+                            classNames?.statusBadge,
+                            classNames?.statusBadgeSuccess
+                          )}
+                        >
                           <Text size="xs" c="white" fw={700}>
                             ✓
                           </Text>
                         </div>
                       )}
                       {item.status === 'error' && (
-                        <div className={cx(
-                          defaultClasses.statusBadge,
-                          defaultClasses.statusBadgeError,
-                          classNames?.statusBadge,
-                          classNames?.statusBadgeError
-                        )}>
+                        <div
+                          className={cx(
+                            defaultClasses.statusBadge,
+                            defaultClasses.statusBadgeError,
+                            classNames?.statusBadge,
+                            classNames?.statusBadgeError
+                          )}
+                        >
                           <HiOutlineX size={16} color="white" />
                         </div>
                       )}
@@ -305,7 +344,7 @@ export function MediaUpload({
                       lineClamp={1}
                       title={item.file.name}
                       classNames={{
-                        root: classNames?.itemFilename?.root
+                        root: classNames?.itemFilename?.root,
                       }}
                     >
                       {item.file.name}
@@ -315,14 +354,14 @@ export function MediaUpload({
                       align="end"
                       gap="xs"
                       classNames={{
-                        root: classNames?.itemGroup?.root
+                        root: classNames?.itemGroup?.root,
                       }}
                     >
                       <Text
                         size="xs"
                         c="dimmed"
                         classNames={{
-                          root: classNames?.itemFilesize?.root
+                          root: classNames?.itemFilesize?.root,
                         }}
                       >
                         {formatFileSize(item.file.size)}
@@ -331,14 +370,17 @@ export function MediaUpload({
                         <UnstyledButton
                           onClick={() => handleCopyLink(item.url!)}
                           classNames={{
-                            root: cx(defaultClasses.copyButtonRoot, classNames?.copyButton?.root)
+                            root: cx(
+                              defaultClasses.copyButtonRoot,
+                              classNames?.copyButton?.root
+                            ),
                           }}
                         >
                           <Text
                             size="sm"
                             c="blue"
                             classNames={{
-                              root: classNames?.copyButtonText?.root
+                              root: classNames?.copyButtonText?.root,
                             }}
                           >
                             Copy link
@@ -351,7 +393,7 @@ export function MediaUpload({
                         size="xs"
                         c="red"
                         classNames={{
-                          root: classNames?.itemError?.root
+                          root: classNames?.itemError?.root,
                         }}
                       >
                         {item.error || 'Upload failed'}

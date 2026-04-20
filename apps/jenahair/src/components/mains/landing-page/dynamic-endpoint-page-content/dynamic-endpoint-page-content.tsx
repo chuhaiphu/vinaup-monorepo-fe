@@ -117,9 +117,9 @@ export default function DynamicEndpointPageContent({
       </section>
 
       <section className={classes.pageDetailInfo}>
-        <Container size={'lg'} className={classes.pageDetailInfoContainer}>
+        {/* <Container size={'lg'} className={classes.pageDetailInfoContainer}>
           {renderPageTitles()}
-        </Container>
+        </Container> */}
       </section>
 
       {page.additionalImagesPosition === 'top' &&

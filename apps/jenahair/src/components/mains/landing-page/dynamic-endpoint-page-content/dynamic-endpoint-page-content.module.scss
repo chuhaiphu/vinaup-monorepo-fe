@@ -6,7 +6,7 @@
 
     .pageDetailHeaderContainer {
       margin: 0 auto;
-      padding: 0;
+      // padding: 0;
     }
 
     .pageHomeLink {
@@ -31,7 +31,7 @@
     margin-bottom: 1.5rem;
 
     .pageDetailInfoContainer {
-      padding: 0;
+      // padding: 0;
     }
 
     .pageTags {
@@ -80,11 +80,6 @@
 
   .pageDetailContent {
     .pageDetailContentContainer {
-      padding: 1.25rem;
-      background: #ffffff;
-      opacity: 0.75;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-      border-radius: 0.5rem;
     }
   }
 
@@ -93,7 +88,7 @@
     margin-bottom: 1.5rem;
 
     .pageCarouselSectionContainer {
-      padding: 0;
+      // padding: 0;
     }
   }
 
@@ -115,8 +110,15 @@
   }
 
   .htmlContent {
+    background: #ffffff;
+    opacity: 0.75;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+    padding: 1rem;
+
     > * {
       color: black;
+      font-size: 1.1rem;
     }
 
     h1 {

@@ -1,5 +1,6 @@
 'use client';
 import { UnstyledButton } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 
 export function CopyToClipboard({
   content,
@@ -8,9 +9,13 @@ export function CopyToClipboard({
   content: string;
   children: React.ReactNode;
 }) {
-  return (
-    <UnstyledButton onClick={() => navigator.clipboard.writeText(content)}>
-      {children}
-    </UnstyledButton>
-  );
+  const handleCopy = () => {
+    navigator.clipboard.writeText(content);
+    Notifications.show({
+      title: 'Copy thành công',
+      message: content,
+      color: 'green',
+    });
+  };
+  return <UnstyledButton onClick={handleCopy}>{children}</UnstyledButton>;
 }

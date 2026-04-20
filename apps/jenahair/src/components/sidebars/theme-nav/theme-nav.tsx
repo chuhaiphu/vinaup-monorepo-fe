@@ -12,6 +12,7 @@ type ThemeNavItem = {
 
 const THEME_NAV_ITEMS: ThemeNavItem[] = [
   { label: 'Social Links', path: '/adminup/theme/social-links' },
+  { label: 'Banner Marquee', path: '/adminup/theme/banner-marquee' },
 ];
 
 export default function ThemeNav() {

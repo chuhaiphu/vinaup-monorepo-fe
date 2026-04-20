@@ -7,7 +7,7 @@ import './globals.scss';
 // app/layout.tsx
 import type { Metadata } from 'next';
 import { MantineConfigProvider } from '@vinaup/ui/libs/mantine';
-import { openSans } from './font';
+import { inter } from './font';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://jenahair.com'),
@@ -32,16 +32,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-
   return (
-    <html lang="vi" {...mantineHtmlProps} className={openSans.variable}>
+    <html lang="vi" {...mantineHtmlProps} className={inter.variable}>
       <head>
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineConfigProvider>
-          {children}
-        </MantineConfigProvider>
+        <MantineConfigProvider>{children}</MantineConfigProvider>
       </body>
     </html>
   );

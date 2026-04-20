@@ -17,3 +17,16 @@ export type IThemeSocialLinksResponse = IGlobalSettingResponse<IThemeSocialLinkI
 export interface IUpdateThemeConfigSocialLinks {
   value: IThemeSocialLinkItem[];
 }
+
+export interface IMarqueeSlide {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+export type IMarqueeSlidesResponse = IGlobalSettingResponse<IMarqueeSlide[]>;
+
+export interface IUpdateThemeConfigMarquee {
+  value: IMarqueeSlide[];
+}

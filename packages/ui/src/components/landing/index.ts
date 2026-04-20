@@ -14,6 +14,7 @@ export * from './sections/toggle-section/toggle-section';
 
 // primitives
 export * from './primitives/carousels/hero-carousel/hero-carousel';
+export * from './primitives/carousels/auto-scroll-carousel/auto-scroll-carousel';
 export * from './primitives/carousels/section-carousel/section-carousel';
 export * from './primitives/carousels/grid-carousel/grid-carousel';
 export * from './primitives/cards/media-card/media-card';

@@ -20,7 +20,7 @@
   justify-content: center;
   font: inherit;
   font-weight: 700;
-  
+
   &:hover {
     background-color: rgba(255, 255, 255, 0.15);
   }
@@ -42,5 +42,12 @@
 
   &:hover {
     background: #ffffff;
+  }
+}
+
+.homeTag {
+  background: transparent;
+  &:hover {
+    background-color: transparent;
   }
 }

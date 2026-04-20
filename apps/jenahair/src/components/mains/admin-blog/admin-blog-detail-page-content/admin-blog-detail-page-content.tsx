@@ -993,7 +993,7 @@ function AdminBlogDetailPageContentInner({
               </Group>
               <Group justify="center">
                 <Text size="md" c="dimmed">
-                  (png, jpg; jpeg; Size ≤ 2M)
+                  (png, jpg; jpeg; Size ≤ 5Mbs)
                 </Text>
               </Group>
             </Stack>

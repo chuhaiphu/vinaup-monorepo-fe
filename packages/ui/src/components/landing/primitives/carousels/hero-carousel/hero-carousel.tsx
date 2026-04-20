@@ -23,7 +23,7 @@ interface HeroCarouselProps {
   borderRadius?: string | number;
 }
 
-export function HeroCarousel({
+export function   HeroCarousel({
   children,
   data,
   height = '80vh',

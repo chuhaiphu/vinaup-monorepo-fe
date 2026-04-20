@@ -44,3 +44,10 @@
     background: #ffffff;
   }
 }
+
+.homeTag {
+  background: transparent;
+  &:hover {
+    background-color: transparent;
+  }
+}

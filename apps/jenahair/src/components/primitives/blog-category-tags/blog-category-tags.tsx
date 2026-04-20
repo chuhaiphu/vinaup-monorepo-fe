@@ -30,7 +30,7 @@ export default async function BlogCategoryTags({
     <Group gap="sm" className={classes.tagsWrapper}>
       <Link
         href={'/blogs' as Route}
-        className={getTagClassName(isHomeActive)}
+        className={getTagClassName(isHomeActive) + ' ' + classes.homeTag}
         aria-current={isHomeActive ? 'page' : undefined}
         scroll={false}
         prefetch={true}

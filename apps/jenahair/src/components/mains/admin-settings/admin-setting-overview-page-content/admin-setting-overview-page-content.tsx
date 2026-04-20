@@ -136,7 +136,7 @@ export default function AdminSettingOverviewPageContent({
               <Stack gap={2}>
                 <Text size="lg">{faviconUrl ? 'Edit' : 'Upload'}</Text>
                 <Text size="sm" c="dimmed">
-                  png, jpg; jpeg; Size ≤ 2M
+                  png, jpg; jpeg; Size ≤ 5Mbs
                 </Text>
               </Stack>
             </Group>
@@ -158,7 +158,7 @@ export default function AdminSettingOverviewPageContent({
               <Stack gap={2}>
                 <Text size="lg">{logoUrl ? 'Edit' : 'Upload'}</Text>
                 <Text size="sm" c="dimmed">
-                  png, jpg; jpeg; Size ≤ 2M
+                  png, jpg; jpeg; Size ≤ 5Mbs
                 </Text>
               </Stack>
             </Group>
