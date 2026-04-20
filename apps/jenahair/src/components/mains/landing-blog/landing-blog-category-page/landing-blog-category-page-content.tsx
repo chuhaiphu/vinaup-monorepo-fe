@@ -91,7 +91,9 @@ export default async function LandingBlogCategoryPageContent({
       </Container>
 
       {category.videoPosition !== 'top' && (
-        <Container size="xl">{renderVideoSection()}</Container>
+        <Container size="xl" p={0}>
+          {renderVideoSection()}
+        </Container>
       )}
     </div>
   );

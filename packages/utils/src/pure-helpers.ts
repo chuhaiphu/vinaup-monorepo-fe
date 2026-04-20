@@ -36,6 +36,12 @@ export function getEmbeddedVideoUrl(url: string | null | undefined): string | nu
         }
         return url;
       }
+      if (parsed.pathname.startsWith('/shorts/')) {
+        const shortId = parsed.pathname.split('/shorts/')[1]?.split('?')[0];
+        if (shortId) {
+          return `https://www.youtube-nocookie.com/embed/${shortId}`;
+        }
+      }
     }
 
     if (hostname === 'vimeo.com') {
