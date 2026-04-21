@@ -7,19 +7,4 @@
         transform: scale(1.05);
         filter: brightness(120%);
     }
-
-    /* ÉP SIZE CHO MÀN HÌNH ĐIỆN THOẠI (Dưới 768px) */
-    @media (max-width: 768px) {
-        /* Thu nhỏ bản thân nút ActionIcon */
-        width: 34px !important;
-        height: 34px !important;
-        min-height: 34px !important;
-
-        /* Ép hình SVG (MenuSquareIcon) bên trong nhỏ lại */
-        svg {
-            width: 24px !important;
-            /* To hơn icon social một chút cho dễ bấm */
-            height: auto !important;
-        }
-    }
 }

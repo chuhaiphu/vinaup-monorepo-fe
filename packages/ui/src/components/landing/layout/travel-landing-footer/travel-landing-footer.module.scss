@@ -156,9 +156,9 @@
     transform: translateY(20px);
     transition: all 0.3s ease;
 
-    background-color: var(--vinaup-white) !important;
-    color: var(--brand-green) !important;
-    border: 2px solid var(--brand-green) !important;
+    background-color: var(--vinaup-white);
+    color: var(--brand-green);
+    border: 2px solid var(--brand-green);
 
     &.visible {
         opacity: 1;
@@ -167,8 +167,8 @@
     }
 
     &:hover {
-        background-color: var(--brand-green) !important;
-        color: var(--vinaup-white) !important;
+        background-color: var(--brand-green);
+        color: var(--vinaup-white);
     }
 
     @media (max-width: 768px) {

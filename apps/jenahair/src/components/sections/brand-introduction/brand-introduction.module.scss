@@ -10,29 +10,23 @@
 }
 
 .heading {
-  font-size: clamp(3.5rem, 15vw, 16.25rem);
-  line-height: 0.9;
-  margin-bottom: 1.5rem;
+  font-size: clamp(5rem, 22vw, 14rem);
   white-space: nowrap;
-  letter-spacing: -0.02em;
-
-  // GỌI ANIMATION TẠI ĐÂY
-  // 4s: Thời gian hoàn thành 1 chu kỳ (rất chậm và mượt)
-  // ease-in-out: Sáng lên từ từ rồi mờ đi từ từ
-  // infinite: Lặp lại vô hạn
+  letter-spacing: -0.02em;;
   animation: breathingGlow 4s ease-in-out infinite;
+  margin-bottom: -1.5rem;
 
   @media (max-width: 768px) {
-    margin-bottom: 1rem;
+    margin-bottom: -0.5rem;
   }
 }
 
 .jena {
   color: var(--vinaup-mint);
-  padding-right: 1.5rem; // Chuyển từ TSX sang đây
+  padding-right: 1.5rem; // Moved from TSX to here
 
   @media (max-width: 768px) {
-    padding-right: 0.5rem; // Trên điện thoại nên thu hẹp khoảng cách lại một chút
+    padding-right: 0.5rem; // Narrow the gap slightly on mobile
   }
 }
 
@@ -55,7 +49,7 @@
   }
 }
 
-// --- KHAI BÁO ANIMATION NHẤP NHÁY CHẬM ---
+// --- DECLARE SLOW PULSING ANIMATION ---
 @keyframes breathingGlow {
   0%,
   100% {
@@ -65,10 +59,10 @@
   50% {
     text-shadow:
       0px 4px 12px rgba(0, 0, 0, 0.5),
-      /* Bóng đen nền */ 0px 0px 10px rgba(255, 255, 255, 0.8),
-      /* Lõi chói: thu lại chỉ còn 10px nhưng đậm (0.8) */ 0px 0px 20px
+      /* Dark background shadow */ 0px 0px 10px rgba(255, 255, 255, 0.8),
+      /* Bright core: reduced to 10px but bold (0.8) */ 0px 0px 20px
         rgba(255, 255, 255, 0.4);
-    /* Viền sáng: ôm sát chữ ở mức 20px */
-    /* Đã cắt bỏ hoàn toàn các lớp 30px và 50px để không bị lan xa */
+    /* Bright border: closely hugs text at 20px */
+    /* Completely removed 30px and 50px layers to prevent spreading */
   }
 }

@@ -17,7 +17,7 @@ export function SalonServicesBanner({
   return (
     <section className={classes.wrapper}>
       <Container size={'xl'}>
-        <Grid gap={{ base: 'xl', md: 40 }} align="center">
+        <Grid gap={20} align="center">
           <GridCol span={{ base: 12, md: 4 }}>
             <div className={classes.imageWrapper}>
               <Image
@@ -32,9 +32,9 @@ export function SalonServicesBanner({
 
           <GridCol span={{ base: 12, md: 8 }}>
             <div className={classes.content}>
-              <h2 className={classes.title}>Tiệm cắt tóc nữ Jena Hair</h2>
+              <h2 className={classes.title}>Salon Tóc Nữ & Trang Điểm</h2>
               <p className={classes.subtitle}>
-                Jena phục vụ cắt tóc làm đầu trang điểm bằng tình yêu nghề
+                Na phục vụ cắt tóc, uốn duỗi nhuộm và trang điểm bằng tình yêu nghề
               </p>
 
               <Group className={classes.tagsGroup}>
