@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-interface LayoutSiderState {
+interface AdminLayoutSiderState {
   collapsed: boolean;
   toggle: () => void;
   open: () => void;
@@ -8,7 +8,7 @@ interface LayoutSiderState {
   setCollapsed: (collapsed: boolean) => void;
 }
 
-export const useLayoutSiderStore = create<LayoutSiderState>((set) => ({
+export const useAdminLayoutSiderStore = create<AdminLayoutSiderState>((set) => ({
   collapsed: false,
   toggle: () => set((state) => ({ collapsed: !state.collapsed })),
   open: () => set({ collapsed: false }),

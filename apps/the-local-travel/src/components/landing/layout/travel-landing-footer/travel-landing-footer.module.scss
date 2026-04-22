@@ -1,4 +1,4 @@
-@use '../../../../cores/styles/mixins' as *;
+@use '../../../../app/mixins' as *;
 
 .footer {
     background-color: var(--brand-green);
@@ -11,7 +11,6 @@
     padding-bottom: 2rem;
 }
 
-/* Search Form */
 .searchForm {
     display: flex;
     align-items: center;
@@ -55,27 +54,23 @@
     transition: transform 0.15s ease, box-shadow 0.2s ease;
 
     svg {
-        /* Cho cái icon mũi tên bên trong chuyển động mượt */
         transition: transform 0.2s ease;
     }
 
     &:hover {
-
-        /* Hiệu ứng 1: Khi đưa chuột vào, mũi tên trượt sang phải 4px */
         svg {
             transform: translateX(4px);
         }
     }
 }
 
-/* Links Section */
 .linksGrid {
     text-align: left;
 }
 
 .columnTitle {
     font-weight: 700;
-    font-size: clamp(1rem, 2vw, 1.25rem); // Từ 16px đến 18px
+    font-size: clamp(1rem, 2vw, 1.25rem);
     margin-bottom: 1.5rem;
     color: var(--vinaup-white);
     text-transform: uppercase;
@@ -89,18 +84,17 @@
 
 .linkItem {
     color: #d1d5db;
-    font-size: clamp(0.875rem, 1.2vw, 1rem); // Từ 14px đến 16px
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     text-decoration: none;
     transition: color 0.2s ease, transform 0.2s ease;
     display: inline-block;
 
     &:hover {
         color: var(--brand-light-green);
-        transform: translateX(4px); // Tạo hiệu ứng trượt nhẹ sang phải
+        transform: translateX(4px);
     }
 }
 
-/* Bottom Bar */
 .bottomBar {
     background-color: var(--vinaup-white);
     padding: 1.5rem 0;
@@ -123,7 +117,7 @@
 
 .copyright {
     color: var(--vinaup-medium-dark-gray);
-    font-size: clamp(0.875rem, 1.2vw, 1rem); // Từ 14px đến 16px
+    font-size: clamp(0.875rem, 1.2vw, 1rem);
     font-weight: 500;
 }
 
@@ -145,7 +139,6 @@
     }
 }
 
-/* Floating Back To Top Button */
 .floatingTopBtn {
     position: fixed;
     bottom: 2rem;
@@ -155,7 +148,6 @@
     visibility: hidden;
     transform: translateY(20px);
     transition: all 0.3s ease;
-
     background-color: var(--vinaup-white);
     color: var(--brand-green);
     border: 2px solid var(--brand-green);

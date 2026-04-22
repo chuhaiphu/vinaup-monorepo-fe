@@ -4,9 +4,10 @@ import classes from './layout.module.scss';
 import { getAppConfigActionPublic } from '@/actions/app-config-action';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
-import { SalonLandingFooter } from '@vinaup/ui/landing';
 import LandingHeader from '@/components/headers/landing-header/landing-header';
 import { MaintenanceGuard } from '@/components/guards/maintenance-guard';
+import { SalonLandingFooter } from '@/components/primitives/salon-landing-footer/salon-landing-footer';
+import { ScrollToTop } from '@vinaup/ui/landing';
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -71,6 +72,7 @@ export default async function LandingLayout({
       <LandingHeader />
       {children}
       <SalonLandingFooter />
+      <ScrollToTop />
     </main>
   );
 }

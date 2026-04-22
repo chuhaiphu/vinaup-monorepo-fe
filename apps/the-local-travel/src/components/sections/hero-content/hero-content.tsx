@@ -1,6 +1,6 @@
 import { Container, Title } from '@mantine/core';
 import classes from './hero-content.module.scss';
-import { SearchBar } from '@vinaup/ui/landing';
+import { SearchBar } from '../../landing/primitives/search-bar/search-bar';
 
 export function HeroContent() {
   return (

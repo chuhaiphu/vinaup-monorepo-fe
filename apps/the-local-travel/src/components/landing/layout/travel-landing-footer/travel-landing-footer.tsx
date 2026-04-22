@@ -21,7 +21,6 @@ export function TravelLandingFooter({ columns }: Readonly<TravelLandingFooterPro
   return (
     <footer className={classes.footer}>
       <Container size={'xl'} className={classes.inner}>
-        {/* Search Bar Section */}
         <div className={classes.searchForm}>
           <input
             type="text"
@@ -33,7 +32,6 @@ export function TravelLandingFooter({ columns }: Readonly<TravelLandingFooterPro
           </button>
         </div>
 
-        {/* Links Section */}
         <Grid gap={{ base: 'sm', md: 'lg' }} className={classes.linksGrid}>
           {columns.map((col, index) => (
             <GridCol span={{ base: 6, sm: 3 }} key={index}>
@@ -50,7 +48,6 @@ export function TravelLandingFooter({ columns }: Readonly<TravelLandingFooterPro
         </Grid>
       </Container>
 
-      {/* Bottom Bar Section */}
       <div className={classes.bottomBar}>
         <Container size={'xl'}>
           <div className={classes.bottomBarInner}>

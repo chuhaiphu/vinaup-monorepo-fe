@@ -1,4 +1,3 @@
-
 import { Title, Text, Stack, TitleOrder } from '@mantine/core';
 import classes from './section-header.module.scss';
 

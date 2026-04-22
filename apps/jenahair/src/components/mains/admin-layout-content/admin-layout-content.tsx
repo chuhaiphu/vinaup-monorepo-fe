@@ -5,7 +5,7 @@ import { DashboardHeader } from '@/components/headers/dashboard-header/dashboard
 import DashboardSidebar from '@/components/sidebars/dashboard-sidebar/dashboard-sidebar';
 import { ActionResponse } from '@/interfaces/_base-interface';
 import { IUserResponse } from '@/interfaces/user-interface';
-import { useLayoutSiderStore } from '@/libs/zustand/layout-sider-store';
+import { useAdminLayoutSiderStore } from '@/libs/zustand/admin-layout-sider-store';
 import { AuthProvider } from '@/providers/auth-provider';
 import { AppShell, AppShellMain } from '@mantine/core';
 import { redirect } from 'next/navigation';
@@ -22,7 +22,7 @@ export default function AdminLayoutContent({
   userDataPromise,
 }: AdminLayoutContentProps) {
   const userData = use(userDataPromise);
-  const { collapsed } = useLayoutSiderStore();
+  const { collapsed } = useAdminLayoutSiderStore();
 
   if (!userData.success || !userData.data) {
     redirect('/login?invalid=1');

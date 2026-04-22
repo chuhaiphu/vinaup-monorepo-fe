@@ -10,13 +10,10 @@ export function SalonLandingFooter() {
         px={{ base: 0, md: 'md' }}
         className={classes.footerContainer}
       >
-        {/* THANH FOOTER CHÍNH MÀU XÁM KHI TRÊN DESKTOP, FULL WIDTH MOBILE */}
         <div className={classes.mainFooter}>
           <Grid gap={{ base: 'xl', md: 40 }} align="center" justify="space-between">
-            {/* CỘT TRÁI: THÔNG TIN LIÊN HỆ */}
             <GridCol span={{ base: 12, md: 6 }}>
               <div className={classes.contactBlock}>
-                {/* Logo */}
                 <Image
                   src="/images/logo-icon.svg"
                   alt="Jenahair.com Logo"
@@ -25,7 +22,6 @@ export function SalonLandingFooter() {
                   className={classes.logoImage}
                 />
 
-                {/* Chữ Liên hệ */}
                 <div className={classes.contactInfo}>
                   <Text className={classes.contactLabel}>
                     Nhận booking theo lịch hẹn
@@ -48,7 +44,6 @@ export function SalonLandingFooter() {
               </div>
             </GridCol>
 
-            {/* CỘT PHẢI: THỜI GIAN PHỤC VỤ */}
             <GridCol span={{ base: 12, md: 6 }}>
               <div className={classes.hoursBlock}>
                 <Text className={classes.hoursLabel}>Thời gian phục vụ</Text>
@@ -61,7 +56,6 @@ export function SalonLandingFooter() {
           </Grid>
         </div>
 
-        {/* DÒNG BẢN QUYỀN (COPYRIGHT) */}
         <div className={classes.copyright}>
           <Text
             size="md"
@@ -69,9 +63,9 @@ export function SalonLandingFooter() {
             className={classes.copyrightText}
           >
             <span className={classes.brandName}>Jenahair</span> © 2026 by{' '}
-            <Anchor 
-              href="https://vinaup.net" 
-              target="_blank" 
+            <Anchor
+              href="https://vinaup.net"
+              target="_blank"
               rel="noopener noreferrer"
               size=""
             >

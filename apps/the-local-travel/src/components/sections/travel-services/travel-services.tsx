@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { SectionHeader } from '@vinaup/ui/landing';
+import { SectionHeader } from '../../landing/primitives/section-header/section-header';
 import classes from './travel-services.module.scss';
 import { Flex, Grid, GridCol } from '@mantine/core';
 

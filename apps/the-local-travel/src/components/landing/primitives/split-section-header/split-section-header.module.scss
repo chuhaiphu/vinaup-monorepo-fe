@@ -1,0 +1,17 @@
+@use '../../../../app/mixins' as *;
+
+.wrapper {
+  margin-bottom: 2rem;
+}
+
+.title {
+  @include heading-title;
+  flex: 1;
+}
+
+.description {
+  color: var(--brand-black-text);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
+  flex: 1;
+}

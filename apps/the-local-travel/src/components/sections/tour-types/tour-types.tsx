@@ -1,5 +1,5 @@
 import { Box } from '@mantine/core';
-import { SplitSectionHeader } from '@vinaup/ui/landing';
+import { SplitSectionHeader } from '../../landing/primitives/split-section-header/split-section-header';
 import {
   GridCarousel,
   GridCarouselItem,

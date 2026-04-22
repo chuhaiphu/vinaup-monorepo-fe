@@ -2,7 +2,7 @@
 import { Box, SimpleGrid } from '@mantine/core';
 import Image from 'next/image';
 import classes from './our-partners.module.scss';
-import { SectionHeader } from '@vinaup/ui/landing';
+import { SectionHeader } from '../../landing/primitives/section-header/section-header';
 
 export interface PartnerItem {
   id: number | string;

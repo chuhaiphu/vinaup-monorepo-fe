@@ -3,10 +3,26 @@ import { IoSearch } from 'react-icons/io5';
 import classes from './header.module.scss';
 import Link from 'next/link';
 import type { Route } from 'next';
-import SidebarControl from '../../sidebar/sidebar-control/sidebar-control';
-import { NavLinkItem, SocialLinkItem, HeaderProps } from '../types';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { Sidebar } from '../../sidebar/sidebar';
+import { Sidebar, SidebarControl } from '@vinaup/ui/landing';
+
+export interface NavLinkItem {
+  label: string;
+  href: string;
+  active?: boolean;
+  children?: NavLinkItem[];
+}
+
+export interface SocialLinkItem {
+  icon: React.ReactNode;
+  href: string;
+  label: string;
+}
+
+interface HeaderProps {
+  navLinks: NavLinkItem[];
+  socialLinks: SocialLinkItem[];
+}
 
 export function HeaderCenteredLogo({
   navLinks,
@@ -16,11 +32,11 @@ export function HeaderCenteredLogo({
     <header className={classes.headerWrapper}>
       <Sidebar navLinks={navLinks} drawerPosition="right" />
 
-      {/* HÀNG 1: Logo & Socials */}
+      {/* HANG 1: Logo & Socials */}
       <div className={classes.topRow}>
         <Container size={'xl'} h="100%">
           <Group justify="space-between" align="center" h="100%" wrap="nowrap">
-            {/* BÊN TRÁI: Social Icons */}
+            {/* BEN TRAI: Social Icons */}
             <Box className={classes.btnContainer} style={{ flex: 1 }}>
               <Group gap="xs">
                 {socialLinks.map((social) => (
@@ -41,17 +57,17 @@ export function HeaderCenteredLogo({
               </Group>
             </Box>
 
-            {/* GIỮA: Logo */}
+            {/* GIUA: Logo */}
             <Link
               href="/"
               className={classes.logoLink}
-              aria-label="The Local Travel - Trang chủ"
-              title="Về trang chủ"
+              aria-label="The Local Travel - Trang chu"
+              title="Ve trang chu"
             >
               <Text className={classes.logoText}>The Local Travel</Text>
             </Link>
 
-            {/* PHẢI: Search & Menu */}
+            {/* PHAI: Search & Menu */}
             <Group
               justify="flex-end"
               style={{ flex: 1 }}
@@ -63,22 +79,22 @@ export function HeaderCenteredLogo({
                 radius="xl"
                 size="lg"
                 className={classes.searchIcon}
-                aria-label="Mở tìm kiếm"
-                title="Mở tìm kiếm"
+                aria-label="Mo tim kiem"
+                title="Mo tim kiem"
               >
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
 
               <SidebarControl
                 iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />}
-                menuButtonLabel="Mở menu điều hướng"
+                menuButtonLabel="Mo menu dieu huong"
               />
             </Group>
           </Group>
         </Container>
       </div>
 
-      {/* HÀNG 2: Navigation */}
+      {/* HANG 2: Navigation */}
       <nav className={classes.bottomRow}>
         <Container size={'xl'} h="100%" classNames={{ root: classes.navContainer }}>
           <Group

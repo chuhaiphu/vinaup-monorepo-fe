@@ -3,8 +3,14 @@
 import { ActionIcon, Container, Group } from '@mantine/core';
 import Link from 'next/link';
 import { MenuSquareIcon } from '@vinaup/ui/cores';
-import { SidebarControl, type SocialLinkItem } from '@vinaup/ui/landing';
+import { SidebarControl } from '@vinaup/ui/landing';
 import classes from './sticky-header-content.module.scss';
+
+export interface SocialLinkItem {
+  icon: React.ReactNode;
+  href: string;
+  label: string;
+}
 
 interface StickyHeaderContentProps {
   socialLinks: SocialLinkItem[];

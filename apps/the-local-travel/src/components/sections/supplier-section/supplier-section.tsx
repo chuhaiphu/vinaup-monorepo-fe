@@ -1,5 +1,5 @@
 import { Box, SimpleGrid } from '@mantine/core';
-import { SectionHeader } from '@vinaup/ui/landing';
+import { SectionHeader } from '../../landing/primitives/section-header/section-header';
 import { OverlayCard, OverlayCardProps } from '@vinaup/ui/landing';
 
 interface SupplierSectionProps {
