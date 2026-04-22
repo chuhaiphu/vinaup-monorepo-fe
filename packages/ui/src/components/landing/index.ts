@@ -3,7 +3,8 @@ export * from './layout/travel-landing-footer/travel-landing-footer';
 export * from './layout/salon-landing-footer/salon-landing-footer';
 export * from './layout/header/types';
 export * from './layout/header/header-centered-logo/header-centered-logo';
-export * from './layout/header/header-with-search-and-sidebar/header-with-search-and-sidebar';
+export * from './layout/header/sticky-header/sticky-header';
+export { default as SidebarControl } from './layout/sidebar/sidebar-control/sidebar-control';
 export * from './layout/sidebar/sidebar';
 export * from './layout/scroll-to-top/scroll-to-top';
 
@@ -23,6 +24,7 @@ export * from './primitives/cards/product-card/product-card';
 export * from './primitives/search-bar/search-bar';
 export * from './primitives/section-header/section-header';
 export * from './primitives/split-section-header/split-section-header';
+export * from './primitives/spotlight-search/spotlight-search';
 export * from './primitives/recaptcha-enterprise/recaptcha-enterprise';
 export * from './primitives/skeleton/skeleton';
 export * from './primitives/actions/copy-to-clipboard';

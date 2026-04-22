@@ -1,0 +1,22 @@
+.inner {
+  height: 100%;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    filter: brightness(120%);
+  }
+}
+
+.socialIcon {
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}

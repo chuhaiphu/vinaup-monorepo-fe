@@ -1,5 +1,8 @@
 import { getThemeConfigActionPublic } from '@/actions/theme-config-action';
 import { getAllMenusActionPublic } from '@/actions/menu-action';
+import { getAllBlogsActionPublic } from '@/actions/blog-action';
+import { getAllDiariesActionPublic } from '@/actions/diary-action';
+import { getAllPagesPublicActionPublic } from '@/actions/page-action';
 import type { IMenuResponse } from '@/interfaces/menu-interface';
 import { TreeManager } from '@vinaup/utils/tree-manager';
 import { JenhairIcon } from '@vinaup/ui/cores';
@@ -9,11 +12,13 @@ import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
 import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
 import WhatsappIcon from '@vinaup/ui/cores/icons/whatsapp-icon.svg';
 import {
-  HeaderWithSearchAndSidebar,
+  StickyHeader,
   Sidebar,
   type SidebarNavLink,
 } from '@vinaup/ui/landing';
 import { isExternalEndpoint, parseEndpoint } from '@vinaup/utils';
+import { StickyHeaderContent } from './sticky-header-content';
+import BlogsDiariesSpotlightSearchContent from './blogs-diaries-spotlight-search-content';
 
 const SOCIAL_ICON_MAP: Record<string, { icon: React.ReactNode; label: string }> = {
   googlemap: {
@@ -60,9 +65,18 @@ function buildNavLinks(flatMenus: IMenuResponse[]): SidebarNavLink[] {
 
 export default async function LandingHeader() {
   'use cache';
-  const [socialLinksResponse, menusResponse] = await Promise.all([
+  const [
+    socialLinksResponse,
+    menusResponse,
+    blogsResponse,
+    diariesResponse,
+    pagesResponse,
+  ] = await Promise.all([
     getThemeConfigActionPublic(),
     getAllMenusActionPublic(),
+    getAllBlogsActionPublic(),
+    getAllDiariesActionPublic(),
+    getAllPagesPublicActionPublic(),
   ]);
 
   const socialLinksData = socialLinksResponse.data?.value ?? [];
@@ -79,10 +93,21 @@ export default async function LandingHeader() {
   const navLinks = buildNavLinks(menusResponse.data ?? []);
 
   return (
-    <HeaderWithSearchAndSidebar
-      socialLinks={socialLinks}
-      logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
-      sidebarChildren={<Sidebar navLinks={navLinks} drawerPosition="right" />}
-    />
+    <>
+    <StickyHeader>
+      <StickyHeaderContent
+        socialLinks={socialLinks}
+        logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
+        spotlightChildren={
+          <BlogsDiariesSpotlightSearchContent
+            blogsResponse={blogsResponse.data ?? []}
+            diariesResponse={diariesResponse.data ?? []}
+            pagesResponse={pagesResponse.data ?? []}
+          />
+        }
+      />
+    </StickyHeader>
+    <Sidebar navLinks={navLinks} drawerPosition="right" />
+    </>
   );
 }

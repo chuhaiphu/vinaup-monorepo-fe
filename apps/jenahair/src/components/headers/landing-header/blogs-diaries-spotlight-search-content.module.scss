@@ -1,0 +1,43 @@
+.spotlightContent {
+  border-radius: 0.75rem;
+}
+
+.spotlightActionsList {
+  padding: 0.5rem;
+}
+
+.spotlightAction {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  margin-bottom: 0.25rem;
+
+  transition: all 0.15s ease;
+
+  &[data-selected] {
+    background-color: var(--vinaup-soft-green);
+    color: var(--vinaup-moss);
+    padding-left: 1.5rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0.5rem;
+      top: 25%;
+      bottom: 25%;
+      width: 0.2rem;
+      background-color: var(--vinaup-amber);
+    }
+  }
+
+  &:hover {
+    background-color: var(--vinaup-soft-green);
+  }
+}
+
+.spotlightEmpty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--vinaup-medium-dark-gray);
+  font-size: 0.875rem;
+}

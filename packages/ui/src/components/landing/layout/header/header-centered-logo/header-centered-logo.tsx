@@ -3,7 +3,7 @@ import { IoSearch } from 'react-icons/io5';
 import classes from './header.module.scss';
 import Link from 'next/link';
 import type { Route } from 'next';
-import NavigationControl from '../../../primitives/navigation-control/navigation-control';
+import SidebarControl from '../../sidebar/sidebar-control/sidebar-control';
 import { NavLinkItem, SocialLinkItem, HeaderProps } from '../types';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Sidebar } from '../../sidebar/sidebar';
@@ -69,7 +69,7 @@ export function HeaderCenteredLogo({
                 <IoSearch size={20} strokeWidth={2} />
               </ActionIcon>
 
-              <NavigationControl
+              <SidebarControl
                 iconSvg={<RxHamburgerMenu size={32} color="var(--brand-green)" />}
                 menuButtonLabel="Mở menu điều hướng"
               />
