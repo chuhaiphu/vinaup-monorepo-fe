@@ -1,6 +1,5 @@
 import { IBlogResponse } from "@/interfaces/blog-interface";
 
-// Dữ liệu Mock Blogs
 export const MOCK_BLOGS_DATA: IBlogResponse[] = [
   {
     id: "blog_01",

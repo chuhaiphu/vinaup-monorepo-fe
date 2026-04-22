@@ -13,7 +13,7 @@ export async function SalonVideoAndBlogsShowcase() {
   return (
     <section className={classes.sectionWrapper}>
       <Container size={'xl'}>
-        <Stack gap="3rem">
+        <Stack gap="2rem">
           <div className={classes.header}>
             <h2 className={classes.mainTitle}>Salon cam kết với khách hàng</h2>
             <p className={classes.mainDescription}>
@@ -30,7 +30,7 @@ export async function SalonVideoAndBlogsShowcase() {
                   <h3 className={classes.subTitle}>Video</h3>
                   <Link href="/nhat-ky" className={classes.seeAllLink} prefetch>
                     Tất cả
-                    <VinaupGridListIcon size={23} />
+                    <VinaupGridListIcon size={23} fill="currentColor"/>
                   </Link>
                 </Group>
 
@@ -44,7 +44,7 @@ export async function SalonVideoAndBlogsShowcase() {
                   <h3 className={classes.subTitle}>Blog</h3>
                   <Link href="/blogs" className={classes.seeAllLink} prefetch>
                     Tất cả
-                    <VinaupGridListIcon size={23} />
+                    <VinaupGridListIcon size={23} fill="currentColor"/>
                   </Link>
                 </Group>
 

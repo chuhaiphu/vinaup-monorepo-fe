@@ -91,7 +91,7 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
       opened={opened}
       onClose={close}
       position={drawerPosition}
-      padding="lg"
+      padding="1rem"
       size={300}
       withCloseButton={false}
       classNames={{ content: classes.drawerContent }}
@@ -108,12 +108,9 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
 
       <Group justify="space-between" align="center" mb="sm">
         <Link href={"/" as Route} className={classes.homeLink} onClick={close}>
-          <Group className={classes.sidebarHeader} gap="xs">
-            <IoHomeOutline size={20} strokeWidth={2} />
-            <Text size="lg" fw={600}>
-              Home
-            </Text>
-          </Group>
+
+            <IoHomeOutline size={24} strokeWidth={2} color="var(--vinaup-amber)" />
+
         </Link>
 
         <Text className={classes.brandTitle}>
@@ -123,7 +120,7 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
 
       <div className={classes.searchSection}>
         <TextInput
-          placeholder="Search..."
+          placeholder="Tìm kiếm..."
           leftSection={<IoSearch size={18} />}
           radius="md"
           mt="md"

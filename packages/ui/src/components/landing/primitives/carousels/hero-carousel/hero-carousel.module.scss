@@ -10,7 +10,7 @@
 
   @media (min-width: 768px) {
     height: var(--carousel-height,
-        80vh); // Sử dụng biến CSS để linh hoạt điều chỉnh chiều cao trên desktop, mặc định là 80vh)
+        75vh); // Sử dụng biến CSS để linh hoạt điều chỉnh chiều cao trên desktop, mặc định là 80vh)
   }
 }
 
@@ -52,31 +52,31 @@
 
 // --- PHẦN INDICATORS (CHẤM TRÒN) BÊN PHẢI ---
 .indicatorsCustom {
-  flex-direction: column !important;
-  right: 1.25rem !important; // 20px
-  left: auto !important;
-  top: 50% !important;
-  bottom: auto !important;
-  transform: translateY(-50%) !important;
-  gap: 0.625rem !important; // 10px
-  z-index: 10 !important;
+  flex-direction: column;
+  right: 1.25rem; // 20px
+  left: auto;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  gap: 0.625rem; // 10px
+  z-index: 10;
 }
 
 @media (max-width: 768px) {
   .indicatorsCustom {
-    right: 0.625rem !important; // 10px trên mobile để tiết kiệm không gian
+    right: 0.625rem; // 10px trên mobile để tiết kiệm không gian
   }
 }
 
 .indicatorDot {
-  width: 0.5rem !important; // 8px
-  height: 2.125rem !important; // 34px
-  background-color: rgba(255, 255, 255, 0.6) !important;
+  width: 0.5rem; // 8px
+  height: 2.125rem; // 34px
+  background-color: rgba(255, 255, 255, 0.6);
   transition: all 0.2s ease;
-  border-radius: 6.25rem !important; // 100px
+  border-radius: 6.25rem; // 100px
 
   &[data-active] {
-    background-color: #fff !important;
+    background-color: #fff;
   }
 }
 
@@ -87,12 +87,14 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
-  padding-bottom: 3rem;
+  align-items: flex-start;
   pointer-events: none;
+  justify-content: flex-end;
+  padding-bottom: 3rem;
+  padding-left: 3rem;
 
   @media (max-width: 768px) {
-    padding-bottom: 1.5rem;
+    padding-left: 1rem;
   }
 }
 
@@ -104,7 +106,6 @@
 .slideTitle {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 768px) {

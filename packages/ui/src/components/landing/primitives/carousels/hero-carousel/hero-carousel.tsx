@@ -23,10 +23,10 @@ interface HeroCarouselProps {
   borderRadius?: string | number;
 }
 
-export function   HeroCarousel({
+export function HeroCarousel({
   children,
   data,
-  height = '80vh',
+  height = '75vh',
   overlayOpacity = 0.6,
   borderRadius = '0',
 }: HeroCarouselProps) {
@@ -82,18 +82,16 @@ export function   HeroCarousel({
             />
             {(slide.title || slide.description) && (
               <div className={classes.slideTextOverlay}>
-                <Container size={'xl'} w="100%">
-                  <div className={classes.textContainer}>
-                    {slide.title && (
-                      <h2 className={classes.slideTitle}>{slide.title}</h2>
-                    )}
-                    {slide.description && (
-                      <p className={classes.slideDescription}>
-                        {slide.description}
-                      </p>
-                    )}
-                  </div>
-                </Container>
+                <div className={classes.textContainer}>
+                  {slide.title && (
+                    <p className={classes.slideTitle}>{slide.title}</p>
+                  )}
+                  {slide.description && (
+                    <p className={classes.slideDescription}>
+                      {slide.description}
+                    </p>
+                  )}
+                </div>
               </div>
             )}
           </CarouselSlide>

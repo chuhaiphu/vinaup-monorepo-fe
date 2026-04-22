@@ -14,7 +14,7 @@ export default function Home() {
 
       <Container size={'xl'}>
         <Stack gap="3rem">
-          <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="70vh" borderRadius={20} />
+          <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="75vh" borderRadius={20} />
           <BrandIntroduction />
         </Stack>
       </Container>

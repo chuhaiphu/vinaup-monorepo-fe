@@ -84,7 +84,7 @@ export default function DiaryGrid({
   return (
     <>
       {/* Desktop and tablet grid view */}
-      <Grid mt={'lg'} mb={'md'} gap="lg" visibleFrom="md">
+      <Grid mt="2rem" mb="1.25rem" gap="lg" visibleFrom="md">
         {paginated.map((item) => (
           <GridCol span={{ base: 12, sm: 6, md: 3 }} key={item.id}>
             {renderDiaryCard(item)}
@@ -94,8 +94,8 @@ export default function DiaryGrid({
 
       {/* Mobile carousel view */}
       <Carousel
-        mt="lg"
-        mb="md"
+        mt="2rem"
+        mb="1.25rem"
         slideSize="80%"
         slideGap="md"
         withControls={false}

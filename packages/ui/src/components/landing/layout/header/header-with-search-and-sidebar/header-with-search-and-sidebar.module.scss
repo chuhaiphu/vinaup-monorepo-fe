@@ -48,19 +48,6 @@
 .socialIcon {
   transition: all 0.2s ease;
 
-  @media (max-width: 375px) {
-    /* 1. Thu nhỏ bản thân cái nút ActionIcon */
-    width: 30px !important;
-    height: 30px !important;
-    min-height: 30px !important;
-
-    /* 2. Ép hình SVG bên trong nhỏ lại, đè lên width/height ở file Layout */
-    svg {
-      width: 22px !important;
-      height: auto !important;
-    }
-  }
-
   &:hover {
     transform: translateY(-2px);
   }

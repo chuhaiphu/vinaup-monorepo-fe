@@ -23,8 +23,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-        background-color: var(--brand-green) !important;
-        color: var(--vinaup-soft-gray) !important;
+        background-color: var(--brand-green);
+        color: var(--vinaup-soft-gray);
         transform: translateY(-0.125rem);
     }
 }
@@ -70,7 +70,7 @@
 // --- RESPONSIVE ---
 @media (max-width: 768px) {
     .btnContainer {
-        display: none !important;
+        display: none;
     }
 
     .topRow {
@@ -78,7 +78,7 @@
     }
 
     .rightSection {
-        gap: 0.5rem !important; // 8px
+        gap: 0.5rem; // 8px
     }
 
     .navGroup {
@@ -89,7 +89,7 @@
 
 @media (max-width: 480px) {
     .searchIcon {
-        display: none !important;
+        display: none;
     }
 
     .navLink {

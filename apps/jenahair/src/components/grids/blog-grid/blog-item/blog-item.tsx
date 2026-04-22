@@ -11,7 +11,7 @@ interface BlogItemProps {
 export default function BlogItem({ item }: BlogItemProps) {
   return (
     <div className={classes.blogCardWrapper}>
-      {/* KHỐI ẢNH BÊN TRÁI */}
+      {/* LEFT IMAGE BLOCK */}
       <div className={classes.imageWrapper}>
         <Image
           fill
@@ -22,7 +22,7 @@ export default function BlogItem({ item }: BlogItemProps) {
         />
       </div>
 
-      {/* KHỐI NỘI DUNG BÊN PHẢI */}
+      {/* RIGHT CONTENT BLOCK */}
       <div className={classes.content}>
         <h3 className={classes.title} title={item.title}>
           {item.title}
