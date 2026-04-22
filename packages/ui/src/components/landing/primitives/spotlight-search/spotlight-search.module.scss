@@ -6,4 +6,9 @@
   border-radius: 0.5rem;
   color: var(--vinaup-mint);
   border: 1px solid color-mix(in srgb, var(--vinaup-mint) 45%, transparent);
+
+  &:focus-visible {
+    outline: 1px solid var(--vinaup-mint);
+    outline-offset: 1px;
+  }
 }

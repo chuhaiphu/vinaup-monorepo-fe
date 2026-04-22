@@ -38,7 +38,11 @@ export function SpotlightSearch({
         actions={spotlightActions}
         nothingFound="Không tìm thấy nội dung"
         highlightQuery
-        limit={10}
+        styles={{
+          actionsList: {
+            maxHeight: '480px',
+          },
+        }}
         searchProps={{
           leftSection: <IoSearch size={20} />,
           placeholder: '...',

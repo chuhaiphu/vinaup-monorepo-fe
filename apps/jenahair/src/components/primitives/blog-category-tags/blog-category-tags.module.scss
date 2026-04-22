@@ -36,17 +36,9 @@
 }
 
 .tagItemActive {
-  background: #ffffff;
+  background: transparent;
   border-color: var(--vinaup-amber);
   color: var(--vinaup-amber);
-
-  &:hover {
-    background: #ffffff;
-  }
-}
-
-.homeTag {
-  background: transparent;
   &:hover {
     background-color: transparent;
   }

@@ -111,7 +111,7 @@ export default function DynamicEndpointPageContent({
       <section className={classes.pageDetailHeader}>
         <Container size={'lg'} className={classes.pageDetailHeaderContainer}>
           <Group gap={20} align={'center'}>
-            <Text classNames={{ root: classes.pageTitle }}>{page.title}</Text>
+            <Text classNames={{ root: classes.pageTitle }} component='h1'>{page.title}</Text>
           </Group>
         </Container>
       </section>
