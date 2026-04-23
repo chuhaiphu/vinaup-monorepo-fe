@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ['10.149.35.43', 'localhost:3000'],
+  allowedDevOrigins: ['10.149.35.43', 'localhost:3000', '192.168.1.152'],
   transpilePackages: ['@vinaup/ui', '@vinaup/utils'],
   cacheComponents: true,
   output: 'standalone',

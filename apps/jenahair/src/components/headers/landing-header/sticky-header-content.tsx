@@ -24,9 +24,7 @@ export function StickyHeaderContent({
   spotlightChildren,
 }: Readonly<StickyHeaderContentProps>) {
   return (
-    <Container size={'vinaupxl'} h="100%">
-
-
+    <Container size={'xl'} h="100%">
       <Group
         h="100%"
         w="100%"
@@ -58,7 +56,9 @@ export function StickyHeaderContent({
                 target="_blank"
                 variant="transparent"
                 size="xl"
-                className={classes.socialIcon}
+                classNames={{
+                  root: classes.socialIcon,
+                }}
                 aria-label={social.label}
               >
                 {social.icon}

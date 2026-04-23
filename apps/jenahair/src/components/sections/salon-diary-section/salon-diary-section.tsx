@@ -19,11 +19,12 @@ export async function SalonDiarySection() {
 
   return (
     <section>
-      <Container size={'vinaupxl'}>
+      <Container size={'xl'}>
         <div className={classes.header}>
           <h2 className={classes.title}>Nhật ký cắt tóc & trang điểm</h2>
           <p className={classes.description}>
-            Salon Jena được chị em truyền miệng vì “Tay nghề giỏi, tận tâm & sử dụng sản phẩm đến từ tự nhiên chính hãng tốt cho sức khỏe...”{' '}
+            Salon Jena được chị em truyền miệng vì “Tay nghề giỏi, tận tâm & sử dụng
+            sản phẩm đến từ tự nhiên chính hãng tốt cho sức khỏe...”{' '}
             <Link href="/nhat-ky" className={classes.link} prefetch={true}>
               Xem nhật ký
             </Link>

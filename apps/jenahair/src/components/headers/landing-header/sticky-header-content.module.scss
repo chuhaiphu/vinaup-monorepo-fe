@@ -15,6 +15,11 @@
 
 .socialIcon {
   transition: all 0.2s ease;
+  @media (max-width: 768px) {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
 
   &:hover {
     transform: translateY(-2px);

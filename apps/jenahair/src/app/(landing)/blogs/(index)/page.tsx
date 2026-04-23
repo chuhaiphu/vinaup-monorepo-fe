@@ -35,7 +35,7 @@ export default async function BlogsIndexPage({
       {/* --- 1. ORANGE HEADER --- */}
       <Box className={classes.orangeHeader}>
         <Container size={'xl'}>
-          <h1 className={classes.h1Title}>Tất cả Blog</h1>
+          <h1 className={classes.h1Title}>Blog</h1>
         </Container>
       </Box>
 

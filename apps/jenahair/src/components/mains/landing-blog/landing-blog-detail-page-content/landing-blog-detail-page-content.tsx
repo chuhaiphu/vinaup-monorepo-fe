@@ -14,7 +14,7 @@ import {
   SectionCarouselSlide,
 } from '@vinaup/ui/landing';
 import { notFound } from 'next/navigation';
-import { FaRegCopy, FaRegEye, FaShareAlt } from 'react-icons/fa';
+import { FaRegCopy, FaRegEye } from 'react-icons/fa';
 import { IoIosPricetag } from 'react-icons/io';
 import LikeBlogButton from './like-blog-button';
 import classes from './landing-blog-detail-page-content.module.scss';
@@ -172,7 +172,7 @@ export default async function LandingBlogDetailPageContent({
       <IncrementView blogId={blogData.id} />
       <section className={classes.blogDetailHeader}>
         <Container size={'lg'} className={classes.blogDetailHeaderContainer}>
-          <Group gap={20} align={'center'}>
+          <Group gap={20} align={'center'} wrap="nowrap">
             <Link href={'/blogs' as Route} prefetch>
               <VinaupGridListIcon size={30} fill="white" />
             </Link>

@@ -14,7 +14,7 @@ import {
   SectionCarouselSlide,
 } from '@vinaup/ui/landing';
 import { notFound } from 'next/navigation';
-import { FaRegCopy, FaRegEye, FaShareAlt } from 'react-icons/fa';
+import { FaRegCopy, FaRegEye } from 'react-icons/fa';
 import { IoIosPricetag } from 'react-icons/io';
 import LikeDiaryButton from './like-diary-button';
 import classes from './landing-diary-detail-page-content.module.scss';
@@ -173,7 +173,7 @@ export default async function LandingDiaryDetailPageContent({
       <IncrementView diaryId={diaryData.id} />
       <section className={classes.diaryDetailHeader}>
         <Container size={'lg'} className={classes.diaryDetailHeaderContainer}>
-          <Group gap={20} align={'center'}>
+          <Group gap={20} align={'center'} wrap="nowrap">
             <Link href={'/nhat-ky' as Route} prefetch>
               <VinaupGridListIcon size={30} fill="white" />
             </Link>

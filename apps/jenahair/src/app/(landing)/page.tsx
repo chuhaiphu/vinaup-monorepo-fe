@@ -11,12 +11,16 @@ import { SalonVideoAndBlogsShowcase } from '@/components/sections/salon-video-an
 export default function Home() {
   return (
     <div>
-
-      <Container size={'vinaupxl'}>
-        <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="75vh" borderRadius={20} />
+      <Container size={'xl'}>
+        <HeroCarousel
+          data={MOCK_SLIDES}
+          overlayOpacity={0.2}
+          height="75vh"
+          borderRadius={20}
+        />
       </Container>
 
-      <Container size={'vinauplg'}>
+      <Container size={'lg'}>
         <BrandIntroduction />
       </Container>
 

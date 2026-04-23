@@ -28,7 +28,6 @@ export function SpotlightSearch({
         className={classes.searchButton}
       >
         <IoSearch size={20} />
-        Tìm kiếm
       </UnstyledButton>
       <Spotlight
         scrollAreaProps={{

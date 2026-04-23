@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  Container,
-  createTheme,
-  MantineProvider,
-  NavLink
-} from '@mantine/core';
+import { Container, createTheme, MantineProvider, NavLink } from '@mantine/core';
 import { ReactNode } from 'react';
 import { DatesProvider } from '@mantine/dates';
 import 'dayjs/locale/vi';
@@ -15,6 +10,11 @@ interface MantineConfigProviderContainerProps {
   children: ReactNode;
 }
 
+const CONTAINER_SIZES: Record<string, number> = {
+  lg: 992,
+  xl: 1232,
+};
+
 export default function MantineConfigProviderContainer({
   children,
 }: Readonly<MantineConfigProviderContainerProps>) {
@@ -22,15 +22,10 @@ export default function MantineConfigProviderContainer({
     components: {
       Container: Container.extend({
         vars: (_, { size }) => {
-          const containerSizes: Record<string, string> = {
-            vinaupxl: '1232px',
-            vinauplg: '992px',
-          };
-
-          if (size && containerSizes[size]) {
+          if (size && CONTAINER_SIZES[size]) {
             return {
               root: {
-                '--container-size': containerSizes[size],
+                '--container-size': `${CONTAINER_SIZES[size]}px`,
               },
             };
           }

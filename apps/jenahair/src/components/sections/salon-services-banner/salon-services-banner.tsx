@@ -16,7 +16,7 @@ export function SalonServicesBanner({
 }: Readonly<SalonServicesBannerProps>) {
   return (
     <section className={classes.wrapper}>
-      <Container size={'vinaupxl'}>
+      <Container size={'xl'}>
         <Grid gap={20} align="center">
           <GridCol span={{ base: 12, md: 4 }}>
             <div className={classes.imageWrapper}>
