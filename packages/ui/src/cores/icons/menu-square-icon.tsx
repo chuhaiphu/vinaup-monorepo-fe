@@ -1,7 +1,7 @@
 import * as React from "react"
 
 export default function MenuSquareIcon({
-    fill = "#fff",
+    fill = "#F16406",
     size = 42,
     className,
 }: {
@@ -13,50 +13,44 @@ export default function MenuSquareIcon({
         <svg
             width={size}
             height={size}
-            viewBox="0 0 57 55"
+            viewBox="0 0 35 35"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className={className}
         >
             <rect
-                x={56.0985}
-                y={32.9539}
-                width={56.0985}
-                height={10.908}
-                rx={5.45402}
-                transform="rotate(-180 56.0985 32.9539)"
-                fill="#F16406"
+                x={29.9751}
+                y={21.2393}
+                width={24.5309}
+                height={7.47863}
+                rx={3.73931}
+                transform="rotate(-180 29.9751 21.2393)"
+                fill={fill}
             />
+            <rect width={24.5297} height={7.47863} rx={3.73931} fill={fill} />
             <rect
-                x={56.0985}
-                y={55}
-                width={38.9573}
-                height={10.908}
-                rx={5.45402}
-                transform="rotate(-180 56.0985 55)"
-                fill="#F16406"
+                x={34.9995}
+                y={35}
+                width={24.5297}
+                height={7.47863}
+                rx={3.73931}
+                transform="rotate(-180 34.9995 35)"
+                fill={fill}
             />
             <ellipse
-                cx={5.454}
-                cy={49.546}
-                rx={5.45402}
-                ry={5.45402}
-                transform="rotate(-180 5.454 49.546)"
-                fill="#F16406"
-            />
-            <rect
-                x={0.00012207}
-                width={38.9573}
-                height={10.908}
-                rx={5.45401}
-                fill="#F16406"
+                cx={3.73923}
+                cy={31.2607}
+                rx={3.73929}
+                ry={3.73932}
+                transform="rotate(-180 3.73923 31.2607)"
+                fill={fill}
             />
             <ellipse
-                cx={50.6445}
-                cy={5.45402}
-                rx={5.45402}
-                ry={5.45402}
-                fill="#F16406"
+                cx={31.2608}
+                cy={3.73932}
+                rx={3.73929}
+                ry={3.73932}
+                fill={fill}
             />
         </svg>
     )

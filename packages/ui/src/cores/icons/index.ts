@@ -12,3 +12,8 @@ export { default as MenuSquareIcon } from './menu-square-icon';
 export { default as VinaupGridListIcon } from './vinaup-grid-list-icon';
 export { default as VinaupHeartIcon } from './vinaup-heart-icon';
 export { default as VinaupEyeIcon } from './vinaup-eye-icon';
+export { default as VinaupFacebookIcon } from './vinaup-facebook-icon';
+export { default as VinaupGoogleMapIcon } from './vinaup-googlemap-icon';
+export { default as VinaupInstagramIcon } from './vinaup-instagram-icon';
+export { default as VinaupTiktokIcon } from './vinaup-tiktok-icon';
+export { default as VinaupGlobalIcon } from './vinaup-global-icon';

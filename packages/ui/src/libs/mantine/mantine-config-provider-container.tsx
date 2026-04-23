@@ -22,14 +22,20 @@ export default function MantineConfigProviderContainer({
     components: {
       Container: Container.extend({
         vars: (_, { size }) => {
-          if (size === 'xl') {
+          const containerSizes: Record<string, string> = {
+            vinaupxl: '1232px',
+            vinauplg: '992px',
+          };
+
+          if (size && containerSizes[size]) {
             return {
               root: {
-                '--container-size': '1232px',
+                '--container-size': containerSizes[size],
               },
-            }
+            };
           }
-          return { root: {} }
+
+          return { root: {} };
         },
       }),
       NavLink: NavLink.extend({
