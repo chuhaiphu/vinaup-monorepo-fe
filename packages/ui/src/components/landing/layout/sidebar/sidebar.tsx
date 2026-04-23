@@ -58,7 +58,6 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
         target="_blank"
         rel="noopener noreferrer"
         className={classes.sidebarLink}
-        style={{ paddingLeft }}
         onClick={close}
       >
         {link.label}
@@ -67,7 +66,6 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
       <Link
         href={link.href as Route}
         className={classes.sidebarLink}
-        style={{ paddingLeft }}
         onClick={close}
       >
         {link.label}
@@ -108,9 +106,7 @@ export function Sidebar({ drawerPosition = 'right', navLinks }: SidebarProps) {
 
       <Group justify="space-between" align="center" mb="sm">
         <Link href={"/" as Route} className={classes.homeLink} onClick={close}>
-
-            <IoHomeOutline size={24} strokeWidth={2} color="var(--vinaup-amber)" />
-
+          <IoHomeOutline size={28} strokeWidth={2} color="var(--vinaup-amber)" />
         </Link>
 
         <Text className={classes.brandTitle}>

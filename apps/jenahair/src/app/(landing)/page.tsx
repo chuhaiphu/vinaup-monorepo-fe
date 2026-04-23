@@ -12,11 +12,12 @@ export default function Home() {
   return (
     <div>
 
-      <Container size={'xl'}>
-        <Stack gap="3rem">
-          <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="75vh" borderRadius={20} />
-          <BrandIntroduction />
-        </Stack>
+      <Container size={'vinaupxl'}>
+        <HeroCarousel data={MOCK_SLIDES} overlayOpacity={0.2} height="75vh" borderRadius={20} />
+      </Container>
+
+      <Container size={'vinauplg'}>
+        <BrandIntroduction />
       </Container>
 
       <Stack gap="3rem" pt="3rem">

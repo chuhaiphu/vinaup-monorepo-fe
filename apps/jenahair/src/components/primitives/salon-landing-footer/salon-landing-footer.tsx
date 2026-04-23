@@ -36,7 +36,7 @@ export function SalonLandingFooter() {
                     >
                       Zalo
                     </Anchor>
-                    <Anchor href="#" target="_blank" className={classes.socialLink}>
+                    <Anchor href="https://m.me/1926675050924056" target="_blank" className={classes.socialLink}>
                       Messenger
                     </Anchor>
                   </Group>
@@ -47,7 +47,7 @@ export function SalonLandingFooter() {
             <GridCol span={{ base: 12, md: 6 }}>
               <div className={classes.hoursBlock}>
                 <Text className={classes.hoursLabel}>Thời gian phục vụ</Text>
-                <Text className={classes.hoursTime}>09h00 - 19h30</Text>
+                <Text className={classes.hoursTime}>09h00 - 20h00</Text>
                 <Text className={classes.hoursDays}>
                   Tất cả các ngày trong tuần
                 </Text>
@@ -62,7 +62,7 @@ export function SalonLandingFooter() {
             style={{ color: 'inherit' }}
             className={classes.copyrightText}
           >
-            <span className={classes.brandName}>Jenahair</span> © 2026 by{' '}
+            Jenahair © 2026 by{' '}
             <Anchor
               href="https://vinaup.net"
               target="_blank"

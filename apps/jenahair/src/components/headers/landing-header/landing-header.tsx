@@ -5,11 +5,7 @@ import { getAllDiariesActionPublic } from '@/actions/diary-action';
 import { getAllPagesPublicActionPublic } from '@/actions/page-action';
 import type { IMenuResponse } from '@/interfaces/menu-interface';
 import { TreeManager } from '@vinaup/utils/tree-manager';
-import { JenhairIcon } from '@vinaup/ui/cores';
-import FacebookIcon from '@vinaup/ui/cores/icons/facebook-icon.svg';
-import InstagramIcon from '@vinaup/ui/cores/icons/instagram-icon.svg';
-import TiktokIcon from '@vinaup/ui/cores/icons/tiktok.svg';
-import GoogleMapIcon from '@vinaup/ui/cores/icons/google-map.svg';
+import { JenhairIcon, VinaupFacebookIcon, VinaupGoogleMapIcon, VinaupInstagramIcon, VinaupTiktokIcon } from '@vinaup/ui/cores';
 import WhatsappIcon from '@vinaup/ui/cores/icons/whatsapp-icon.svg';
 import {
   StickyHeader,
@@ -22,19 +18,19 @@ import BlogsDiariesSpotlightSearchContent from './blogs-diaries-spotlight-search
 
 const SOCIAL_ICON_MAP: Record<string, { icon: React.ReactNode; label: string }> = {
   googlemap: {
-    icon: <GoogleMapIcon width={36} height={38} />,
+    icon: <VinaupGoogleMapIcon size={36} />,
     label: 'Google Map',
   },
   tiktok: {
-    icon: <TiktokIcon width={36} height={38} />,
+    icon: <VinaupTiktokIcon size={36} />,
     label: 'Tiktok',
   },
   facebook: {
-    icon: <FacebookIcon width={36} height={38} />,
+    icon: <VinaupFacebookIcon size={36} />,
     label: 'Facebook',
   },
   instagram: {
-    icon: <InstagramIcon width={36} height={38} />,
+    icon: <VinaupInstagramIcon size={36} />,
     label: 'Instagram',
   },
   whatsapp: {
@@ -94,20 +90,20 @@ export default async function LandingHeader() {
 
   return (
     <>
-    <StickyHeader>
-      <StickyHeaderContent
-        socialLinks={socialLinks}
-        logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
-        spotlightChildren={
-          <BlogsDiariesSpotlightSearchContent
-            blogsResponse={blogsResponse.data ?? []}
-            diariesResponse={diariesResponse.data ?? []}
-            pagesResponse={pagesResponse.data ?? []}
-          />
-        }
-      />
-    </StickyHeader>
-    <Sidebar navLinks={navLinks} drawerPosition="right" />
+      <StickyHeader>
+        <StickyHeaderContent
+          socialLinks={socialLinks}
+          logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
+          spotlightChildren={
+            <BlogsDiariesSpotlightSearchContent
+              blogsResponse={blogsResponse.data ?? []}
+              diariesResponse={diariesResponse.data ?? []}
+              pagesResponse={pagesResponse.data ?? []}
+            />
+          }
+        />
+      </StickyHeader>
+      <Sidebar navLinks={navLinks} drawerPosition="right" />
     </>
   );
 }

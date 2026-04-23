@@ -1,7 +1,7 @@
 // import { Suspense } from 'react';
 import { Container, Grid, GridCol, Stack, Group } from '@mantine/core';
 import Link from 'next/link';
-import { VinaupGridListIcon } from '@vinaup/ui/cores';
+import { VinaupGlobalIcon, VinaupGridListIcon } from '@vinaup/ui/cores';
 import classes from './salon-video-and-blogs-showcase.module.scss';
 import { BlogsColumn } from './blogs-column';
 import { VideoSectionShowcase } from './video-section-showcase';
@@ -30,7 +30,7 @@ export async function SalonVideoAndBlogsShowcase() {
                   <h3 className={classes.subTitle}>Video</h3>
                   <Link href="/nhat-ky" className={classes.seeAllLink} prefetch>
                     Tất cả
-                    <VinaupGridListIcon size={23} fill="currentColor"/>
+                    <VinaupGlobalIcon size={23} fill="currentColor" />
                   </Link>
                 </Group>
 
@@ -44,7 +44,7 @@ export async function SalonVideoAndBlogsShowcase() {
                   <h3 className={classes.subTitle}>Blog</h3>
                   <Link href="/blogs" className={classes.seeAllLink} prefetch>
                     Tất cả
-                    <VinaupGridListIcon size={23} fill="currentColor"/>
+                    <VinaupGlobalIcon size={23} fill="currentColor" />
                   </Link>
                 </Group>
 

@@ -60,12 +60,11 @@
     color: var(--vinaup-black);
     font-size: 1.25rem;
     font-weight: 400;
-    padding: 0.75rem;
-    padding-left: 12px;
     border-radius: 4px;
     display: block;
     box-sizing: border-box;
     transition: background-color 0.2s, transform 0.2s;
+    padding: 0.75rem 0;
 
     &:hover {
         transform: translateX(5px);

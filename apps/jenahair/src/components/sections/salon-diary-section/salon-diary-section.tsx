@@ -19,14 +19,11 @@ export async function SalonDiarySection() {
 
   return (
     <section>
-      <Container size={'xl'}>
+      <Container size={'vinaupxl'}>
         <div className={classes.header}>
-          <h2 className={classes.title}>Nhật ký cắt tóc nữ</h2>
+          <h2 className={classes.title}>Nhật ký cắt tóc & trang điểm</h2>
           <p className={classes.description}>
-            Tiệm tóc nữ quận Tân Phú được chị em truyền miệng vì &ldquo;Tay nghề
-            giỏi, tận tâm &amp; sử dụng sản phẩm nhập khẩu tốt cho sức
-            khỏe&rdquo;. Chuyên chữa trị tóc hư tổn, cắt tóc tạo kiểu, tẩy tóc
-            nhuộm màu thời trang...{' '}
+            Salon Jena được chị em truyền miệng vì “Tay nghề giỏi, tận tâm & sử dụng sản phẩm đến từ tự nhiên chính hãng tốt cho sức khỏe...”{' '}
             <Link href="/nhat-ky" className={classes.link} prefetch={true}>
               Xem nhật ký
             </Link>

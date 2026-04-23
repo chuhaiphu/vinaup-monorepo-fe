@@ -24,7 +24,7 @@ export function StickyHeaderContent({
   spotlightChildren,
 }: Readonly<StickyHeaderContentProps>) {
   return (
-    <Container size="xl" h="100%">
+    <Container size={'vinaupxl'} h="100%">
 
 
       <Group
@@ -67,7 +67,7 @@ export function StickyHeaderContent({
           </Group>
 
           <SidebarControl
-            iconSvg={<MenuSquareIcon size={32} fill="var(--vinaup-amber)" />}
+            iconSvg={<MenuSquareIcon size={36} fill="var(--vinaup-amber)" />}
             menuButtonLabel="Mở menu điều hướng"
           />
         </Group>
