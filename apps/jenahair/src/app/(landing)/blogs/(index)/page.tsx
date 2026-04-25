@@ -29,7 +29,6 @@ export default async function BlogsIndexPage({
 }: {
   searchParams: Promise<BlogIndexPageQueryParams>;
 }) {
-
   return (
     <div className={classes.pageWrapper}>
       {/* --- 1. ORANGE HEADER --- */}
@@ -51,6 +50,7 @@ export default async function BlogsIndexPage({
       {/* --- 3. BLOGS GRID --- */}
       <Container size="xl">
         <Suspense fallback={<BlogGridSkeleton />}>
+          <BlogGridSkeleton />
           <BlogIndexPageContent searchParams={searchParams} />
         </Suspense>
       </Container>

@@ -9,7 +9,7 @@ type DiaryCategoryTagsSkeletonProps = {
 const TAG_WIDTHS = [96, 128, 112, 144];
 
 export default function DiaryCategoryTagsSkeleton({
-  itemCount = 4,
+  itemCount = 2,
 }: DiaryCategoryTagsSkeletonProps) {
   return (
     <Group gap="sm" className={classes.tagsWrapper}>

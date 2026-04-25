@@ -13,7 +13,8 @@ export default function BlogGridSkeleton({
       {Array.from({ length: itemCount }).map((_, index) => (
         <GridCol span={{ base: 12, md: 6 }} key={index}>
           <Group
-            gap="md"
+            gap="1.25rem"
+            align="stretch"
             style={{
               borderRadius: 12,
               background: 'rgba(255,255,255,0.08)',
@@ -21,21 +22,36 @@ export default function BlogGridSkeleton({
               overflow: 'hidden',
             }}
           >
-            <Box style={{ flexShrink: 0, width: 140, height: 100 }}>
-              <Skeleton width={140} height={100} borderRadius={8} />
+            {/* Image — flex: 1, aspect-ratio 16/9 */}
+            <Box style={{ flex: 1, aspectRatio: '16 / 9', borderRadius: 8, overflow: 'hidden' }}>
+              <Skeleton width="100%" height="100%" borderRadius={8} />
             </Box>
-            <Box style={{ flex: 1 }}>
-              <Skeleton width="80%" height={18} borderRadius={6} />
-              <Box mt={8}>
-                <Skeleton width="95%" height={14} borderRadius={6} />
+
+            {/* Content — flex: 1, column, space-between */}
+            <Box
+              style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '0.5rem 0',
+              }}
+            >
+              {/* Title — 3-line clamp */}
+              <Box>
+                <Skeleton width="90%" height={18} borderRadius={6} />
+                <Box mt={8}>
+                  <Skeleton width="100%" height={18} borderRadius={6} />
+                </Box>
+                <Box mt={8}>
+                  <Skeleton width="65%" height={18} borderRadius={6} />
+                </Box>
               </Box>
-              <Box mt={4}>
-                <Skeleton width="70%" height={14} borderRadius={6} />
+
+              {/* Meta */}
+              <Box mt={12}>
+                <Skeleton width="40%" height={16} borderRadius={6} />
               </Box>
-              <Group gap="sm" mt={12}>
-                <Skeleton width={48} height={16} borderRadius={6} />
-                <Skeleton width={48} height={16} borderRadius={6} />
-              </Group>
             </Box>
           </Group>
         </GridCol>

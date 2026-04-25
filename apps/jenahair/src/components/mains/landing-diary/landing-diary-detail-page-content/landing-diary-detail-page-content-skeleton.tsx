@@ -26,7 +26,7 @@ export default function LandingDiaryDetailPageContentSkeleton() {
               <Skeleton width={240} height={22} borderRadius={6} />
             </Group>
             <Group gap={18}>
-              {Array.from({ length: 4 }).map((_, index) => (
+              {Array.from({ length: 3 }).map((_, index) => (
                 <Group key={index} gap={6}>
                   <Skeleton width={18} height={18} borderRadius={999} />
                   <Skeleton width={48} height={20} borderRadius={6} />
@@ -49,18 +49,6 @@ export default function LandingDiaryDetailPageContentSkeleton() {
               />
             ))}
           </Stack>
-        </Container>
-      </section>
-
-      <section className={classes.diaryVideoSection}>
-        <Container
-          size={'lg'}
-          className={classes.diaryVideoSectionContainer}
-          bg={'white'}
-          bdrs={'md'}
-          p={'sm'}
-        >
-          <Skeleton width="100%" height={320} borderRadius={8} />
         </Container>
       </section>
 

@@ -48,10 +48,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.haitrieu.com',
-      },
-      {
-        protocol: 'https',
         hostname: 'media.jenahair.com',
         pathname: '/**',
       },

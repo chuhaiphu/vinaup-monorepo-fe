@@ -1,5 +1,5 @@
 // import { Suspense } from 'react';
-import { Container, Stack } from '@mantine/core';
+import { Container } from '@mantine/core';
 import Link from 'next/link';
 import { getAllDiariesActionPublic } from '@/actions/diary-action';
 import DiaryGrid from '@/components/grids/diary-grid/diary-grid';

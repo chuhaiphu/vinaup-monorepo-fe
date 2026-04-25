@@ -9,7 +9,7 @@ type BlogCategoryTagsSkeletonProps = {
 const TAG_WIDTHS = [96, 128, 112, 144];
 
 export default function BlogCategoryTagsSkeleton({
-  itemCount = 4,
+  itemCount = 2,
 }: BlogCategoryTagsSkeletonProps) {
   return (
     <Group gap="sm" className={classes.tagsWrapper}>
