@@ -6,7 +6,6 @@ import classes from './page.module.scss';
 import { Suspense } from 'react';
 import BlogGridSkeleton from '@/components/grids/blog-grid/blog-grid-skeleton';
 import BlogCategoryTagsSkeleton from '@/components/primitives/blog-category-tags/blog-category-tags-skeleton';
-
 export type BlogIndexPageQueryParams = {
   q?: string;
   destinations?: string;
@@ -50,7 +49,6 @@ export default async function BlogsIndexPage({
       {/* --- 3. BLOGS GRID --- */}
       <Container size="xl">
         <Suspense fallback={<BlogGridSkeleton />}>
-          <BlogGridSkeleton />
           <BlogIndexPageContent searchParams={searchParams} />
         </Suspense>
       </Container>
