@@ -67,7 +67,7 @@ export function StickyHeaderContent({
           </Group>
 
           <SidebarControl
-            iconSvg={<MenuSquareIcon size={36} fill="var(--vinaup-amber)" />}
+            iconSvg={<MenuSquareIcon size={30} fill="var(--vinaup-amber)" />}
             menuButtonLabel="Mở menu điều hướng"
           />
         </Group>

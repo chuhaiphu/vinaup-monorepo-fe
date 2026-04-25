@@ -19,7 +19,6 @@ export default function Home() {
           borderRadius={20}
         />
       </Container>
-
       <Container size={'lg'}>
         <BrandIntroduction />
       </Container>

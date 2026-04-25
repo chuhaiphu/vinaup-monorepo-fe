@@ -18,19 +18,19 @@ import BlogsDiariesSpotlightSearchContent from './blogs-diaries-spotlight-search
 
 const SOCIAL_ICON_MAP: Record<string, { icon: React.ReactNode; label: string }> = {
   googlemap: {
-    icon: <VinaupGoogleMapIcon size={36} />,
+    icon: <VinaupGoogleMapIcon size={30} />,
     label: 'Google Map',
   },
   tiktok: {
-    icon: <VinaupTiktokIcon size={36} />,
+    icon: <VinaupTiktokIcon size={30} />,
     label: 'Tiktok',
   },
   facebook: {
-    icon: <VinaupFacebookIcon size={36} />,
+    icon: <VinaupFacebookIcon size={30} />,
     label: 'Facebook',
   },
   instagram: {
-    icon: <VinaupInstagramIcon size={36} />,
+    icon: <VinaupInstagramIcon size={30} />,
     label: 'Instagram',
   },
   whatsapp: {
@@ -56,7 +56,7 @@ function buildNavLinks(flatMenus: IMenuResponse[]): SidebarNavLink[] {
     };
   }
 
-  return root.children.map(toNavLink);
+  return root.children.map(toNavLink)
 }
 
 export default async function LandingHeader() {
@@ -93,7 +93,7 @@ export default async function LandingHeader() {
       <StickyHeader>
         <StickyHeaderContent
           socialLinks={socialLinks}
-          logo={<JenhairIcon size={42} fill="var(--vinaup-amber)" />}
+          logo={<JenhairIcon size={55} fill="var(--vinaup-amber)" />}
           spotlightChildren={
             <BlogsDiariesSpotlightSearchContent
               blogsResponse={blogsResponse.data ?? []}
