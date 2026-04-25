@@ -27,7 +27,7 @@ export function SpotlightSearch({
         onClick={() => spotlight.open()}
         className={classes.searchButton}
       >
-        <IoSearch size={20} />
+        <IoSearch size={22} />
       </UnstyledButton>
       <Spotlight
         scrollAreaProps={{
